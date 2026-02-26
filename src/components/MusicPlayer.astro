@@ -1,0 +1,202 @@
+---
+// src/components/MusicPlayer.astro
+export interface Props {
+  trackId?: string;
+  trackName?: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { trackId = "19yMYXxG3gtIbKxOpQo9vL", trackName = "Mean It In The Morning", size = 'medium' } = Astro.props;
+
+const sizeClasses = {
+  small: 'music-player-small',
+  medium: 'music-player-medium',
+  large: 'music-player-large',
+};
+---
+
+<div class={`music-player ${sizeClasses[size]}`}>
+  <div class="player-lp" style="background-color: #a18f5c;">
+    <div class="player-label"></div>
+  </div>
+  
+  <div class="player-album">
+    <iframe 
+      src={`https://open.spotify.com/embed/track/${trackId}?theme=0`} 
+      width="100%" 
+      height="100%" 
+      frameborder="0" 
+      allowtransparency="true" 
+      allow="encrypted-media">
+    </iframe>
+    <div class="album-overlay">
+      <img src="/images/album-overlay.png" alt="" loading="lazy" />
+    </div>
+  </div>
+  
+  <div class="player-info">
+    <span class="player-label-top">[CURRENTLY ON REPEAT]</span>
+    <span class="player-label-bottom">[LC - {trackName}]</span>
+  </div>
+</div>
+
+<style>
+.music-player {
+  position: relative;
+}
+
+.music-player-medium {
+  width: 378px;
+  height: 280px;
+}
+
+.music-player-small {
+  width: 270px;
+  height: 200px;
+}
+
+.music-player-large {
+  width: 420px;
+  height: 310px;
+}
+
+.player-lp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 264px;
+  height: 264px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 6px rgba(255,255,255,0.1);
+  transition: left 0.3s;
+}
+
+.music-player-small .player-lp {
+  width: 180px;
+  height: 180px;
+}
+
+.music-player-large .player-lp {
+  width: 300px;
+  height: 300px;
+}
+
+.player-lp:hover {
+  left: 55%;
+}
+
+.player-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  width: 81px;
+  height: 81px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px rgba(255,255,255,0.1);
+}
+
+.music-player-small .player-label {
+  width: 55px;
+  height: 55px;
+  box-shadow: 0 0 0 7px rgba(255,255,255,0.1);
+}
+
+.music-player-large .player-label {
+  width: 92px;
+  height: 92px;
+  box-shadow: 0 0 0 12px rgba(255,255,255,0.1);
+}
+
+.player-album {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 267px;
+  height: 267px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background-color: #a18f5c;
+  filter: saturate(1.3);
+  box-shadow: 0 50px 55px -30px rgba(0,0,0,0.25);
+  overflow: hidden;
+  transition: left 0.3s;
+}
+
+.music-player-small .player-album {
+  width: 182px;
+  height: 182px;
+}
+
+.music-player-large .player-album {
+  width: 303px;
+  height: 303px;
+}
+
+.player-album:hover {
+  left: 47%;
+}
+
+.album-overlay {
+  position: absolute;
+  bottom: 0;
+  left: -1px;
+  width: 101%;
+  height: 100%;
+  mix-blend-mode: screen;
+}
+
+.album-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player-info {
+  position: absolute;
+  bottom: 46px;
+  right: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+}
+
+.music-player-small .player-info {
+  bottom: 30px;
+  right: 30px;
+  gap: 15px;
+}
+
+.music-player-large .player-info {
+  bottom: 52px;
+  right: 52px;
+  gap: 30px;
+}
+
+.player-label-top, .player-label-bottom {
+  font-family: var(--font-roboto-mono);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--token-text-light);
+  white-space: nowrap;
+}
+
+.music-player-small .player-label-top,
+.music-player-small .player-label-bottom {
+  font-size: 12px;
+}
+
+.music-player-large .player-label-top,
+.music-player-large .player-label-bottom {
+  font-size: 16px;
+}
+
+.player-album iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>

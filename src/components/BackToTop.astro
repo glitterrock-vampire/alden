@@ -1,0 +1,56 @@
+---
+// src/components/BackToTop.astro
+---
+
+<div class="back-to-top" id="back-to-top">
+  <div class="top-arrow">↑</div>
+  <span class="top-tooltip">Back to top</span>
+</div>
+
+<script>
+  document.getElementById('back-to-top')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+<style>
+.back-to-top {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.top-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: var(--token-text-light);
+}
+
+.top-tooltip {
+  position: absolute;
+  top: -28px;
+  left: -25px;
+  right: -25px;
+  height: 39px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-koulen);
+  color: var(--token-text-light);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.back-to-top:hover .top-tooltip {
+  opacity: 1;
+  top: -38px;
+}
+</style>

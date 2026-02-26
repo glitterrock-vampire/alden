@@ -1,0 +1,127 @@
+---
+// src/components/Button.astro
+export interface Props {
+  href: string;
+  children: React.ReactNode;
+  chineseText?: string;
+  variant?: 'default' | 'dark' | 'light';
+  size?: 'small' | 'medium' | 'large';
+  className?: string;
+  target?: '_blank' | '_self';
+}
+
+const { 
+  href, 
+  children, 
+  chineseText, 
+  variant = 'default', 
+  size = 'medium', 
+  className = '',
+  target = '_self'
+} = Astro.props;
+
+const variantClasses = {
+  default: 'button-default',
+  dark: 'button-dark',
+  light: 'button-light',
+};
+
+const sizeClasses = {
+  small: 'button-small',
+  medium: 'button-medium',
+  large: 'button-large',
+};
+---
+
+<a href={href} class={`button ${variantClasses[variant]} ${sizeClasses[size]} ${className}`} target={target}>
+  <span class="button-text">{children}</span>
+  {chineseText && <span class="button-chinese">{chineseText}</span>}
+</a>
+
+<style>
+.button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button-default {
+  background: #121212;
+}
+
+.button-dark {
+  background: #121212;
+}
+
+.button-light {
+  background: var(--token-bg-light);
+}
+
+.button-small {
+  width: 130px;
+  height: 30px;
+}
+
+.button-medium {
+  width: 149px;
+  height: 33px;
+}
+
+.button-large {
+  width: 213px;
+  height: 26px;
+}
+
+.button-text {
+  font-family: var(--font-koulen);
+  font-size: 20px;
+  color: #fff;
+  transition: transform 0.3s;
+}
+
+.button-light .button-text {
+  color: var(--token-text-dark);
+}
+
+.button-chinese {
+  font-family: 'HanyiSentyFoundation Regular', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  position: absolute;
+  bottom: -27px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.3s;
+  white-space: nowrap;
+}
+
+.button-light .button-chinese {
+  color: var(--token-text-dark);
+}
+
+.button:hover .button-text {
+  transform: translateY(-20px);
+}
+
+.button:hover .button-chinese {
+  transform: translateX(-50%) translateY(-27px);
+}
+
+/* Size variants */
+.button-small:hover .button-text {
+  transform: translateY(-20px);
+}
+
+.button-small .button-chinese {
+  bottom: -20px;
+}
+
+.button-small:hover .button-chinese {
+  transform: translateX(-50%) translateY(-20px);
+}
+</style>

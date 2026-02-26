@@ -1,0 +1,146 @@
+---
+// src/layouts/Layout.astro
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { 
+  title = "AL DEN DS GNS | Sr Visual Designer", 
+  description = "AL DEN DS GNS is a Senior Visual Designer currently at IBM iX. Working with global businesses in creating industry-leading, immersive experiences.",
+  ogImage = "https://framerusercontent.com/assets/po9x9AirrMmaeOyiuCXRkTVzQwc.png"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-499YNMHRWW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-499YNMHRWW');
+    </script>
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    
+    <!-- Font preconnect -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/koulen/v30/AMOQz46as3KIBPemhXo8.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <slot />
+    
+    <!-- Animation Script -->
+    <script src="/src/scripts/animations.js"></script>
+    
+    <style>
+      /* View transitions */
+      @view-transition {
+        navigation: auto;
+      }
+      
+      /* Custom view transition styles */
+      ::view-transition-old(root) {
+        animation: fadeOut 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
+      }
+      
+      ::view-transition-new(root) {
+        animation: fadeIn 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
+      }
+      
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+      }
+    </style>
+    <style is:global>
+      html, body {
+        overscroll-behavior: none;
+        background: #000;
+        scroll-behavior: auto;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      
+      /* Loading states */
+      [data-animate-hero] {
+        opacity: 0.001;
+      }
+      
+      /* Smooth transitions */
+      * {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      
+      /* Disable transitions on load */
+      .loading * {
+        transition: none !important;
+      }
+      
+      /* Ensure page loads from top */
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    </style>
+    
+    <!-- Remove loading class after page load -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Ensure page loads from top
+        window.scrollTo(0, 0);
+        
+        setTimeout(() => {
+          document.body.classList.remove('loading');
+        }, 100);
+      });
+      
+      // Also ensure scroll to top on page load
+      window.addEventListener('load', () => {
+        window.scrollTo(0, 0);
+      });
+    </script>
+  </body>
+</html>

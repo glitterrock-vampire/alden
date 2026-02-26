@@ -1,0 +1,331 @@
+---
+export interface Props {
+  currentPage?: 'home' | 'work' | 'info';
+}
+
+const { currentPage = 'home' } = Astro.props;
+---
+
+<nav class="nav" id="main-nav" data-appear="nav">
+  <div class="nav-container">
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <span class="nav-letter">A</span>
+      <span class="nav-letter">L</span>
+      <span class="nav-letter">D</span>
+      <span class="nav-letter">E</span>
+      <span class="nav-letter">N</span>
+    </a>
+    
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a href="/" class={`nav-link ${currentPage === 'home' ? 'active' : ''}`}>
+        <span class="nav-link-text">HOME</span>
+      </a>
+      
+      <a href="/work" class={`nav-link ${currentPage === 'work' ? 'active' : ''}`}>
+        <span class="nav-link-text">WORK</span>
+      </a>
+      
+      <a href="/side" class="nav-link coming-soon">
+        <span class="nav-link-text">ON THE SIDE</span>
+        <div class="coming-soon-badge"></div>
+      </a>
+      
+      <a href="/info" class={`nav-link ${currentPage === 'info' ? 'active' : ''}`}>
+        <span class="nav-link-text">INFO</span>
+      </a>
+    </div>
+    
+    <!-- Year -->
+    <div class="nav-year">
+      <span class="year-current">[2026]</span>
+      <span class="day-current"></span>
+    </div>
+  </div>
+</nav>
+
+<script>
+class NavScrollController {
+  nav: HTMLElement;
+  lastScrollY: number;
+  isNavHidden: boolean;
+  isReady: boolean;
+  introDelay: number;
+
+  constructor() {
+    this.nav = document.getElementById('main-nav') as HTMLElement;
+    this.lastScrollY = window.scrollY;
+    this.isNavHidden = false;
+    this.isReady = false;
+
+    // Match the CSS animation delay so we don't fight it
+    const isMobile = window.matchMedia('(max-width: 809.98px)').matches;
+    // slideDown animation: 1.5s duration + 2.5s delay desktop / 1.6s + 1s mobile
+    this.introDelay = isMobile ? (1 + 1.6) * 1000 : (2.5 + 1.5) * 1000;
+
+    this.init();
+  }
+
+  init() {
+    // Wait until the CSS intro animation has fully completed before
+    // letting the scroll controller take over. This prevents the JS
+    // transform from conflicting with the CSS animation's forwards fill.
+    setTimeout(() => {
+      // Clear any leftover inline styles from the animation
+      this.nav.style.animation = 'none';
+      this.nav.style.opacity = '1';
+      this.nav.style.transform = 'translateY(0)';
+      this.nav.style.transition = 'transform 0.35s cubic-bezier(0.55, 0.45, 0.16, 1), opacity 0.35s ease';
+
+      this.isReady = true;
+      this.lastScrollY = window.scrollY;
+    }, this.introDelay);
+
+    window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+  }
+
+  handleScroll() {
+    // Don't interfere until the intro animation is done
+    if (!this.isReady) return;
+
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - this.lastScrollY;
+
+    // Ignore tiny jitter
+    if (Math.abs(delta) < 4) return;
+
+    if (delta > 0) {
+      // Scrolling DOWN → hide nav
+      this.hideNav();
+    } else {
+      // Scrolling UP → show nav
+      this.showNav();
+    }
+
+    this.lastScrollY = currentScrollY;
+  }
+
+  hideNav() {
+    if (!this.isNavHidden) {
+      this.nav.style.transform = 'translateY(-120%)';
+      this.nav.style.opacity = '0';
+      this.isNavHidden = true;
+    }
+  }
+
+  showNav() {
+    if (this.isNavHidden) {
+      this.nav.style.transform = 'translateY(0)';
+      this.nav.style.opacity = '1';
+      this.isNavHidden = false;
+    }
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => new NavScrollController());
+} else {
+  new NavScrollController();
+}
+</script>
+
+<script>
+const date = new Date();
+const formatted = `${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}.${date.getFullYear()}`;
+const el = document.querySelector('.year-current');
+if (el) el.textContent = formatted;
+
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const chineseDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+const dayIndex = date.getDay();
+const dayText = `${days[dayIndex]} [${chineseDays[dayIndex]}]`;
+const dayEl = document.querySelector('.day-current');
+if (dayEl) dayEl.textContent = dayText;
+</script>
+
+<style>
+.nav {
+  mix-blend-mode: difference;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 24px;
+  /* Intro slide-down animation — JS takes over after this completes */
+  animation: slideDown 1.5s 2.5s ease forwards;
+  opacity: 0.001;
+  transform: translateY(-150px);
+  will-change: transform, opacity;
+}
+
+@media (max-width: 809.98px) {
+  .nav {
+    animation: slideDown 1.6s 1s ease forwards;
+    padding: 24px 16px;
+  }
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 2500px;
+  margin: 0 auto;
+}
+
+.logo {
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.nav-letter {
+  font-family: var(--font-koulen);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  color: var(--token-text-light);
+  transition: all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1);
+  display: inline-block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding-left: 300px;
+}
+
+@media (max-width: 1199.98px) {
+  .nav-links {
+    padding-left: 40px;
+    gap: 1px;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .nav-links {
+    padding-left: 0;
+  }
+  
+  .nav-link {
+    transform: scale(0.9);
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-text {
+  font-family: var(--font-roboto-mono);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--token-text-light);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+}
+
+.nav-link.active .nav-link-text {
+  position: relative;
+  padding-left: 12px;
+}
+
+.nav-link.active .nav-link-text::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  background: var(--token-text-light);
+  border-radius: 50%;
+}
+
+.nav-link:hover .nav-link-text {
+  transform: translateY(-20px);
+}
+
+.nav-link.coming-soon {
+  position: relative;
+  cursor: not-allowed;
+}
+
+.nav-link.coming-soon .nav-link-text {
+  opacity: 0.7;
+}
+
+.coming-soon-badge {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-6deg);
+  width: 80px;
+  height: 23px;
+  background-image: url('/images/coming-soon-badge.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.nav-link.coming-soon:hover .coming-soon-badge {
+  opacity: 1;
+}
+
+.nav-year {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: auto;
+  height: auto;
+  cursor: default;
+}
+
+.year-current {
+  font-family: var(--font-roboto-mono);
+  font-size: 14px;
+  color: var(--token-text-light);
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.day-current {
+  font-family: var(--font-roboto-mono);
+  font-size: 12px;
+  color: var(--token-text-light);
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  margin-top: 2px;
+  display: block;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0.001;
+    transform: translateY(-150px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

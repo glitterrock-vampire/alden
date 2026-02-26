@@ -1,0 +1,275 @@
+---
+// src/components/Footer.astro
+import MusicPlayer from './MusicPlayer.astro';
+import BackToTop from './BackToTop.astro';
+import Button from './Button.astro';
+---
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-top">
+      <span class="footer-name">[MASON WONG]</span>
+      <span class="footer-copyright">[COPYRIGHT 2026]</span>
+    </div>
+    
+    <div class="footer-middle">
+      <div class="footer-title">
+        <span class="title-line" data-animate="COME">COME</span>
+        <span class="title-line" data-animate="say">say</span>
+        <span class="title-line" data-animate="HELLO">HELLO</span>
+      </div>
+      
+      <div class="footer-chinese">
+        <span class="chinese-char" data-animate="﹁">﹁</span>
+        <span class="chinese-char" data-animate="你">你</span>
+        <span class="chinese-char" data-animate="好">好</span>
+        <span class="chinese-char" data-animate="﹂">﹂</span>
+      </div>
+      
+      <div class="footer-player">
+        <span class="player-label">[CURRENTLY ON REPEAT]</span>
+        <MusicPlayer size="medium" />
+        <span class="player-label-bottom">[LC - MEAN IT IN THE MORNING]</span>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <Button href="https://www.linkedin.com/in/masonhhwong/" variant="default" size="medium" target="_blank">
+        LINKEDIN
+      </Button>
+      
+      <BackToTop />
+      
+      <Button href="https://www.instagram.com/_mhhw/" variant="default" size="medium" target="_blank">
+        INSTAGRAM
+      </Button>
+    </div>
+  </div>
+  
+  <div class="footer-border"></div>
+  <div class="footer-bg-blur">
+    <img src="/images/footer-bg.jpg" alt="" loading="lazy" />
+  </div>
+</footer>
+
+<style>
+.footer {
+  background: var(--token-bg-light);
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.footer-name, .footer-copyright {
+  font-family: var(--font-roboto-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--token-text-light);
+}
+
+.footer-middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 16px 76px;
+}
+
+.footer-title {
+  width: 33%;
+  padding: 24px;
+}
+
+.title-line {
+  display: block;
+  font-family: var(--font-koulen);
+  font-size: 158px;
+  line-height: 0.9;
+  color: var(--token-text-light);
+  animation: fadeUp 1s 0.5s forwards;
+  opacity: 0.001;
+  transform: translateY(10px);
+  filter: blur(7px);
+}
+
+@media (min-width: 2000px) {
+  .title-line {
+    font-size: 205px;
+  }
+}
+
+@media (max-width: 1499.98px) {
+  .title-line {
+    font-size: 128px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .title-line {
+    font-size: 88px;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .title-line {
+    font-size: 78px;
+  }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.footer-chinese {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.chinese-char {
+  display: block;
+  font-family: 'HanyiSentyFoundation Regular', sans-serif;
+  font-size: 136px;
+  line-height: 1.1;
+  color: var(--token-accent-gold);
+  animation: fadeUp 1s 0.5s forwards;
+  opacity: 0.001;
+  transform: translateY(10px);
+  filter: blur(7px);
+}
+
+@media (min-width: 2000px) {
+  .chinese-char {
+    font-size: 156px;
+  }
+}
+
+@media (max-width: 1499.98px) {
+  .chinese-char {
+    font-size: 106px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .chinese-char {
+    font-size: 76px;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .chinese-char {
+    font-size: 73px;
+    display: inline-block;
+  }
+  
+  .footer-chinese {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 20px;
+  }
+}
+
+.footer-player {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+  padding: 24px 45px 46px;
+}
+
+@media (max-width: 1199.98px) {
+  .footer-player {
+    padding: 24px 0;
+  }
+}
+
+@media (max-width: 809.98px) {
+  .footer-player {
+    width: 100%;
+    align-items: center;
+    padding: 24px 0;
+  }
+}
+
+.player-label, .player-label-bottom {
+  font-family: var(--font-roboto-mono);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--token-text-light);
+  white-space: nowrap;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+@media (max-width: 809.98px) {
+  .footer-bottom {
+    padding: 16px 0;
+  }
+}
+
+.footer-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 21px solid var(--token-bg-light);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 809.98px) {
+  .footer-border {
+    border-width: 11px;
+  }
+}
+
+.footer-bg-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(0) saturate(0.6) blur(10px);
+  z-index: 0;
+}
+
+.footer-bg-blur img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
