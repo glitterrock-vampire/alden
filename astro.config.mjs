@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://www.mason-wong.com',
   output: 'static',
   build: {
     assets: 'assets',
