@@ -2,10 +2,8 @@
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import WorkSection from '../components/WorkSection.astro';
 import Button from '../components/Button.astro';
 import Footer from '../components/Footer.astro';
-import { projects } from '../data/projects.js';
 ---
 
 <Layout title="AL DEN DS GNS | Sr Visual Designer">
@@ -65,9 +63,6 @@ import { projects } from '../data/projects.js';
         <video class="hero-video" src="/videos/hero-background.mp4" autoplay loop muted playsinline></video>
       </div>
     </section>
-    
-    <!-- Work Section -->
-    <WorkSection />
     
     <!-- Info Section -->
     <section class="info">
@@ -210,7 +205,7 @@ import { projects } from '../data/projects.js';
 
 .hero-alden-logo {
   position: absolute;
-  top: 32%;
+  top: 29%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;

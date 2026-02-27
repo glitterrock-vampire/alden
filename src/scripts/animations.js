@@ -56,33 +56,6 @@ class AnimationController {
             document.querySelector('.nav').classList.remove('nav--light');
           }
           entry.target.style.transition = 'all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1)';
-        } else if (entry.target.closest('.work')) {
-          // Work section specific animations - don't hide header text initially
-          if (entry.isIntersecting) {
-            entry.target.style.filter = 'blur(0px)';
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0) scale(1)';
-            
-            // Trigger staggered animation for project tiles
-            if (entry.target.classList.contains('project-tile-wrapper')) {
-              const parentGrid = entry.target.closest('.stagger-animation');
-              if (parentGrid) {
-                const tiles = parentGrid.querySelectorAll('.project-tile-wrapper');
-                tiles.forEach((tile, index) => {
-                  if (tile === entry.target) {
-                    setTimeout(() => {
-                      tile.style.transition = 'all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1)';
-                      tile.style.filter = 'blur(0px)';
-                      tile.style.opacity = '1';
-                      tile.style.transform = 'translateY(0) scale(1)';
-                    }, index * 150); // Stagger by 150ms
-                  }
-                });
-              }
-            }
-          }
-          // Removed the else block that was hiding project tiles
-          entry.target.style.transition = 'all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1)';
         } else {
           // Standard behavior for other elements
           if (entry.isIntersecting) {
@@ -108,18 +81,9 @@ class AnimationController {
       observer.observe(el);
     });
 
-    // Observe work section elements
-    document.querySelectorAll('.work .animate-on-scroll').forEach(el => {
-      el.style.filter = 'blur(3px)';
-      el.style.opacity = '0.6';
-      el.style.transform = 'translateY(30px) scale(0.95)';
-      el.style.transition = 'all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1)';
-      observer.observe(el);
-    });
-
     // Observe other elements
     document.querySelectorAll('.animate-on-scroll, .featured').forEach(el => {
-      if (!el.closest('.hero-content') && !el.closest('.work')) {
+      if (!el.closest('.hero-content')) {
         el.style.filter = 'blur(3px)';
         el.style.opacity = '0.6';
         el.style.transform = 'translateY(20px) scale(0.98)';
