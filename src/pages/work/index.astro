@@ -38,25 +38,21 @@ const projects: Project[] = [
 >
   <Nav currentPage="work" />
 
+  <!-- ─── FULL PAGE VIDEO BACKGROUND ──────────────────────────────────────── -->
+  <div class="page-video-bg" id="pageVideoBg">
+    <div class="page-dark-overlay"></div>
+    
+    <div class="page-video-wrap" id="pageVideoWrap">
+      <video
+        src="https://framerusercontent.com/assets/WTjKqrn8HNXvDANMM6KjIZoIHI.mp4"
+        muted playsinline preload="auto"
+        class="page-video"
+      ></video>
+    </div>
+  </div>
+
   <!-- ─── HERO ─────────────────────────────────────────────────────────── -->
   <section class="hero" id="hero">
-
-    <!-- 330vh parallax container (framer-41kccs) -->
-    <div class="hero-bg" id="heroBg">
-      <div class="hero-dark-overlay"></div>
-
-      <!-- Video wrap (framer-azf245): top:-708px, scale 1.1→1, blur -->
-      <div class="hero-video-wrap" id="heroVideoWrap">
-        <video
-          src="https://framerusercontent.com/assets/WTjKqrn8HNXvDANMM6KjIZoIHI.mp4"
-          autoplay muted loop playsinline
-          class="hero-video"
-        ></video>
-      </div>
-
-      <!-- Secondary blur layer (framer-mlai04): scale 1.1→1, delay 7.1s -->
-      <div class="hero-blur-layer" id="heroBlurLayer"></div>
-    </div>
 
     <!-- Giant "WORK" letters (fecytw): y -230→0, delay 2.4s -->
     <div class="hero-letter-wrap">
@@ -70,17 +66,6 @@ const projects: Project[] = [
 
   <!-- ─── CREAM SECTION ────────────────────────────────────────────────── -->
   <section class="cream-section">
-
-    <!-- FEATURED / PROJECTS sticky label (175vh scroll area) -->
-    <div class="title-scroll-area">
-      <div class="title-sticky">
-        <div class="title-featured-stack" id="featuredStack">
-          <h5 class="title-featured">FEATURED</h5>
-          <p class="title-chinese">作<br/>品</p>
-        </div>
-        <h5 class="title-projects" id="projectsStack">PROJECTS</h5>
-      </div>
-    </div>
 
     <!-- Horizontal scroll gallery -->
     <div class="hscroll-outer" id="hscrollOuter">
@@ -207,6 +192,47 @@ const projects: Project[] = [
 
 <style>
 /* ═══════════════════════════════════════════════════════════════════
+   FULL PAGE VIDEO BACKGROUND
+═══════════════════════════════════════════════════════════════════ */
+.page-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.page-dark-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.1;
+  background: linear-gradient(#0000 0%, #000 34.9539%);
+  pointer-events: none;
+}
+
+.page-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  filter: brightness(1.01) blur(8px);
+  will-change: transform;
+  transform-origin: center center;
+  transform: scale(1.1);
+  animation: page-video-in 1.2s cubic-bezier(0.58,-0.13,0.17,1.02) 2.6s forwards;
+}
+
+@keyframes page-video-in { to { transform: scale(1); } }
+
+.page-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════════════════════════════ */
 .hero {
@@ -235,7 +261,7 @@ const projects: Project[] = [
   top: -79px;
   left: 0;
   width: 100%;
-  height: 330vh;
+  height: 500vh;
   z-index: 2;
   will-change: transform;
   opacity: 0.001;
@@ -249,7 +275,7 @@ const projects: Project[] = [
   position: absolute;
   inset: 0;
   z-index: 2;
-  opacity: 0.43;
+  opacity: 0.1;
   background: linear-gradient(#0000 0%, #000 34.9539%);
   pointer-events: none;
 }
@@ -260,12 +286,12 @@ const projects: Project[] = [
       Entrance: scale 1.1→1, delay:2.6s, dur:1.2s, ease:[0.58,-0.13,0.17,1.02] */
 .hero-video-wrap {
   position: absolute;
-  top: -708px;
-  left: -1.5%;
-  width: 103%;
-  height: 111%;
+  top: -1000px;
+  left: -5%;
+  width: 110%;
+  height: 120%;
   z-index: 1;
-  filter: brightness(1.01) blur(10px);
+  filter: brightness(1.01) blur(8px);
   will-change: transform;
   transform-origin: center center;
   transform: scale(1.1);
@@ -344,68 +370,14 @@ const projects: Project[] = [
 @media (min-width: 810px)  and (max-width: 1199px) { .hero-letter { font-size: 189px; } }
 @media (max-width: 809px)  { .hero-letter { font-size: 120px; } }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    CREAM SECTION
 ═══════════════════════════════════════════════════════════════════ */
 .cream-section {
-  background-color: var(--cream);
+  background-color: transparent;
   position: relative;
   z-index: 2;
   padding: 50px 24px 0;
-}
-
-/* ── Title scroll area (175vh container, sticky 100vh) */
-.title-scroll-area {
-  width: 100%;
-  height: 175vh;
-  position: relative;
-  overflow: visible;
-}
-.title-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding: 25px 0 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1;
-  overflow: visible;
-}
-.title-featured-stack {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 30px;
-  will-change: transform, opacity, filter;
-}
-.title-featured {
-  font-family: var(--ff-disp);
-  font-size: clamp(90px, 12vw, 244px);
-  line-height: 0.83em;
-  color: var(--dark);
-}
-.title-chinese {
-  font-family: var(--ff-cjk);
-  font-size: clamp(50px, 5vw, 132px);
-  line-height: 1.1em;
-  color: var(--gold-warm);
-  position: sticky;
-  top: 0;
-  height: 100%;
-  align-self: flex-start;
-}
-.title-projects {
-  font-family: var(--ff-disp);
-  font-size: clamp(90px, 12vw, 244px);
-  line-height: 0.83em;
-  color: var(--dark);
-  text-align: right;
-  flex: 1;
-  will-change: transform, opacity, filter;
 }
 
 /* ── Horizontal scroll */
@@ -459,6 +431,7 @@ const projects: Project[] = [
   position: absolute;
   inset: 0;
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.85);
   transition: filter 0.45s cubic-bezier(0.22,1,0.36,1),
               opacity 0.45s cubic-bezier(0.22,1,0.36,1) !important;
 }
@@ -469,7 +442,7 @@ const projects: Project[] = [
 }
 .card:hover .card-bg {
   filter: blur(10px) brightness(0.5);
-  opacity: 0.6;
+  opacity: 0.4;
 }
 .card--soon .card-bg-img { filter: brightness(0.35) grayscale(0.6); }
 
@@ -815,43 +788,68 @@ const projects: Project[] = [
 
 <script>
 /* ═══════════════════════════════════════════════════════════════════
-   PARALLAX
-   Mirrors Framer Motion's scroll-linked transform on the bg container.
-   
-   Layout.astro scrolls to top on DOMContentLoaded — good, ensures
-   parallax starts from scrollY=0.
-   
-   Two layers:
-   - heroBg (the 330vh container):  translateY at 0.15× scroll
-   - heroVideoWrap (the video):     translateY at 0.4× scroll
-     → video moves slower than page = parallax depth illusion
-   
-   After the CSS zoom-in animation completes (2.6s + 1.2s = 3.8s),
-   JS takes over the scale so CSS and JS don't fight.
+   SCROLL-BASED VIDEO CONTROL
+   Video plays frame-by-frame based on scroll position for parallax effect
 ═══════════════════════════════════════════════════════════════════ */
-(function initParallax() {
-  const heroBg    = document.getElementById('heroBg') as HTMLElement;
-  const videoWrap = document.getElementById('heroVideoWrap') as HTMLElement;
-  const heroEl    = document.getElementById('hero') as HTMLElement;
-  if (!heroBg || !videoWrap || !heroEl) return;
+(function initVideoScroll() {
+  const pageVideoBg = document.getElementById('pageVideoBg') as HTMLElement;
+  const videoWrap   = document.getElementById('pageVideoWrap') as HTMLElement;
+  const video       = document.querySelector('.page-video') as HTMLVideoElement;
+  if (!pageVideoBg || !videoWrap || !video) return;
 
   let ticking   = false;
-  let animated  = false;  // becomes true after CSS zoom finishes
+  let animated  = false;
   let lastSY    = 0;
+  let videoLoaded = false;
+  let lastVideoTime = 0;
+  let seekTimeout = null;
+
+  // Wait for video to load metadata
+  video.addEventListener('loadedmetadata', () => {
+    videoLoaded = true;
+    video.currentTime = 0;
+    video.playbackRate = 1.0; // Ensure normal playback rate
+    
+    // Request video frame callback for smoother playback
+    if ('requestVideoFrameCallback' in video) {
+      video.requestVideoFrameCallback(() => {
+        // Video is ready for smooth frame control
+      });
+    }
+  });
 
   function apply() {
     ticking = false;
     const sy = window.scrollY;
     lastSY = sy;
 
-    if (sy > heroEl.offsetHeight * 1.5) return;
-
-    // Bg container: subtle drift
-    heroBg.style.transform = `translate3d(0, ${sy * 0.15}px, 0)`;
-
-    // Video: faster parallax (moves up slower than page scroll)
+    // Video: no parallax movement, only scale animation
     const scale = animated ? 1 : 1.1;
-    videoWrap.style.transform = `translate3d(0, ${sy * 0.4}px, 0) scale(${scale})`;
+    if (animated) {
+      videoWrap.style.transform = 'none';
+    } else {
+      videoWrap.style.transform = `scale(${scale})`;
+    }
+
+    // Control video playback based on scroll - extended range for full page
+    if (videoLoaded && video.duration) {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = Math.min(1, Math.max(0, sy / maxScroll));
+      const targetTime = scrollProgress * video.duration;
+      
+      // Clear any pending seek
+      if (seekTimeout) {
+        clearTimeout(seekTimeout);
+      }
+      
+      // Debounced seek for smoother playback
+      seekTimeout = setTimeout(() => {
+        if (Math.abs(video.currentTime - targetTime) > 0.05) {
+          video.currentTime = targetTime;
+          lastVideoTime = targetTime;
+        }
+      }, 16); // ~60fps timing
+    }
   }
 
   function onScroll() {
@@ -864,12 +862,10 @@ const projects: Project[] = [
   window.addEventListener('scroll', onScroll, { passive: true });
 
   // After zoom animation finishes, hand control fully to JS
-  // delay = 2.6s + duration 1.2s + small buffer = 3.9s
   setTimeout(() => {
     animated = true;
-    // Remove the CSS animation so JS transform is sole authority
     videoWrap.style.animation = 'none';
-    videoWrap.style.transform = `translate3d(0, ${lastSY * 0.4}px, 0) scale(1)`;
+    videoWrap.style.transform = 'none';
   }, 3900);
 
   apply();
@@ -904,43 +900,6 @@ const projects: Project[] = [
   window.addEventListener('resize', () => { resize(); update(); }, { passive: true });
   window.addEventListener('scroll', update, { passive: true });
   update();
-})();
-
-/* ═══════════════════════════════════════════════════════════════════
-   SCROLL-REVEAL: FEATURED / PROJECTS labels
-   Blur-in from bottom — same pattern as Framer's whileInView
-═══════════════════════════════════════════════════════════════════ */
-(function initTitleReveal() {
-  const els = [
-    document.getElementById('featuredStack'),
-    document.getElementById('projectsStack'),
-  ].filter(Boolean) as HTMLElement[];
-
-  els.forEach(el => {
-    el.style.cssText += `
-      opacity: 0.001;
-      filter: blur(10px);
-      transform: translateY(10px);
-      transition: opacity 0.7s cubic-bezier(0.44,0,0.56,1),
-                  filter  0.7s cubic-bezier(0.44,0,0.56,1),
-                  transform 0.7s cubic-bezier(0.44,0,0.56,1);
-    `;
-  });
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (!e.isIntersecting) return;
-      const el = e.target as HTMLElement;
-      setTimeout(() => {
-        el.style.opacity   = '1';
-        el.style.filter    = 'blur(0px)';
-        el.style.transform = 'translateY(0)';
-      }, i * 100);
-      io.unobserve(el);
-    });
-  }, { threshold: 0.1 });
-
-  els.forEach(el => io.observe(el));
 })();
 
 /* ═══════════════════════════════════════════════════════════════════
