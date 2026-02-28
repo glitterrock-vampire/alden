@@ -1,9 +1,990 @@
---- 
+---
+// src/pages/work.astro
 import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+interface Project {
+  id: number;
+  title: string;
+  category: string;
+  href: string;
+  image: string;
+  imageW: number;
+  imageH: number;
+  comingSoon?: boolean;
+}
+
+// WORK letters for animated hero text
+const WORK_LETTERS = ["W", "O", "R", "K"];
+
+const projects: Project[] = [
+  { id:1,  title:"LIVERPOOL FC",           category:"MOBILE APP",          href:"/liverpoolfc",         image:"https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png",   imageW:1628, imageH:1119 },
+  { id:2,  title:"GLOBAL ESPORTS",         category:"BRAND IDENTITY",      href:"/globalEsports",       image:"https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png", imageW:2718, imageH:1810 },
+  { id:3,  title:"AIR BP",                category:"UI / VISUAL DESIGN",   href:"/airbp",               image:"https://framerusercontent.com/images/jGIDW70qyfBuP6v8UKUwumU8HGo.png", imageW:1628, imageH:1119 },
+  { id:4,  title:"NATIONWIDE",            category:"ENTERPRISE DESIGN",    href:"/nationwide",           image:"https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png", imageW:1628, imageH:1119 },
+  { id:5,  title:"THE NORWEGIAN CAPSULE", category:"RESPONSIVE WEB",       href:"/thenorwegiancapsule", image:"https://framerusercontent.com/images/TujYt1WY1IHHodeZrmAt5UobWY.png",   imageW:1792, imageH:2490 },
+  { id:6,  title:"ENGLAND RFU",           category:"DIGITAL CAMPAIGN",     href:"/englandrfu",           image:"https://framerusercontent.com/images/fKFKHb1VZsz50W8Ctq7RIZW4SRw.png", imageW:1628, imageH:1119 },
+  { id:7,  title:"WILD",                  category:"RESPONSIVE WEB",       href:"/wild",                 image:"https://framerusercontent.com/images/N5cohaaWuBrrm5OzvudHSkiiEXA.png", imageW:1792, imageH:2392 },
+  { id:8,  title:"LFCTV GO",              category:"OTT PLATFORM",         href:"/lfctvgo",              image:"https://framerusercontent.com/images/nsH8fDKT0gbSp0z4LbmN4XVjw28.png", imageW:1628, imageH:1119 },
+  { id:9,  title:"HEXABOTS",              category:"PRODUCT DESIGN",       href:"#",                     image:"https://framerusercontent.com/images/iEHXOE8MWd2vGa9Prmwyjtm35A.png",  imageW:1628, imageH:1119, comingSoon:true },
+  { id:10, title:"POSSO",                category:"MOBILE APP",            href:"#",                     image:"https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png",  imageW:1628, imageH:1119, comingSoon:true },
+];
 ---
 
-<Layout title="Andre Walters | Work">
-<main>
-  <!-- Work content will be recreated -->
-</main>
+<Layout
+  title="Work — ALDEN"
+  description="Selected work by ALDEN, Sr Visual Designer currently at IBM iX."
+>
+  <Nav currentPage="work" />
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+
+    <!-- 330vh parallax container (framer-41kccs) -->
+    <div class="hero-bg" id="heroBg">
+      <div class="hero-dark-overlay"></div>
+
+      <!-- Video wrap (framer-azf245): top:-708px, scale 1.1→1, blur -->
+      <div class="hero-video-wrap" id="heroVideoWrap">
+        <video
+          src="https://framerusercontent.com/assets/WTjKqrn8HNXvDANMM6KjIZoIHI.mp4"
+          autoplay muted loop playsinline
+          class="hero-video"
+        ></video>
+      </div>
+
+      <!-- Secondary blur layer (framer-mlai04): scale 1.1→1, delay 7.1s -->
+      <div class="hero-blur-layer" id="heroBlurLayer"></div>
+    </div>
+
+    <!-- Giant "WORK" letters (fecytw): y -230→0, delay 2.4s -->
+    <div class="hero-letter-wrap">
+      {WORK_LETTERS.map((letter, index) => (
+        <span class="hero-letter" data-letter={letter} data-index={index}>
+          {letter}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- ─── CREAM SECTION ────────────────────────────────────────────────── -->
+  <section class="cream-section">
+
+    <!-- FEATURED / PROJECTS sticky label (175vh scroll area) -->
+    <div class="title-scroll-area">
+      <div class="title-sticky">
+        <div class="title-featured-stack" id="featuredStack">
+          <h5 class="title-featured">FEATURED</h5>
+          <p class="title-chinese">作<br/>品</p>
+        </div>
+        <h5 class="title-projects" id="projectsStack">PROJECTS</h5>
+      </div>
+    </div>
+
+    <!-- Horizontal scroll gallery -->
+    <div class="hscroll-outer" id="hscrollOuter">
+      <div class="hscroll-sticky">
+        <div class="hscroll-track" id="hscrollTrack">
+          {projects.map((p) => (
+            <a
+              href={p.comingSoon ? undefined : p.href}
+              class={`card${p.comingSoon ? " card--soon" : ""}`}
+              aria-label={p.title}
+            >
+              <div class="card-bg">
+                <img
+                  src={`${p.image}?scale-down-to=1024&width=${p.imageW}&height=${p.imageH}`}
+                  width={p.imageW} height={p.imageH}
+                  loading={p.id <= 3 ? "eager" : "lazy"}
+                  alt={`${p.title} project`}
+                  class="card-bg-img"
+                />
+              </div>
+              <div class="card-mockup">
+                <img
+                  src={`${p.image}?scale-down-to=512&width=${p.imageW}&height=${p.imageH}`}
+                  width={p.imageW} height={p.imageH}
+                  loading="lazy"
+                  alt=""
+                  class="card-mockup-img"
+                />
+              </div>
+              <div class="card-labels">
+                <span class="card-title-text">{p.title}</span>
+                <span class="card-category-text">{p.category}</span>
+              </div>
+              {p.comingSoon && <div class="card-soon">COMING SOON</div>}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cta-row">
+      <a href="/work" class="cta-link">VIEW ALL WORK</a>
+      <a href="/info" class="cta-link">READ MY STORY</a>
+    </div>
+
+  </section>
+
+  <!-- ─── CAPABILITIES ──────────────────────────────────────────────────── -->
+  <section class="capabilities-section">
+    <div class="capabilities-inner">
+      <div class="capabilities-left">
+        <p class="cap-intro">Quietly<br/>powerful<br/><em>Digital Experiences</em></p>
+        <img
+          src="https://media.giphy.com/media/l0ExvIBFmKniVDqje/giphy.gif"
+          alt="Kobe Bryant tribute highlight reel"
+          class="kobe-gif"
+          loading="lazy"
+        />
+      </div>
+      <ul class="cap-list">
+        {["ART DIRECTION","UI / VISUAL DESIGN","USER EXPERIENCE DESIGN","ENTERPRISE DESIGN THINKING","RESEARCH / STRATEGY","BRAND IDENTITY"].map((c, i) => (
+          <li class="cap-item" style={`--delay:${i * 0.06}s`}>
+            <span class="cap-dash" aria-hidden="true">—</span>
+            <span class="cap-text">{c}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Footer />
 </Layout>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     STYLES
+     Note: Layout.astro's global `* { transition: 0.3s }` rule would
+     interfere with the precisely-timed CSS animations below. We cancel
+     it for every animated element with `transition: none` inside the
+     .loading class (already done by Layout) and re-declare our own
+     transition values explicitly so they always win via specificity.
+──────────────────────────────────────────────────────────────────────── -->
+<style is:global>
+  /* ── Albert Sans (not preloaded by Layout) ──────────────────────────── */
+  @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+  /* ── Design tokens (supplement Layout / global.css) ─────────────────── */
+  :root {
+    --cream:     #e7e5df;
+    --cream-50:  #e7e5df80;
+    --gold:      #ccbb87;
+    --gold-dk:   #8a7432;
+    --gold-warm: rgb(213, 197, 148);
+    --dark:      #2f2f2f;
+    --black:     #000000;
+    --ff-disp:   'Koulen', sans-serif;
+    --ff-mono:   'Roboto Mono', monospace;
+    --ff-body:   'Albert Sans', sans-serif;
+    --ff-cjk:    "HanyiSentyFoundation Regular", "PingFang SC", "Noto Serif CJK SC", serif;
+  }
+
+  /* Disable Layout's blanket transition on every animated element
+     so our precise CSS keyframe timings are not delayed/cancelled. */
+  /* Hero entrance elements — CSS @keyframes handle timing, NOT transitions */
+  .hero-bg,
+  .hero-video-wrap,
+  .hero-blur-layer,
+  .hero-letter {
+    transition: none !important;
+  }
+
+  /* Scroll-revealed elements — JS sets explicit transitions on them;
+     Layout's blanket rule must not pre-fire before JS applies opacity. */
+  .title-featured-stack,
+  .title-projects {
+    opacity: 0.001;
+  }
+  .footer-greet-line,
+  .footer-chinese {
+    /* Initial hidden state — JS reveals via .visible class */
+    opacity: 0.001;
+  }
+</style>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  padding-top: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: #000;
+}
+
+@media (--mobile) {
+  .hero {
+    padding-top: 150px;
+  }
+}
+
+/* ── Parallax BG container (framer-41kccs)
+      330vh tall, absolute top:-79px, will-change:transform
+      Entrance: opacity 0.001→1, delay:0.3s, dur:0.5s, ease:[0.44,0,0.56,1] */
+.hero-bg {
+  position: absolute;
+  top: -79px;
+  left: 0;
+  width: 100%;
+  height: 330vh;
+  z-index: 2;
+  will-change: transform;
+  opacity: 0.001;
+  animation: hero-bg-in 0.5s cubic-bezier(0.44,0,0.56,1) 0.3s forwards;
+}
+@keyframes hero-bg-in { to { opacity: 1; } }
+
+/* ── Dark gradient overlay (framer-16z1j8k)
+      opacity:0.43, gradient transparent → #000 at 34.95% */
+.hero-dark-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.43;
+  background: linear-gradient(#0000 0%, #000 34.9539%);
+  pointer-events: none;
+}
+
+/* ── Video container (framer-azf245-container)
+      top:-708px, left:-1.5%, width:103%, height:111%
+      filter: brightness(1.01) blur(10px), will-change:transform
+      Entrance: scale 1.1→1, delay:2.6s, dur:1.2s, ease:[0.58,-0.13,0.17,1.02] */
+.hero-video-wrap {
+  position: absolute;
+  top: -708px;
+  left: -1.5%;
+  width: 103%;
+  height: 111%;
+  z-index: 1;
+  filter: brightness(1.01) blur(10px);
+  will-change: transform;
+  transform-origin: center center;
+  transform: scale(1.1);
+  animation: hero-video-in 1.2s cubic-bezier(0.58,-0.13,0.17,1.02) 2.6s forwards;
+}
+@keyframes hero-video-in { to { transform: scale(1); } }
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0; left: 0;
+  display: block;
+}
+
+/* ── Blur layer (framer-mlai04)
+      scale 1.1→1, delay:7.1s, dur:1.2s, ease:[0.58,-0.13,0.17,1.02]
+      (This is the secondary sharpening layer that resolves last) */
+.hero-blur-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  will-change: transform;
+  transform: scale(1.1);
+  animation: hero-blur-in 1.2s cubic-bezier(0.58,-0.13,0.17,1.02) 7.1s forwards;
+  pointer-events: none;
+}
+@keyframes hero-blur-in { to { transform: scale(1); } }
+
+/* ── Hero letters "WORK" (framer-fecytw)
+      y: -230px→0, delay:2.4s, dur:0.9s, ease:[0.77,0.02,0.38,1] */
+.hero-letter-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  z-index: 3;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  gap: 12px; /* Proper spacing between letters */
+  padding: 0 40px; /* Add horizontal padding to prevent edge clipping */
+}
+.hero-letter {
+  font-family: var(--ff-disp);
+  line-height: 0.7em;
+  color: var(--cream);
+  white-space: nowrap;
+  will-change: transform;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(-230px);
+  animation: hero-letter-in 0.9s cubic-bezier(0.77,0.02,0.38,1) forwards;
+  /* Responsive sizes from original breakpoints */
+  font-size: 670px;
+}
+
+/* Staggered animation delays for each letter */
+.hero-letter:nth-child(1) { animation-delay: 2.4s; }
+.hero-letter:nth-child(2) { animation-delay: 2.5s; }
+.hero-letter:nth-child(3) { animation-delay: 2.6s; }
+.hero-letter:nth-child(4) { animation-delay: 2.7s; }
+
+@keyframes hero-letter-in { 
+  to { 
+    opacity: 1;
+    transform: translateY(0); 
+  } 
+}
+
+@media (min-width: 2000px) { .hero-letter { font-size: 940px; } }
+@media (min-width: 1500px) and (max-width: 1999px) { .hero-letter { font-size: 670px; } }
+@media (min-width: 1200px) and (max-width: 1499px) { .hero-letter { font-size: 350px; } }
+@media (min-width: 810px)  and (max-width: 1199px) { .hero-letter { font-size: 189px; } }
+@media (max-width: 809px)  { .hero-letter { font-size: 120px; } }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   CREAM SECTION
+═══════════════════════════════════════════════════════════════════ */
+.cream-section {
+  background-color: var(--cream);
+  position: relative;
+  z-index: 2;
+  padding: 50px 24px 0;
+}
+
+/* ── Title scroll area (175vh container, sticky 100vh) */
+.title-scroll-area {
+  width: 100%;
+  height: 175vh;
+  position: relative;
+  overflow: visible;
+}
+.title-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 25px 0 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  overflow: visible;
+}
+.title-featured-stack {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  will-change: transform, opacity, filter;
+}
+.title-featured {
+  font-family: var(--ff-disp);
+  font-size: clamp(90px, 12vw, 244px);
+  line-height: 0.83em;
+  color: var(--dark);
+}
+.title-chinese {
+  font-family: var(--ff-cjk);
+  font-size: clamp(50px, 5vw, 132px);
+  line-height: 1.1em;
+  color: var(--gold-warm);
+  position: sticky;
+  top: 0;
+  height: 100%;
+  align-self: flex-start;
+}
+.title-projects {
+  font-family: var(--ff-disp);
+  font-size: clamp(90px, 12vw, 244px);
+  line-height: 0.83em;
+  color: var(--dark);
+  text-align: right;
+  flex: 1;
+  will-change: transform, opacity, filter;
+}
+
+/* ── Horizontal scroll */
+.hscroll-outer {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+}
+.hscroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.hscroll-track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  padding: 0 80px;
+  will-change: transform;
+  flex-shrink: 0;
+}
+
+/* ── Project cards (framer-l4ka5: 685×528px) */
+.card {
+  --cw: 685px;
+  --ch: 528px;
+  flex: none;
+  width: var(--cw);
+  height: var(--ch);
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  /* Override Layout's blanket transition, use our own */
+  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.card:hover { transform: scale(1.02); }
+.card--soon { cursor: not-allowed; }
+
+/* Portrait cards */
+.card:nth-child(5),
+.card:nth-child(7) { --cw: 380px; --ch: 580px; }
+
+.card-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transition: filter 0.45s cubic-bezier(0.22,1,0.36,1),
+              opacity 0.45s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.card-bg-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: none !important;
+}
+.card:hover .card-bg {
+  filter: blur(10px) brightness(0.5);
+  opacity: 0.6;
+}
+.card--soon .card-bg-img { filter: brightness(0.35) grayscale(0.6); }
+
+/* Foreground mockup (framer-1r8dz0f: 54% wide, 46% tall, top:23.85%, left:23%) */
+.card-mockup {
+  z-index: 4;
+  position: absolute;
+  width: 54%;
+  height: 46%;
+  top: 23.85%;
+  left: 23%;
+  overflow: hidden;
+  opacity: 0;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.2);
+  transform: translateY(-16px) scale(0.97);
+  transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
+              transform 0.45s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.card-mockup-img { width: 100%; height: 100%; object-fit: cover; }
+.card:hover .card-mockup {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Labels (framer-159htgq: absolute top:50%, padding:0 24px, justify:space-between) */
+.card-labels {
+  z-index: 5;
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  transform: translateY(-50%);
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 21px;
+  pointer-events: none;
+}
+.card-title-text {
+  font-family: var(--ff-mono);
+  font-size: 14px;
+  line-height: 1.4em;
+  color: var(--dark);
+  white-space: pre;
+}
+.card-category-text {
+  font-family: var(--ff-mono);
+  font-size: 14px;
+  line-height: 1.4em;
+  color: var(--dark);
+  opacity: 0.5;
+  white-space: pre;
+}
+.card-soon {
+  position: absolute;
+  bottom: 16px; right: 16px;
+  z-index: 6;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--dark);
+  border: 1px solid rgba(47,47,47,0.35);
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: rgba(231,229,223,0.75);
+  backdrop-filter: blur(4px);
+}
+
+/* ── CTAs */
+.cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  padding: 6px 24px 250px;
+}
+.cta-link {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--dark);
+  opacity: 0.6;
+  position: relative;
+  transition: opacity 0.2s ease !important;
+}
+.cta-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 1px;
+  background: var(--dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.cta-link:hover { opacity: 1; }
+.cta-link:hover::after { transform: scaleX(1); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CAPABILITIES
+═══════════════════════════════════════════════════════════════════ */
+.capabilities-section {
+  background-color: var(--cream);
+  position: relative;
+  z-index: 2;
+  padding: 180px 150px;
+}
+.capabilities-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 80px;
+  width: 97%;
+  margin: 0 auto;
+}
+.capabilities-left {
+  flex: none;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.cap-intro {
+  font-family: var(--ff-body);
+  font-size: clamp(28px, 3vw, 52px);
+  line-height: 1.25;
+  color: var(--dark);
+}
+.cap-intro em { font-style: italic; color: var(--gold-dk); }
+.kobe-gif { width: 69%; height: auto; border-radius: 2px; }
+
+.cap-list { flex: 1; list-style: none; display: flex; flex-direction: column; }
+.cap-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(47,47,47,0.12);
+  opacity: 0;
+  transform: translateX(-24px);
+  /* !important to beat Layout's blanket `* { transition }` */
+  transition:
+    opacity  0.5s ease          var(--delay, 0s),
+    transform 0.5s cubic-bezier(0.22,1,0.36,1) var(--delay, 0s),
+    letter-spacing 0.3s ease   !important;
+}
+.cap-item:first-child { border-top: 1px solid rgba(47,47,47,0.12); }
+.cap-item.visible { opacity: 1; transform: none; }
+.cap-dash { font-family: var(--ff-mono); font-size: 14px; color: var(--dark); opacity: 0.3; flex-shrink: 0; }
+.cap-text { font-family: var(--ff-mono); font-size: 14px; letter-spacing: 0.06em; color: var(--dark); }
+.cap-item:hover .cap-text { letter-spacing: 0.14em; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════════════ */
+.footer {
+  background-color: var(--cream);
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+}
+.footer-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+  z-index: 3;
+}
+.footer-meta {
+  font-family: var(--ff-mono);
+  font-size: 14px;
+  line-height: 1.5em;
+  color: var(--cream);
+  mix-blend-mode: exclusion;
+  white-space: pre;
+}
+.footer-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 76px;
+  z-index: 3;
+  position: relative;
+}
+.footer-chinese-wrap {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+}
+.footer-chinese {
+  font-family: var(--ff-cjk);
+  font-size: clamp(80px, 9vw, 136px);
+  line-height: 1.1em;
+  color: var(--gold-warm);
+  text-align: center;
+  opacity: 0.001;
+  filter: blur(10px);
+  transform: translateY(10px);
+  transition:
+    opacity   0.8s cubic-bezier(0.44,0,0.56,1),
+    filter    0.8s cubic-bezier(0.44,0,0.56,1),
+    transform 0.8s cubic-bezier(0.44,0,0.56,1) !important;
+}
+.footer-chinese-wrap.visible .footer-chinese {
+  opacity: 1; filter: blur(0); transform: none;
+}
+.footer-greet-wrap {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+.footer-greet-line {
+  font-family: var(--ff-disp);
+  font-size: clamp(60px, 9vw, 158px);
+  line-height: 0.9em;
+  text-align: center;
+  color: var(--cream);
+  mix-blend-mode: exclusion;
+  opacity: 0.001;
+  filter: blur(10px);
+  transform: translateY(10px);
+  /* stagger via transition-delay on .visible variants below */
+  transition:
+    opacity   0.6s cubic-bezier(0.44,0,0.56,1) 0s,
+    filter    0.6s cubic-bezier(0.44,0,0.56,1) 0s,
+    transform 0.6s cubic-bezier(0.44,0,0.56,1) 0s !important;
+}
+.footer-come.visible  {
+  opacity: 1; filter: blur(0); transform: none;
+  transition-delay: 0s !important;
+}
+.footer-say.visible   {
+  opacity: 1; filter: blur(0); transform: none;
+  transition-delay: 0.12s !important;
+}
+.footer-hello.visible {
+  opacity: 1; filter: blur(0); transform: none;
+  transition-delay: 0.24s !important;
+}
+.footer-spotify-wrap {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 24px 45px 46px;
+  position: relative;
+  z-index: 2;
+}
+.footer-bottombar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+  z-index: 3;
+}
+.footer-socials { display: flex; }
+.footer-social {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 130px;
+  height: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: none !important;
+}
+.social-text,
+.social-text-italic {
+  font-family: var(--ff-disp);
+  font-size: 25px;
+  line-height: 1em;
+  color: var(--cream);
+  mix-blend-mode: exclusion;
+  position: absolute;
+  white-space: nowrap;
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.social-text         { top: 0;   left: 0; }
+.social-text-italic  { font-style: italic; top: 30px; left: 0; }
+.footer-social:hover .social-text        { transform: translateY(-30px); }
+.footer-social:hover .social-text-italic { transform: translateY(-30px); }
+
+.footer-backtop {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--dark);
+  opacity: 0.45;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease !important;
+}
+.footer-backtop:hover { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 1499px) { .capabilities-section { padding: 180px 80px; } }
+@media (max-width: 1199px) {
+  .capabilities-section { padding: 120px 50px; }
+  .capabilities-inner   { flex-direction: column; gap: 60px; }
+  .capabilities-left    { width: 100%; }
+  .footer-mid           { flex-direction: column; padding: 16px 24px; gap: 40px; }
+  .footer-greet-wrap    { width: 100%; }
+  .footer-spotify-wrap  { width: 100%; padding: 0; align-items: center; }
+  .hscroll-track        { padding: 0 40px; gap: 16px; }
+}
+@media (max-width: 809px) {
+  .cream-section  { padding: 32px 16px 0; }
+  .hscroll-track  { padding: 0 16px; gap: 12px; }
+  .card           { --cw: 280px; --ch: 200px; }
+  .card:nth-child(5),
+  .card:nth-child(7) { --cw: 200px; --ch: 280px; }
+  .cta-row        { flex-direction: column; gap: 16px; padding-bottom: 120px; }
+  .footer-socials { gap: 8px; }
+  .footer-social  { width: auto; }
+  .footer-mid     { flex-direction: column; padding: 16px; gap: 32px; }
+}
+</style>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   PARALLAX
+   Mirrors Framer Motion's scroll-linked transform on the bg container.
+   
+   Layout.astro scrolls to top on DOMContentLoaded — good, ensures
+   parallax starts from scrollY=0.
+   
+   Two layers:
+   - heroBg (the 330vh container):  translateY at 0.15× scroll
+   - heroVideoWrap (the video):     translateY at 0.4× scroll
+     → video moves slower than page = parallax depth illusion
+   
+   After the CSS zoom-in animation completes (2.6s + 1.2s = 3.8s),
+   JS takes over the scale so CSS and JS don't fight.
+═══════════════════════════════════════════════════════════════════ */
+(function initParallax() {
+  const heroBg    = document.getElementById('heroBg') as HTMLElement;
+  const videoWrap = document.getElementById('heroVideoWrap') as HTMLElement;
+  const heroEl    = document.getElementById('hero') as HTMLElement;
+  if (!heroBg || !videoWrap || !heroEl) return;
+
+  let ticking   = false;
+  let animated  = false;  // becomes true after CSS zoom finishes
+  let lastSY    = 0;
+
+  function apply() {
+    ticking = false;
+    const sy = window.scrollY;
+    lastSY = sy;
+
+    if (sy > heroEl.offsetHeight * 1.5) return;
+
+    // Bg container: subtle drift
+    heroBg.style.transform = `translate3d(0, ${sy * 0.15}px, 0)`;
+
+    // Video: faster parallax (moves up slower than page scroll)
+    const scale = animated ? 1 : 1.1;
+    videoWrap.style.transform = `translate3d(0, ${sy * 0.4}px, 0) scale(${scale})`;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(apply);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // After zoom animation finishes, hand control fully to JS
+  // delay = 2.6s + duration 1.2s + small buffer = 3.9s
+  setTimeout(() => {
+    animated = true;
+    // Remove the CSS animation so JS transform is sole authority
+    videoWrap.style.animation = 'none';
+    videoWrap.style.transform = `translate3d(0, ${lastSY * 0.4}px, 0) scale(1)`;
+  }, 3900);
+
+  apply();
+})();
+
+/* ═══════════════════════════════════════════════════════════════════
+   HORIZONTAL SCROLL
+   Sets hscroll-outer height dynamically so the sticky track scrolls
+   through the full horizontal distance.
+═══════════════════════════════════════════════════════════════════ */
+(function initHScroll() {
+  const track = document.getElementById('hscrollTrack') as HTMLElement;
+  const outer = document.getElementById('hscrollOuter') as HTMLElement;
+  if (!track || !outer) return;
+
+  function resize() {
+    const extra = Math.max(0, track.scrollWidth - window.innerWidth);
+    outer.style.height = `${extra + window.innerHeight}px`;
+  }
+
+  function update() {
+    const outerTop = outer.offsetTop;
+    const outerH   = parseFloat(outer.style.height) || 0;
+    const sy       = window.scrollY;
+    const progress = (sy - outerTop) / (outerH - window.innerHeight);
+    const clamped  = Math.max(0, Math.min(1, progress));
+    const maxTX    = track.scrollWidth - window.innerWidth;
+    track.style.transform = `translate3d(${-clamped * maxTX}px, 0, 0)`;
+  }
+
+  resize();
+  window.addEventListener('resize', () => { resize(); update(); }, { passive: true });
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLL-REVEAL: FEATURED / PROJECTS labels
+   Blur-in from bottom — same pattern as Framer's whileInView
+═══════════════════════════════════════════════════════════════════ */
+(function initTitleReveal() {
+  const els = [
+    document.getElementById('featuredStack'),
+    document.getElementById('projectsStack'),
+  ].filter(Boolean) as HTMLElement[];
+
+  els.forEach(el => {
+    el.style.cssText += `
+      opacity: 0.001;
+      filter: blur(10px);
+      transform: translateY(10px);
+      transition: opacity 0.7s cubic-bezier(0.44,0,0.56,1),
+                  filter  0.7s cubic-bezier(0.44,0,0.56,1),
+                  transform 0.7s cubic-bezier(0.44,0,0.56,1);
+    `;
+  });
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (!e.isIntersecting) return;
+      const el = e.target as HTMLElement;
+      setTimeout(() => {
+        el.style.opacity   = '1';
+        el.style.filter    = 'blur(0px)';
+        el.style.transform = 'translateY(0)';
+      }, i * 100);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.1 });
+
+  els.forEach(el => io.observe(el));
+})();
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLL-REVEAL: Capabilities list items (staggered)
+═══════════════════════════════════════════════════════════════════ */
+(function initCaps() {
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.cap-item').forEach(el => io.observe(el));
+})();
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLL-REVEAL: Footer COME/say/HELLO + Chinese chars
+═══════════════════════════════════════════════════════════════════ */
+(function initFooterReveal() {
+  const come    = document.getElementById('footerCome');
+  const chinese = document.querySelector('.footer-chinese-wrap');
+  if (!come) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.getElementById('footerCome')  ?.classList.add('visible');
+      document.getElementById('footerSay')   ?.classList.add('visible');
+      document.getElementById('footerHello') ?.classList.add('visible');
+      chinese?.classList.add('visible');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.2 });
+
+  io.observe(come);
+})();
+
+/* ═══════════════════════════════════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════════════════════════════════ */
+document.getElementById('backToTop')?.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
