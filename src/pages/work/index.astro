@@ -552,18 +552,19 @@ const projects: Project[] = [
 .capabilities-inner {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 80px;
-  width: 97%;
+  align-items: center;
+  justify-content: center;
+  gap: 120px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 .capabilities-left {
   flex: none;
-  width: 35%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   gap: 60px;
+  align-items: flex-start;
 }
 .cap-intro {
   font-family: var(--ff-body);
@@ -574,7 +575,14 @@ const projects: Project[] = [
 .cap-intro em { font-style: italic; color: var(--gold-dk); }
 .kobe-gif { width: 69%; height: auto; border-radius: 2px; }
 
-.cap-list { flex: 1; list-style: none; display: flex; flex-direction: column; }
+.cap-list { 
+  flex: 1; 
+  list-style: none; 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+}
 .cap-item {
   display: flex;
   align-items: center;
@@ -763,17 +771,23 @@ const projects: Project[] = [
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════════════════ */
-@media (max-width: 1499px) { .capabilities-section { padding: 180px 80px; } }
+@media (max-width: 1499px) { 
+  .capabilities-section { padding: 180px 80px; }
+  .capabilities-inner { gap: 100px; }
+}
 @media (max-width: 1199px) {
   .capabilities-section { padding: 120px 50px; }
-  .capabilities-inner   { flex-direction: column; gap: 60px; }
-  .capabilities-left    { width: 100%; }
+  .capabilities-inner   { flex-direction: column; gap: 60px; align-items: center; }
+  .capabilities-left    { width: 100%; max-width: 500px; align-items: center; }
+  .cap-list             { max-width: 100%; }
   .footer-mid           { flex-direction: column; padding: 16px 24px; gap: 40px; }
   .footer-greet-wrap    { width: 100%; }
   .footer-spotify-wrap  { width: 100%; padding: 0; align-items: center; }
   .hscroll-track        { padding: 0 40px; gap: 16px; }
 }
 @media (max-width: 809px) {
+  .capabilities-section { padding: 80px 24px; }
+  .capabilities-inner   { gap: 40px; }
   .cream-section  { padding: 32px 16px 0; }
   .hscroll-track  { padding: 0 16px; gap: 12px; }
   .card           { --cw: 280px; --ch: 200px; }
