@@ -51,15 +51,18 @@ const sizeClasses = {
 }
 
 .button-default {
-  background: #121212;
+  background: transparent;
+  border: none;
 }
 
 .button-dark {
-  background: #121212;
+  background: transparent;
+  border: none;
 }
 
 .button-light {
-  background: var(--token-bg-light);
+  background: transparent;
+  border: none;
 }
 
 .button-small {
@@ -78,19 +81,21 @@ const sizeClasses = {
 }
 
 .button-text {
-  font-family: var(--font-koulen);
-  font-size: 20px;
+  font-family: var(--font-roboto-mono);
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.2;
   color: #fff;
-  transition: transform 0.3s;
+  transition: none;
 }
 
 .button-light .button-text {
-  color: var(--token-text-dark);
+  color: #fff;
 }
 
 .button-chinese {
   font-family: 'HanyiSentyFoundation Regular', sans-serif;
-  font-size: 20px;
+  font-size: 14px;
   color: #fff;
   position: absolute;
   bottom: -27px;
@@ -101,7 +106,7 @@ const sizeClasses = {
 }
 
 .button-light .button-chinese {
-  color: var(--token-text-dark);
+  color: #fff;
 }
 
 .button:hover .button-text {

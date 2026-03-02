@@ -75,6 +75,7 @@ const projects: Project[] = [
             <a
               href={p.comingSoon ? undefined : p.href}
               class={`card${p.comingSoon ? " card--soon" : ""}`}
+              data-project-id={p.id}
               aria-label={p.title}
             >
               <div class="card-bg">
@@ -96,7 +97,7 @@ const projects: Project[] = [
                 />
               </div>
               <div class="card-labels">
-                <span class="card-title-text">{p.title}</span>
+                <span class={`card-title-text ${p.id === 1 ? 'liverpool-title' : p.id === 2 ? 'esports-title' : p.id === 5 ? 'norwegian-title' : ''}`}>{p.title}</span>
                 <span class="card-category-text">{p.category}</span>
               </div>
               {p.comingSoon && <div class="card-soon">COMING SOON</div>}
@@ -400,6 +401,8 @@ const projects: Project[] = [
   align-items: center;
   gap: 24px;
   padding: 0 80px;
+  padding-left: 200px; /* Extra padding to show first tile better */
+  padding-bottom: 60px; /* Space for text labels below cards */
   will-change: transform;
   flex-shrink: 0;
 }
@@ -467,12 +470,11 @@ const projects: Project[] = [
   transform: translateY(0) scale(1);
 }
 
-/* Labels (framer-159htgq: absolute top:50%, padding:0 24px, justify:space-between) */
+/* Labels (positioned below tiles) */
 .card-labels {
   z-index: 5;
   position: absolute;
-  top: 50%; left: 0; right: 0;
-  transform: translateY(-50%);
+  bottom: -40px; left: 0; right: 0;
   padding: 0 24px;
   display: flex;
   justify-content: space-between;
@@ -486,6 +488,12 @@ const projects: Project[] = [
   line-height: 1.4em;
   color: var(--dark);
   white-space: pre;
+}
+/* Gold titles for specific projects */
+.liverpool-title,
+.esports-title,
+.norwegian-title {
+  color: #ccbb87 !important;
 }
 .card-category-text {
   font-family: var(--ff-mono);
@@ -907,7 +915,9 @@ const projects: Project[] = [
     const progress = (sy - outerTop) / (outerH - window.innerHeight);
     const clamped  = Math.max(0, Math.min(1, progress));
     const maxTX    = track.scrollWidth - window.innerWidth;
-    track.style.transform = `translate3d(${-clamped * maxTX}px, 0, 0)`;
+    // Slow down scroll speed by using a factor (0.7 = 30% slower)
+    const scrollFactor = 0.7;
+    track.style.transform = `translate3d(${-clamped * maxTX * scrollFactor}px, 0, 0)`;
   }
 
   resize();

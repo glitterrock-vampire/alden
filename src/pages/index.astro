@@ -17,7 +17,7 @@ const EXPERTISE_ITEMS = [
 ];
 ---
 
-<Layout title="AL DEN DS GNS | Sr Visual Designer">
+<Layout title="ALDEN | Sr Visual Designer">
   <div class="bg-pattern" data-parallax="0.2"></div>
   <Nav currentPage="home" />
   
@@ -55,19 +55,12 @@ const EXPERTISE_ITEMS = [
               <span class="fancy-creative">Creative</span> Production
             </h2>
           </div>
-          
-          <div class="hero-bio" data-animate-hero="bio" data-delay="1.0">
-            <p class="hero-bio-title">
-              <span class="hero-job-title">SR SOFTWARE AND USER EXP</span>
-              <span class="hero-location">BASED IN KINGSTON JAMAICA I partner with brands, companies and entrepreneurs to transform visions into captivating experiences, all designed with the users at the helm.</span>
-            </p>
-          </div>
         </div>
         
-        <div class="hero-scroll" data-animate-hero="scroll" data-delay="1.5">
+        <div class="hero-scroll" data-animate-hero="scroll" data-delay="1.2">
+          <span class="scroll-instruction">[SCROLL DOWN] 請下去 [DOWN]</span>
           <span class="scroll-text">[NICE TO MEET YOU]</span>
           <span class="scroll-chinese">「很高興見到你」</span>
-          <span class="scroll-instruction">[SCROLL DOWN] 請下去 [DOWN]</span>
         </div>
       </div>
       
@@ -80,13 +73,13 @@ const EXPERTISE_ITEMS = [
     <!-- Featured Work Section -->
     <section class="featured-work">
       <div class="featured-work-container">
-        <h2 class="featured-work-title">FEATURED PROJECTS</h2>
+        <h2 class="featured-work-title" data-animate-hero="featured-title" data-delay="1.2">FEATURED PROJECTS</h2>
         
         <!-- Horizontal scroll gallery (larger tiles) -->
         <div class="hscroll-outer" id="hscrollOuter">
           <div class="hscroll-sticky">
             <div class="hscroll-track" id="hscrollTrack">
-              <a href="/work" class="work-card" aria-label="Liverpool FC Project">
+              <a href="/work" class="work-card" aria-label="Liverpool FC Project" data-animate-hero="tile-1" data-delay="1.6">
                 <div class="work-card-bg">
                   <img
                     src="https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png?scale-down-to=1024&width=1628&height=1119"
@@ -111,7 +104,7 @@ const EXPERTISE_ITEMS = [
                 </div>
               </a>
               
-              <a href="/work" class="work-card" aria-label="Global Esports Project">
+              <a href="/work" class="work-card" aria-label="Global Esports Project" data-animate-hero="tile-2" data-delay="2.0">
                 <div class="work-card-bg">
                   <img
                     src="https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png?scale-down-to=1024&width=2718&height=1810"
@@ -136,7 +129,7 @@ const EXPERTISE_ITEMS = [
                 </div>
               </a>
               
-              <a href="/work" class="work-card" aria-label="The Norwegian Capsule Project">
+              <a href="/work" class="work-card" aria-label="The Norwegian Capsule Project" data-animate-hero="tile-3" data-delay="2.4">
                 <div class="work-card-bg">
                   <img
                     src="https://framerusercontent.com/images/TujYt1WY1IHHodeZrmAt5UobWY.png?scale-down-to=1024&width=1792&height=2490"
@@ -164,7 +157,7 @@ const EXPERTISE_ITEMS = [
           </div>
         </div>
         
-        <a href="/work" class="view-full-work-btn">VIEW FULL WORK</a>
+        <a href="/work" class="view-full-work-btn" data-animate-hero="view-work" data-delay="2.8">VIEW FULL WORK</a>
       </div>
     </section>
     
@@ -281,7 +274,7 @@ const EXPERTISE_ITEMS = [
   background-image: url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');
   background-repeat: repeat;
   background-size: 256px 256px;
-  opacity: 0.05;
+  opacity: 0.08;
   pointer-events: none;
   z-index: 0;
 }
@@ -382,11 +375,12 @@ const EXPERTISE_ITEMS = [
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   padding: 1100px var(--container-padding) 100px;
   z-index: 2;
   box-sizing: border-box;
+  gap: 20px;
   
   @media (max-width: 809px) {
     padding: 750px var(--container-padding-mobile) 80px;
@@ -398,8 +392,9 @@ const EXPERTISE_ITEMS = [
 .hero-role {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 120px;
-  text-align: left;
+  transform: translateX(50px);
   
   @media (min-width: 1200px) and (max-width: 1499px) { margin-bottom: 156px; }
   @media (min-width: 810px) and (max-width: 1199px) { margin-bottom: 132px; }
@@ -426,21 +421,18 @@ const EXPERTISE_ITEMS = [
 /* Hero Bio */
 .hero-bio {
   width: 28%;
+  margin: 0 auto 40px auto;
+  text-align: center;
   
   @media (min-width: 2000px) { width: 21%; }
   @media (min-width: 1500px) and (max-width: 1999px) { width: 32%; }
   @media (min-width: 1200px) and (max-width: 1499px) { width: 32%; }
   @media (min-width: 810px) and (max-width: 1199px) { width: 49%; }
-  @media (max-width: 809px) { width: 100%; }
-}
-
-.hero-bio-title {
-  font-family: var(--font-roboto-mono);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--token-text-light);
-  margin-bottom: 1em;
+  @media (max-width: 809px) { 
+    width: 100%; 
+    margin: 0 0 20px 0;
+    text-align: left;
+  }
 }
 
 .hero-job-title,
@@ -449,11 +441,17 @@ const EXPERTISE_ITEMS = [
   font-size: 14px;
   color: var(--token-accent-gold);
   display: block;
+  margin: 0.5em 0;
 }
 
 .hero-job-title {
-  margin-bottom: 8px;
   font-weight: 600;
+}
+
+.hero-location {
+  text-align: justify;
+  line-height: 1.4;
+  margin-top: 0.5em;
 }
 
 /* Hero Scroll */
@@ -600,9 +598,9 @@ const EXPERTISE_ITEMS = [
 
 /* Featured Work Section */
 .featured-work {
-  background: var(--cream);
-  padding: 120px 0;
+  background: transparent;
   position: relative;
+  padding: 80px 0 0;
 }
 
 .featured-work-container {
@@ -625,14 +623,6 @@ const EXPERTISE_ITEMS = [
   letter-spacing: -0.02em;
   text-align: center;
   white-space: nowrap;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
-  
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
   
   @media (min-width: 1200px) and (max-width: 1499px) { 
     font-size: 150px; 
@@ -655,7 +645,7 @@ const EXPERTISE_ITEMS = [
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 240px;
+  margin-top: 200px;
 }
 
 .hscroll-sticky {
@@ -690,14 +680,6 @@ const EXPERTISE_ITEMS = [
   overflow: visible;
   /* Override Layout's blanket transition, use our own */
   transition: transform 0.5s cubic-bezier(0.22,1,0.36,1) !important;
-  opacity: 0;
-  transform: translateY(80px) scale(0.8);
-  transition: opacity 1.2s cubic-bezier(0.22,1,0.36,1), transform 1.2s cubic-bezier(0.22,1,0.36,1);
-  
-  &.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 .work-card:hover { transform: scale(1.02); }
 
@@ -784,17 +766,9 @@ const EXPERTISE_ITEMS = [
   letter-spacing: 0.1em;
   border-radius: 4px;
   transition: all 0.3s ease;
-  margin: 80px auto 0; /* Increased top margin */
+  margin: 120px auto 30px; /* Increased top/bottom margin by 1.5x */
   text-align: center;
   width: fit-content;
-  opacity: 0;
-  transform: translateY(60px) scale(0.9);
-  transition: opacity 1.2s cubic-bezier(0.22,1,0.36,1), transform 1.2s cubic-bezier(0.22,1,0.36,1);
-  
-  &.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
   
   &:hover {
     background: var(--gold);
@@ -805,14 +779,14 @@ const EXPERTISE_ITEMS = [
 /* ===== INFO SECTION ===== */
 .info {
   background: var(--token-bg-dark);
-  padding: 180px 0 500px;
+  padding: 40px 0 100px;
   position: relative;
   z-index: 2;
   overflow: hidden;
   
-  @media (min-width: 1200px) and (max-width: 1499px) { padding: 38px 0 150px; }
-  @media (min-width: 810px) and (max-width: 1199px) { padding: 31px 0 150px; }
-  @media (max-width: 809px) { padding: 0 var(--container-padding-mobile) 32px; }
+  @media (min-width: 1200px) and (max-width: 1499px) { padding: 30px 0 80px; }
+  @media (min-width: 810px) and (max-width: 1199px) { padding: 0 0 60px; }
+  @media (max-width: 809px) { padding: 20px 0 40px; }
 }
 
 .info::before {
@@ -867,16 +841,14 @@ const EXPERTISE_ITEMS = [
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 97%;
+  width: 100%;
   margin: 0 auto;
   position: relative;
-  min-height: 100vh;
-  padding-top: 150px;
+  min-height: 30vh;
   
   @media (max-width: 809px) { 
     width: 100%;
-    min-height: 100vh;
-    padding: 100px 0 0;
+    min-height: 20vh;
   }
 }
 
@@ -887,19 +859,24 @@ const EXPERTISE_ITEMS = [
 
 .info-hero-in {
   font-family: var(--font-koulen);
-  font-size: 500px;
-  line-height: 0.7;
+  font-size: 180px;
+  line-height: 0.6;
   color: var(--token-text-light);
   letter-spacing: 0.1em;
+  text-align: center;
+  transform: translateX(80px);
   
-  @media (min-width: 2000px) { font-size: 700px; }
-  @media (min-width: 1500px) and (max-width: 1999px) { font-size: 380px; }
-  @media (min-width: 1200px) and (max-width: 1499px) { font-size: 260px; }
-  @media (min-width: 810px) and (max-width: 1199px) { font-size: 135px; }
+  @media (min-width: 1200px) and (max-width: 1499px) { 
+    font-size: 150px; 
+  }
+  @media (min-width: 810px) and (max-width: 1199px) { 
+    font-size: 120px; 
+  }
   @media (max-width: 809px) { 
     position: static;
     font-size: 90px;
     letter-spacing: 0.05em;
+    transform: translateX(40px);
   }
 }
 
@@ -908,43 +885,38 @@ const EXPERTISE_ITEMS = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 211px;
+  gap: 100px;
   width: 100%;
-  padding: 0 150px;
-  margin-top: 50px;
+  padding: 0 80px;
   
-  @media (min-width: 2000px) { gap: 188px; }
+  @media (min-width: 2000px) { gap: 80px; }
   @media (min-width: 1200px) and (max-width: 1499px) { 
-    padding: 0;
-    gap: 188px;
+    padding: 0 40px;
+    gap: 80px;
   }
-  @media (min-width: 810px) and (max-width: 1199px) { gap: 123px; }
+  @media (min-width: 810px) and (max-width: 1199px) { gap: 60px; }
   @media (max-width: 809px) { 
-    gap: 100px;
-    padding: 0;
+    gap: 40px;
+    padding: 0 20px;
   }
 }
 
 .info-title {
-  width: 96%;
   font-family: var(--font-koulen);
   font-size: 74px;
   line-height: 1;
   text-align: center;
   color: var(--token-text-light);
   
-  @media (min-width: 2000px) { width: 70%; }
+  @media (min-width: 2000px) { font-size: 63px; }
   @media (min-width: 1500px) and (max-width: 1999px) { font-size: 63px; }
   @media (min-width: 1200px) and (max-width: 1499px) { 
-    width: 114%;
     font-size: 44px;
   }
   @media (min-width: 810px) and (max-width: 1199px) { 
-    width: 137%;
     font-size: 44px;
   }
   @media (max-width: 809px) { 
-    width: 100%;
     font-size: 36px;
   }
 }
@@ -1202,8 +1174,6 @@ const EXPERTISE_ITEMS = [
 
   // Observe elements in order
   const observeOrder = [
-    elements.heroBio,
-    elements.heroScroll,
     elements.featuredWorkTitle,
     elements.viewWorkBtn,
     elements.heroIn,
@@ -1220,19 +1190,59 @@ const EXPERTISE_ITEMS = [
 
   // ===== STAGGERED TILE ANIMATIONS (like work page) =====
   (function initTileStagger() {
+    // Use IntersectionObserver to trigger animations as user scrolls
+    const featuredElements = document.querySelectorAll('[data-animate-hero^="featured"], [data-animate-hero^="tile"], [data-animate-hero^="view-work"]');
+    
     const io = new IntersectionObserver(
-      entries => entries.forEach((e, index) => {
-        if (e.isIntersecting) {
-          // Add more dramatic staggered delay based on index
-          setTimeout(() => {
-            e.target.classList.add('visible');
-          }, index * 300); // 300ms delay between each tile (doubled)
-          io.unobserve(e.target);
+      entries => entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = parseFloat(el.dataset.delay) || 0;
+          
+          // Different animations for different elements
+          if (el.dataset.animateHero === 'featured-title') {
+            // Title: simple fade like hero
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(10px)';
+            el.style.filter = 'blur(7px)';
+            el.style.transition = 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out, filter 0.6s ease-in-out';
+            
+            setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+              el.style.filter = 'blur(0)';
+            }, 200); // Immediate trigger for title
+          } else if (el.dataset.animateHero.startsWith('tile')) {
+            // Tiles: dynamic scale and rotation with scroll-based delay
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px) scale(0.9) rotate(2deg)';
+            el.style.transition = 'opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1)';
+            
+            // Use element index for stagger instead of data-delay
+            const tileIndex = Array.from(document.querySelectorAll('[data-animate-hero^="tile"]')).indexOf(el);
+            setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+            }, 200 + (tileIndex * 200)); // 200ms stagger between tiles
+          } else if (el.dataset.animateHero === 'view-work') {
+            // Button: slide and scale
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px) scale(0.95)';
+            el.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+            
+            setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0) scale(1)';
+            }, 800); // Button appears after tiles
+          }
+          
+          io.unobserve(el);
         }
       }),
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' } // Trigger earlier as scrolling
     );
-    document.querySelectorAll('.work-card').forEach(el => io.observe(el));
+    
+    featuredElements.forEach(el => io.observe(el));
   })();
   
   // ===== SCROLL-BASED VIDEO CONTROL =====

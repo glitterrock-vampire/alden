@@ -168,10 +168,11 @@ if (dayEl) dayEl.textContent = dayText;
 
 .nav-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   max-width: 2500px;
   margin: 0 auto;
+  position: relative;
 }
 
 .logo {
@@ -180,6 +181,8 @@ if (dayEl) dayEl.textContent = dayText;
   display: flex;
   align-items: center;
   gap: 0;
+  position: absolute;
+  left: 0;
 }
 
 .logo:hover {
@@ -202,7 +205,6 @@ if (dayEl) dayEl.textContent = dayText;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  padding-left: 300px;
 }
 
 @media (max-width: 1199.98px) {
@@ -290,7 +292,8 @@ if (dayEl) dayEl.textContent = dayText;
 }
 
 .nav-year {
-  position: relative;
+  position: absolute;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
