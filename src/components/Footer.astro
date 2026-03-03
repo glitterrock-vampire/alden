@@ -34,13 +34,13 @@ import Button from './Button.astro';
     </div>
     
     <div class="footer-bottom">
-      <Button href="https://www.linkedin.com/in/masonhhwong/" variant="default" size="medium" target="_blank">
+      <Button href="https://www.linkedin.com/in/masonhhwong/" variant="light" size="medium" target="_blank">
         LINKEDIN
       </Button>
       
       <BackToTop />
       
-      <Button href="https://www.instagram.com/_mhhw/" variant="default" size="medium" target="_blank">
+      <Button href="https://www.instagram.com/_mhhw/" variant="light" size="medium" target="_blank">
         INSTAGRAM
       </Button>
     </div>
@@ -232,6 +232,11 @@ import Button from './Button.astro';
   justify-content: space-between;
   align-items: center;
   padding: 16px;
+}
+
+.footer-bottom .button-text {
+  color: var(--token-text-light);
+  mix-blend-mode: difference;
 }
 
 @media (max-width: 809.98px) {

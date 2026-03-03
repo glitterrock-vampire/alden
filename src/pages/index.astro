@@ -18,8 +18,10 @@ const EXPERTISE_ITEMS = [
 ---
 
 <Layout title="ALDEN | Sr Visual Designer">
-  <div class="bg-pattern" data-parallax="0.2"></div>
   <Nav currentPage="home" />
+  
+  <!-- Animated Grain Overlay -->
+  <div class="grain-overlay"></div>
   
   <!-- ─── FULL PAGE VIDEO BACKGROUND ──────────────────────────────────────── -->
   <div class="page-video-bg" id="pageVideoBg">
@@ -257,26 +259,74 @@ const EXPERTISE_ITEMS = [
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  background: var(--token-bg-dark);
+  background: transparent;
   position: relative;
 }
 
-/* Background pattern (shared) */
-.bg-pattern,
-.hero::before,
-.info::before {
-  content: '';
-  position: absolute;
+/* Background pattern removed */
+
+/* ===== ANIMATED GRAIN OVERLAY ===== */
+.grain-overlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png');
-  background-repeat: repeat;
-  background-size: 256px 256px;
-  opacity: 0.08;
+  z-index: 3;
   pointer-events: none;
-  z-index: 0;
+  opacity: 0.03;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0),
+    radial-gradient(circle at 3px 3px, rgba(255,255,255,0.1) 1px, transparent 0);
+  background-size: 50px 50px, 30px 30px, 20px 20px;
+  background-position: 0 0, 10px 10px, 20px 20px;
+  animation: grain-move 8s steps(10) infinite;
+  filter: blur(0.5px);
+  mix-blend-mode: overlay;
+}
+
+@keyframes grain-move {
+  0%, 100% {
+    transform: translate(0, 0);
+    background-position: 0 0, 10px 10px, 20px 20px;
+  }
+  10% {
+    transform: translate(-5px, -10px);
+    background-position: 5px 5px, 15px 15px, 25px 25px;
+  }
+  20% {
+    transform: translate(-10px, 5px);
+    background-position: 10px 10px, 20px 20px, 30px 30px;
+  }
+  30% {
+    transform: translate(5px, -5px);
+    background-position: 15px 15px, 25px 25px, 35px 35px;
+  }
+  40% {
+    transform: translate(-15px, -15px);
+    background-position: 20px 20px, 30px 30px, 40px 40px;
+  }
+  50% {
+    transform: translate(10px, 10px);
+    background-position: 25px 25px, 35px 35px, 45px 45px;
+  }
+  60% {
+    transform: translate(-20px, 5px);
+    background-position: 30px 30px, 40px 40px, 50px 50px;
+  }
+  70% {
+    transform: translate(15px, -10px);
+    background-position: 35px 35px, 45px 45px, 55px 55px;
+  }
+  80% {
+    transform: translate(-5px, 20px);
+    background-position: 40px 40px, 50px 50px, 60px 60px;
+  }
+  90% {
+    transform: translate(25px, -25px);
+    background-position: 45px 45px, 55px 55px, 65px 65px;
+  }
 }
 
 /* ===== TYPOGRAPHY UTILITIES ===== */
@@ -299,6 +349,7 @@ const EXPERTISE_ITEMS = [
   padding-top: 200px;
   padding-bottom: 2020px;
   overflow: visible;
+  background: transparent;
 }
 
 @media (--mobile) {
@@ -395,10 +446,14 @@ const EXPERTISE_ITEMS = [
   align-items: flex-start;
   margin-bottom: 120px;
   transform: translateX(50px);
+  gap: 20px;
   
   @media (min-width: 1200px) and (max-width: 1499px) { margin-bottom: 156px; }
   @media (min-width: 810px) and (max-width: 1199px) { margin-bottom: 132px; }
-  @media (max-width: 809px) { margin-bottom: 40px; }
+  @media (max-width: 809px) { 
+    margin-bottom: 40px;
+    gap: 10px;
+  }
 }
 
 .hero-role-visual,
@@ -556,7 +611,7 @@ const EXPERTISE_ITEMS = [
   position: absolute;
   inset: 0;
   z-index: 2;
-  opacity: 0.1;
+  opacity: 0;
   background: linear-gradient(#0000 0%, #000 34.9539%);
   pointer-events: none;
 }
@@ -565,10 +620,10 @@ const EXPERTISE_ITEMS = [
   position: absolute;
   inset: 0;
   z-index: 1;
-  filter: brightness(1.01) blur(8px);
+  filter: brightness(0.95) blur(8px) saturate(0.7);
   will-change: transform;
   transform-origin: center center;
-  transform: scale(1.1);
+  transform: scale(1.05);
   animation: page-video-in 1.2s cubic-bezier(0.58,-0.13,0.17,1.02) 2.6s forwards;
 }
 
@@ -618,11 +673,13 @@ const EXPERTISE_ITEMS = [
   font-family: var(--font-koulen);
   font-size: 180px;
   line-height: 0.6;
-  color: var(--dark);
+  color: #ffffff;
   margin-bottom: 0;
   letter-spacing: -0.02em;
   text-align: center;
   white-space: nowrap;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  mix-blend-mode: screen;
   
   @media (min-width: 1200px) and (max-width: 1499px) { 
     font-size: 150px; 
@@ -742,16 +799,18 @@ const EXPERTISE_ITEMS = [
   font-family: var(--font-mono);
   font-size: 14px;
   line-height: 1.4em;
-  color: var(--dark);
+  color: var(--token-text-light);
   white-space: pre;
+  mix-blend-mode: difference;
 }
 .work-card-category-text {
   font-family: var(--font-mono);
   font-size: 14px;
   line-height: 1.4em;
-  color: var(--dark);
-  opacity: 0.5;
+  color: var(--token-text-light);
+  opacity: 0.7;
   white-space: pre;
+  mix-blend-mode: difference;
 }
 
 /* View Full Work Button */
@@ -778,7 +837,7 @@ const EXPERTISE_ITEMS = [
 
 /* ===== INFO SECTION ===== */
 .info {
-  background: var(--token-bg-dark);
+  background: transparent;
   padding: 40px 0 100px;
   position: relative;
   z-index: 2;

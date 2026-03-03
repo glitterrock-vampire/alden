@@ -342,23 +342,27 @@ const pageData = {
       backface-visibility: hidden;
     }
 
-    /* ----------------------------------------
-       Background Pattern
-       ---------------------------------------- */
-    .background-pattern {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      opacity: 0.05;
-      pointer-events: none;
-      z-index: var(--z-background);
-      background-image: url('/images/grid-pattern.png');
-      background-size: 256px 256px;
-      background-repeat: repeat;
-      will-change: transform;
-    }
+    /* Background pattern removed */
+
+    /* ===== VIDEO BACKGROUND OVERLAY SYSTEM ===== */
+.page-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.page-dark-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  background: linear-gradient(#0000 0%, #000 34.9539%);
+  pointer-events: none;
+}
 
     /* ----------------------------------------
        Hero Section - Enhanced with Character Animations
@@ -2537,10 +2541,11 @@ const pageData = {
     }
   </style>
 
-  <!-- Background Pattern -->
-  <div class="background-pattern"></div>
-
   <main>
+    <!-- Video Background Overlay -->
+    <div class="page-video-bg">
+      <div class="page-dark-overlay"></div>
+    </div>
     <!-- Hero Section -->
     <section class="hero">
       <!-- Giant "INFO" letters with character animations -->

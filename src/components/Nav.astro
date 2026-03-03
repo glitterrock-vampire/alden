@@ -27,11 +27,6 @@ const { currentPage = 'home' } = Astro.props;
         <span class="nav-link-text">WORK</span>
       </a>
       
-      <a href="/side" class="nav-link coming-soon">
-        <span class="nav-link-text">ON THE SIDE</span>
-        <div class="coming-soon-badge"></div>
-      </a>
-      
       <a href="/info" class={`nav-link ${currentPage === 'info' ? 'active' : ''}`}>
         <span class="nav-link-text">INFO</span>
       </a>
