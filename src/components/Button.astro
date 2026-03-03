@@ -100,15 +100,19 @@ const sizeClasses = {
 }
 
 .button-chinese {
-  font-family: 'HanyiSentyFoundation Regular', sans-serif;
-  font-size: 14px;
+  font-family: var(--font-roboto-mono); /* Same as scroll instructions */
+  font-size: 14px; /* Same as scroll instructions */
+  line-height: 0.83; /* Same as scroll instructions */
   color: #fff;
   position: absolute;
   bottom: -27px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-27px); /* Move up by default */
   transition: transform 0.3s;
   white-space: nowrap;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8) !important; /* Add shadow for visibility */
 }
 
 .button-light .button-chinese {

@@ -66,22 +66,42 @@ const pageData = {
           }, index * 150); // Increased from 100ms to 150ms for slower animation
         });
 
-        // Intersection Observer for scroll animations
+        // Enhanced scroll observer for all bio sections
         const scrollObserver = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
+            const element = entry.target;
+            
             if (entry.isIntersecting) {
-              const element = entry.target;
+              // Element is entering viewport - animate in
               setTimeout(() => {
                 element.classList.add('visible');
-              }, 200); // Add 200ms delay to scroll animations
-              scrollObserver.unobserve(element);
+              }, 100); // Reduced delay for smoother animations
+            } else {
+              // Element is leaving viewport - animate out
+              element.classList.remove('visible');
             }
           });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe all elements with data-animate
-        document.querySelectorAll('[data-animate]').forEach(el => {
-          scrollObserver.observe(el);
+        // Observe all sections including immersive
+        const sectionsToObserve = [
+          '.about-description',
+          '.about-bio',
+          '.about-experience',
+          '.about-education',
+          '.about-achievements',
+          '.about-interests',
+          '.bio-meta',
+          '.bio-text',
+          '.immersive',
+          '.immersive-stats',
+          '.immersive-description'
+        ];
+
+        sectionsToObserve.forEach(selector => {
+          document.querySelectorAll(selector).forEach(el => {
+            scrollObserver.observe(el);
+          });
         });
 
         // Footer animations with delay
@@ -467,6 +487,7 @@ const pageData = {
 
     .about-description {
       margin-bottom: 80px;
+      text-align: center; /* Center align the description */
     }
 
     .about-lead {
@@ -512,6 +533,176 @@ const pageData = {
       color: var(--color-text-primary);
       margin-bottom: 20px;
       opacity: 0.9;
+      text-align: justify; /* Justify the text */
+      text-justify: inter-word; /* Use inter-word justification */
+    }
+
+    .bio-text h3 {
+      font-family: var(--font-koulen);
+      font-size: 20px;
+      color: var(--color-text-primary);
+      margin: 32px 0 12px 0;
+    }
+
+    .bio-text h3:first-child {
+      margin-top: 0;
+    }
+
+    .bio-text ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    .bio-text li {
+      font-family: var(--font-roboto-mono);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .bio-text strong {
+      color: var(--color-accent-gold);
+      font-weight: normal;
+    }
+
+    /* Animation transitions for all sections */
+    .about-description,
+    .about-bio,
+    .about-experience,
+    .about-education,
+    .about-achievements,
+    .about-interests {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .about-description.visible,
+    .about-bio.visible,
+    .about-experience.visible,
+    .about-education.visible,
+    .about-achievements.visible,
+    .about-interests.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered animations for sections */
+    .about-bio { transition-delay: 0.2s; }
+    .about-experience { transition-delay: 0.4s; }
+    .about-education { transition-delay: 0.6s; }
+    .about-achievements { transition-delay: 0.8s; }
+    .about-interests { transition-delay: 1.0s; }
+
+    /* Parallax effect for bio text */
+    .bio-text {
+      opacity: 0;
+      transform: translateY(30px) translateX(-20px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bio-text.visible {
+      opacity: 1;
+      transform: translateY(0) translateX(0);
+    }
+
+    /* Staggered paragraph animations */
+    .bio-text p {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bio-text.visible p {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+
+    /* Staggered paragraph delays */
+    .bio-text.visible p:nth-child(1) { transition-delay: 0.1s; }
+    .bio-text.visible p:nth-child(2) { transition-delay: 0.2s; }
+    .bio-text.visible p:nth-child(3) { transition-delay: 0.3s; }
+    .bio-text.visible p:nth-child(4) { transition-delay: 0.4s; }
+    .bio-text.visible p:nth-child(5) { transition-delay: 0.5s; }
+    .bio-text.visible p:nth-child(6) { transition-delay: 0.6s; }
+    .bio-text.visible p:nth-child(7) { transition-delay: 0.7s; }
+
+    /* Bio meta title animations */
+    .bio-meta {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bio-meta.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Heading animations */
+    .bio-text h3 {
+      opacity: 0;
+      transform: translateY(15px) scale(0.95);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bio-text.visible h3 {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* List animations */
+    .bio-text ul {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bio-text.visible ul {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .bio-text li {
+      opacity: 0;
+      transform: translateX(-15px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bio-text.visible li {
+      opacity: 0.9;
+      transform: translateX(0);
+    }
+
+    /* Staggered list item animations */
+    .bio-text.visible li:nth-child(1) { transition-delay: 0.05s; }
+    .bio-text.visible li:nth-child(2) { transition-delay: 0.1s; }
+    .bio-text.visible li:nth-child(3) { transition-delay: 0.15s; }
+    .bio-text.visible li:nth-child(4) { transition-delay: 0.2s; }
+    .bio-text.visible li:nth-child(5) { transition-delay: 0.25s; }
+    .bio-text.visible li:nth-child(6) { transition-delay: 0.3s; }
+    .bio-text.visible li:nth-child(7) { transition-delay: 0.35s; }
+
+    /* New sections styling */
+    .about-experience,
+    .about-education,
+    .about-achievements,
+    .about-interests {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 40px; /* Reduced from 80px */
+      margin-bottom: 20px; /* Added bottom margin reduction */
+    }
+
+    .about-experience:first-of-type,
+    .about-education:first-of-type,
+    .about-achievements:first-of-type,
+    .about-interests:first-of-type {
+      margin-top: 60px;
     }
 
     @media (max-width: 809.98px) {
@@ -519,7 +710,11 @@ const pageData = {
         padding: 60px var(--space-md);
       }
       
-      .about-bio {
+      .about-bio,
+      .about-experience,
+      .about-education,
+      .about-achievements,
+      .about-interests {
         grid-template-columns: 1fr;
         gap: 30px;
       }
@@ -533,11 +728,14 @@ const pageData = {
        Immersive Section - Enhanced Design
        ---------------------------------------- */
     .immersive {
-      background-color: var(--color-bg-light);
-      color: var(--color-text-secondary);
-      padding: 120px var(--space-lg);
+      background-color: var(--color-bg-light, #1a1a1a);
+      color: var(--color-text-secondary, #ffffff);
+      padding: 120px var(--space-lg, 80px);
       position: relative;
       overflow: hidden;
+      display: block; /* Ensure it's displayed */
+      visibility: visible; /* Ensure it's visible */
+      opacity: 1; /* Ensure it's not transparent */
     }
 
     .immersive::before {
@@ -617,18 +815,28 @@ const pageData = {
     .immersive-content {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 400px; /* Match spacing between date and title */
+      gap: 60px; /* Increased gap for better spacing */
       align-items: start; /* Align to top for better visual flow */
+      position: relative;
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
     }
 
     .immersive-stats {
       display: flex;
       gap: 60px; /* Back to original spacing */
       justify-content: center;
+      position: relative;
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
     }
 
     .stat-item {
       text-align: center;
+      opacity: 1;
+      visibility: visible;
     }
 
     .stat-number {
@@ -649,15 +857,18 @@ const pageData = {
     }
 
     .immersive-description {
-      font-family: var(--font-roboto-mono);
+      font-family: var(--font-roboto-mono, 'Courier New', monospace);
       font-size: 18px;
       line-height: 1.8; /* Increased line height for better spacing */
-      color: var(--color-text-secondary);
-      opacity: 0.9;
-      max-width: 400px;
-      padding-left: 60px; /* Match title padding */
-      text-align: justify; /* Justified text */
-      text-justify: inter-word; /* Better justification */
+      color: var(--color-text-secondary, #ffffff);
+      max-width: 600px;
+      margin: 0;
+      text-align: justify;
+      text-justify: inter-word;
+      position: relative;
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
     }
 
     .hero-job-title {
@@ -836,8 +1047,13 @@ const pageData = {
     .expertise {
       background: var(--color-bg);
       color: var(--color-text-primary);
-      padding: 120px var(--space-lg);
+      padding: 60px var(--space-lg) 160px; /* Increased bottom padding to 160px */
       position: relative;
+      margin-bottom: 0px; /* Removed negative margin to prevent overlap */
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: none !important; /* Hide expertise section for now */
+      z-index: 1;
     }
 
     .expertise-container {
@@ -859,22 +1075,31 @@ const pageData = {
     }
 
     .expertise-grid {
-      display: grid;
+      display: grid !important;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 40px;
+      opacity: 1 !important;
+      visibility: visible !important;
+      position: relative;
+      z-index: 5;
     }
 
     .expertise-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05); /* Increased from 0.02 */
+      border: 1px solid rgba(255, 255, 255, 0.2); /* Increased from 0.1 */
       padding: 40px;
       position: relative;
       transition: all 0.3s ease;
+      opacity: 1 !important; /* Force full opacity */
+      visibility: visible !important; /* Force visibility */
+      display: block !important; /* Force display */
+      transform: none !important; /* Remove any transforms */
+      z-index: 10; /* Ensure above other elements */
     }
 
     .expertise-card:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08); /* Increased from 0.05 */
+      border-color: rgba(255, 255, 255, 0.3); /* Increased from 0.2 */
       transform: translateY(-2px);
     }
 
@@ -883,44 +1108,41 @@ const pageData = {
     }
 
     .card-number {
-      font-family: var(--font-roboto-mono);
-      font-size: 14px;
-      color: var(--color-text-primary);
-      opacity: 0.6;
-      margin-bottom: 15px;
+      font-family: var(--font-koulen, 'Arial Black', sans-serif);
+      font-size: 18px;
+      color: var(--color-text-primary, #ffffff);
+      opacity: 0.8;
     }
 
     .card-title {
-      font-family: var(--font-koulen);
-      font-size: clamp(32px, 4vw, 48px);
-      line-height: 0.9;
-      color: var(--color-text-primary);
-      margin: 0 0 5px 0;
+      font-family: var(--font-koulen, 'Arial Black', sans-serif);
+      font-size: 32px;
+      color: var(--color-text-primary, #ffffff);
+      margin: 0 0 8px 0;
+      line-height: 1;
     }
 
     .card-subtitle {
-      font-family: var(--font-koulen);
-      font-size: clamp(24px, 3vw, 36px);
-      line-height: 0.9;
-      color: var(--color-text-primary);
+      font-family: var(--font-koulen, 'Arial Black', sans-serif);
+      font-size: 24px;
+      color: var(--color-text-primary, #ffffff);
       margin: 0;
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     .card-divider {
       width: 100%;
       height: 1px;
       background: rgba(255, 255, 255, 0.2);
-      margin: 30px 0;
+      margin: 20px 0;
     }
 
     .card-text {
-      font-family: var(--font-roboto-mono);
+      font-family: var(--font-roboto-mono, 'Courier New', monospace);
       font-size: 16px;
-      line-height: 1.6;
-      color: var(--color-text-primary);
+      color: var(--color-text-primary, #ffffff);
       opacity: 0.9;
-      margin: 0;
+      line-height: 1.6;
     }
 
     @media (max-width: 809.98px) {
@@ -2468,6 +2690,8 @@ const pageData = {
       
       .footer-middle {
         margin: 40px 0;
+        justify-content: space-between; /* Match homepage centering */
+        align-items: center; /* Match homepage alignment */
       }
       
       .footer-title {
@@ -2671,14 +2895,14 @@ const pageData = {
           </div>
 
           <div class="immersive-description" data-animate>
-            <p class="hero-job-title">SR SOFTWARE AND USER EXPERIENCE DESIGNER</p>
+            <p class="hero-job-title">SR SOFTWARE AND USER EXP</p>
             <p class="hero-location">BASED IN KINGSTON JAMAICA I partner with brands, companies and entrepreneurs to transform visions into captivating experiences, all designed with the users at the helm.</p>
           </div>
         </div>
         </div>
       </section>
       
-      <Button href="/info" variant="light" chineseText="讀我的故事" class="hover-lift" style="color: #2f2f2f !important; text-shadow: 0 0 5px rgba(0,0,0,0.8) !important;">
+      <Button href="/info" variant="light" class="hover-lift">
         READ MY STORY
       </Button>
       
@@ -2687,7 +2911,7 @@ const pageData = {
       <div class="about-content">
         <div class="about-description">
           <p class="about-lead">
-            software developer
+            a software developer
           </p>
           <p class="about-subline">
             <span class="about-script">based in</span> Jamaica
@@ -2696,12 +2920,83 @@ const pageData = {
 
         <div class="about-bio">
           <div class="bio-meta">
-            <h2 class="bio-title">About</h2>
+            <h2 class="bio-title">Profile</h2>
           </div>
           <div class="bio-text">
-            <p>I'm ALDEN, a Senior Visual Designer at IBM iX with over 6 years of experience crafting digital experiences that matter.</p>
-            <p>Based in Hong Kong, I've had the privilege of working with global brands and innovative startups, helping them tell their stories through thoughtful design and strategic thinking.</p>
-            <p>When I'm not designing, you can find me exploring the intersection of technology and creativity, or enjoying the vibrant culture of Hong Kong.</p>
+            <p>Hi, I'm Andre Walters! Full-stack software and electronics engineer with 6+ years in crafting resilient, scalable applications.</p>
+            <p>Versed in Angular, React, Next.js, Node.js, TypeScript, Flutter, Django, Spring Boot, and PostgreSQL — from UI design to backend infrastructure.</p>
+            <p>Electronics Engineering graduate from The University of the West Indies, Mona — where hardware meets code.</p>
+            <p>Special interest in IoT and seamless hardware-software integrations that elevate real-world utility.</p>
+            <p>Helped evolve and modernize critical features in the MyJPS Mobile App and Harmony Customer Experience Platform between 2021–2024 at JPS.</p>
+            <p>Recognized for blending a sharp creative eye with technical resilience to deliver intuitive, user-centered digital experiences.</p>
+            <p>When I'm not coding, I'm probably off-grid exploring waterfalls or soaking in the natural rhythm of Jamaica's rivers and beaches.</p>
+          </div>
+        </div>
+
+        <div class="about-experience">
+          <div class="bio-meta">
+            <h2 class="bio-title">Experience</h2>
+          </div>
+          <div class="bio-text">
+            <h3>Full Stack Developer, IOT & Systems Integration</h3>
+            <p><strong>Available for Opportunities</strong> — Present</p>
+            <p>Actively seeking new opportunities in full-stack development and software engineering. Available for freelance projects, contract work, or full-time positions. Experienced in MERN stack, React, Node.js, and modern web technologies. Ready to contribute to innovative projects and collaborative teams.</p>
+            
+            <h3>Software Developer</h3>
+            <p><strong>Jamaica Public Service (JPS)</strong> — Sep 2022 – Mar 2024</p>
+            <p>Maintained and upgraded enterprise-grade web applications used across Jamaica for utility management, adding new features and improvements.</p>
+            <ul>
+              <li>Front-end developed and maintained user interfaces for web applications using Angular, ensuring seamless user experiences across data platforms.</li>
+              <li>Back-end built and maintained server-side components for web applications using microservices architecture, including API design and implementation.</li>
+              <li>Managed SQL databases with external services using PostgreSQL, focusing on integrity and security via written queries for scalable data models and optimized performance.</li>
+              <li>Integrated third-party APIs and developed custom APIs for system-to-service communication, ensuring seamless data exchange and functional reliability.</li>
+              <li>Tested and debugged applications to ensure functionality and quality, writing test cases and performing code reviews to maintain high code standards.</li>
+              <li>Utilized Git for source code management and tracked changes to facilitate effective collaboration with developers and manage repositories across version control teams.</li>
+              <li>Collaborated closely with senior developers and project managers in an agile environment, attending sprint planning and daily stand-ups, providing regular updates, and contributing to team discussions for project improvements.</li>
+            </ul>
+            
+            <h3>Technical Support Engineer</h3>
+            <p><strong>Innovative Corporate Solutions</strong> — Feb 2022 – Aug 2022</p>
+            <p>Provided first-level technical support for software and hardware issues, improving client satisfaction. Created documentation for technical issues and escalated unresolved tickets to senior engineers. Assisted in managing CRM and customer databases using Jira and QuickBooks. Helped update internal tools and automation scripts to improve support operations.</p>
+            
+            <h3>Capstone Engineer (University Project)</h3>
+            <p><strong>The University of the West Indies</strong> — 2020 – 2021</p>
+            <p>Developed a Universal Car Blackbox for telematics using embedded C, accelerometers, and gyroscopes. Implemented real-time crash detection and telemetry logging using GPS, SD card, and cloud storage. Designed custom PCBs and prototyped enclosure parts using AutoCAD and 3D printing. Built a user interface for visualizing accident data and export for insurance diagnostics.</p>
+          </div>
+        </div>
+
+        <div class="about-education">
+          <div class="bio-meta">
+            <h2 class="bio-title">Education</h2>
+          </div>
+          <div class="bio-text">
+            <h3>Master of Science in Computer Based Management System</h3>
+            <p>(in progress)</p>
+            
+            <h3>Bachelor of Science (B.Sc) in Electronics Engineering</h3>
+            <p>2017 - 2023</p>
+            
+            <h3>CAPE and CSEC Distinctions and Passes</h3>
+            <p>2010 - 2017</p>
+          </div>
+        </div>
+
+        <div class="about-achievements">
+          <div class="bio-meta">
+            <h2 class="bio-title">Achievements</h2>
+          </div>
+          <div class="bio-text">
+            <p>Successfully contributed to enterprise-grade applications such as the MyJPS Mobile App and Harmony Platform while working at Jamaica Public Service (JPS).</p>
+            <p>Placed in the Top 5 at the AI Intellibus Hackathon out of 600+ participants for building a gamified youth development platform using AI-powered quizzes and mentorship logic.</p>
+          </div>
+        </div>
+
+        <div class="about-interests">
+          <div class="bio-meta">
+            <h2 class="bio-title">My Leisurely Pastimes</h2>
+          </div>
+          <div class="bio-text">
+            <p>I find peace and inspiration in nature—hiking to hidden rivers, watching the ocean, or just sitting still under trees across Jamaica. Music fuels my creativity and grounds my energy, whether I'm discovering new sounds or building playlists that match my mood. Photography is how I capture moments that speak to me—natural light, real emotion, and unfiltered beauty. These quiet passions keep me grounded, inspired, and in tune with the world around me.</p>
           </div>
         </div>
       </div>

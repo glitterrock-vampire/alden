@@ -159,7 +159,13 @@ const EXPERTISE_ITEMS = [
           </div>
         </div>
         
-        <a href="/work" class="view-full-work-btn" data-animate-hero="view-work" data-delay="2.8">VIEW FULL WORK</a>
+        <a href="/work" class="work-divider-link" data-animate>
+          <div class="work-divider">
+            <div class="divider-line"></div>
+            <div class="divider-text">View Full Work</div>
+            <div class="divider-line"></div>
+          </div>
+        </a>
       </div>
     </section>
     
@@ -196,10 +202,6 @@ const EXPERTISE_ITEMS = [
       </div>
       
       <div class="info-expertise">
-        <div class="expertise-left">
-          <img src="/images/expertise.jpg" alt="" class="expertise-image image-hover" loading="lazy" />
-        </div>
-        
         <div class="expertise-right">
           <h4 class="expertise-title">
             <span class="expertise-quiet">Quietly</span> <span class="expertise-powerful">powerful</span>
@@ -210,16 +212,16 @@ const EXPERTISE_ITEMS = [
             elevate everyday interactions into something more meaningful and crucially, quietly 
             threading in moments of joy that catch us by surprise and stay with us for years to come.
           </p>
-          <Button href="/info" variant="light" chineseText="讀我的故事" class="hover-lift" style="color: #2f2f2f !important; text-shadow: 0 0 5px rgba(0,0,0,0.8) !important;">
+          <Button href="/info" variant="light" chineseText="Read My Story" class="hover-lift" style="color: #2f2f2f !important; text-shadow: 0 0 8px rgba(255,255,255,0.8) !important; background: rgba(255,255,255,0.1) !important; padding: 12px 24px !important; border: 1px solid rgba(47,47,47,0.3) !important; mix-blend-mode: normal !important;">
             READ MY STORY
           </Button>
         </div>
         
-        <div class="expertise-list">
+        <div class="expertise-list" data-animate>
           <span class="list-label">[EXPERTISE AND SERVICES]</span>
           <div class="list-items">
-            {EXPERTISE_ITEMS.map(item => (
-              <div class="list-item">{item}</div>
+            {EXPERTISE_ITEMS.map((item, index) => (
+              <div class="list-item" style={`--delay: ${index * 0.1}s`}>{item}</div>
             ))}
           </div>
         </div>
@@ -817,6 +819,15 @@ const EXPERTISE_ITEMS = [
   mix-blend-mode: difference;
 }
 
+/* Work Separator */
+.work-separator {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--token-text-light), transparent);
+  margin: 60px 0;
+  opacity: 0.3;
+}
+
 /* View Full Work Button */
 .view-full-work-btn {
   display: block;
@@ -1044,65 +1055,87 @@ const EXPERTISE_ITEMS = [
   text-align: center;
 }
 
+/* Work Divider Styles */
+.work-divider-link {
+  display: block;
+  text-decoration: none;
+  margin: 180px 0 60px 0; /* Even more padding above to separate from tiles */
+  transition: all 0.3s ease;
+}
+
+.work-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px; /* Increased gap to match Chinese divider */
+  padding: 20px 0;
+}
+
+.work-divider .divider-text {
+  font-family: var(--font-mono); /* Original font before separation lines */
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--token-text-light);
+  text-align: center;
+  letter-spacing: 0.1em; /* Original letter spacing */
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.work-divider .divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--token-text-light);
+  max-width: 200px; /* Extend lines further */
+}
+
+.work-divider-link:hover .divider-text {
+  color: var(--token-accent-gold);
+  transform: scale(1.05);
+}
+
+.work-divider-link:hover .divider-line {
+  background: var(--token-accent-gold);
+}
+
 /* Expertise Section */
 .info-expertise {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: block;
   padding: 117px var(--container-padding) 0;
-  gap: 20px;
   
   @media (--desktop-large) { padding: 117px var(--container-padding) 100px; }
   @media (--mobile) { 
-    flex-direction: column;
-    gap: 30px;
     padding: 35px 0 0;
   }
 }
 
-.expertise-left {
-  width: 35%;
-  position: relative;
-  
-  @media (--tablet) { width: 35%; }
-  @media (--mobile) { 
-    width: 100%;
-    order: 1;
-    padding-top: 70px;
-  }
-}
-
-.expertise-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  
-  @media (--mobile) { height: 321px; }
-}
-
 .expertise-right {
-  width: 65%;
-  padding-left: 20px;
+  width: 100%;
+  padding-left: 0;
+  margin-left: 60px; /* Move the entire section to the right */
   
-  @media (--desktop-large) { width: 65%; }
-  @media (--desktop-small) { width: 70%; }
-  @media (--tablet) { width: 82%; }
+  @media (--desktop-large) { width: 100%; margin-left: 80px; }
+  @media (--desktop-small) { width: 100%; margin-left: 40px; }
+  @media (--tablet) { width: 100%; margin-left: 30px; }
   @media (--mobile) { 
     width: 100%;
     padding-left: 0;
+    margin-left: 0; /* Reset for mobile */
     order: 0;
   }
 }
 
 .expertise-title {
   font-family: var(--font-koulen);
-  font-size: 34px;
+  font-size: 48px;
   line-height: 1;
-  color: var(--token-text-dark);
+  color: var(--token-text-light) !important;
+  mix-blend-mode: normal !important;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8) !important;
   margin-bottom: 12px;
   
-  @media (--tablet) { font-size: 31px; }
-  @media (--mobile) { font-size: 28px; }
+  @media (--tablet) { font-size: 42px; }
+  @media (--mobile) { font-size: 36px; }
 }
 
 .expertise-quiet {
@@ -1120,13 +1153,15 @@ const EXPERTISE_ITEMS = [
 
 .expertise-description {
   font-family: var(--font-roboto-mono);
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 18px;
+  line-height: 1.6;
   color: var(--token-text-light);
   margin-bottom: 34px;
   max-width: 45%;
   mix-blend-mode: normal;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  text-align: justify; /* Justify the text */
+  text-justify: inter-word; /* Better justification for longer words */
   
   @media (--desktop-large) { max-width: 46%; }
   @media (--desktop-small) { max-width: 51%; }
@@ -1137,6 +1172,7 @@ const EXPERTISE_ITEMS = [
 .expertise-list {
   margin-top: 40px;
   width: 45%;
+  margin-left: auto; /* Push to the right side */
   
   @media (--desktop-large) { width: 46%; }
   @media (--desktop-small) { width: 51%; }
@@ -1144,6 +1180,7 @@ const EXPERTISE_ITEMS = [
     width: 100%;
     order: 3;
     margin-top: 20px;
+    margin-left: 0; /* Reset for mobile */
   }
 }
 
@@ -1233,31 +1270,36 @@ const EXPERTISE_ITEMS = [
     expertise: document.querySelector('.info-expertise')
   };
 
-  // Set initial states - simple fade only
+  // Set initial states - include transform and filter for animations
   Object.values(elements).forEach(el => {
     if (el) {
       el.style.opacity = '0';
-      el.style.transition = 'opacity 0.6s ease-in-out';
+      el.style.transform = 'translateY(20px)';
+      el.style.filter = 'blur(2px)';
+      el.style.transition = 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out, filter 0.6s ease-in-out';
     }
   });
 
-  // Intersection Observer for simple fade animations
+  // Intersection Observer for bidirectional scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
+      const element = entry.target;
+      
       if (entry.isIntersecting) {
-        const element = entry.target;
-        
-        // Simple staggered fade-in
-        setTimeout(() => {
-          element.style.opacity = '1';
-        }, index * 100);
-        
-        observer.unobserve(element);
+        // Element is entering viewport - animate in
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+        element.style.filter = 'blur(0)';
+      } else {
+        // Element is leaving viewport - animate out
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.filter = 'blur(2px)';
       }
     });
   }, {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
   });
 
   // Observe elements in order
@@ -1281,53 +1323,64 @@ const EXPERTISE_ITEMS = [
     // Use IntersectionObserver to trigger animations as user scrolls
     const featuredElements = document.querySelectorAll('[data-animate-hero^="featured"], [data-animate-hero^="tile"], [data-animate-hero^="view-work"]');
     
+    // Set initial states for all elements
+    featuredElements.forEach(el => {
+      if (el.dataset.animateHero === 'featured-title') {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(10px)';
+        el.style.filter = 'blur(7px)';
+        el.style.transition = 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out, filter 0.6s ease-in-out';
+      } else if (el.dataset.animateHero.startsWith('tile')) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px) scale(0.9) rotate(2deg)';
+        el.style.transition = 'opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1)';
+      } else if (el.dataset.animateHero === 'view-work') {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out';
+      }
+    });
+    
     const io = new IntersectionObserver(
       entries => entries.forEach(entry => {
+        const el = entry.target;
+        const delay = parseFloat(el.dataset.delay) || 0;
+        
         if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = parseFloat(el.dataset.delay) || 0;
-          
-          // Different animations for different elements
+          // Element is entering viewport - animate in
           if (el.dataset.animateHero === 'featured-title') {
             // Title: simple fade like hero
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(10px)';
-            el.style.filter = 'blur(7px)';
-            el.style.transition = 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out, filter 0.6s ease-in-out';
-            
-            setTimeout(() => {
-              el.style.opacity = '1';
-              el.style.transform = 'translateY(0)';
-              el.style.filter = 'blur(0)';
-            }, 200); // Immediate trigger for title
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            el.style.filter = 'blur(0)';
           } else if (el.dataset.animateHero.startsWith('tile')) {
             // Tiles: dynamic scale and rotation with scroll-based delay
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(40px) scale(0.9) rotate(2deg)';
-            el.style.transition = 'opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1)';
-            
-            // Use element index for stagger instead of data-delay
             const tileIndex = Array.from(document.querySelectorAll('[data-animate-hero^="tile"]')).indexOf(el);
             setTimeout(() => {
               el.style.opacity = '1';
               el.style.transform = 'translateY(0) scale(1) rotate(0deg)';
-            }, 200 + (tileIndex * 200)); // 200ms stagger between tiles
+            }, tileIndex * 100);
           } else if (el.dataset.animateHero === 'view-work') {
             // Button: slide and scale
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px) scale(0.95)';
-            el.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
-            
-            setTimeout(() => {
-              el.style.opacity = '1';
-              el.style.transform = 'translateY(0) scale(1)';
-            }, 800); // Button appears after tiles
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
           }
-          
-          io.unobserve(el);
+        } else {
+          // Element is leaving viewport - animate out
+          if (el.dataset.animateHero === 'featured-title') {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(10px)';
+            el.style.filter = 'blur(7px)';
+          } else if (el.dataset.animateHero.startsWith('tile')) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px) scale(0.9) rotate(2deg)';
+          } else if (el.dataset.animateHero === 'view-work') {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+          }
         }
       }),
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' } // Trigger earlier as scrolling
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
     
     featuredElements.forEach(el => io.observe(el));
@@ -1338,6 +1391,7 @@ const EXPERTISE_ITEMS = [
     const pageVideoBg = document.getElementById('pageVideoBg') as HTMLElement;
     const videoWrap   = document.getElementById('pageVideoWrap') as HTMLElement;
     const video       = document.querySelector('.page-video') as HTMLVideoElement;
+    
     if (!pageVideoBg || !videoWrap || !video) return;
 
     let ticking   = false;
@@ -1346,20 +1400,35 @@ const EXPERTISE_ITEMS = [
     let videoLoaded = false;
     let lastVideoTime = 0;
     let seekTimeout = null;
+    let lastTargetTime = 0;
+    let frameCount = 0;
 
-    // Wait for video to load metadata
-    video.addEventListener('loadedmetadata', () => {
-      videoLoaded = true;
+    // Enhanced video preparation
+    function prepareVideo() {
       video.currentTime = 0;
-      video.playbackRate = 1.0; // Ensure normal playback rate
+      video.playbackRate = 1.0;
+      video.muted = true;
+      video.loop = false;
       
-      // Request video frame callback for smoother playback
+      // Preload video frames
       if ('requestVideoFrameCallback' in video) {
         video.requestVideoFrameCallback(() => {
-          // Video is ready for smooth frame control
+          videoLoaded = true;
         });
+      } else {
+        videoLoaded = true;
       }
-    });
+    }
+
+    // Wait for video to load metadata
+    video.addEventListener('loadedmetadata', prepareVideo);
+    
+    // Fallback if metadata doesn't load
+    setTimeout(() => {
+      if (!videoLoaded && video.readyState >= 2) {
+        prepareVideo();
+      }
+    }, 1000);
 
     function apply() {
       ticking = false;
@@ -1374,26 +1443,32 @@ const EXPERTISE_ITEMS = [
         videoWrap.style.transform = `scale(${scale})`;
       }
       
-      // Control video playback based on scroll - extended range for full page
+      // Enhanced video playback control
       if (videoLoaded && video.duration) {
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         const scrollProgress = Math.min(1, Math.max(0, sy / maxScroll));
         const targetTime = scrollProgress * video.duration;
         
-        // Clear any pending seek
-        if (seekTimeout) {
-          clearTimeout(seekTimeout);
-        }
-        
-        // Simplified smoother approach
-        seekTimeout = setTimeout(() => {
-          const currentTimeDiff = Math.abs(video.currentTime - targetTime);
-          if (currentTimeDiff > 0.01) { // Very small threshold
-            // Direct seek with smaller timeout for responsiveness
-            video.currentTime = targetTime;
-            lastVideoTime = targetTime;
+        // Only seek if target time changed significantly
+        const timeDiff = Math.abs(targetTime - lastTargetTime);
+        if (timeDiff > 0.05) { // Only seek for meaningful changes
+          lastTargetTime = targetTime;
+          
+          // Clear any pending seek
+          if (seekTimeout) {
+            clearTimeout(seekTimeout);
           }
-        }, 12); // Balanced update rate (83fps)
+          
+          // Optimized seek with frame rate consideration
+          seekTimeout = setTimeout(() => {
+            const currentTimeDiff = Math.abs(video.currentTime - targetTime);
+            if (currentTimeDiff > 0.02) { // Tight threshold for smoothness
+              video.currentTime = targetTime;
+              lastVideoTime = targetTime;
+              frameCount++;
+            }
+          }, 8); // Faster update rate (125fps) for smoother motion
+        }
       }
     }
 
@@ -1404,6 +1479,7 @@ const EXPERTISE_ITEMS = [
       }
     }
 
+    // Enhanced scroll listener with passive option
     window.addEventListener('scroll', onScroll, { passive: true });
 
     // After zoom animation finishes, hand control fully to JS

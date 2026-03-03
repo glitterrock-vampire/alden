@@ -159,24 +159,38 @@ class DynamicMusicPlayer {
   }
 
   simulateSpotifyConnection() {
-    // Simulated track data with placeholder images
+    // Dynamic simulated track data with varied genres and realistic info
     const tracks = [
-      { name: "Mean It In The Morning", artist: "LC", album: "Dreams", image: "/api/default-album", isPlaying: true },
-      { name: "Midnight City", artist: "M83", album: "Hurry Up, We're Dreaming", image: "/api/default-album", isPlaying: false },
-      { name: "Starlight", artist: "Muse", album: "Black Holes and Revelations", image: "/api/default-album", isPlaying: false }
+      { name: "Blinding Lights", artist: "The Weeknd", album: "After Hours", image: "/api/default-album", isPlaying: true },
+      { name: "Levitating", artist: "Dua Lipa", album: "Future Nostalgia", image: "/api/default-album", isPlaying: false },
+      { name: "Heat Waves", artist: "Glass Animals", album: "Dreamland", image: "/api/default-album", isPlaying: false },
+      { name: "Stay", artist: "The Kid LAROI & Justin Bieber", album: "Stay", image: "/api/default-album", isPlaying: false },
+      { name: "Good 4 U", artist: "Olivia Rodrigo", album: "SOUR", image: "/api/default-album", isPlaying: false },
+      { name: "Industry Baby", artist: "Lil Nas X & Jack Harlow", album: "Montero", image: "/api/default-album", isPlaying: false },
+      { name: "Peaches", artist: "Justin Bieber ft. Daniel Caesar & Giveon", album: "Justice", image: "/api/default-album", isPlaying: false },
+      { name: "Montero (Call Me By Your Name)", artist: "Lil Nas X", album: "Montero", image: "/api/default-album", isPlaying: false },
+      { name: "Kiss Me More", artist: "Doja Cat ft. SZA", album: "Planet Her", image: "/api/default-album", isPlaying: false },
+      { name: "Save Your Tears", artist: "The Weeknd", album: "After Hours", image: "/api/default-album", isPlaying: false },
+      { name: "Drivers License", artist: "Olivia Rodrigo", album: "SOUR", image: "/api/default-album", isPlaying: false },
+      { name: "Deja Vu", artist: "Olivia Rodrigo", album: "SOUR", image: "/api/default-album", isPlaying: false },
+      { name: "Familia", artist: "BTS", album: "Proof", image: "/api/default-album", isPlaying: false },
+      { name: "Bad Habits", artist: "Ed Sheeran", album: "=", image: "/api/default-album", isPlaying: false },
+      { name: "Shivers", artist: "Ed Sheeran", album: "=", image: "/api/default-album", isPlaying: false }
     ];
 
     let trackIndex = 0;
+    let playDuration = 15000 + Math.random() * 10000; // 15-25 seconds per track
     
     const updateTrack = () => {
       const track = tracks[trackIndex];
       this.updateTrackInfo(track);
       
-      // Simulate track changes
+      // Simulate track changes with random timing
       setTimeout(() => {
         trackIndex = (trackIndex + 1) % tracks.length;
+        playDuration = 15000 + Math.random() * 10000; // Random duration for next track
         updateTrack();
-      }, 8000); // Change track every 8 seconds
+      }, playDuration);
     };
 
     updateTrack();
