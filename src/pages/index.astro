@@ -274,7 +274,7 @@ const EXPERTISE_ITEMS = [
   height: 100%;
   z-index: 3;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.01;
   background-image: 
     radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0),
     radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0),
@@ -618,13 +618,17 @@ const EXPERTISE_ITEMS = [
 
 .page-video-wrap {
   position: absolute;
-  inset: 0;
+  top: -50px;
+  left: -10%;
+  width: 120%;
+  height: 120%;
   z-index: 1;
-  filter: brightness(0.95) blur(8px) saturate(0.7);
+  filter: brightness(0.95) blur(12px) saturate(0.7);
   will-change: transform;
   transform-origin: center center;
-  transform: scale(1.05);
+  transform: scale(1.01);
   animation: page-video-in 1.2s cubic-bezier(0.58,-0.13,0.17,1.02) 2.6s forwards;
+  clip-path: inset(50px round 0px);
 }
 
 @keyframes page-video-in { to { transform: scale(1); } }
@@ -758,7 +762,7 @@ const EXPERTISE_ITEMS = [
   transition: none !important;
 }
 .work-card:hover .work-card-bg {
-  filter: blur(10px) brightness(0.5);
+  filter: brightness(0.5);
   opacity: 0.4;
 }
 
