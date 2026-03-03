@@ -123,12 +123,6 @@ const projects: Project[] = [
     <div class="capabilities-inner">
       <div class="capabilities-left">
         <p class="cap-intro">Quietly<br/>powerful<br/><em>Digital Experiences</em></p>
-        <img
-          src="https://media.giphy.com/media/l0ExvIBFmKniVDqje/giphy.gif"
-          alt="Kobe Bryant tribute highlight reel"
-          class="kobe-gif"
-          loading="lazy"
-        />
       </div>
       <ul class="cap-list">
         {["ART DIRECTION","UI / VISUAL DESIGN","USER EXPERIENCE DESIGN","ENTERPRISE DESIGN THINKING","RESEARCH / STRATEGY","BRAND IDENTITY"].map((c, i) => (
@@ -653,7 +647,6 @@ const projects: Project[] = [
   color: var(--dark);
 }
 .cap-intro em { font-style: italic; color: var(--gold-dk); }
-.kobe-gif { width: 69%; height: auto; border-radius: 2px; }
 
 .cap-list { 
   flex: 1; 
@@ -936,13 +929,15 @@ const projects: Project[] = [
         clearTimeout(seekTimeout);
       }
       
-      // Debounced seek for smoother playback
+      // Simplified smoother approach
       seekTimeout = setTimeout(() => {
-        if (Math.abs(video.currentTime - targetTime) > 0.05) {
+        const currentTimeDiff = Math.abs(video.currentTime - targetTime);
+        if (currentTimeDiff > 0.01) { // Very small threshold
+          // Direct seek with smaller timeout for responsiveness
           video.currentTime = targetTime;
           lastVideoTime = targetTime;
         }
-      }, 16); // ~60fps timing
+      }, 12); // Balanced update rate (83fps)
     }
   }
 

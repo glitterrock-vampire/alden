@@ -8,12 +8,12 @@ import Footer from '../components/Footer.astro';
 // Define constants for better maintainability
 const HERO_LETTERS = ['A', 'L', 'D', 'E', 'N'];
 const EXPERTISE_ITEMS = [
-  'Art direction',
+  'Software Development',
   'UI / VISUAL DESIGN',
   'USER EXPERIENCE DESIGN',
   'enterprise design thinking',
   'RESEARCH / STRATEGY',
-  'BRAND IDENTITY'
+  'BRAND MANAGEMENT'
 ];
 ---
 
@@ -210,7 +210,7 @@ const EXPERTISE_ITEMS = [
             elevate everyday interactions into something more meaningful and crucially, quietly 
             threading in moments of joy that catch us by surprise and stay with us for years to come.
           </p>
-          <Button href="/info" variant="light" chineseText="讀我的故事" class="hover-lift">
+          <Button href="/info" variant="light" chineseText="讀我的故事" class="hover-lift" style="color: #2f2f2f !important; text-shadow: 0 0 5px rgba(0,0,0,0.8) !important;">
             READ MY STORY
           </Button>
         </div>
@@ -1010,6 +1010,8 @@ const EXPERTISE_ITEMS = [
     font-size: clamp(16px, 1.8vw, 18px);
     line-height: 1.4;
     color: var(--token-text-light);
+    mix-blend-mode: normal;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -1105,19 +1107,26 @@ const EXPERTISE_ITEMS = [
 
 .expertise-quiet {
   color: var(--token-text-light);
+  mix-blend-mode: normal;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .expertise-powerful {
   font-family: 'Pinyon Script', cursive;
+  color: var(--token-text-light);
+  mix-blend-mode: normal;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .expertise-description {
   font-family: var(--font-roboto-mono);
   font-size: 14px;
   line-height: 1.4;
-  color: var(--token-text-dark);
+  color: var(--token-text-light);
   margin-bottom: 34px;
   max-width: 45%;
+  mix-blend-mode: normal;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   
   @media (--desktop-large) { max-width: 46%; }
   @media (--desktop-small) { max-width: 51%; }
@@ -1144,6 +1153,12 @@ const EXPERTISE_ITEMS = [
   color: var(--token-accent-gold);
   display: block;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.list-label:hover {
+  color: var(--token-text-light);
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
 .list-items {
@@ -1156,12 +1171,22 @@ const EXPERTISE_ITEMS = [
   font-family: var(--font-koulen);
   font-size: 37px;
   line-height: 1;
-  color: var(--token-text-dark);
-  border-bottom: 1px solid var(--token-text-dark);
+  color: var(--token-text-light);
+  border-bottom: 1px solid var(--token-text-light);
   padding: 8px 0;
+  transition: all 0.3s ease;
+  opacity: 0.8;
   
   @media (--tablet) { font-size: 31px; }
   @media (--mobile) { font-size: 28px; }
+}
+
+.list-item:hover {
+  color: var(--token-accent-gold);
+  border-bottom: 1px solid var(--token-accent-gold);
+  opacity: 1;
+  transform: translateX(10px);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* ===== ANIMATIONS ===== */
@@ -1360,13 +1385,15 @@ const EXPERTISE_ITEMS = [
           clearTimeout(seekTimeout);
         }
         
-        // Debounced seek for smoother playback
+        // Simplified smoother approach
         seekTimeout = setTimeout(() => {
-          if (Math.abs(video.currentTime - targetTime) > 0.05) {
+          const currentTimeDiff = Math.abs(video.currentTime - targetTime);
+          if (currentTimeDiff > 0.01) { // Very small threshold
+            // Direct seek with smaller timeout for responsiveness
             video.currentTime = targetTime;
             lastVideoTime = targetTime;
           }
-        }, 16); // ~60fps timing
+        }, 12); // Balanced update rate (83fps)
       }
     }
 

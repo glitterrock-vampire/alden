@@ -19,15 +19,15 @@ const { currentPage = 'home' } = Astro.props;
     
     <!-- Navigation Links -->
     <div class="nav-links">
-      <a href="/" class={`nav-link ${currentPage === 'home' ? 'active' : ''}`}>
+      <a href="/" class={`nav-link ${currentPage === 'home' ? 'active' : ''}`} onclick="handleNavClick(event, '/')">
         <span class="nav-link-text">HOME</span>
       </a>
       
-      <a href="/work" class={`nav-link ${currentPage === 'work' ? 'active' : ''}`}>
+      <a href="/work" class={`nav-link ${currentPage === 'work' ? 'active' : ''}`} onclick="handleNavClick(event, '/work')">
         <span class="nav-link-text">WORK</span>
       </a>
       
-      <a href="/info" class={`nav-link ${currentPage === 'info' ? 'active' : ''}`}>
+      <a href="/info" class={`nav-link ${currentPage === 'info' ? 'active' : ''}`} onclick="handleNavClick(event, '/info')">
         <span class="nav-link-text">INFO</span>
       </a>
     </div>
@@ -325,4 +325,30 @@ if (dayEl) dayEl.textContent = dayText;
     transform: translateY(0);
   }
 }
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}
 </style>
+
+<script>
+// Navigation click handler for smooth transition
+function handleNavClick(event, targetUrl) {
+  event.preventDefault();
+  
+  // Add slide-up animation to current page content
+  document.body.style.animation = 'slideUp 0.5s ease-out forwards';
+  
+  // Navigate after animation completes
+  setTimeout(() => {
+    window.location.href = targetUrl;
+  }, 400);
+}
+</script>

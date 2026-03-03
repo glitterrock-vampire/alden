@@ -90,7 +90,13 @@ const sizeClasses = {
 }
 
 .button-light .button-text {
-  color: #fff;
+  color: var(--token-text-dark) !important;
+  mix-blend-mode: normal !important;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  transform: translateY(0) !important;
 }
 
 .button-chinese {
@@ -109,10 +115,7 @@ const sizeClasses = {
   color: #fff;
 }
 
-.button:hover .button-text {
-  transform: translateY(-20px);
-}
-
+/* Removed hover effects */
 .button:hover .button-chinese {
   transform: translateX(-50%) translateY(-27px);
 }

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import Button from '../components/Button.astro';
 import Footer from '../components/Footer.astro';
 
 const pageData = {
@@ -478,7 +479,7 @@ const pageData = {
 
     .about-subline {
       font-family: var(--font-roboto-mono);
-      font-size: 18px;
+      font-size: 24px;
       color: var(--color-text-primary);
       opacity: 0.8;
     }
@@ -487,6 +488,7 @@ const pageData = {
       font-family: var(--font-pinyon);
       font-style: italic;
       color: var(--color-accent-gold);
+      font-size: 28px;
     }
 
     .about-bio {
@@ -559,7 +561,7 @@ const pageData = {
     .immersive-header {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 40px; /* Reduced gap to bring title closer to numbers */
+      gap: 400px; /* 5x more spacing between numbers and title */
       align-items: center;
       margin-bottom: 80px;
     }
@@ -590,7 +592,7 @@ const pageData = {
 
     .immersive-title {
       border-left: 2px solid rgba(255,255,255,0.2);
-      padding-left: 60px;
+      padding-left: 30px; /* Reduced padding for better alignment */
     }
 
     .immersive-heading {
@@ -615,13 +617,14 @@ const pageData = {
     .immersive-content {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 60px; /* Increased gap for better spacing */
+      gap: 400px; /* Match spacing between date and title */
       align-items: start; /* Align to top for better visual flow */
     }
 
     .immersive-stats {
       display: flex;
-      gap: 40px;
+      gap: 60px; /* Back to original spacing */
+      justify-content: center;
     }
 
     .stat-item {
@@ -2668,22 +2671,26 @@ const pageData = {
           </div>
 
           <div class="immersive-description" data-animate>
-            <p class="hero-job-title">SR SOFTWARE AND USER EXP</p>
+            <p class="hero-job-title">SR SOFTWARE AND USER EXPERIENCE DESIGNER</p>
             <p class="hero-location">BASED IN KINGSTON JAMAICA I partner with brands, companies and entrepreneurs to transform visions into captivating experiences, all designed with the users at the helm.</p>
           </div>
         </div>
-      </div>
-    </section>
-
+        </div>
+      </section>
+      
+      <Button href="/info" variant="light" chineseText="讀我的故事" class="hover-lift" style="color: #2f2f2f !important; text-shadow: 0 0 5px rgba(0,0,0,0.8) !important;">
+        READ MY STORY
+      </Button>
+      
     <!-- About Section -->
     <section class="about-section">
       <div class="about-content">
         <div class="about-description">
           <p class="about-lead">
-            a senior visual designer
+            software developer
           </p>
           <p class="about-subline">
-            <span class="about-script">born in</span> Hong Kong
+            <span class="about-script">based in</span> Jamaica
           </p>
         </div>
 
