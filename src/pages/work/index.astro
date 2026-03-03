@@ -892,13 +892,28 @@ const projects: Project[] = [
   let seekTimeout = null;
   let lastTargetTime = 0;
   let frameCount = 0;
+  let lastFrameTime = performance.now();
+  let fps = 60; // Target FPS for work page
 
-  // Enhanced video preparation
+  // Enhanced video preparation with production optimizations
   function prepareVideo() {
     video.currentTime = 0;
     video.playbackRate = 1.0;
     video.muted = true;
     video.loop = false;
+    
+    // Production: Add video preloading for better performance
+    video.preload = 'auto';
+    
+    // Production: Optimize for different devices
+    const isLowEndDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+    const isSlowConnection = navigator.connection && navigator.connection.effectiveType && 
+                            ['slow-2g', '2g', '3g'].includes(navigator.connection.effectiveType);
+    
+    if (isLowEndDevice || isSlowConnection) {
+      // Reduce performance demands on slower devices
+      video.playbackRate = 0.8;
+    }
     
     // Preload video frames
     if ('requestVideoFrameCallback' in video) {
@@ -941,7 +956,7 @@ const projects: Project[] = [
       
       // Only seek if target time changed significantly
       const timeDiff = Math.abs(targetTime - lastTargetTime);
-      if (timeDiff > 0.05) { // Only seek for meaningful changes
+      if (timeDiff > 0.1) { // Increased threshold for production stability
         lastTargetTime = targetTime;
         
         // Clear any pending seek
@@ -949,23 +964,29 @@ const projects: Project[] = [
           clearTimeout(seekTimeout);
         }
         
-        // Optimized seek with frame rate consideration
+        // Optimized seek with production-friendly frame rate
         seekTimeout = setTimeout(() => {
           const currentTimeDiff = Math.abs(video.currentTime - targetTime);
-          if (currentTimeDiff > 0.02) { // Tight threshold for smoothness
+          if (currentTimeDiff > 0.05) { // Increased threshold for better performance
             video.currentTime = targetTime;
             lastVideoTime = targetTime;
             frameCount++;
           }
-        }, 8); // Faster update rate (125fps) for smoother motion
+        }, 16); // 60fps update rate for better production performance
       }
     }
   }
 
   function onScroll() {
-    if (!ticking) {
+    // FPS throttling for better performance
+    const now = performance.now();
+    const elapsed = now - lastFrameTime;
+    const targetFrameTime = 1000 / fps; // 16.67ms for 60fps
+    
+    if (!ticking && elapsed >= targetFrameTime) {
       requestAnimationFrame(apply);
       ticking = true;
+      lastFrameTime = now;
     }
   }
 
