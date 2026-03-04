@@ -110,13 +110,7 @@ const projects: Project[] = [
       </div>
     </div>
 
-    <!-- CTAs -->
-    <div class="cta-row">
-      <a href="/work" class="cta-link">VIEW ALL WORK</a>
-      <a href="/info" class="cta-link">READ MY STORY</a>
-    </div>
-
-  </section>
+    </section>
 
   <!-- ─── CAPABILITIES ──────────────────────────────────────────────────── -->
   <section class="capabilities-section">
@@ -154,10 +148,10 @@ const projects: Project[] = [
   :root {
     --cream:     #e7e5df;
     --cream-50:  #e7e5df80;
-    --gold:      #ccbb87;
+    --gold:      #FFD700; /* Changed from grey to gold */
     --gold-dk:   #8a7432;
     --gold-warm: rgb(213, 197, 148);
-    --dark:      #2f2f2f;
+    --dark:      #ffffff; /* Changed from dark to white for text */
     --black:     #000000;
     --ff-disp:   'Koulen', sans-serif;
     --ff-mono:   'Roboto Mono', monospace;
@@ -548,27 +542,54 @@ const projects: Project[] = [
   min-height: 21px;
   pointer-events: none;
 }
-.card-title-text {
+.card-labels {
   font-family: var(--ff-mono);
   font-size: 14px;
   line-height: 1.4em;
-  color: var(--dark);
+  color: #FFD700 !important; /* Direct gold color with !important */
   white-space: pre;
 }
+.card-title-text {
+      font-family: var(--ff-mono);
+      font-size: 14px;
+      line-height: 1.4em;
+      color: #FFD700 !important; /* Direct gold color with !important */
+      white-space: pre;
+      transition: color 0.3s ease !important; /* Smooth color transition */
+    }
+    
+    .card:hover .card-title-text {
+      color: #FFED4E !important; /* Brighter gold on hover */
+    }
 /* Gold titles for specific projects */
 .liverpool-title,
 .esports-title,
 .norwegian-title {
-  color: #ccbb87 !important;
-}
+      color: #FFD700 !important; /* Changed from grey to gold */
+    }
 .card-category-text {
-  font-family: var(--ff-mono);
-  font-size: 14px;
-  line-height: 1.4em;
-  color: var(--dark);
-  opacity: 0.5;
-  white-space: pre;
-}
+      font-family: var(--ff-mono);
+      font-size: 14px;
+      line-height: 1.4em;
+      color: #FFD700 !important; /* Direct gold color with !important */
+      opacity: 1; /* Increased opacity for visibility */
+      white-space: pre;
+      transition: color 0.3s ease !important; /* Smooth color transition */
+    }
+    
+    /* Force all card text to gold with maximum specificity */
+    .card .card-labels .card-title-text,
+    .card .card-labels .card-category-text,
+    .card:hover .card-labels .card-title-text,
+    .card:hover .card-labels .card-category-text {
+      color: #FFD700 !important;
+      opacity: 1 !important;
+    }
+    
+    .card:hover .card-labels .card-title-text,
+    .card:hover .card-labels .card-category-text {
+      color: #FFED4E !important; /* Brighter gold on hover */
+    }
 .card-soon {
   position: absolute;
   bottom: 16px; right: 16px;
@@ -576,7 +597,7 @@ const projects: Project[] = [
   font-family: var(--ff-mono);
   font-size: 10px;
   letter-spacing: 0.15em;
-  color: var(--dark);
+  color: #FFD700 !important; /* Changed from var(--dark) to gold */
   border: 1px solid rgba(47,47,47,0.35);
   padding: 4px 10px;
   border-radius: 2px;
@@ -596,7 +617,7 @@ const projects: Project[] = [
   font-family: var(--ff-mono);
   font-size: 12px;
   letter-spacing: 0.12em;
-  color: var(--dark);
+  color: #FFD700 !important; /* Changed from var(--dark) to gold */
   opacity: 0.6;
   position: relative;
   transition: opacity 0.2s ease !important;
@@ -641,11 +662,11 @@ const projects: Project[] = [
   align-items: flex-start;
 }
 .cap-intro {
-  font-family: var(--ff-body);
-  font-size: clamp(28px, 3vw, 52px);
-  line-height: 1.25;
-  color: var(--dark);
-}
+      font-family: var(--ff-body);
+      font-size: clamp(28px, 3vw, 52px);
+      line-height: 1.25;
+      color: #2f2f2f; /* Changed to dark grey */
+    }
 .cap-intro em { font-style: italic; color: var(--gold-dk); }
 
 .cap-list { 
@@ -672,8 +693,8 @@ const projects: Project[] = [
 }
 .cap-item:first-child { border-top: 1px solid rgba(47,47,47,0.12); }
 .cap-item.visible { opacity: 1; transform: none; }
-.cap-dash { font-family: var(--ff-mono); font-size: 14px; color: var(--dark); opacity: 0.3; flex-shrink: 0; }
-.cap-text { font-family: var(--ff-mono); font-size: 14px; letter-spacing: 0.06em; color: var(--dark); }
+.cap-dash { font-family: var(--ff-mono); font-size: 14px; color: #2f2f2f; opacity: 0.3; flex-shrink: 0; }
+.cap-text { font-family: var(--ff-mono); font-size: 14px; letter-spacing: 0.06em; color: #000000; }
 .cap-item:hover .cap-text { letter-spacing: 0.14em; }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -827,18 +848,30 @@ const projects: Project[] = [
 .footer-social:hover .social-text        { transform: translateY(-30px); }
 .footer-social:hover .social-text-italic { transform: translateY(-30px); }
 
-.footer-backtop {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--dark);
-  opacity: 0.45;
-  background: none;
-  border: none;
+.footer-link {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #FFD700 !important; /* Changed from var(--dark) to gold */
+      opacity: 0.45;
+      background: none;
+      border: none;
   cursor: pointer;
   padding: 0;
   transition: opacity 0.2s ease !important;
 }
+.footer-backtop {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #FFD700 !important; /* Changed from var(--dark) to gold */
+      opacity: 0.45;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.2s ease !important;
+    }
 .footer-backtop:hover { opacity: 1; }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -870,6 +903,24 @@ const projects: Project[] = [
   .footer-socials { gap: 8px; }
   .footer-social  { width: auto; }
   .footer-mid     { flex-direction: column; padding: 16px; gap: 32px; }
+}
+</style>
+
+<style>
+/* Universal override - Force ALL text to gold */
+.card-title-text,
+.card-category-text,
+.card-labels,
+.cta-link,
+.footer-link,
+.footer-backtop {
+  color: #FFD700 !important;
+}
+
+/* Hover states */
+.card:hover .card-title-text,
+.card:hover .card-category-text {
+  color: #FFED4E !important;
 }
 </style>
 

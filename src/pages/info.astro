@@ -46,6 +46,31 @@ const pageData = {
       
       // Add initial delay before any animations start
       setTimeout(() => {
+        // Parallax scroll effect for background image
+        let ticking = false;
+        let lastScrollY = 0;
+        
+        function updateParallax() {
+          if (!ticking) {
+            const scrollY = window.scrollY;
+            const speed = 0.5; // Adjust speed for parallax effect
+            
+            // Update background position for parallax
+            document.body.style.backgroundPosition = `center ${20 + (scrollY * speed)}% top`;
+            
+            lastScrollY = scrollY;
+            ticking = false;
+          }
+        }
+        
+        function onScroll() {
+          ticking = true;
+          requestAnimationFrame(updateParallax);
+        }
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', onScroll, { passive: true });
+        
         // Intersection Observer for hero letters
         const heroObserver = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
@@ -217,12 +242,17 @@ const pageData = {
     body {
       font-family: var(--font-roboto-mono);
       color: var(--color-text-primary);
-      background: var(--color-bg);
+      background: url('/images/Facetune_03-03-2026-18-12-33.JPG');
+      background-size: cover;
+      background-position: center 20% top; /* Move down to avoid head cutoff */
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       line-height: 1.4;
       overflow-x: hidden;
       width: 100%;
       position: relative;
       cursor: default;
+      padding-top: 100px; /* Add top padding to push content down */
     }
 
     /* Custom cursor for specific elements */
@@ -372,7 +402,10 @@ const pageData = {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  background: transparent;
   pointer-events: none;
 }
 
@@ -399,7 +432,7 @@ const pageData = {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #000;
+      background: transparent;
     }
 
     @media (max-width: 809.98px) {
@@ -474,7 +507,7 @@ const pageData = {
        About Section
        ---------------------------------------- */
     .about-section {
-      background: var(--color-bg);
+      background: transparent; /* Changed from var(--color-bg) to transparent */
       color: var(--color-text-primary);
       padding: 100px var(--space-lg);
       position: relative;
@@ -532,9 +565,9 @@ const pageData = {
       line-height: 1.6;
       color: var(--color-text-primary);
       margin-bottom: 20px;
-      opacity: 0.9;
-      text-align: justify; /* Justify the text */
-      text-justify: inter-word; /* Use inter-word justification */
+      opacity: 0.4; /* Reduced from 0.9 to make harder to read */
+      text-align: justify;
+      text-justify: inter-word;
     }
 
     .bio-text h3 {
@@ -728,7 +761,7 @@ const pageData = {
        Immersive Section - Enhanced Design
        ---------------------------------------- */
     .immersive {
-      background-color: var(--color-bg-light, #1a1a1a);
+      background: transparent; /* Changed from var(--color-bg-light) to transparent */
       color: var(--color-text-secondary, #ffffff);
       padding: 120px var(--space-lg, 80px);
       position: relative;
@@ -1045,7 +1078,7 @@ const pageData = {
        Expertise Section - Enhanced Card Design
        ---------------------------------------- */
     .expertise {
-      background: var(--color-bg);
+      background: transparent; /* Changed from var(--color-bg) to transparent */
       color: var(--color-text-primary);
       padding: 60px var(--space-lg) 160px; /* Increased bottom padding to 160px */
       position: relative;
@@ -1331,7 +1364,7 @@ const pageData = {
        Always Designed Section
        ---------------------------------------- */
     .always-designed {
-      background-color: var(--color-bg-light);
+      background: transparent; /* Changed from var(--color-bg-light) to transparent */
       color: var(--color-text-secondary);
       padding: 26px var(--space-xl) 277px;
       position: relative;
@@ -1410,10 +1443,11 @@ const pageData = {
     /* ----------------------------------------
        Objectives Section
        ---------------------------------------- */
-    .objectives {
-      background-color: var(--color-bg-light);
+    .stats-section {
+      background: transparent;
       color: var(--color-text-secondary);
-      padding: 100px var(--space-lg) 180px;
+      padding: 50px var(--space-lg);
+      width: 100%;
       position: relative;
       overflow: hidden;
     }
@@ -1510,11 +1544,12 @@ const pageData = {
     /* ----------------------------------------
        Clients Section
        ---------------------------------------- */
-    .clients {
-      background-color: var(--color-bg-light);
+    .objectives {
+      background: transparent; /* Changed from var(--color-bg-light) to transparent */
       color: var(--color-text-secondary);
-      padding: 100px var(--space-lg);
+      padding: 100px var(--space-lg) 180px;
       position: relative;
+      overflow: hidden;
     }
 
     .clients-header {
@@ -1625,11 +1660,12 @@ const pageData = {
     /* ----------------------------------------
        Love Stories / Timeline Section
        ---------------------------------------- */
-    .love-stories {
-      background-color: var(--color-bg-light);
+    .love-stor.clients {
+      background: transparent; /* Changed from var(--color-bg-light) to transparent */
       color: var(--color-text-secondary);
       padding: 100px var(--space-lg);
       position: relative;
+      overflow: hidden;
     }
 
     .stories-header {
@@ -1797,8 +1833,16 @@ const pageData = {
     /* ----------------------------------------
        CTA Section
        ---------------------------------------- */
+    .love-stories {
+      background: transparent; /* Changed from var(--color-bg-light) to transparent */
+      color: var(--color-text-secondary);
+      padding: 100px var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
     .cta {
-      background-color: var(--color-bg);
+      background: transparent; /* Changed from var(--color-bg) to transparent */
       color: var(--color-text-primary);
       padding: 196px 0 65px;
       position: relative;
