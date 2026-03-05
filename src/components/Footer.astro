@@ -34,13 +34,13 @@ import Button from './Button.astro';
     </div>
     
     <div class="footer-bottom">
-      <Button href="https://www.linkedin.com/in/masonhhwong/" variant="light" size="medium" target="_blank">
+      <Button href="https://www.linkedin.com/in/andre-walters-ja/" variant="light" size="medium" target="_blank" class="social-linkedin">
         LINKEDIN
       </Button>
       
       <BackToTop />
       
-      <Button href="https://www.instagram.com/_mhhw/" variant="light" size="medium" target="_blank">
+      <Button href="https://www.instagram.com/andre_walters_ja/" variant="light" size="medium" target="_blank" class="social-instagram">
         INSTAGRAM
       </Button>
     </div>
@@ -232,6 +232,40 @@ import Button from './Button.astro';
   justify-content: space-between;
   align-items: center;
   padding: 16px;
+}
+
+/* Enhanced social links styling */
+.social-linkedin,
+.social-instagram {
+  position: relative;
+  z-index: 10;
+  transition: all 0.3s ease !important;
+}
+
+.social-linkedin:hover,
+.social-instagram:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.social-linkedin::before,
+.social-instagram::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.social-linkedin:hover::before,
+.social-instagram:hover::before {
+  opacity: 1;
 }
 
 .footer-bottom .button-text {

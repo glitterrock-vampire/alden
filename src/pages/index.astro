@@ -15,6 +15,37 @@ const EXPERTISE_ITEMS = [
   'RESEARCH / STRATEGY',
   'BRAND MANAGEMENT'
 ];
+
+// Featured projects with live URLs
+const FEATURED_PROJECTS = [
+  {
+    title: "CDT JAMAICA",
+    category: "DIGITAL PLATFORM",
+    href: "https://cdtjamaica.org",
+    liveUrl: "https://cdtjamaica.org",
+    image: "https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png",
+    imageW: 1628,
+    imageH: 1119
+  },
+  {
+    title: "TOTALLY BAKED",
+    category: "E-COMMERCE",
+    href: "https://totally-baked-ja.vercel.app",
+    liveUrl: "https://totally-baked-ja.vercel.app",
+    image: "https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png",
+    imageW: 2718,
+    imageH: 1810
+  },
+  {
+    title: "ZENITH TEAS",
+    category: "TEA MANAGEMENT",
+    href: "https://zenith-taupe.vercel.app",
+    liveUrl: "https://zenith-taupe.vercel.app",
+    image: "https://framerusercontent.com/images/TujYt1WY1IHHodeZrmAt5UobWY.png",
+    imageW: 1792,
+    imageH: 2490
+  }
+];
 ---
 
 <Layout title="ALDEN | Sr Visual Designer">
@@ -81,80 +112,40 @@ const EXPERTISE_ITEMS = [
         <div class="hscroll-outer" id="hscrollOuter">
           <div class="hscroll-sticky">
             <div class="hscroll-track" id="hscrollTrack">
-              <a href="/work" class="work-card" aria-label="Liverpool FC Project" data-animate-hero="tile-1" data-delay="1.6">
-                <div class="work-card-bg">
-                  <img
-                    src="https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png?scale-down-to=1024&width=1628&height=1119"
-                    width="1628" height="1119"
-                    loading="eager"
-                    alt="Liverpool FC project"
-                    class="work-card-bg-img"
-                  />
+              {FEATURED_PROJECTS.map((project, index) => (
+                <div class="work-card" aria-label={`${project.title} Project`} data-animate-hero={`tile-${index + 1}`} data-delay={1.6 + (index * 0.4)}>
+                  <div class="work-card-bg">
+                    {project.liveUrl ? (
+                      <iframe
+                        src={project.liveUrl}
+                        title={`${project.title} Live Preview`}
+                        loading="lazy"
+                        class="work-card-live-preview"
+                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                        referrerpolicy="no-referrer"
+                        allowfullscreen
+                      ></iframe>
+                    ) : (
+                      <img
+                        src={`${project.image}?scale-down-to=1024&width=${project.imageW}&height=${project.imageH}`}
+                        width={project.imageW} height={project.imageH}
+                        loading="eager"
+                        alt={`${project.title} project`}
+                        class="work-card-bg-img"
+                      />
+                    )}
+                  </div>
+                  <div class="work-card-labels">
+                    <span class="work-card-title-text">{project.title}</span>
+                    <span class="work-card-category-text">{project.category}</span>
+                  </div>
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" class="work-card-live-link">
+                      <span class="live-link-text">VIEW LIVE SITE →</span>
+                    </a>
+                  )}
                 </div>
-                <div class="work-card-mockup">
-                  <img
-                    src="https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png?scale-down-to=512&width=1628&height=1119"
-                    width="1628" height="1119"
-                    loading="lazy"
-                    alt=""
-                    class="work-card-mockup-img"
-                  />
-                </div>
-                <div class="work-card-labels">
-                  <span class="work-card-title-text">LIVERPOOL FC</span>
-                  <span class="work-card-category-text">MOBILE APP</span>
-                </div>
-              </a>
-              
-              <a href="/work" class="work-card" aria-label="Global Esports Project" data-animate-hero="tile-2" data-delay="2.0">
-                <div class="work-card-bg">
-                  <img
-                    src="https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png?scale-down-to=1024&width=2718&height=1810"
-                    width="2718" height="1810"
-                    loading="eager"
-                    alt="Global Esports project"
-                    class="work-card-bg-img"
-                  />
-                </div>
-                <div class="work-card-mockup">
-                  <img
-                    src="https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png?scale-down-to=512&width=2718&height=1810"
-                    width="2718" height="1810"
-                    loading="lazy"
-                    alt=""
-                    class="work-card-mockup-img"
-                  />
-                </div>
-                <div class="work-card-labels">
-                  <span class="work-card-title-text">GLOBAL ESPORTS</span>
-                  <span class="work-card-category-text">BRAND IDENTITY</span>
-                </div>
-              </a>
-              
-              <a href="/work" class="work-card" aria-label="The Norwegian Capsule Project" data-animate-hero="tile-3" data-delay="2.4">
-                <div class="work-card-bg">
-                  <img
-                    src="https://framerusercontent.com/images/TujYt1WY1IHHodeZrmAt5UobWY.png?scale-down-to=1024&width=1792&height=2490"
-                    width="1792" height="2490"
-                    loading="eager"
-                    alt="The Norwegian Capsule project"
-                    class="work-card-bg-img"
-                  />
-                </div>
-                <div class="work-card-mockup">
-                  <img
-                    src="https://framerusercontent.com/images/TujYt1WY1IHHodeZrmAt5UobWY.png?scale-down-to=512&width=1792&height=2490"
-                    width="1792" height="2490"
-                    loading="lazy"
-                    alt=""
-                    class="work-card-mockup-img"
-                  />
-                </div>
-                <div class="work-card-labels">
-                  <span class="work-card-title-text">THE NORWEGIAN CAPSULE</span>
-                  <span class="work-card-category-text">RESPONSIVE WEB</span>
-                </div>
-              </a>
+              ))}
             </div>
           </div>
         </div>
@@ -726,9 +717,10 @@ const EXPERTISE_ITEMS = [
   }
 }
 
+/* ── Project cards (matching work page style) */
 .work-card {
-  --cw: 540px;
-  --ch: 324px;
+  --cw: 685px;
+  --ch: 528px;
   flex: none;
   width: var(--cw);
   height: var(--ch);
@@ -743,9 +735,9 @@ const EXPERTISE_ITEMS = [
 }
 .work-card:hover { transform: scale(1.02); }
 
-/* Landscape cards (all cards now landscape) */
+/* Portrait cards */
 .work-card:nth-child(5),
-.work-card:nth-child(7) { display: none; }
+.work-card:nth-child(7) { --cw: 380px; --ch: 580px; }
 
 .work-card-bg {
   position: absolute;
@@ -755,35 +747,62 @@ const EXPERTISE_ITEMS = [
   transition: filter 0.45s cubic-bezier(0.22,1,0.36,1),
               opacity 0.45s cubic-bezier(0.22,1,0.36,1) !important;
 }
+
+.work-card-live-preview {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  object-fit: cover;
+}
+
 .work-card-bg-img {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: none !important;
 }
 .work-card:hover .work-card-bg {
-  filter: brightness(0.5);
+  filter: blur(10px) brightness(0.5);
   opacity: 0.4;
 }
 
-/* Foreground mockup */
-.work-card-mockup {
-  z-index: 4;
+.work-card-live-link {
   position: absolute;
-  width: 54%;
-  height: 46%;
-  top: 23.85%;
-  left: 23%;
-  overflow: hidden;
+  bottom: 16px;
+  right: 16px;
+  z-index: 3;
+  background: rgba(255, 215, 0, 0.9);
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
   opacity: 0;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.2);
-  transform: translateY(-16px) scale(0.97);
-  transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
-              transform 0.45s cubic-bezier(0.22,1,0.36,1) !important;
+  transform: translateY(10px);
 }
-.work-card-mockup-img { width: 100%; height: 100%; object-fit: cover; }
-.work-card:hover .work-card-mockup {
+
+.work-card:hover .work-card-live-link {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
+}
+
+.work-card-live-link:hover {
+  background: #FFD700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.live-link-text {
+  white-space: nowrap;
 }
 
 /* Labels (moved under tiles) */

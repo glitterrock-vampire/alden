@@ -13,22 +13,18 @@ interface Project {
   imageW: number;
   imageH: number;
   comingSoon?: boolean;
+  liveUrl?: string;
 }
 
 // WORK letters for animated hero text
 const WORK_LETTERS = ["W", "O", "R", "K"];
 
 const projects: Project[] = [
-  { id:1,  title:"LIVERPOOL FC",           category:"MOBILE APP",          href:"/liverpoolfc",         image:"https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png",   imageW:1628, imageH:1119 },
-  { id:2,  title:"GLOBAL ESPORTS",         category:"BRAND IDENTITY",      href:"/globalEsports",       image:"https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png", imageW:2718, imageH:1810 },
-  { id:3,  title:"AIR BP",                category:"UI / VISUAL DESIGN",   href:"/airbp",               image:"https://framerusercontent.com/images/jGIDW70qyfBuP6v8UKUwumU8HGo.png", imageW:1628, imageH:1119 },
-  { id:4,  title:"NATIONWIDE",            category:"ENTERPRISE DESIGN",    href:"/nationwide",           image:"https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png", imageW:1628, imageH:1119 },
-  { id:5,  title:"THE NORWEGIAN CAPSULE", category:"RESPONSIVE WEB",       href:"/thenorwegiancapsule", image:"https://framerusercontent.com/images/TujYt1WY1IHHodeZrmAt5UobWY.png",   imageW:1792, imageH:2490 },
-  { id:6,  title:"ENGLAND RFU",           category:"DIGITAL CAMPAIGN",     href:"/englandrfu",           image:"https://framerusercontent.com/images/fKFKHb1VZsz50W8Ctq7RIZW4SRw.png", imageW:1628, imageH:1119 },
-  { id:7,  title:"WILD",                  category:"RESPONSIVE WEB",       href:"/wild",                 image:"https://framerusercontent.com/images/N5cohaaWuBrrm5OzvudHSkiiEXA.png", imageW:1792, imageH:2392 },
-  { id:8,  title:"LFCTV GO",              category:"OTT PLATFORM",         href:"/lfctvgo",              image:"https://framerusercontent.com/images/nsH8fDKT0gbSp0z4LbmN4XVjw28.png", imageW:1628, imageH:1119 },
-  { id:9,  title:"HEXABOTS",              category:"PRODUCT DESIGN",       href:"#",                     image:"https://framerusercontent.com/images/iEHXOE8MWd2vGa9Prmwyjtm35A.png",  imageW:1628, imageH:1119, comingSoon:true },
-  { id:10, title:"POSSO",                category:"MOBILE APP",            href:"#",                     image:"https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png",  imageW:1628, imageH:1119, comingSoon:true },
+  { id:1,  title:"CDT JAMAICA",           category:"DIGITAL PLATFORM",          href:"https://cdtjamaica.org",         image:"https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png",   imageW:1628, imageH:1119, liveUrl:"https://cdtjamaica.org" },
+  { id:2,  title:"TOTALLY BAKED",         category:"E-COMMERCE",      href:"https://totally-baked-ja.vercel.app",       image:"https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png", imageW:2718, imageH:1810, liveUrl:"https://totally-baked-ja.vercel.app" },
+  { id:3,  title:"ZENITH TEAS",                category:"TEA MANAGEMENT",   href:"https://zenith-taupe.vercel.app",               image:"https://framerusercontent.com/images/jGIDW70qyfBuP6v8UKUwumU8HGo.png", imageW:1628, imageH:1119, liveUrl:"https://zenith-taupe.vercel.app" },
+  { id:4,  title:"GLOWING LANDING",            category:"LANDING PAGE",    href:"https://glowing-landing-page.netlify.app",           image:"https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png", imageW:1628, imageH:1119, liveUrl:"https://glowing-landing-page.netlify.app" },
+  { id:5,  title:"BLACKBOX SYSTEM",           category:"IOT SYSTEM",     href:"https://blackbox-online.vercel.app",           image:"https://framerusercontent.com/images/fKFKHb1VZsz50W8Ctq7RIZW4SRw.png", imageW:1628, imageH:1119, liveUrl:"https://blackbox-online.vercel.app" },
 ];
 ---
 
@@ -68,66 +64,56 @@ const projects: Project[] = [
   </section>
 
   <!-- ─── CREAM SECTION ────────────────────────────────────────────────── -->
-  <section class="cream-section">
+  <section class="cream-section" style="padding-top: 120px;">
 
     <!-- Horizontal scroll gallery -->
     <div class="hscroll-outer" id="hscrollOuter">
       <div class="hscroll-sticky">
         <div class="hscroll-track" id="hscrollTrack">
           {projects.map((p) => (
-            <a
-              href={p.comingSoon ? undefined : p.href}
+            <div
               class={`card${p.comingSoon ? " card--soon" : ""}`}
               data-project-id={p.id}
               aria-label={p.title}
             >
               <div class="card-bg">
-                <img
-                  src={`${p.image}?scale-down-to=1024&width=${p.imageW}&height=${p.imageH}`}
-                  width={p.imageW} height={p.imageH}
-                  loading={p.id <= 3 ? "eager" : "lazy"}
-                  alt={`${p.title} project`}
-                  class="card-bg-img"
-                />
-              </div>
-              <div class="card-mockup">
-                <img
-                  src={`${p.image}?scale-down-to=512&width=${p.imageW}&height=${p.imageH}`}
-                  width={p.imageW} height={p.imageH}
-                  loading="lazy"
-                  alt=""
-                  class="card-mockup-img"
-                />
+                {p.liveUrl ? (
+                  <iframe
+                    src={p.liveUrl}
+                    title={`${p.title} Live Preview`}
+                    loading="lazy"
+                    class="card-live-preview"
+                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                    referrerpolicy="no-referrer"
+                    allowfullscreen
+                  ></iframe>
+                ) : (
+                  <img
+                    src={`${p.image}?scale-down-to=1024&width=${p.imageW}&height=${p.imageH}`}
+                    width={p.imageW} height={p.imageH}
+                    loading={p.id <= 3 ? "eager" : "lazy"}
+                    alt={`${p.title} project`}
+                    class="card-bg-img"
+                  />
+                )}
               </div>
               <div class="card-labels">
-                <span class={`card-title-text ${p.id === 1 ? 'liverpool-title' : p.id === 2 ? 'esports-title' : p.id === 5 ? 'norwegian-title' : ''}`}>{p.title}</span>
+                <span class={`card-title-text ${p.id === 1 ? 'cdt-title' : ''}`}>{p.title}</span>
                 <span class="card-category-text">{p.category}</span>
               </div>
               {p.comingSoon && <div class="card-soon">COMING SOON</div>}
-            </a>
+              {p.liveUrl && (
+                <a href={p.liveUrl} target="_blank" class="card-live-link">
+                  <span class="live-link-text">VIEW LIVE SITE →</span>
+                </a>
+              )}
+            </div>
           ))}
         </div>
       </div>
     </div>
 
     </section>
-
-  <!-- ─── CAPABILITIES ──────────────────────────────────────────────────── -->
-  <section class="capabilities-section">
-    <div class="capabilities-inner">
-      <div class="capabilities-left">
-        <p class="cap-intro">Quietly<br/>powerful<br/><em>Digital Experiences</em></p>
-      </div>
-      <ul class="cap-list">
-        {["ART DIRECTION","UI / VISUAL DESIGN","USER EXPERIENCE DESIGN","ENTERPRISE DESIGN THINKING","RESEARCH / STRATEGY","BRAND IDENTITY"].map((c, i) => (
-          <li class="cap-item" style={`--delay:${i * 0.06}s`}>
-            <span class="cap-dash" aria-hidden="true">—</span>
-            <span class="cap-text">{c}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
 
   <Footer />
 </Layout>
@@ -459,12 +445,10 @@ const projects: Project[] = [
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 24px;
-  padding: 0 80px;
-  padding-left: 200px; /* Extra padding to show first tile better */
-  padding-bottom: 60px; /* Space for text labels below cards */
-  will-change: transform;
-  flex-shrink: 0;
+  padding: 0 40px;
+  gap: 16px;
+  /* Center the first project initially in the middle of screen */
+  transform: translateX(calc(50vw - 342px));
 }
 
 /* ── Project cards (framer-l4ka5: 685×528px) */
@@ -642,7 +626,9 @@ const projects: Project[] = [
   background-color: var(--cream);
   position: relative;
   z-index: 2;
-  padding: 180px 150px;
+  margin-top: 400px; /* Adjusted to match original proportions */
+  padding: 0 150px; /* Remove top padding */
+  padding-bottom: 10px; /* Minimal bottom padding to reduce gap */
 }
 .capabilities-inner {
   display: flex;
@@ -702,8 +688,8 @@ const projects: Project[] = [
 ═══════════════════════════════════════════════════════════════════ */
 .footer {
   background-color: var(--cream);
-  height: 100vh;
-  min-height: 600px;
+  height: 60vh; /* Further reduced from 80vh */
+  min-height: 300px; /* Further reduced from 400px */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -922,6 +908,217 @@ const projects: Project[] = [
 .card:hover .card-category-text {
   color: #FFED4E !important;
 }
+
+/* Live preview iframe styling */
+.card-live-preview {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.card-live-link {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 3;
+  background: rgba(255, 215, 0, 0.9);
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.card:hover .card-live-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-live-link:hover {
+  background: #FFD700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.live-link-text {
+  white-space: nowrap;
+}
+
+/* CDT Jamaica title styling */
+.cdt-title {
+  color: #FFD700 !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   LIVE PROJECT PREVIEWS
+═══════════════════════════════════════════════════════════════════ */
+.live-previews-section {
+  background: var(--cream);
+  padding: 120px var(--space-lg);
+  position: relative;
+}
+
+.live-previews-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.live-previews-left {
+  text-align: center;
+}
+
+.live-previews-title {
+  font-family: var(--ff-disp);
+  font-size: clamp(48px, 8vw, 72px);
+  line-height: 0.9em;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+
+.live-previews-subtitle {
+  font-family: var(--ff-mono);
+  font-size: 18px;
+  color: var(--dark);
+  opacity: 0.7;
+  margin-bottom: 60px;
+}
+
+.live-previews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.live-preview-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(47, 47, 47, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.live-preview-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(47, 47, 47, 0.2);
+}
+
+.live-preview-iframe-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.live-preview-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+.live-preview-info {
+  padding: 24px;
+}
+
+.live-preview-title {
+  font-family: var(--ff-disp);
+  font-size: 24px;
+  line-height: 1.2em;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.live-preview-description {
+  font-family: var(--ff-mono);
+  font-size: 16px;
+  line-height: 1.5em;
+  color: var(--dark);
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.live-preview-link {
+  font-family: var(--ff-mono);
+  font-size: 14px;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.live-preview-link:hover {
+  color: var(--gold-dk);
+}
+
+/* Placeholder for adding more projects */
+.live-preview-placeholder {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  border: 2px dashed rgba(47, 47, 47, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.placeholder-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(47, 47, 47, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-disp);
+  font-size: 32px;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+
+.placeholder-text {
+  font-family: var(--ff-mono);
+  font-size: 16px;
+  color: var(--dark);
+  opacity: 0.6;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1199px) {
+  .live-previews-section { padding: 80px 40px; }
+  .live-previews-grid { grid-template-columns: 1fr; gap: 30px; }
+  .live-preview-iframe-container { height: 250px; }
+}
+
+@media (max-width: 809px) {
+  .live-previews-section { padding: 60px 24px; }
+  .live-previews-title { font-size: clamp(36px, 7vw, 56px); }
+  .live-previews-subtitle { font-size: 16px; margin-bottom: 40px; }
+  .live-preview-iframe-container { height: 200px; }
+  .live-preview-info { padding: 20px; }
+  .live-preview-title { font-size: 20px; }
+  .live-preview-description { font-size: 14px; }
+}
 </style>
 
 <script>
@@ -1072,6 +1269,16 @@ const projects: Project[] = [
     const outerTop = outer.offsetTop;
     const outerH   = parseFloat(outer.style.height) || 0;
     const sy       = window.scrollY;
+    
+    // Wait until user scrolls past the entire hero section before starting horizontal scroll
+    const heroSection = document.querySelector('.hero');
+    const heroHeight = heroSection ? heroSection.offsetHeight : 400;
+    
+    if (sy < outerTop + heroHeight + 100) {
+      track.style.transform = 'translate3d(0, 0, 0)';
+      return;
+    }
+    
     const progress = (sy - outerTop) / (outerH - window.innerHeight);
     const clamped  = Math.max(0, Math.min(1, progress));
     const maxTX    = track.scrollWidth - window.innerWidth;
