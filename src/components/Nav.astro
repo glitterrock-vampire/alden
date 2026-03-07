@@ -32,9 +32,9 @@ const { currentPage = 'home' } = Astro.props;
       </a>
     </div>
     
-    <!-- Year -->
+    <!-- Date Display -->
     <div class="nav-year">
-      <span class="year-current">[2026]</span>
+      <span class="year-current"></span>
       <span class="day-current"></span>
     </div>
   </div>
@@ -54,20 +54,15 @@ class NavScrollController {
     this.isNavHidden = false;
     this.isReady = false;
 
-    // Match the CSS animation delay so we don't fight it
+    // Match the CSS animation delay
     const isMobile = window.matchMedia('(max-width: 809.98px)').matches;
-    // slideDown animation: 1.5s duration + 2.5s delay desktop / 1.6s + 1s mobile
     this.introDelay = isMobile ? (1 + 1.6) * 1000 : (2.5 + 1.5) * 1000;
 
     this.init();
   }
 
   init() {
-    // Wait until the CSS intro animation has fully completed before
-    // letting the scroll controller take over. This prevents the JS
-    // transform from conflicting with the CSS animation's forwards fill.
     setTimeout(() => {
-      // Clear any leftover inline styles from the animation
       this.nav.style.animation = 'none';
       this.nav.style.opacity = '1';
       this.nav.style.transform = 'translateY(0)';
@@ -81,20 +76,16 @@ class NavScrollController {
   }
 
   handleScroll() {
-    // Don't interfere until the intro animation is done
     if (!this.isReady) return;
 
     const currentScrollY = window.scrollY;
     const delta = currentScrollY - this.lastScrollY;
 
-    // Ignore tiny jitter
     if (Math.abs(delta) < 4) return;
 
     if (delta > 0) {
-      // Scrolling DOWN → hide nav
       this.hideNav();
     } else {
-      // Scrolling UP → show nav
       this.showNav();
     }
 
@@ -123,13 +114,23 @@ if (document.readyState === 'loading') {
 } else {
   new NavScrollController();
 }
+
+// Navigation click handler
+function handleNavClick(event, targetUrl) {
+  event.preventDefault();
+  document.body.style.animation = 'slideUp 0.5s ease-out forwards';
+  setTimeout(() => {
+    window.location.href = targetUrl;
+  }, 400);
+}
 </script>
 
 <script>
+// Update date
 const date = new Date();
 const formatted = `${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}.${date.getFullYear()}`;
-const el = document.querySelector('.year-current');
-if (el) el.textContent = formatted;
+const yearEl = document.querySelector('.year-current');
+if (yearEl) yearEl.textContent = `[${formatted}]`;
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const chineseDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
@@ -145,18 +146,20 @@ if (dayEl) dayEl.textContent = dayText;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 1000;
   padding: 24px;
-  /* Intro slide-down animation — JS takes over after this completes */
-  animation: slideDown 1.5s 2.5s ease forwards;
+  animation: slideDown 1.5s 2.5s cubic-bezier(0.55, 0.45, 0.16, 1) forwards;
   opacity: 0.001;
   transform: translateY(-150px);
   will-change: transform, opacity;
+  /* Using the original mix-blend-mode from the Framer site */
+  mix-blend-mode: difference;
+  background: transparent;
 }
 
 @media (max-width: 809.98px) {
   .nav {
-    animation: slideDown 1.6s 1s ease forwards;
+    animation: slideDown 1.6s 1s cubic-bezier(0.55, 0.45, 0.16, 1) forwards;
     padding: 24px 16px;
   }
 }
@@ -172,7 +175,7 @@ if (dayEl) dayEl.textContent = dayText;
 
 .logo {
   text-decoration: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
   display: flex;
   align-items: center;
   gap: 0;
@@ -233,7 +236,7 @@ if (dayEl) dayEl.textContent = dayText;
   font-size: 14px;
   line-height: 1.4;
   color: var(--token-text-light);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
   display: block;
 }
 
@@ -251,7 +254,7 @@ if (dayEl) dayEl.textContent = dayText;
   width: 5px;
   height: 5px;
   background: var(--token-text-light);
-  border-radius: 50%;
+  border-radius: 0; /* Square dot as in original */
 }
 
 .nav-link:hover .nav-link-text {
@@ -278,7 +281,7 @@ if (dayEl) dayEl.textContent = dayText;
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
   pointer-events: none;
 }
 
@@ -301,54 +304,42 @@ if (dayEl) dayEl.textContent = dayText;
   font-family: var(--font-roboto-mono);
   font-size: 14px;
   color: var(--token-text-light);
-  transition: opacity 0.3s ease;
   white-space: nowrap;
+  line-height: 1.4;
 }
 
 .day-current {
   font-family: var(--font-roboto-mono);
   font-size: 12px;
   color: var(--token-text-light);
-  transition: opacity 0.3s ease;
   white-space: nowrap;
   margin-top: 2px;
   display: block;
+  line-height: 1.4;
+  opacity: 0.8;
 }
 
 @keyframes slideDown {
-  from {
+  0% {
     opacity: 0.001;
     transform: translateY(-150px);
+    filter: blur(10px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 
 @keyframes slideUp {
-  from {
+  0% {
     opacity: 1;
     transform: translateY(0);
   }
-  to {
+  100% {
     opacity: 0;
     transform: translateY(-50px);
   }
 }
 </style>
-
-<script>
-// Navigation click handler for smooth transition
-function handleNavClick(event, targetUrl) {
-  event.preventDefault();
-  
-  // Add slide-up animation to current page content
-  document.body.style.animation = 'slideUp 0.5s ease-out forwards';
-  
-  // Navigate after animation completes
-  setTimeout(() => {
-    window.location.href = targetUrl;
-  }, 400);
-}
-</script>

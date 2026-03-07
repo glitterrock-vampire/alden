@@ -476,7 +476,7 @@ const pageData = {
 
     .hero-tagline {
       font-family: var(--font-roboto-mono);
-      font-size: 18px;
+      font-size: 24px;
       line-height: 1.6;
       color: var(--color-text-primary);
       opacity: 0.8;
@@ -485,6 +485,8 @@ const pageData = {
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
+      mix-blend-mode: difference;
+      text-shadow: 0 0 20px rgba(0,0,0,0.8);
     }
 
     .tagline-word {
@@ -499,7 +501,7 @@ const pageData = {
     @media (min-width: 810px) and (max-width: 1199px) { .hero-letter { font-size: 400px; } }
     @media (max-width: 809.98px) { 
       .hero-letter { font-size: 280px; }
-      .hero-tagline { font-size: 16px; }
+      .hero-tagline { font-size: 20px; }
       .hero-subtitle { padding: 0 20px; }
     }
 
@@ -525,17 +527,23 @@ const pageData = {
 
     .about-lead {
       font-family: var(--font-koulen);
-      font-size: clamp(60px, 8vw, 120px);
+      font-size: clamp(80px, 10vw, 140px); /* Increased from 60px to 80px */
       line-height: 0.9;
       color: var(--color-text-primary);
       margin-bottom: 20px;
+      /* Smart color blending for readability */
+      mix-blend-mode: difference;
+      text-shadow: 0 0 20px rgba(0,0,0,0.8);
     }
 
     .about-subline {
       font-family: var(--font-roboto-mono);
-      font-size: 24px;
+      font-size: 28px; /* Increased from 24px */
       color: var(--color-text-primary);
       opacity: 0.8;
+      /* Smart color blending for readability */
+      mix-blend-mode: difference;
+      text-shadow: 0 0 15px rgba(0,0,0,0.6);
     }
 
     .about-script {
@@ -554,27 +562,36 @@ const pageData = {
 
     .bio-title {
       font-family: var(--font-koulen);
-      font-size: 24px;
+      font-size: 32px; /* Increased from 24px */
       color: var(--color-text-primary);
       margin: 0;
+      /* Smart color blending for readability */
+      mix-blend-mode: difference;
+      text-shadow: 0 0 15px rgba(0,0,0,0.6);
     }
 
     .bio-text p {
       font-family: var(--font-roboto-mono);
-      font-size: 16px;
+      font-size: 20px; /* Increased from 16px */
       line-height: 1.6;
       color: var(--color-text-primary);
       margin-bottom: 20px;
-      opacity: 0.4; /* Reduced from 0.9 to make harder to read */
+      opacity: 0.9; /* Restored for readability */
       text-align: justify;
       text-justify: inter-word;
+      /* Smart color blending for readability */
+      mix-blend-mode: difference;
+      text-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
     .bio-text h3 {
       font-family: var(--font-koulen);
-      font-size: 20px;
+      font-size: 28px; /* Increased from 20px */
       color: var(--color-text-primary);
       margin: 32px 0 12px 0;
+      /* Smart color blending for readability */
+      mix-blend-mode: difference;
+      text-shadow: 0 0 15px rgba(0,0,0,0.6);
     }
 
     .bio-text h3:first-child {
@@ -588,11 +605,14 @@ const pageData = {
 
     .bio-text li {
       font-family: var(--font-roboto-mono);
-      font-size: 15px;
+      font-size: 18px; /* Increased from 15px */
       line-height: 1.5;
       color: var(--color-text-primary);
       opacity: 0.9;
       margin-bottom: 8px;
+      /* Smart color blending for readability */
+      mix-blend-mode: difference;
+      text-shadow: 0 0 8px rgba(0,0,0,0.4);
     }
 
     .bio-text strong {
@@ -908,20 +928,22 @@ const pageData = {
       font-family: var(--font-roboto-mono);
       font-size: 18px;
       font-weight: 600;
-      color: var(--color-text-secondary);
+      color: var(--token-text-light);
       margin: 0 0 12px 0; /* Added spacing below title */
       text-align: justify; /* Justified text */
       text-justify: inter-word;
+      mix-blend-mode: difference;
     }
 
     .hero-location {
       font-family: var(--font-roboto-mono);
       font-size: 18px;
       line-height: 1.8;
-      color: var(--color-text-secondary);
+      color: var(--token-text-light);
       margin: 0;
       text-align: justify; /* Justified text */
       text-justify: inter-word;
+      mix-blend-mode: difference;
     }
 
     .immersive-tagline {
@@ -2905,51 +2927,7 @@ const pageData = {
       </div>
     </section>
 
-    <!-- Immersive Section -->
-    <section class="immersive">
-      <div class="immersive-container">
-        <div class="immersive-header">
-          <div class="immersive-numbers">
-            <span class="num-bracket">[</span>
-            <span class="num">0</span>
-            <span class="num">6</span>
-            <span class="num">-</span>
-            <span class="num">2</span>
-            <span class="num">0</span>
-            <span class="num">2</span>
-            <span class="num">6</span>
-            <span class="num-bracket">]</span>
-          </div>
-          <div class="immersive-title">
-            <h2 class="immersive-heading">UI / VISUAL</h2>
-            <h3 class="immersive-subheading">DESIGNS</h3>
-          </div>
-        </div>
-
-        <div class="immersive-content">
-          <div class="immersive-stats">
-            <div class="stat-item" data-animate>
-              <span class="stat-number">6+</span>
-              <span class="stat-label">Years</span>
-            </div>
-            <div class="stat-item" data-animate>
-              <span class="stat-number">50+</span>
-              <span class="stat-label">Projects</span>
-            </div>
-          </div>
-
-          <div class="immersive-description" data-animate>
-            <p class="hero-job-title">SR SOFTWARE AND USER EXP</p>
-            <p class="hero-location">BASED IN KINGSTON JAMAICA I partner with brands, companies and entrepreneurs to transform visions into captivating experiences, all designed with the users at the helm.</p>
-          </div>
-        </div>
-        </div>
-      </section>
-      
-      <Button href="/info" variant="light" class="hover-lift">
-        READ MY STORY
-      </Button>
-      
+          
     <!-- About Section -->
     <section class="about-section">
       <div class="about-content">
@@ -2960,6 +2938,8 @@ const pageData = {
           <p class="about-subline">
             <span class="about-script">based in</span> Jamaica
           </p>
+          <p class="hero-job-title">SR SOFTWARE AND USER EXP</p>
+          <p class="hero-location">BASED IN KINGSTON JAMAICA I partner with brands, companies and entrepreneurs to transform visions into captivating experiences, all designed with the users at the helm.</p>
         </div>
 
         <div class="about-bio">

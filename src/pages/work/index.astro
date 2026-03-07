@@ -109,6 +109,8 @@ const projects: Project[] = [
               )}
             </div>
           ))}
+          <!-- Spacer tile for better scroll visibility of last item -->
+          <div class="card-spacer"></div>
         </div>
       </div>
     </div>
@@ -143,6 +145,12 @@ const projects: Project[] = [
     --ff-mono:   'Roboto Mono', monospace;
     --ff-body:   'Albert Sans', sans-serif;
     --ff-cjk:    "HanyiSentyFoundation Regular", "PingFang SC", "Noto Serif CJK SC", serif;
+    
+    /* Footer background variables */
+    --token-bg-light: #ffffff;
+    --token-text-light: #ffffff;
+    --token-text-dark: #333333;
+    --token-accent-gold: #d4af37;
   }
 
   /* Disable Layout's blanket transition on every animated element
@@ -164,7 +172,7 @@ const projects: Project[] = [
   .footer-greet-line,
   .footer-chinese {
     /* Initial hidden state — JS reveals via .visible class */
-    opacity: 0.001;
+    opacity: 1 !important;
   }
 
   /* ===== ANIMATED GRAIN OVERLAY ===== */
@@ -242,7 +250,7 @@ const projects: Project[] = [
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: -1; /* Push video behind all content */
   pointer-events: none;
 }
 
@@ -290,7 +298,7 @@ const projects: Project[] = [
   overflow: hidden;
   display: flex;
   align-items: flex-end;
-  background: #000;
+  background: transparent;
 }
 
 @media (--mobile) {
@@ -437,9 +445,16 @@ const projects: Project[] = [
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   align-items: center;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hscroll-sticky::-webkit-scrollbar {
+  display: none;
 }
 .hscroll-track {
   display: flex;
@@ -447,14 +462,13 @@ const projects: Project[] = [
   align-items: center;
   padding: 0 40px;
   gap: 16px;
-  /* Center the first project initially in the middle of screen */
-  transform: translateX(calc(50vw - 342px));
+  min-width: max-content;
 }
 
 /* ── Project cards (framer-l4ka5: 685×528px) */
 .card {
-  --cw: 685px;
-  --ch: 528px;
+  --cw: 560px;
+  --ch: 350px; /* 16:10 aspect ratio */
   flex: none;
   width: var(--cw);
   height: var(--ch);
@@ -470,9 +484,36 @@ const projects: Project[] = [
 .card:hover { transform: scale(1.02); }
 .card--soon { cursor: not-allowed; }
 
-/* Portrait cards */
+/* Portrait cards - also 16:10 */
 .card:nth-child(5),
-.card:nth-child(7) { --cw: 380px; --ch: 580px; }
+.card:nth-child(7) { --cw: 560px; --ch: 350px; }
+
+/* Responsive tile sizes - maintaining 16:10 ratio */
+@media (max-width: 1499px) {
+  .card { --cw: 480px; --ch: 300px; }
+  .card:nth-child(5),
+  .card:nth-child(7) { --cw: 480px; --ch: 300px; }
+  .card-spacer { --cw: 480px; --ch: 300px; }
+}
+
+@media (max-width: 1199px) {
+  .card { --cw: 400px; --ch: 250px; }
+  .card:nth-child(5),
+  .card:nth-child(7) { --cw: 400px; --ch: 250px; }
+  .card-spacer { --cw: 400px; --ch: 250px; }
+}
+
+/* Spacer tiles - 16:10 aspect ratio */
+.card-spacer {
+  --cw: 560px;
+  --ch: 350px; /* 16:10 aspect ratio */
+  flex: none;
+  width: var(--cw);
+  height: var(--ch);
+  position: relative;
+  pointer-events: none;
+  visibility: hidden;
+}
 
 .card-bg {
   position: absolute;
@@ -684,183 +725,6 @@ const projects: Project[] = [
 .cap-item:hover .cap-text { letter-spacing: 0.14em; }
 
 /* ═══════════════════════════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════════════════════════ */
-.footer {
-  background-color: var(--cream);
-  height: 60vh; /* Further reduced from 80vh */
-  min-height: 300px; /* Further reduced from 400px */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  overflow: hidden;
-  padding: 24px;
-  position: relative;
-  z-index: 2;
-}
-.footer-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 16px;
-  z-index: 3;
-}
-.footer-meta {
-  font-family: var(--ff-mono);
-  font-size: 14px;
-  line-height: 1.5em;
-  color: var(--cream);
-  mix-blend-mode: exclusion;
-  white-space: pre;
-}
-.footer-mid {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 16px 76px;
-  z-index: 3;
-  position: relative;
-}
-.footer-chinese-wrap {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  pointer-events: none;
-}
-.footer-chinese {
-  font-family: var(--ff-cjk);
-  font-size: clamp(80px, 9vw, 136px);
-  line-height: 1.1em;
-  color: var(--gold-warm);
-  text-align: center;
-  opacity: 0.001;
-  filter: blur(10px);
-  transform: translateY(10px);
-  transition:
-    opacity   0.8s cubic-bezier(0.44,0,0.56,1),
-    filter    0.8s cubic-bezier(0.44,0,0.56,1),
-    transform 0.8s cubic-bezier(0.44,0,0.56,1) !important;
-}
-.footer-chinese-wrap.visible .footer-chinese {
-  opacity: 1; filter: blur(0); transform: none;
-}
-.footer-greet-wrap {
-  width: 33%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  overflow: hidden;
-  position: relative;
-  z-index: 2;
-}
-.footer-greet-line {
-  font-family: var(--ff-disp);
-  font-size: clamp(60px, 9vw, 158px);
-  line-height: 0.9em;
-  text-align: center;
-  color: var(--cream);
-  mix-blend-mode: exclusion;
-  opacity: 0.001;
-  filter: blur(10px);
-  transform: translateY(10px);
-  /* stagger via transition-delay on .visible variants below */
-  transition:
-    opacity   0.6s cubic-bezier(0.44,0,0.56,1) 0s,
-    filter    0.6s cubic-bezier(0.44,0,0.56,1) 0s,
-    transform 0.6s cubic-bezier(0.44,0,0.56,1) 0s !important;
-}
-.footer-come.visible  {
-  opacity: 1; filter: blur(0); transform: none;
-  transition-delay: 0s !important;
-}
-.footer-say.visible   {
-  opacity: 1; filter: blur(0); transform: none;
-  transition-delay: 0.12s !important;
-}
-.footer-hello.visible {
-  opacity: 1; filter: blur(0); transform: none;
-  transition-delay: 0.24s !important;
-}
-.footer-spotify-wrap {
-  width: 33%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 24px 45px 46px;
-  position: relative;
-  z-index: 2;
-}
-.footer-bottombar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 16px;
-  z-index: 3;
-}
-.footer-socials { display: flex; }
-.footer-social {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 130px;
-  height: 30px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: none !important;
-}
-.social-text,
-.social-text-italic {
-  font-family: var(--ff-disp);
-  font-size: 25px;
-  line-height: 1em;
-  color: var(--cream);
-  mix-blend-mode: exclusion;
-  position: absolute;
-  white-space: nowrap;
-  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1) !important;
-}
-.social-text         { top: 0;   left: 0; }
-.social-text-italic  { font-style: italic; top: 30px; left: 0; }
-.footer-social:hover .social-text        { transform: translateY(-30px); }
-.footer-social:hover .social-text-italic { transform: translateY(-30px); }
-
-.footer-link {
-      font-family: var(--ff-mono);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      color: #FFD700 !important; /* Changed from var(--dark) to gold */
-      opacity: 0.45;
-      background: none;
-      border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: opacity 0.2s ease !important;
-}
-.footer-backtop {
-      font-family: var(--ff-mono);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      color: #FFD700 !important; /* Changed from var(--dark) to gold */
-      opacity: 0.45;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: opacity 0.2s ease !important;
-    }
-.footer-backtop:hover { opacity: 1; }
-
-/* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════════════════ */
 @media (max-width: 1499px) { 
@@ -872,9 +736,6 @@ const projects: Project[] = [
   .capabilities-inner   { flex-direction: column; gap: 60px; align-items: center; }
   .capabilities-left    { width: 100%; max-width: 500px; align-items: center; }
   .cap-list             { max-width: 100%; }
-  .footer-mid           { flex-direction: column; padding: 16px 24px; gap: 40px; }
-  .footer-greet-wrap    { width: 100%; }
-  .footer-spotify-wrap  { width: 100%; padding: 0; align-items: center; }
   .hscroll-track        { padding: 0 40px; gap: 16px; }
 }
 @media (max-width: 809px) {
@@ -886,20 +747,15 @@ const projects: Project[] = [
   .card:nth-child(5),
   .card:nth-child(7) { --cw: 200px; --ch: 280px; }
   .cta-row        { flex-direction: column; gap: 16px; padding-bottom: 120px; }
-  .footer-socials { gap: 8px; }
-  .footer-social  { width: auto; }
-  .footer-mid     { flex-direction: column; padding: 16px; gap: 32px; }
 }
 </style>
 
 <style>
-/* Universal override - Force ALL text to gold */
+  /* Card-specific overrides only */
 .card-title-text,
 .card-category-text,
 .card-labels,
-.cta-link,
-.footer-link,
-.footer-backtop {
+.cta-link {
   color: #FFD700 !important;
 }
 
@@ -1314,7 +1170,7 @@ const projects: Project[] = [
 ═══════════════════════════════════════════════════════════════════ */
 (function initFooterReveal() {
   const come    = document.getElementById('footerCome');
-  const chinese = document.querySelector('.footer-chinese-wrap');
+  const chinese = document.querySelector('.footer-chinese');
   if (!come) return;
 
   const io = new IntersectionObserver(entries => {

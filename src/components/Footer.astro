@@ -14,9 +14,9 @@ import Button from './Button.astro';
     
     <div class="footer-middle">
       <div class="footer-title">
-        <span class="title-line" data-animate="COME">COME</span>
-        <span class="title-line" data-animate="say">say</span>
-        <span class="title-line" data-animate="HELLO">HELLO</span>
+        <span class="title-line footer-come" data-animate="COME" id="footerCome">COME</span>
+        <span class="title-line footer-say" data-animate="say" id="footerSay">say</span>
+        <span class="title-line footer-hello" data-animate="HELLO" id="footerHello">HELLO</span>
       </div>
       
       <div class="footer-chinese">
@@ -52,6 +52,30 @@ import Button from './Button.astro';
   </div>
 </footer>
 
+<script>
+  // Universal footer animation script - works on all pages
+  document.addEventListener('DOMContentLoaded', () => {
+    const footerCome = document.getElementById('footerCome');
+    const footerSay = document.getElementById('footerSay');
+    const footerHello = document.getElementById('footerHello');
+    const chineseChars = document.querySelectorAll('.chinese-char');
+    
+    // Make footer text visible immediately on all pages
+    setTimeout(() => {
+      if (footerCome) footerCome.classList.add('visible');
+      if (footerSay) footerSay.classList.add('visible');
+      if (footerHello) footerHello.classList.add('visible');
+      
+      // Make Chinese characters visible
+      chineseChars.forEach(char => {
+        char.style.opacity = '1';
+        char.style.filter = 'blur(0)';
+        char.style.transform = 'none';
+      });
+    }, 500);
+  });
+</script>
+
 <style>
 .footer {
   background: var(--token-bg-light);
@@ -84,6 +108,9 @@ import Button from './Button.astro';
   font-size: 14px;
   line-height: 1.5;
   color: var(--token-text-light);
+  /* Smart color blending for readability */
+  mix-blend-mode: difference;
+  text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
 
 .footer-middle {
@@ -103,12 +130,32 @@ import Button from './Button.astro';
   display: block;
   font-family: var(--font-koulen);
   font-size: 158px;
-  line-height: 0.9;
+  line-height: 0.9em;
   color: var(--token-text-light);
-  animation: fadeUp 1s 0.5s forwards;
+  /* Smart color blending for readability */
+  mix-blend-mode: difference;
+  text-shadow: 0 0 20px rgba(0,0,0,0.8);
+  transition: all 0.6s cubic-bezier(0.44,0,0.56,1);
   opacity: 0.001;
+  filter: blur(10px);
   transform: translateY(10px);
-  filter: blur(7px);
+}
+
+/* Work page footer styles - ensure visibility */
+.footer-come,
+.footer-say,
+.footer-hello {
+  color: var(--token-text-light) !important;
+  mix-blend-mode: difference !important;
+  text-shadow: 0 0 20px rgba(0,0,0,0.8) !important;
+}
+
+.footer-come.visible,
+.footer-say.visible,
+.footer-hello.visible {
+  opacity: 1 !important;
+  filter: blur(0) !important;
+  transform: none !important;
 }
 
 @media (min-width: 2000px) {
@@ -149,6 +196,7 @@ import Button from './Button.astro';
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  z-index: 9999 !important;
 }
 
 .chinese-char {
@@ -156,11 +204,16 @@ import Button from './Button.astro';
   font-family: 'HanyiSentyFoundation Regular', sans-serif;
   font-size: 136px;
   line-height: 1.1;
-  color: var(--token-accent-gold);
+  color: var(--token-accent-gold) !important;
   animation: fadeUp 1s 0.5s forwards;
-  opacity: 0.001;
-  transform: translateY(10px);
-  filter: blur(7px);
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  /* Smart color blending for readability */
+  mix-blend-mode: difference;
+  text-shadow: 0 0 20px rgba(0,0,0,0.6);
+  z-index: 9999 !important;
+  position: relative;
 }
 
 @media (min-width: 2000px) {
@@ -185,6 +238,8 @@ import Button from './Button.astro';
   .chinese-char {
     font-size: 73px;
     display: inline-block;
+    z-index: 9999 !important;
+    position: relative !important;
   }
   
   .footer-chinese {
@@ -193,6 +248,7 @@ import Button from './Button.astro';
     left: auto;
     transform: none;
     margin-bottom: 20px;
+    z-index: 9999 !important;
   }
 }
 
@@ -238,7 +294,7 @@ import Button from './Button.astro';
 .social-linkedin,
 .social-instagram {
   position: relative;
-  z-index: 10;
+  z-index: 9998 !important; /* Bring to top layer */
   transition: all 0.3s ease !important;
 }
 
@@ -268,13 +324,27 @@ import Button from './Button.astro';
   opacity: 1;
 }
 
+/* Force all button elements to be visible and white */
+.footer-bottom button,
+.footer-bottom .button {
+  z-index: 9998 !important;
+}
+
+.footer-bottom button *,
+.footer-bottom .button * {
+  color: #ffffff !important;
+  z-index: 9999 !important;
+}
+
 .footer-bottom .button-text {
-  color: var(--token-text-light);
+  color: #ffffff !important; /* Force white color */
   font-family: var(--font-koulen);
   font-size: 14px;
   font-weight: bold;
   mix-blend-mode: normal;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8) !important;
+  position: relative;
+  z-index: 9999 !important; /* Bring button text to highest layer */
 }
 
 @media (max-width: 809.98px) {
