@@ -78,28 +78,16 @@ const FEATURED_PROJECTS = [
         ))}
       </div>
       
+      <div class="hero-subtitle">
+        <span>Technology · Design · Innovation</span>
+      </div>
+      
       <div class="hero-content">
         <div class="hero-description">
           <div class="hero-role">
-            <h2 class="hero-role-visual" data-animate-hero="visual" data-delay="0.6">Technology</h2>
-            <h2 class="hero-role-swimmer" data-animate-hero="swimmer" data-delay="0.7">Visual Design</h2>
-            <h2 class="hero-role-and" data-animate-hero="and" data-delay="0.8">Brand Systems</h2>
-            <h2 class="hero-role-porsche" data-animate-hero="porsche" data-delay="0.9">
-              <span class="tagline-word fancy-creative">
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">C</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">r</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">e</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">a</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">t</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">i</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">v</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">e</span>
-              </span> <span class="tagline-word">
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">P</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">r</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">o</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">d</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">u</span>
+            <h2 class="hero-role-visual" data-animate-hero="visual" data-delay="0.6">the technology</h2>
+            <h2 class="hero-role-swimmer" data-animate-hero="swimmer" data-delay="0.7">design</h2>
+            <h2 class="hero-role-and" data-animate-hero="and" data-delay="0.8">innovation</h2>
                 <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">c</span>
                 <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">t</span>
                 <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">i</span>
@@ -159,6 +147,9 @@ const FEATURED_PROJECTS = [
         <a href="/photography" class="section-link photo-link">View Photography →</a>
       </div>
     </section>
+    
+    <!-- Custom Cursor Dot -->
+    <div class="cursor-dot" id="cursorDot"></div>
     
     <!-- Info Section -->
     <section class="info">
@@ -362,7 +353,7 @@ const FEATURED_PROJECTS = [
 /* Alden Logo Letters */
 .hero-alden-logo {
   position: absolute;
-  top: 32%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -373,9 +364,28 @@ const FEATURED_PROJECTS = [
   cursor: pointer;
   
   @media (max-width: 809px) {
-    top: 20%;
+    top: 15%;
     gap: 5px;
     flex-wrap: wrap;
+  }
+}
+
+.hero-subtitle {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-roboto-mono);
+  font-size: 18px;
+  color: var(--token-text-light);
+  opacity: 0.8;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 3;
+  
+  @media (max-width: 809px) {
+    font-size: 14px;
+    top: 50%;
   }
 }
 
@@ -1070,6 +1080,20 @@ const FEATURED_PROJECTS = [
   height: 60px;
 }
 
+/* Custom Cursor Dot */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--token-accent-gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+  opacity: 0.8;
+}
+
 /* Dynamic Section Separators */
 /* .development-work::before,
 .photo-works::before,
@@ -1721,5 +1745,32 @@ const FEATURED_PROJECTS = [
       videoWrap.style.transform = 'none';
     }, 3900);
   })();
-})();
+  
+  // Custom Cursor Dot
+  const cursorDot = document.getElementById('cursorDot');
+  let mouseX = 0, mouseY = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    if (cursorDot) {
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+    }
+  });
+  
+  // Hide cursor dot when mouse leaves window
+  document.addEventListener('mouseleave', () => {
+    if (cursorDot) {
+      cursorDot.style.opacity = '0';
+    }
+  });
+  
+  // Show cursor dot when mouse enters window
+  document.addEventListener('mouseenter', () => {
+    if (cursorDot) {
+      cursorDot.style.opacity = '0.8';
+    }
+  });
 </script>
