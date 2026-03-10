@@ -12,8 +12,7 @@ const EXPERTISE_ITEMS = [
   'UI / VISUAL DESIGN',
   'USER EXPERIENCE DESIGN',
   'enterprise design thinking',
-  'RESEARCH / STRATEGY',
-  'BRAND MANAGEMENT'
+  'RESEARCH / STRATEGY'
 ];
 
 // Featured projects with live URLs
@@ -56,7 +55,6 @@ const FEATURED_PROJECTS = [
   
   <!-- ─── FULL PAGE VIDEO BACKGROUND ──────────────────────────────────────── -->
   <div class="page-video-bg" id="pageVideoBg">
-    <div class="page-dark-overlay"></div>
     
     <div class="page-video-wrap" id="pageVideoWrap">
       <video
@@ -78,24 +76,14 @@ const FEATURED_PROJECTS = [
         ))}
       </div>
       
-      <div class="hero-subtitle">
-        <span>Technology · Design · Innovation</span>
-      </div>
-      
       <div class="hero-content">
         <div class="hero-description">
           <div class="hero-role">
-            <h2 class="hero-role-visual" data-animate-hero="visual" data-delay="0.6">the technology</h2>
-            <h2 class="hero-role-swimmer" data-animate-hero="swimmer" data-delay="0.7">design</h2>
-            <h2 class="hero-role-and" data-animate-hero="and" data-delay="0.8">innovation</h2>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">c</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">t</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">i</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">o</span>
-                <span class="letter-char" style="display:inline-block;opacity:0.001;transform:translateX(0px) translateY(10px) scale(1) rotate(0deg) skewX(0deg) skewY(0deg)">n</span>
-              </span>
-            </h2>
+            <h2 class="hero-role-visual" data-animate-hero="visual" data-delay="0.6">Technology</h2>
+            <h2 class="hero-role-swimmer" data-animate-hero="swimmer" data-delay="0.7">Innovation</h2>
+            <h2 class="hero-role-and" data-animate-hero="and" data-delay="0.8">Design</h2>
           </div>
+          <p class="hero-location" style="text-align: left; margin-left: 50px; font-size: 18px;">BASED IN KINGSTON JAMAICA<br/>I partner with companies and entrepreneurs<br/>to transform visions into captivating experiences,<br/>all designed with users at the helm.</p>
         </div>
         
         <div class="hero-scroll" data-animate-hero="scroll" data-delay="1.2">
@@ -138,18 +126,29 @@ const FEATURED_PROJECTS = [
         </div>
         <a href="/work" class="section-link">View Development Projects →</a>
         
-        <div class="spacer"></div>
+        <div class="spacer" style="height: 100px;"></div>
         
         <h3 class="section-title">PHOTOGRAPHY</h3>
-        <div class="photo-categories">
-          <span class="photo-text">· Landscapes · Portraits · Events</span>
+        <div class="dev-grid">
+          <div class="dev-item">
+            <h3>Landscapes</h3>
+            <p>Natural beauty and scenic environments</p>
+            <p>Mountains · Oceans · Forests · Sunsets</p>
+          </div>
+          <div class="dev-item">
+            <h3>Portraits</h3>
+            <p>People and personality captured</p>
+            <p>Headshots · Lifestyle · Events · Creative</p>
+          </div>
+          <div class="dev-item">
+            <h3>Events</h3>
+            <p>Moments and celebrations documented</p>
+            <p>Weddings · Corporate · Parties · Concerts</p>
+          </div>
         </div>
         <a href="/photography" class="section-link photo-link">View Photography →</a>
       </div>
     </section>
-    
-    <!-- Custom Cursor Dot -->
-    <div class="cursor-dot" id="cursorDot"></div>
     
     <!-- Info Section -->
     <section class="info">
@@ -163,11 +162,11 @@ const FEATURED_PROJECTS = [
         <h3 class="info-title">
           A <span class="title-bracket">[</span>multidisciplinary<span class="title-bracket">]</span> 
           perspective informed by <span class="title-name">technology</span>, 
-          <span class="title-name">design</span>, and <span class="title-name">brand strategy</span>.
+          <span class="title-name">design</span>, and <span class="title-name">innovation</span>.
         </h3>
         
         <div class="info-text">
-          <p>A multidisciplinary perspective informed by technology, design, and brand strategy.</p>
+          <p>A multidisciplinary perspective informed by technology, design, and innovation.</p>
           <p>A strategic approach led by clarity, precision, and intent.</p>
           <p>Every digital experience is engineered to be intuitive, scalable, and enduring.</p>
         </div>
@@ -191,7 +190,7 @@ const FEATURED_PROJECTS = [
             elevate everyday interactions into something more meaningful and crucially, quietly 
             threading in moments of joy that catch us by surprise and stay with us for years to come.
           </p>
-          <Button href="/info" variant="light" chineseText="all caqps" class="hover-lift" style="color: #2f2f2f !important; text-shadow: 0 0 8px rgba(255,255,255,0.8) !important; background: rgba(255,255,255,0.1) !important; padding: 20px 32px !important; border: 1px solid rgba(47,47,47,0.3) !important; mix-blend-mode: normal !important; font-size: 18px !important; letter-spacing: 1px !important; line-height: 1.6 !important; min-height: 60px !important;">
+          <Button href="/founder" variant="light" chineseText="all caqps" class="hover-lift" style="color: #2f2f2f !important; text-shadow: 0 0 8px rgba(255,255,255,0.8) !important; background: rgba(255,255,255,0.1) !important; padding: 20px 32px !important; border: 1px solid rgba(47,47,47,0.3) !important; mix-blend-mode: normal !important; font-size: 18px !important; letter-spacing: 1px !important; line-height: 1.6 !important; min-height: 60px !important;">
             all caqps
           </Button>
         </div>
@@ -226,6 +225,20 @@ const FEATURED_PROJECTS = [
   --container-padding: 24px;
   --container-padding-mobile: 16px;
   --container-max-width: 2500px;
+}
+
+body {
+  font-family: var(--font-roboto-mono);
+  color: var(--token-text-light);
+  background: transparent;
+  background-size: cover;
+  background-position: center 20% top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  line-height: 1.4;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
 }
 
 /* ===== BREAKPOINTS ===== */
@@ -317,6 +330,8 @@ const FEATURED_PROJECTS = [
   letter-spacing: 0.2em;
   font-size: 0.6em;
   white-space: nowrap;
+  z-index: 9999 !important;
+  position: relative;
 }
 
 .chinese-text {
@@ -353,7 +368,7 @@ const FEATURED_PROJECTS = [
 /* Alden Logo Letters */
 .hero-alden-logo {
   position: absolute;
-  top: 25%;
+  top: 32%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -364,28 +379,9 @@ const FEATURED_PROJECTS = [
   cursor: pointer;
   
   @media (max-width: 809px) {
-    top: 15%;
+    top: 20%;
     gap: 5px;
     flex-wrap: wrap;
-  }
-}
-
-.hero-subtitle {
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-roboto-mono);
-  font-size: 18px;
-  color: var(--token-text-light);
-  opacity: 0.8;
-  text-align: center;
-  white-space: nowrap;
-  z-index: 3;
-  
-  @media (max-width: 809px) {
-    font-size: 14px;
-    top: 50%;
   }
 }
 
@@ -1080,20 +1076,6 @@ const FEATURED_PROJECTS = [
   height: 60px;
 }
 
-/* Custom Cursor Dot */
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--token-accent-gold);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease-out;
-  opacity: 0.8;
-}
-
 /* Dynamic Section Separators */
 /* .development-work::before,
 .photo-works::before,
@@ -1745,32 +1727,5 @@ const FEATURED_PROJECTS = [
       videoWrap.style.transform = 'none';
     }, 3900);
   })();
-  
-  // Custom Cursor Dot
-  const cursorDot = document.getElementById('cursorDot');
-  let mouseX = 0, mouseY = 0;
-  
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    
-    if (cursorDot) {
-      cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top = mouseY + 'px';
-    }
-  });
-  
-  // Hide cursor dot when mouse leaves window
-  document.addEventListener('mouseleave', () => {
-    if (cursorDot) {
-      cursorDot.style.opacity = '0';
-    }
-  });
-  
-  // Show cursor dot when mouse enters window
-  document.addEventListener('mouseenter', () => {
-    if (cursorDot) {
-      cursorDot.style.opacity = '0.8';
-    }
-  });
+})();
 </script>
