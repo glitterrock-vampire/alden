@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  currentPage?: 'home' | 'work' | 'studio' | 'founder';
+  currentPage?: 'home' | 'studios' | 'web-studio' | 'photo-studio' | 'about' | 'who-we-are' | 'core' | 'contact' | 'farm' | 'build' | 'springs';
 }
 
 const { currentPage = 'home' } = Astro.props;
@@ -19,29 +19,61 @@ const { currentPage = 'home' } = Astro.props;
     
     <!-- Navigation Links -->
     <div class="nav-links">
-      <a href="/" class={`nav-link ${currentPage === 'home' ? 'active' : ''}`} onclick="handleNavClick(event, '/')">
+      <a href="/" class={`nav-link ${currentPage === 'home' ? 'active' : ''}`}>
         <span class="nav-link-text">HOME</span>
       </a>
       
       <div class="nav-dropdown">
-        <a href="/work" class={`nav-link ${currentPage === 'work' ? 'active' : ''}`} onclick="handleNavClick(event, '/work')">
-          <span class="nav-link-text">SERVICES</span>
+        <a href="/studios" class={`nav-link ${currentPage === 'studios' || currentPage === 'web-studio' || currentPage === 'photo-studio' ? 'active' : ''}`}>
+          <span class="nav-link-text">STUDIOS</span>
+          <span class="dropdown-arrow">+</span>
         </a>
         <div class="dropdown-menu">
-          <a href="/work" class="dropdown-item">ALDEN Web Studio</a>
-          <a href="/work/photography" class="dropdown-item">ALDEN Photo Studio</a>
+          <div class="dropdown-section">
+            <div class="dropdown-section-title">Web Studio</div>
+            <a href="/studios/web-studio/services" class="dropdown-item">Services</a>
+            <a href="/portfolio/web" class="dropdown-item">Portfolio</a>
+          </div>
+          <div class="dropdown-section">
+            <div class="dropdown-section-title">Photo Studio</div>
+            <a href="/studios/photo-studio/services" class="dropdown-item">Services</a>
+            <a href="/portfolio/photography" class="dropdown-item">Portfolio</a>
+          </div>
         </div>
       </div>
       
       <div class="nav-dropdown">
-        <a href="/studio" class={`nav-link ${currentPage === 'studio' || currentPage === 'core' ? 'active' : ''}`} onclick="handleNavClick(event, '/studio')">
-          <span class="nav-link-text">ABOUT</span>
+        <a href="/ecosystem" class={`nav-link ${currentPage === 'farm' || currentPage === 'build' || currentPage === 'springs' ? 'active' : ''}`}>
+          <span class="nav-link-text">ECOSYSTEM</span>
+          <span class="dropdown-arrow">+</span>
         </a>
         <div class="dropdown-menu">
-          <a href="/core" class="dropdown-item">Core</a>
-          <a href="/studio" class="dropdown-item">Studio</a>
+          <div class="dropdown-section">
+            <div class="dropdown-section-title">Current Ventures</div>
+            <a href="/farm" class="dropdown-item">ALDEN FARM</a>
+            <a href="/build" class="dropdown-item">ALDEN BUILD</a>
+          </div>
+          <div class="dropdown-section">
+            <div class="dropdown-section-title">Coming Soon</div>
+            <a href="/springs" class="dropdown-item">ALDEN SPRINGS</a>
+          </div>
         </div>
       </div>
+      
+      <div class="nav-dropdown">
+        <a href="/about" class={`nav-link ${currentPage === 'about' || currentPage === 'who-we-are' || currentPage === 'core' ? 'active' : ''}`}>
+          <span class="nav-link-text">ABOUT</span>
+          <span class="dropdown-arrow">+</span>
+        </a>
+        <div class="dropdown-menu">
+          <a href="/about/who-we-are" class="dropdown-item">Who Are We?</a>
+          <a href="/core" class="dropdown-item">Core</a>
+        </div>
+      </div>
+      
+      <a href="/contact" class={`nav-link ${currentPage === 'contact' ? 'active' : ''}`}>
+        <span class="nav-link-text">CONTACT</span>
+      </a>
     </div>
     
     <!-- Date Display -->
@@ -52,363 +84,379 @@ const { currentPage = 'home' } = Astro.props;
   </div>
 </nav>
 
-<script>
-class NavScrollController {
-  nav: HTMLElement;
-  lastScrollY: number;
-  isNavHidden: boolean;
-  isReady: boolean;
-  introDelay: number;
-
-  constructor() {
-    this.nav = document.getElementById('main-nav') as HTMLElement;
-    this.lastScrollY = window.scrollY;
-    this.isNavHidden = false;
-    this.isReady = false;
-
-    // Match the CSS animation delay
-    const isMobile = window.matchMedia('(max-width: 809.98px)').matches;
-    this.introDelay = isMobile ? (1 + 1.6) * 1000 : (2.5 + 1.5) * 1000;
-
-    this.init();
-  }
-
-  init() {
-    setTimeout(() => {
-      this.nav.style.animation = 'none';
-      this.nav.style.opacity = '1';
-      this.nav.style.transform = 'translateY(0)';
-      this.nav.style.transition = 'transform 0.35s cubic-bezier(0.55, 0.45, 0.16, 1), opacity 0.35s ease';
-
-      this.isReady = true;
-      this.lastScrollY = window.scrollY;
-    }, this.introDelay);
-
-    window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
-  }
-
-  handleScroll() {
-    if (!this.isReady) return;
-
-    const currentScrollY = window.scrollY;
-    const delta = currentScrollY - this.lastScrollY;
-
-    if (Math.abs(delta) < 4) return;
-
-    if (delta > 0) {
-      this.hideNav();
-    } else {
-      this.showNav();
-    }
-
-    this.lastScrollY = currentScrollY;
-  }
-
-  hideNav() {
-    if (!this.isNavHidden) {
-      this.nav.style.transform = 'translateY(-120%)';
-      this.nav.style.opacity = '0';
-      this.isNavHidden = true;
-    }
-  }
-
-  showNav() {
-    if (this.isNavHidden) {
-      this.nav.style.transform = 'translateY(0)';
-      this.nav.style.opacity = '1';
-      this.isNavHidden = false;
-    }
-  }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => new NavScrollController());
-} else {
-  new NavScrollController();
-}
-
-// Navigation click handler
-function handleNavClick(event, targetUrl) {
-  event.preventDefault();
-  document.body.style.animation = 'slideUp 0.5s ease-out forwards';
-  setTimeout(() => {
-    window.location.href = targetUrl;
-  }, 400);
-}
-</script>
-
-<script>
-// Update date
-const date = new Date();
-const formatted = `${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}.${date.getFullYear()}`;
-const yearEl = document.querySelector('.year-current');
-if (yearEl) yearEl.textContent = `[${formatted}]`;
-
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const chineseDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-const dayIndex = date.getDay();
-const dayText = `${days[dayIndex]} [${chineseDays[dayIndex]}]`;
-const dayEl = document.querySelector('.day-current');
-if (dayEl) dayEl.textContent = dayText;
-</script>
-
 <style>
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  padding: 24px;
-  animation: slideDown 1.5s 2.5s cubic-bezier(0.55, 0.45, 0.16, 1) forwards;
-  opacity: 0.001;
-  transform: translateY(-150px);
-  will-change: transform, opacity;
-  /* Using the original mix-blend-mode from the Framer site */
-  mix-blend-mode: difference;
-  background: transparent;
-}
-
-@media (max-width: 809.98px) {
   .nav {
-    animation: slideDown 1.6s 1s cubic-bezier(0.55, 0.45, 0.16, 1) forwards;
-    padding: 24px 16px;
-  }
-}
-
-.nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 2500px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.logo {
-  text-decoration: none;
-  transition: opacity 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
-  display: flex;
-  align-items: center;
-  gap: 0;
-  position: absolute;
-  left: 0;
-}
-
-.logo:hover {
-  opacity: 0.8;
-}
-
-.nav-letter {
-  font-family: var(--font-koulen);
-  font-size: 28px;
-  letter-spacing: 0.02em;
-  color: var(--token-text-light);
-  transition: all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1);
-  display: inline-block;
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-}
-
-@media (max-width: 1199.98px) {
-  .nav-links {
-    padding-left: 40px;
-    gap: 1px;
-  }
-}
-
-@media (max-width: 809.98px) {
-  .nav-links {
-    padding-left: 0;
-  }
-  
-  .nav-link {
-    transform: scale(0.9);
-  }
-}
-
-.nav-link {
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  height: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.nav-link-text {
-  font-family: var(--font-roboto-mono);
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--token-text-light);
-  opacity: 0.8;
-  transition: all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1);
-  display: block;
-}
-
-.nav-link.active .nav-link-text {
-  position: relative;
-  padding-left: 12px;
-}
-
-.nav-link.active .nav-link-text::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5px;
-  height: 5px;
-  background: var(--token-text-light);
-  border-radius: 0; /* Square dot as in original */
-}
-
-.nav-link:hover .nav-link-text {
-  transform: translateY(-20px);
-}
-
-.nav-link.coming-soon {
-  position: relative;
-  cursor: not-allowed;
-}
-
-.nav-link.coming-soon .nav-link-text {
-  opacity: 0.7;
-}
-
-.coming-soon-badge {
-  position: absolute;
-  top: -7px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-6deg);
-  width: 80px;
-  height: 23px;
-  background-image: url('/images/coming-soon-badge.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
-  pointer-events: none;
-}
-
-.nav-link.coming-soon:hover .coming-soon-badge {
-  opacity: 1;
-}
-
-/* Dropdown Menu Styles */
-.nav-dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--token-bg-dark);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  min-width: 180px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
-  z-index: 1000;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.nav-dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(10px);
-}
-
-.dropdown-item {
-  display: block;
-  padding: 12px 16px;
-  color: var(--token-text-light);
-  text-decoration: none;
-  font-family: var(--font-roboto-mono);
-  font-size: 14px;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.dropdown-item:last-child {
-  border-bottom: none;
-}
-
-.dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--token-accent-gold);
-  padding-left: 20px;
-}
-
-.dropdown-item:first-child:hover {
-  border-radius: 8px 8px 0 0;
-}
-
-.dropdown-item:last-child:hover {
-  border-radius: 0 0 8px 8px;
-}
-
-.nav-year {
-  position: absolute;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: auto;
-  height: auto;
-  cursor: default;
-}
-
-.year-current {
-  font-family: var(--font-roboto-mono);
-  font-size: 14px;
-  color: var(--token-text-light);
-  white-space: nowrap;
-  line-height: 1.4;
-}
-
-.day-current {
-  font-family: var(--font-roboto-mono);
-  font-size: 12px;
-  color: var(--token-text-light);
-  white-space: nowrap;
-  margin-top: 2px;
-  display: block;
-  line-height: 1.4;
-  opacity: 0.8;
-}
-
-@keyframes slideDown {
-  0% {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 24px;
+    animation: slideDown 1.5s 2.5s cubic-bezier(0.55, 0.45, 0.16, 1) forwards;
     opacity: 0.001;
     transform: translateY(-150px);
-    filter: blur(10px);
+    will-change: transform, opacity;
+    mix-blend-mode: difference;
+    background: transparent;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
 
-@keyframes slideUp {
-  0% {
+  @media (max-width: 809.98px) {
+    .nav {
+      animation: slideDown 1.6s 1s cubic-bezier(0.55, 0.45, 0.16, 1) forwards;
+      padding: 24px 16px;
+    }
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 2500px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .logo {
+    text-decoration: none;
+    transition: opacity 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: absolute;
+    left: 0;
+  }
+
+  .logo:hover {
+    opacity: 0.8;
+  }
+
+  .nav-letter {
+    font-family: var(--font-koulen, 'Koulen', cursive);
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    color: var(--token-text-light, #ffffff);
+    transition: all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1);
+    display: inline-block;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
-  100% {
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+
+  @media (max-width: 1199.98px) {
+    .nav-links {
+      gap: 1px;
+    }
+  }
+
+  @media (max-width: 809.98px) {
+    .nav-links {
+      /* margin-right removed for proper centering */
+    }
+    
+    .nav-link {
+      transform: scale(0.9);
+    }
+  }
+
+  .nav-link {
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-link-text {
+    font-family: var(--font-roboto-mono, 'Roboto Mono', monospace);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--token-text-light, #ffffff);
+    opacity: 0.8;
+    transition: all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1);
+    display: block;
+  }
+
+  .dropdown-arrow {
+    font-family: var(--font-koulen, 'Koulen', cursive);
+    font-size: 12px;
+    margin-left: 8px;
+    opacity: 0.6;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .nav-dropdown:hover .dropdown-arrow {
+    transform: rotate(45deg);
+    opacity: 1;
+  }
+
+  .nav-link.active .nav-link-text {
+    position: relative;
+    padding-left: 12px;
+  }
+
+  .nav-link.active .nav-link-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background: var(--token-text-light, #ffffff);
+    border-radius: 0;
+  }
+
+  .nav-link:hover .nav-link-text {
+    transform: translateY(-20px);
+  }
+
+  /* Dropdown Menu Styles */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    min-width: 200px;
     opacity: 0;
-    transform: translateY(-50px);
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.55, 0.45, 0.16, 1);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    pointer-events: none;
   }
-}
+
+  .nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .dropdown-section {
+    padding: 8px 0;
+  }
+
+  .dropdown-section:first-child {
+    padding-top: 4px;
+  }
+
+  .dropdown-section:last-child {
+    padding-bottom: 4px;
+  }
+
+  .dropdown-section-title {
+    padding: 8px 20px 4px 20px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--font-roboto-mono, 'Roboto Mono', monospace);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 8px 20px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-family: var(--font-roboto-mono, 'Roboto Mono', monospace);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 1);
+    padding-left: 28px;
+  }
+
+  .dropdown-item::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: #c8a84e;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-item:hover::before {
+    opacity: 1;
+    left: 16px;
+  }
+
+  .nav-year {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: auto;
+    height: auto;
+    cursor: default;
+  }
+
+  .year-current {
+    font-family: var(--font-roboto-mono, 'Roboto Mono', monospace);
+    font-size: 14px;
+    color: var(--token-text-light, #ffffff);
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+
+  .day-current {
+    font-family: var(--font-roboto-mono, 'Roboto Mono', monospace);
+    font-size: 12px;
+    color: var(--token-text-light, #ffffff);
+    white-space: nowrap;
+    margin-top: 2px;
+    display: block;
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+
+  @keyframes slideDown {
+    0% {
+      opacity: 0.001;
+      transform: translateY(-150px);
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+  }
 </style>
+
+<script>
+  // Nav scroll controller
+  class NavScrollController {
+    nav: HTMLElement | null;
+    lastScrollY: number;
+    isNavHidden: boolean;
+    isReady: boolean;
+    introDelay: number;
+
+    constructor() {
+      this.nav = document.getElementById('main-nav');
+      this.lastScrollY = window.scrollY;
+      this.isNavHidden = false;
+      this.isReady = false;
+
+      const isMobile = window.matchMedia('(max-width: 809.98px)').matches;
+      this.introDelay = isMobile ? (1 + 1.6) * 1000 : (2.5 + 1.5) * 1000;
+
+      this.init();
+    }
+
+    init() {
+      if (!this.nav) return;
+      
+      setTimeout(() => {
+        if (!this.nav) return;
+        this.nav.style.animation = 'none';
+        this.nav.style.opacity = '1';
+        this.nav.style.transform = 'translateY(0)';
+        this.nav.style.transition = 'transform 0.35s cubic-bezier(0.55, 0.45, 0.16, 1), opacity 0.35s ease';
+        this.isReady = true;
+        this.lastScrollY = window.scrollY;
+      }, this.introDelay);
+
+      window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+    }
+
+    handleScroll() {
+      if (!this.isReady || !this.nav) return;
+
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - this.lastScrollY;
+
+      if (Math.abs(delta) < 4) return;
+
+      if (delta > 0 && currentScrollY > 100) {
+        this.hideNav();
+      } else {
+        this.showNav();
+      }
+
+      this.lastScrollY = currentScrollY;
+    }
+
+    hideNav() {
+      if (!this.isNavHidden && this.nav) {
+        this.nav.style.transform = 'translateY(-120%)';
+        this.nav.style.opacity = '0';
+        this.isNavHidden = true;
+      }
+    }
+
+    showNav() {
+      if (this.isNavHidden && this.nav) {
+        this.nav.style.transform = 'translateY(0)';
+        this.nav.style.opacity = '1';
+        this.isNavHidden = false;
+      }
+    }
+  }
+
+  // Date update
+  function updateDate() {
+    const date = new Date();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const formatted = `${month}.${day}.${year}`;
+    
+    const yearEl = document.querySelector('.year-current');
+    if (yearEl) yearEl.textContent = `[${formatted}]`;
+
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const chineseDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    const dayIndex = date.getDay();
+    const dayText = `${days[dayIndex]} [${chineseDays[dayIndex]}]`;
+    
+    const dayEl = document.querySelector('.day-current');
+    if (dayEl) dayEl.textContent = dayText;
+  }
+
+  // Initialize everything when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new NavScrollController();
+      updateDate();
+    });
+  } else {
+    new NavScrollController();
+    updateDate();
+  }
+</script>

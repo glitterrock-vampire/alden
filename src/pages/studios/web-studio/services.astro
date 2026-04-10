@@ -1,0 +1,719 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import Button from '../../../components/Button.astro';
+import Footer from '../../../components/Footer.astro';
+
+const WEB_STUDIO_SERVICES = [
+  {
+    title: "Digital Transformation",
+    description: "Transform your business with cutting-edge technologies to enhance processes, culture, and customer experiences.",
+    features: ["Assess Current State", "Create Digital Strategic Plan", "Implement and Integrate", "Monitor and Optimize"],
+    icon: "🚀"
+  },
+  {
+    title: "e-Commerce",
+    description: "Comprehensive solution for launching, optimizing, and managing online stores with advanced features.",
+    features: ["Product & Inventory Management", "Order & Shipping Management", "Multi-Vendor Marketplace", "Secure Payment Gateways"],
+    icon: "🛒"
+  },
+  {
+    title: "Website Development",
+    description: "Custom, scalable, and high-performing websites and applications to elevate your online presence.",
+    features: ["Tailored Made To Your Needs", "Scalable Solutions", "Seamless Performance", "Enhanced Engagement"],
+    icon: "🌐"
+  },
+  {
+    title: "Mobile App Development",
+    description: "Custom, high-performance iOS and Android apps to engage and elevate your business.",
+    features: ["Custom Development", "Seamless Integration", "Innovative Design", "Enhanced Security"],
+    icon: "📱"
+  },
+  {
+    title: "Automation & Integration",
+    description: "Transform with integrated digital technologies and automation for efficiency and growth.",
+    features: ["Task Automation", "Data Integration", "Process Optimization", "Cost Reduction"],
+    icon: "⚙️"
+  },
+  {
+    title: "Help Desk Solution",
+    description: "Enhance support with 24/7 help desk, streamlining issue resolution and improving satisfaction.",
+    features: ["Ticket Management", "Multi-Channel Support", "Automated Responses", "Knowledge Base"],
+    icon: "🎧"
+  },
+  {
+    title: "Cloud Hosting",
+    description: "Scalable, secure, and cost-effective cloud services for digital efficiency and reliability.",
+    features: ["Web App & Website Hosting", "Scalable Resources", "Enhanced Security", "Automated Backups"],
+    icon: "☁️"
+  },
+  {
+    title: "Content Marketing",
+    description: "Boost engagement and drive growth with targeted, high-quality content tailored to your audience.",
+    features: ["Audience Research", "Content Planning", "Content Creation", "Performance Analysis"],
+    icon: "📝"
+  },
+  {
+    title: "Quality Assurance",
+    description: "Ensure software reliability and user satisfaction with comprehensive testing strategies.",
+    features: ["Bug Detection", "Performance Testing", "Usability Testing", "Automated Testing"],
+    icon: "🔍"
+  },
+  {
+    title: "Load Testing",
+    description: "Optimize system performance ensuring scalability, stability, and peak traffic readiness.",
+    features: ["Realistic User Simulations", "Scalability Assessment", "Performance Optimization", "Detailed Reporting"],
+    icon: "⚡"
+  },
+  {
+    title: "S&G Cloud Hosting",
+    description: "Unlock the Power of the Cloud for Your S&G Smart Lock Solutions with managed hosting.",
+    features: ["Cloud Server Setup & Integration", "24/7 Managed Hosting", "Scalable and Secure", "Backup & Disaster Recovery"],
+    icon: "🔐"
+  }
+];
+---
+
+<Layout title="ALDEN Web Studio | Services" description="Comprehensive digital services including web development, mobile apps, cloud hosting, and more.">
+  <Nav currentPage="web-studio" />
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="page-dark-overlay"></div>
+    <div class="hero-letter-wrap">
+      <div class="hero-main-word hero-top-word">
+        <span class="hero-letter" data-letter="W" data-index="0">W</span>
+        <span class="hero-letter" data-letter="E" data-index="1">E</span>
+        <span class="hero-letter" data-letter="B" data-index="2">B</span>
+      </div>
+      <div class="hero-main-word hero-bottom-word">
+        <span class="hero-letter" data-letter="S" data-index="3">S</span>
+        <span class="hero-letter" data-letter="E" data-index="4">E</span>
+        <span class="hero-letter" data-letter="R" data-index="5">R</span>
+        <span class="hero-letter" data-letter="V" data-index="6">V</span>
+        <span class="hero-letter" data-letter="I" data-index="7">I</span>
+        <span class="hero-letter" data-letter="C" data-index="8">C</span>
+        <span class="hero-letter" data-letter="E" data-index="9">E</span>
+        <span class="hero-letter" data-letter="S" data-index="10">S</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Header -->
+  <section class="services-header">
+    <div class="section-container">
+      <div class="header-content">
+        <h2 class="page-title">ALDEN Web Studio Services</h2>
+        <p class="page-subtitle">Comprehensive digital solutions tailored for your business needs</p>
+        <p class="page-description">From concept to deployment, we provide end-to-end digital services that transform your vision into reality. Our expertise spans across web development, mobile applications, cloud infrastructure, and digital marketing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-section">
+    <div class="section-container">
+      <div class="services-grid">
+        {WEB_STUDIO_SERVICES.map((service, index) => (
+          <div class="service-card" data-service-index={index}>
+            <div class="service-icon">
+              <span class="icon-emoji">{service.icon}</span>
+            </div>
+            <h3 class="service-title">{service.title}</h3>
+            <p class="service-description">{service.description}</p>
+            <div class="service-features">
+              {service.features.map((feature, featureIndex) => (
+                <div class="feature-item" data-feature-index={featureIndex}>
+                  <span class="checkmark">✓</span>
+                  <span class="feature-text">{feature}</span>
+                </div>
+              ))}
+            </div>
+            <Button href="/contact" variant="light" class="service-cta">Get Started</Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process-section">
+    <div class="section-container">
+      <h2 class="section-title">Our Process</h2>
+      
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Discovery</h3>
+          <p class="step-description">We start by understanding your business goals, target audience, and technical requirements.</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Strategy</h3>
+          <p class="step-description">Develop a comprehensive roadmap outlining the technical approach and project timeline.</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Development</h3>
+          <p class="step-description">Build your solution using cutting-edge technologies and best practices.</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Launch & Support</h3>
+          <p class="step-description">Deploy your solution and provide ongoing support and optimization.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section class="portfolio-section">
+    <div class="section-container">
+      <h2 class="section-title">Our Portfolio</h2>
+      <p class="section-subtitle">Explore our recent projects and see how we've helped businesses transform their digital presence.</p>
+      
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <div class="portfolio-preview">
+            <div class="preview-placeholder">E-Commerce Platform</div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Retail E-Commerce Solution</h3>
+            <p class="portfolio-description">Complete online shopping platform with inventory management and secure payments.</p>
+            <Button href="/studios/web-studio/portfolio" variant="light" class="portfolio-link">View Project</Button>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <div class="portfolio-preview">
+            <div class="preview-placeholder">Business Website</div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Corporate Website Redesign</h3>
+            <p class="portfolio-description">Modern, responsive website with enhanced user experience and performance optimization.</p>
+            <Button href="/studios/web-studio/portfolio" variant="light" class="portfolio-link">View Project</Button>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <div class="portfolio-preview">
+            <div class="preview-placeholder">Mobile App</div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">iOS & Android App</h3>
+            <p class="portfolio-description">Cross-platform mobile application with real-time data synchronization.</p>
+            <Button href="/studios/web-studio/portfolio" variant="light" class="portfolio-link">View Project</Button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="portfolio-cta">
+        <Button href="/studios/web-studio/portfolio" variant="light" class="view-all-button">View All Projects</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="section-container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Transform Your Business?</h2>
+        <p class="cta-subtitle">Let's discuss how our services can help you achieve your digital goals</p>
+        <div class="cta-buttons">
+          <Button href="/contact" variant="light" class="cta-button primary">Start Your Project</Button>
+          <Button href="/studios/web-studio/portfolio" variant="light" class="cta-button secondary">View Our Work</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Intersection Observer Animation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Hero letter animations - restore original timing
+      setTimeout(() => {
+        const heroLetters = document.querySelectorAll('.hero-letter');
+        heroLetters.forEach((letter, index) => {
+          setTimeout(() => {
+            letter.style.opacity = '1';
+            letter.style.transform = 'translateX(0px) translateY(0px) scale(1)';
+          }, 800 + index * 100);
+        });
+      }, 500);
+
+      // Animate service cards on scroll
+      const serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const card = entry.target;
+            const index = parseInt(card.dataset.serviceIndex);
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, index * 100);
+            serviceObserver.unobserve(card);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      document.querySelectorAll('.service-card').forEach(card => {
+        serviceObserver.observe(card);
+      });
+    });
+  </script>
+</Layout>
+
+<style>
+  /* Hero Section Styles */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .page-dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+
+  .hero-letter-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 40px; 
+    right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0 40px;
+    z-index: 2;
+  }
+
+  .hero-main-word {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .hero-top-word .hero-letter {
+    font-size: 150px;
+  }
+
+  .hero-bottom-word .hero-letter {
+    font-size: 380px;
+  }
+
+  .hero-letter {
+    font-family: var(--font-koulen);
+    line-height: 0.7em;
+    color: var(--color-text-primary);
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-230px);
+  }
+
+  /* Responsive breakpoints */
+  @media (min-width: 2000px) { 
+    .hero-top-word .hero-letter { font-size: 240px; }
+    .hero-bottom-word .hero-letter { font-size: 608px; }
+  }
+  @media (min-width: 1500px) and (max-width: 1999px) { 
+    .hero-top-word .hero-letter { font-size: 180px; }
+    .hero-bottom-word .hero-letter { font-size: 456px; }
+  }
+  @media (min-width: 1200px) and (max-width: 1499px) { 
+    .hero-top-word .hero-letter { font-size: 140px; }
+    .hero-bottom-word .hero-letter { font-size: 352px; }
+  }
+  @media (min-width: 810px) and (max-width: 1199px) { 
+    .hero-top-word .hero-letter { font-size: 100px; }
+    .hero-bottom-word .hero-letter { font-size: 252px; }
+  }
+  @media (max-width: 809px) { 
+    .hero-top-word .hero-letter { font-size: 60px; }
+    .hero-bottom-word .hero-letter { font-size: 152px; }
+    .hero-letter-wrap { gap: 15px; left: 20px; padding: 0 20px; }
+    .hero-main-word { gap: 5px; }
+  }
+
+  /* Section Container */
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    .section-container {
+      padding: 0 20px;
+    }
+  }
+
+  /* Services Header */
+  .services-header {
+    padding: 120px 0 80px;
+    text-align: center;
+    background: var(--token-bg-dark);
+  }
+
+  .header-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-family: var(--font-koulen);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: var(--token-text-primary);
+  }
+
+  .page-subtitle {
+    font-family: var(--font-roboto-mono);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: var(--token-accent-gold);
+    margin-bottom: 20px;
+  }
+
+  .page-description {
+    font-family: var(--font-roboto-mono);
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--token-text-secondary);
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: 80px 0;
+    background: var(--token-bg-dark);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.55, 0.45, 0.16, 1);
+  }
+
+  .service-card:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--token-accent-gold);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .icon-emoji {
+    font-size: 28px;
+  }
+
+  .service-title {
+    font-family: var(--font-koulen);
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--token-text-primary);
+  }
+
+  .service-description {
+    font-family: var(--font-roboto-mono);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--token-text-secondary);
+    margin-bottom: 24px;
+  }
+
+  .service-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .checkmark {
+    color: var(--token-accent-gold);
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .feature-text {
+    font-family: var(--font-roboto-mono);
+    font-size: 14px;
+    color: var(--token-text-secondary);
+  }
+
+  .service-cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Process Section */
+  .process-section {
+    padding: 120px 0;
+    background: var(--token-bg-dark);
+  }
+
+  .section-title {
+    font-family: var(--font-koulen);
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 60px;
+    color: var(--token-text-primary);
+  }
+
+  .section-subtitle {
+    font-family: var(--font-roboto-mono);
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+  }
+
+  .process-step {
+    text-align: center;
+    padding: 40px 30px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .process-step:hover {
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-3px);
+  }
+
+  .step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--token-accent-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-koulen);
+    font-size: 24px;
+    color: var(--token-bg-dark);
+    margin: 0 auto 20px;
+  }
+
+  .step-title {
+    font-family: var(--font-koulen);
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: var(--token-text-primary);
+  }
+
+  .step-description {
+    font-family: var(--font-roboto-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--token-text-secondary);
+  }
+
+  /* Portfolio Section */
+  .portfolio-section {
+    padding: 80px 0;
+    background: var(--token-bg-dark);
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+
+  .portfolio-item {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.55, 0.45, 0.16, 1);
+  }
+
+  .portfolio-item:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+
+  .portfolio-preview {
+    height: 200px;
+    background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,255,255,0.08));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .preview-placeholder {
+    font-family: var(--font-koulen);
+    font-size: 1.125rem;
+    color: rgba(255, 215, 0, 0.9);
+  }
+
+  .portfolio-info {
+    padding: 30px;
+  }
+
+  .portfolio-title {
+    font-family: var(--font-koulen);
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 16px;
+  }
+
+  .portfolio-description {
+    font-family: var(--font-roboto-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+  }
+
+  .portfolio-link {
+    display: inline-block;
+  }
+
+  .portfolio-cta {
+    text-align: center;
+  }
+
+  .view-all-button {
+    display: inline-block;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 120px 0;
+    text-align: center;
+    background: var(--token-bg-dark);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-family: var(--font-koulen);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 20px;
+    color: var(--token-text-primary);
+  }
+
+  .cta-subtitle {
+    font-family: var(--font-roboto-mono);
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: var(--token-text-secondary);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    min-width: 180px;
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    border: 1px solid var(--token-text-primary);
+  }
+
+  .cta-button.secondary:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .services-header,
+    .services-section,
+    .process-section,
+    .cta-section {
+      padding: 80px 0;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .service-card {
+      padding: 30px 24px;
+    }
+
+    .process-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>

@@ -116,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @font-face {
   font-family: 'HanyiSentyFoundation Regular';
-  src: url('/fonts/HanyiSentyFoundation-Regular.ttf') format('truetype');
+  src: local('Arial'), local('Helvetica'), sans-serif;
   font-display: swap;
 }
 

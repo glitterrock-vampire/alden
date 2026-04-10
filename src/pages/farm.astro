@@ -1,0 +1,659 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Button from '../components/Button.astro';
+import Footer from '../components/Footer.astro';
+
+// Define farm products
+const FARM_PRODUCTS = [
+  {
+    name: "Free-Range Eggs",
+    description: "Fresh eggs from pasture-raised chickens",
+    price: "$8/dozen",
+    category: "eggs",
+    inStock: true,
+    affiliateLink: "https://agrotonomy.com/eggs"
+  },
+  {
+    name: "Pasture-Raised Chicken",
+    description: "Premium quality chicken meat",
+    price: "$15/lb",
+    category: "meat",
+    inStock: true,
+    affiliateLink: "https://agrotonomy.com/chicken"
+  },
+  {
+    name: "Tower Garden Kit",
+    description: "Complete vertical farming system",
+    price: "$129",
+    category: "supplies",
+    inStock: true,
+    affiliateLink: "https://agrotonomy.com/tower-garden"
+  },
+  {
+    name: "Weekly Produce Box",
+    description: "Seasonal vegetables and fruits",
+    price: "$25/box",
+    category: "produce",
+    inStock: true,
+    affiliateLink: "https://agrotonomy.com/produce-box"
+  },
+  {
+    name: "Farm Supplies Bundle",
+    description: "Essential farming tools and seeds",
+    price: "$45",
+    category: "supplies",
+    inStock: true,
+    affiliateLink: "https://agrotonomy.com/supplies"
+  },
+  {
+    name: "Organic Compost",
+    description: "Nutrient-rich compost for gardens",
+    price: "$12/bag",
+    category: "supplies",
+    inStock: true,
+    affiliateLink: "https://agrotonomy.com/compost"
+  }
+];
+
+// Define delivery zones
+const DELIVERY_ZONES = [
+  { area: "Kingston & St. Andrew", fee: "Free", days: "Tuesday & Friday" },
+  { area: "St. Catherine", fee: "$5", days: "Wednesday & Saturday" },
+  { area: "Portmore", fee: "$3", days: "Tuesday & Friday" },
+  { area: "Other Areas", fee: "Contact for pricing", days: "Custom schedule" }
+];
+---
+
+<Layout title="ALDEN FARM | Fresh Local Produce" description="Fresh farm-to-table produce, chicken, eggs, and supplies. Partnering with Agrotonomy for sustainable local food delivery in Kingston, Jamaica.">
+  <Nav currentPage="farm" />
+  
+  <!-- Hero Section -->
+  <section class="farm-hero">
+    <!-- Hero Background -->
+    <div class="page-video-bg">
+      <div class="page-dark-overlay"></div>
+    </div>
+    
+    <!-- Hero title -->
+    <div class="hero-letter-wrap">
+      <div class="hero-main-word">
+        <span class="hero-letter" data-letter="F" data-index="0">F</span>
+        <span class="hero-letter" data-letter="A" data-index="1">A</span>
+        <span class="hero-letter" data-letter="R" data-index="2">R</span>
+        <span class="hero-letter" data-letter="M" data-index="3">M</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Farm Header -->
+  <section class="farm-header">
+    <div class="section-container">
+      <div class="header-content">
+        <h2 class="page-title">ALDEN FARM</h2>
+        <p class="page-subtitle">Whole Foods · Chicken · Eggs · Supplies</p>
+        <p class="page-description">Fresh from farm to Kingston. Partnering with Agrotonomy for sustainable local produce and farm supplies. Supporting local agriculture and bringing quality products to your table.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="products-section">
+    <div class="section-container">
+      <h2 class="section-title">Featured Products</h2>
+      
+      <div class="products-grid">
+        {FARM_PRODUCTS.map((product, index) => (
+          <div class="product-card" data-product-index={index}>
+            <div class="product-category">{product.category}</div>
+            <h3 class="product-name">{product.name}</h3>
+            <p class="product-description">{product.description}</p>
+            <div class="product-price">{product.price}</div>
+            <div class="product-status">
+              {product.inStock ? (
+                <span class="in-stock">In Stock</span>
+              ) : (
+                <span class="out-of-stock">Out of Stock</span>
+              )}
+            </div>
+            <Button href={product.affiliateLink} variant="light" class="product-cta" target="_blank">Shop Now</Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery Information -->
+  <section class="delivery-section">
+    <div class="section-container">
+      <h2 class="section-title">Delivery & Pickup</h2>
+      
+      <div class="delivery-grid">
+        {DELIVERY_ZONES.map((zone, index) => (
+          <div class="delivery-card">
+            <h3 class="delivery-area">{zone.area}</h3>
+            <div class="delivery-details">
+              <div class="delivery-fee">
+                <span class="fee-label">Delivery Fee:</span>
+                <span class="fee-amount">{zone.fee}</span>
+              </div>
+              <div class="delivery-days">
+                <span class="days-label">Delivery Days:</span>
+                <span class="days-schedule">{zone.days}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="delivery-note">
+        <p><strong>Affiliate Partnership:</strong> Orders are fulfilled through our partner Agrotonomy. Your purchase supports local Jamaican farmers and sustainable agriculture.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Partnership -->
+  <section class="partnership-section">
+    <div class="section-container">
+      <h2 class="section-title">Our Partnership with Agrotonomy</h2>
+      
+      <div class="partnership-content">
+        <div class="partnership-text">
+          <p>ALDEN FARM partners with Agrotonomy to bring you the freshest local produce and farm supplies. Together, we support sustainable agriculture and provide Kingston residents with access to quality, farm-fresh products.</p>
+          <p>Through this partnership, we ensure that every product meets the highest standards of quality and freshness, while supporting local farmers and promoting food security in Jamaica.</p>
+        </div>
+        
+        <div class="partnership-benefits">
+          <div class="benefit-item">
+            <span class="benefit-icon">F</span>
+            <h4>Fresh Products</h4>
+            <p>Daily harvest and delivery</p>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">L</span>
+            <h4>Local Support</h4>
+            <p>Supporting Jamaican farmers</p>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">S</span>
+            <h4>Sustainable</h4>
+            <p>Eco-friendly farming practices</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="section-container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Order Fresh Produce?</h2>
+        <p class="cta-subtitle">Support local farmers and enjoy farm-fresh quality</p>
+        <div class="cta-buttons">
+          <Button href="#products" variant="light" class="cta-button primary">Shop Products</Button>
+          <Button href="/contact" variant="light" class="cta-button secondary">Contact Us</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Animation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animate hero letters
+      const heroLetters = document.querySelectorAll('.hero-letter');
+      heroLetters.forEach((letter, index) => {
+        setTimeout(() => {
+          letter.style.opacity = '1';
+          letter.style.transform = 'translateX(0px) translateY(0px) scale(1)';
+        }, 800 + index * 100);
+      });
+
+      // Animate product cards on scroll
+      const productObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const card = entry.target;
+            const index = parseInt(card.dataset.productIndex);
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, index * 100);
+            productObserver.unobserve(card);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      document.querySelectorAll('.product-card').forEach(card => {
+        productObserver.observe(card);
+      });
+    });
+  </script>
+</Layout>
+
+<style>
+  /* Hero Section Styles */
+  .farm-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .page-dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 175, 80, 0.7);
+    z-index: 1;
+  }
+
+  .hero-letter-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0 40px;
+    width: 100%;
+  }
+
+  .hero-main-word {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .hero-letter {
+    font-family: var(--font-koulen);
+    line-height: 0.7em;
+    color: #1b5e20;
+    font-size: 670px;
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-230px);
+    animation: hero-letter-in 0.9s cubic-bezier(0.77,0.02,0.38,1) forwards;
+  }
+
+  .hero-letter:nth-child(1) { animation-delay: 0.8s; }
+  .hero-letter:nth-child(2) { animation-delay: 0.9s; }
+  .hero-letter:nth-child(3) { animation-delay: 1.0s; }
+  .hero-letter:nth-child(4) { animation-delay: 1.1s; }
+
+  @keyframes hero-letter-in { 
+    to { 
+      opacity: 1;
+      transform: translateY(0); 
+    } 
+  }
+
+  /* Section Container */
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* Farm Header */
+  .farm-header {
+    padding: 120px 0 80px;
+    text-align: center;
+    background: var(--token-bg-dark);
+  }
+
+  .header-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-family: var(--font-koulen);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: var(--token-text-primary);
+  }
+
+  .page-subtitle {
+    font-family: var(--font-roboto-mono);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: #4caf50;
+    margin-bottom: 20px;
+  }
+
+  .page-description {
+    font-family: var(--font-roboto-mono);
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--token-text-secondary);
+  }
+
+  /* Products Section */
+  .products-section {
+    padding: 80px 0;
+    background: var(--token-bg-dark);
+  }
+
+  .section-title {
+    font-family: var(--font-koulen);
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 60px;
+    color: var(--token-text-primary);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+  }
+
+  .product-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.55, 0.45, 0.16, 1);
+  }
+
+  .product-card:hover {
+    background: rgba(76, 175, 80, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(76, 175, 80, 0.2);
+  }
+
+  .product-category {
+    font-family: var(--font-roboto-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #81c784;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+
+  .product-name {
+    font-family: var(--font-koulen);
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--token-text-primary);
+  }
+
+  .product-description {
+    font-family: var(--font-roboto-mono);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--token-text-secondary);
+    margin-bottom: 24px;
+  }
+
+  .product-price {
+    font-family: var(--font-koulen);
+    font-size: 28px;
+    color: #66bb6a;
+    margin-bottom: 16px;
+  }
+
+  .product-status {
+    margin-bottom: 24px;
+  }
+
+  .in-stock {
+    color: #4caf50;
+    font-family: var(--font-roboto-mono);
+    font-size: 14px;
+  }
+
+  .out-of-stock {
+    color: #f44336;
+    font-family: var(--font-roboto-mono);
+    font-size: 14px;
+  }
+
+  .product-cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Delivery Section */
+  .delivery-section {
+    padding: 80px 0;
+    background: var(--token-bg-dark);
+  }
+
+  .delivery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .delivery-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+  }
+
+  .delivery-card:hover {
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-3px);
+  }
+
+  .delivery-area {
+    font-family: var(--font-koulen);
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--token-text-primary);
+  }
+
+  .delivery-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .fee-label, .days-label {
+    font-family: var(--font-roboto-mono);
+    font-size: 14px;
+    color: var(--token-text-secondary);
+  }
+
+  .fee-amount, .days-schedule {
+    font-family: var(--font-roboto-mono);
+    font-size: 16px;
+    color: #4caf50;
+    font-weight: bold;
+  }
+
+  .delivery-note {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .delivery-note p {
+    font-family: var(--font-roboto-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--token-text-secondary);
+  }
+
+  /* Partnership Section */
+  .partnership-section {
+    padding: 80px 0;
+    background: var(--token-bg-dark);
+  }
+
+  .partnership-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .partnership-text {
+    font-family: var(--font-roboto-mono);
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--token-text-secondary);
+  }
+
+  .partnership-text p {
+    margin-bottom: 20px;
+  }
+
+  .partnership-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .benefit-icon {
+    font-family: var(--font-koulen);
+    font-size: 40px;
+    color: #4caf50;
+    opacity: 0.8;
+  }
+
+  .benefit-item h4 {
+    font-family: var(--font-koulen);
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--token-text-primary);
+  }
+
+  .benefit-item p {
+    font-family: var(--font-roboto-mono);
+    font-size: 14px;
+    color: var(--token-text-secondary);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 120px 0;
+    text-align: center;
+    background: var(--token-bg-dark);
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-family: var(--font-koulen);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 20px;
+    color: var(--token-text-primary);
+  }
+
+  .cta-subtitle {
+    font-family: var(--font-roboto-mono);
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: var(--token-text-secondary);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    min-width: 180px;
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    border: 1px solid var(--token-text-primary);
+  }
+
+  .cta-button.secondary:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-letter {
+      font-size: 120px;
+    }
+
+    .hero-main-word {
+      gap: 5px;
+    }
+
+    .farm-header,
+    .products-section,
+    .delivery-section,
+    .partnership-section,
+    .cta-section {
+      padding: 60px 0;
+    }
+
+    .section-container {
+      padding: 0 20px;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .product-card {
+      padding: 30px 24px;
+    }
+
+    .delivery-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .partnership-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>
