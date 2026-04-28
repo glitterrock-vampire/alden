@@ -89,10 +89,10 @@ export default function App() {
         <Route path="/studios" element={<StudiosPage />} />
         <Route path="/ecosystem" element={<EcosystemPage />} />
         {/* Venture redirects to local development */}
-        <Route path="/build" element={<Redirect to="http://localhost:5175" />} />
-        <Route path="/farm" element={<Redirect to="http://localhost:5176" />} />
-        <Route path="/springs" element={<Redirect to="http://localhost:5177" />} />
-        <Route path="/studios/photo-studio/services" element={<Redirect to="http://localhost:5178" />} />
+        <Route path="/build" element={<Redirect to="https://alden-build.vercel.app" />} />
+        <Route path="/farm" element={<Redirect to="https://alden-farm.vercel.app" />} />
+        <Route path="/springs" element={<Redirect to="https://alden-springs.vercel.app" />} />
+        <Route path="/studios/photo-studio/services" element={<Redirect to="https://alden-studio.vercel.app" />} />
         {/* Hub pages */}
         <Route path="/about/who-we-are" element={<WhoWeArePage />} />
         <Route path="/about" element={<WhoWeArePage />} />
