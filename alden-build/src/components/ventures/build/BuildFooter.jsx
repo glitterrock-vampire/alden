@@ -6,7 +6,11 @@ export default function BuildFooter() {
       <div style={{ maxWidth: '72rem', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '3rem' }}>
         <div>
           <h3 style={{ fontFamily: '"Arial Black", sans-serif', fontSize: '1.2rem', color: '#f0ede8', marginBottom: '1rem', textTransform: 'uppercase' }}>
+<<<<<<< HEAD
             ALDEN'S CONSTRUCTION
+=======
+            ALDEN BUILD
+>>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
           </h3>
           <p style={{ fontFamily: 'monospace', fontSize: '12px', color: 'rgba(240, 237, 232, 0.5)', lineHeight: 1.7 }}>
             Affordable homes for Jamaica. Steel frames, container homes, and blueprint packages designed for modern living.
@@ -64,7 +68,11 @@ export default function BuildFooter() {
       </div>
       <div style={{ maxWidth: '72rem', margin: '3rem auto 0', paddingTop: '2rem', borderTop: '1px solid #1e1e1e', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <span style={{ fontFamily: 'monospace', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(240, 237, 232, 0.3)' }}>
+<<<<<<< HEAD
           © 2026 ALDEN'S CONSTRUCTION
+=======
+          © 2026 ALDEN BUILD
+>>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
         </span>
         <a
           href="http://localhost:5173"

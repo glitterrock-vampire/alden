@@ -36,7 +36,11 @@ export default function BuildNav() {
             letterSpacing: '-0.02em',
           }}
         >
+<<<<<<< HEAD
           ALDEN'S CONSTRUCTION
+=======
+          ALDEN BUILD
+>>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
         </a>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           <a

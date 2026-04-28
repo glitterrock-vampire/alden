@@ -41,7 +41,11 @@ function HeroParallax() {
             letterSpacing: '-0.03em',
           }}
         >
+<<<<<<< HEAD
           ALDEN'S<br />CONSTRUCTION
+=======
+          ALDEN<br />BUILD
+>>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
         </h1>
         <p style={{ color: 'rgba(160,130,80,0.6)', fontFamily: 'monospace', fontSize: '13px', marginTop: '1.5rem', letterSpacing: '0.2em' }}>
           Affordable homes for Jamaica.
@@ -71,7 +75,11 @@ export default function AldenBuild() {
         >
           {[...Array(8)].map((_, i) => (
             <span key={i} className="mx-6 font-mono text-[10px] tracking-[0.4em] uppercase" style={{ color: '#a08050' }}>
+<<<<<<< HEAD
               ALDEN'S CONSTRUCTION · STEEL FRAMES · CONTAINER HOMES · BLUEPRINTS · COMING 2026 ·
+=======
+              ALDEN BUILD · STEEL FRAMES · CONTAINER HOMES · BLUEPRINTS · COMING 2026 ·
+>>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
             </span>
           ))}
         </motion.div>

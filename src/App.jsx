@@ -47,7 +47,11 @@ const studios = [
   },
   {
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png',
+<<<<<<< HEAD
     title: "ALDEN'S FARM",
+=======
+    title: 'Alden Farm',
+>>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
     subtitle: 'Fresh from farm to Kingston. Partnering with Agrotonomy for sustainable local produce.',
     tags: 'Whole Foods · Chicken · Eggs · Supplies',
     href: '/farm',
@@ -55,7 +59,11 @@ const studios = [
   },
   {
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png',
+<<<<<<< HEAD
     title: "ALDEN'S CONSTRUCTION",
+=======
+    title: 'Alden Build',
+>>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
     subtitle: 'Affordable homes for Jamaica. Steel frames, container homes, and blueprint packages.',
     tags: 'Affordable Homes · Steel Frames · Coming 2026',
     href: '/build',
