@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
 
@@ -23,11 +24,11 @@ export default function WhoWeArePage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black/70 z-[1]" />
-        <div className="absolute bottom-0 left-0 right-0 z-[2] flex flex-col justify-center items-center gap-5 p-10">
+        <div className="absolute bottom-0 left-0 right-0 z-[2] flex flex-col justify-center items-center gap-5 p-10 pb-20">
           <div className="flex gap-3 justify-center">
             {heroLetters.map((letter, index) => (
               <span
@@ -48,6 +49,85 @@ export default function WhoWeArePage() {
               </span>
             ))}
           </div>
+
+          {/* Tagline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            className="text-[11px] tracking-[0.4em] text-accent uppercase mt-8"
+            style={{ fontFamily: 'Roboto Mono, monospace' }}
+          >
+            Creative Studio · Digital Innovation · Visual Storytelling
+          </motion.p>
+
+          {/* Mission Statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.8, duration: 0.8 }}
+            className="max-w-3xl mx-auto text-center mt-6"
+          >
+            <p
+              className="text-lg md:text-xl leading-relaxed"
+              style={{ fontFamily: 'Roboto Mono, monospace', color: 'rgba(255,255,255,0.8)' }}
+            >
+              We are a multidisciplinary collective where technology meets creativity,
+              design meets functionality, and innovation meets purpose.
+            </p>
+          </motion.div>
+
+          {/* Stats Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.1, duration: 0.8 }}
+            className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12"
+          >
+            {[
+              { num: '5+', label: 'Years Active' },
+              { num: '50+', label: 'Projects Delivered' },
+              { num: '4', label: 'Venture Studios' },
+              { num: 'Jamaica', label: 'Rooted in Kingston' },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p
+                  className="text-3xl md:text-4xl font-bold"
+                  style={{ fontFamily: 'Koulen, cursive', color: 'white' }}
+                >
+                  {stat.num}
+                </p>
+                <p
+                  className="text-[10px] tracking-[0.2em] uppercase mt-1"
+                  style={{ fontFamily: 'Roboto Mono, monospace', color: 'rgba(160,130,80,0.8)' }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.5, duration: 0.5 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          >
+            <div className="flex flex-col items-center gap-2">
+              <span
+                className="text-[10px] tracking-[0.3em] uppercase"
+                style={{ fontFamily: 'Roboto Mono, monospace', color: 'rgba(255,255,255,0.5)' }}
+              >
+                Scroll
+              </span>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-px h-8 bg-gradient-to-b from-white/50 to-transparent"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
