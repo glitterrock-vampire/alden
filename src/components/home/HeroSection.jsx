@@ -72,7 +72,7 @@ export default function HeroSection({ heroImage }) {
         style={{
           y: titleY,
           opacity: titleOpacity,
-          paddingTop: `calc(${navHeight}px + clamp(1rem, 2vh, 2rem))`,
+          paddingTop: `calc(${navHeight}px + clamp(3rem, 6vh, 6rem))`,
         }}
       >
         {/* TOP: Letters + taglines */}
@@ -140,13 +140,13 @@ export default function HeroSection({ heroImage }) {
           --side: clamp(1.5rem, 4.5vw, 2.5rem);
         }
 
-        /* Background: extend past top/bottom to cover parallax travel */
+        /* Background: starts below nav to prevent overlap */
         .hero-bg {
           position: absolute;
           left: 0;
           right: 0;
-          top: -10%;
-          height: 120%;
+          top: 0;
+          height: 100%;
           z-index: 0;
           /* Sits below nav's mixBlendMode: difference — no z-index fight */
         }
@@ -192,11 +192,11 @@ export default function HeroSection({ heroImage }) {
         }
         .alden-letter {
           font-family: 'Koulen', cursive;
-          font-size: clamp(96px, 18vw, 480px);
+          font-size: clamp(64px, 12vw, 320px);
           color: #fff;
-          line-height: 0.82;
+          line-height: 0.85;
           display: inline-block;
-          margin: 0 clamp(1px, 0.3vw, 8px);
+          margin: 0 clamp(1px, 0.2vw, 6px);
         }
 
         /* ── Roles ── */
@@ -241,7 +241,7 @@ export default function HeroSection({ heroImage }) {
           }
 
           .alden-letter {
-            font-size: clamp(62px, 16.5vw, 90px);
+            font-size: clamp(48px, 14vw, 72px);
             margin: 0 1px;
           }
 
@@ -273,7 +273,7 @@ export default function HeroSection({ heroImage }) {
         ════════════════════════════ */
         @media (max-width: 375px) {
           .alden-letter {
-            font-size: clamp(52px, 14.5vw, 68px);
+            font-size: clamp(40px, 12vw, 56px);
           }
         }
       `}</style>
