@@ -310,9 +310,13 @@ export default function PhotoStudioServicesPage() {
       {/* Services Header */}
       <section className="py-32 px-10 text-center bg-background">
         <div className="max-w-3xl mx-auto">
-          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2.5rem, 5vw, 4rem)', lineHeight: '1.1', marginBottom: '30px', color: 'hsl(var(--foreground))' }}>
-            ALDEN Photo Studio Services
-          </h2>
+          <div className="mb-8">
+            <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(3rem, 6vw, 5rem)', lineHeight: '1', color: 'hsl(var(--foreground))' }}>ALDEN</h2>
+            <p style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', letterSpacing: '0.2em', color: '#ccbb87', marginTop: '0.5rem' }}>PHOTO STUDIO</p>
+          </div>
+          <h3 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(1.5rem, 3vw, 2rem)', lineHeight: '1.2', marginBottom: '30px', color: 'hsl(var(--foreground))' }}>
+            Photography Services
+          </h3>
           <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', color: '#ccbb87', marginBottom: '20px' }}>
             Professional photography services tailored for your vision
           </p>

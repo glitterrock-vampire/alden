@@ -99,7 +99,10 @@ export default function StudiosPage() {
       {/* Studios Header */}
       <section className="py-20 md:py-32 px-6 md:px-10 text-center bg-background">
         <div className="max-w-3xl mx-auto">
-          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2rem, 4vw, 3.75rem)', marginBottom: '2rem', color: 'hsl(var(--foreground))' }}>ALDEN Photo Studios</h2>
+          <div className="mb-8">
+            <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(3rem, 6vw, 5rem)', lineHeight: '1', color: 'hsl(var(--foreground))' }}>ALDEN</h2>
+            <p style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', letterSpacing: '0.2em', color: 'hsl(var(--accent))', marginTop: '0.5rem' }}>PHOTO STUDIO</p>
+          </div>
           <p className="text-[11px] tracking-[0.3em] text-accent uppercase mb-5">Creative Excellence Across Multiple Disciplines</p>
           <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(0.875rem, 1vw, 1rem)', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>
             Our Studios bring together expertise in web development, photography, and digital services to deliver comprehensive solutions for your creative and technical needs.

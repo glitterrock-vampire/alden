@@ -38,12 +38,26 @@ function HeroParallax() {
         <p style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace', fontSize: '10px', letterSpacing: '0.5em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
           Photography & Visual Arts — Kingston, JA
         </p>
-        <h1
-          className="font-black text-white uppercase leading-none"
-          style={{ fontSize: 'clamp(3.5rem, 16vw, 13rem)', letterSpacing: '-0.04em', fontFamily: '"Arial Black", sans-serif' }}
-        >
-          ALDEN<br />PHOTO STUDIO
-        </h1>
+        <div>
+          <h1
+            className="font-black text-white uppercase leading-none"
+            style={{ fontSize: 'clamp(4rem, 18vw, 14rem)', letterSpacing: '-0.04em', fontFamily: '"Arial Black", sans-serif' }}
+          >
+            ALDEN
+          </h1>
+          <p
+            style={{
+              fontFamily: 'monospace',
+              fontSize: 'clamp(1rem, 3vw, 2rem)',
+              letterSpacing: '0.3em',
+              color: 'rgba(255,255,255,0.6)',
+              textTransform: 'uppercase',
+              marginTop: '0.5rem'
+            }}
+          >
+            Photo Studio
+          </p>
+        </div>
         <p style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace', fontSize: '13px', letterSpacing: '0.2em', marginTop: '1.5rem' }}>
           Light, shadow, story.
         </p>
