@@ -41,8 +41,7 @@ export default function StudiosPage() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          /** @type {HTMLElement} */
-          const card = entry.target;
+          const card = /** @type {HTMLElement} */ (entry.target);
           const index = parseInt(card.dataset.index || '0');
           setTimeout(() => {
             card.style.opacity = '1';
