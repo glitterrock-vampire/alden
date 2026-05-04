@@ -9,9 +9,9 @@ const projects = [
   { id:4, title:"GLOWING LANDING", category:"LANDING PAGE", filter:"frontend", href:"https://glowing-landing-page.netlify.app", image:"https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png", imageW:1628, imageH:1119, liveUrl:"https://glowing-landing-page.netlify.app" },
   { id:5, title:"BLACKBOX SYSTEM", category:"IOT SYSTEM", filter:"fullstack", href:"https://blackbox-online.vercel.app", image:"https://framerusercontent.com/images/fKFKHb1VZsz50W8Ctq7RIZW4SRw.png", imageW:1628, imageH:1119, liveUrl:"https://blackbox-online.vercel.app" },
   { id:6, title:"DAVID P BLAKE", category:"PERSONAL PORTFOLIO", filter:"frontend", href:"https://davidpblake.org", image:"https://framerusercontent.com/images/placeholder.png", imageW:1628, imageH:1119, liveUrl:"https://davidpblake.org" },
-  { id:7, title:"ALDEN FARM", category:"ECOSYSTEM / AGRICULTURE", filter:"ecosystem", href:"/farm", image:"https://framerusercontent.com/images/jGIDW70qyfBuP6v8UKUwumU8HGo.png", imageW:1628, imageH:1119 },
-  { id:8, title:"ALDEN BUILD", category:"ECOSYSTEM / CONSTRUCTION", filter:"ecosystem", href:"/build", image:"https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png", imageW:1628, imageH:1119 },
-  { id:9, title:"ALDEN SPRINGS", category:"ECOSYSTEM / WATER", filter:"ecosystem", href:"/springs", image:"https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png", imageW:1628, imageH:1119 },
+  { id:7, title:"ALDEN FARM", category:"ECOSYSTEM / AGRICULTURE", filter:"ecosystem", href:"/farm", image:"https://framerusercontent.com/images/jGIDW70qyfBuP6v8UKUwumU8HGo.png", imageW:1628, imageH:1119, liveUrl:"/farm" },
+  { id:8, title:"ALDEN BUILD", category:"ECOSYSTEM / CONSTRUCTION", filter:"ecosystem", href:"/build", image:"https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png", imageW:1628, imageH:1119, liveUrl:"/build" },
+  { id:9, title:"ALDEN SPRINGS", category:"ECOSYSTEM / WATER", filter:"ecosystem", href:"/springs", image:"https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png", imageW:1628, imageH:1119, liveUrl:"/springs" },
 ];
 
 const filters = [
@@ -240,7 +240,7 @@ export default function WebPortfolioPage() {
                   <span style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '0.75rem', color: 'rgba(255, 215, 0, 0.7)', letterSpacing: '0.1em', display: 'block', marginBottom: '1rem' }}>
                     {project.category}
                   </span>
-                  {project.liveUrl ? (
+                  {project.liveUrl?.startsWith('http') ? (
                     <a
                       href={project.liveUrl}
                       target="_blank"
