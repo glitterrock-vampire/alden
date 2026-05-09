@@ -17,6 +17,12 @@ import WebPortfolioPage from '@/pages/WebPortfolioPage';
 import PhotoStudioServicesPage from '@/pages/PhotoStudioServicesPage';
 import WebStudioServicesPage from '@/pages/WebStudioServicesPage';
 import CorePage from '@/pages/CorePage';
+import FarmPage from '@/pages/FarmPage';
+import BuildPage from '@/pages/BuildPage';
+import SpringsPage from '@/pages/SpringsPage';
+
+// Check if running on production (Vercel)
+const isProduction = window.location.hostname.includes('vercel.app') || window.location.hostname === 'alden.com';
 
 const heroImage = 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/dca4e077b_generated_26799b91.png';
 
@@ -47,11 +53,7 @@ const studios = [
   },
   {
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png',
-<<<<<<< HEAD
     title: "ALDEN'S FARM",
-=======
-    title: 'Alden Farm',
->>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
     subtitle: 'Fresh from farm to Kingston. Partnering with Agrotonomy for sustainable local produce.',
     tags: 'Whole Foods · Chicken · Eggs · Supplies',
     href: '/farm',
@@ -59,11 +61,7 @@ const studios = [
   },
   {
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png',
-<<<<<<< HEAD
     title: "ALDEN'S CONSTRUCTION",
-=======
-    title: 'Alden Build',
->>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422
     subtitle: 'Affordable homes for Jamaica. Steel frames, container homes, and blueprint packages.',
     tags: 'Affordable Homes · Steel Frames · Coming 2026',
     href: '/build',
@@ -96,11 +94,11 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/studios" element={<StudiosPage />} />
         <Route path="/ecosystem" element={<EcosystemPage />} />
-        {/* Venture redirects to local development */}
-        <Route path="/build" element={<Redirect to="https://alden-build.vercel.app" />} />
-        <Route path="/farm" element={<Redirect to="https://alden-farm.vercel.app" />} />
-        <Route path="/springs" element={<Redirect to="https://alden-springs.vercel.app" />} />
-        <Route path="/studios/photo-studio/services" element={<Redirect to="https://alden-studio.vercel.app" />} />
+        {/* Venture pages - local in dev, redirect in production */}
+        <Route path="/build" element={isProduction ? <Redirect to="https://alden-build.vercel.app" /> : <BuildPage />} />
+        <Route path="/farm" element={isProduction ? <Redirect to="https://alden-farm.vercel.app" /> : <FarmPage />} />
+        <Route path="/springs" element={isProduction ? <Redirect to="https://alden-springs.vercel.app" /> : <SpringsPage />} />
+        <Route path="/studios/photo-studio/services" element={isProduction ? <Redirect to="https://alden-studio.vercel.app" /> : <PhotoStudioServicesPage />} />
         {/* Hub pages */}
         <Route path="/about/who-we-are" element={<WhoWeArePage />} />
         <Route path="/about" element={<WhoWeArePage />} />

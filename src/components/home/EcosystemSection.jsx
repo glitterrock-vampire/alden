@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 const products = [
   {
@@ -9,6 +10,7 @@ const products = [
     tags: ['Whole Foods', 'Chicken', 'Eggs', 'Supplies'],
     status: 'Active',
     domain: 'http://localhost:5176',
+    image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/a179600a5_generated_a31c9d6a.png',
   },
   {
     num: '02',
@@ -17,6 +19,7 @@ const products = [
     tags: ['Affordable Homes', 'Steel Frames', 'Blueprints'],
     status: 'Coming 2026',
     domain: 'http://localhost:5175',
+    image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png',
   },
   {
     num: '03',
@@ -25,6 +28,7 @@ const products = [
     tags: ['Smart Irrigation', 'Water Harvesting', 'Agri-Tech'],
     status: 'Coming 2027',
     domain: 'http://localhost:5177',
+    image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/9633f1d94_generated_82c4a200.png',
   },
 ];
 
@@ -67,57 +71,90 @@ export default function EcosystemSection() {
         </div>
       </div>
 
-      {/* Product rows — Studio Daboo editorial list style */}
+      {/* Product Cards Grid */}
       <div className="max-w-7xl mx-auto px-6 md:px-10">
-        {products.map((product, i) => (
-          <a
-            key={product.name}
-            href={product.domain}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <motion.div
-              initial={{ opacity: 0, clipPath: 'inset(100% 0% 0% 0%)' }}
-              whileInView={{ opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0, 1] }}
-              viewport={{ once: true, margin: '-60px' }}
-              className="group grid grid-cols-12 gap-4 py-8 md:py-10 border-t border-border hover:bg-background/40 transition-colors duration-300 px-2 -mx-2 cursor-pointer"
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {products.map((product, i) => (
+            <motion.a
+              key={product.name}
+              href={product.domain}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.15, ease: [0.25, 0.1, 0, 1] }}
+              viewport={{ once: true, margin: '-40px' }}
+              className="group relative bg-background border border-border rounded-lg overflow-hidden hover:border-accent/50 transition-all duration-500"
             >
-            {/* Number */}
-            <div className="col-span-2 md:col-span-1 flex items-start pt-1">
-              <span className="text-muted-foreground/40 text-[11px] tracking-[0.3em] font-body">{product.num}</span>
-            </div>
-
-            {/* Name */}
-            <div className="col-span-10 md:col-span-4 flex items-center">
-              <h3 className="font-heading font-black text-xl md:text-2xl text-primary tracking-tight group-hover:text-accent transition-colors duration-300 uppercase">
-                {product.name}
-              </h3>
-            </div>
-
-            {/* Description */}
-            <div className="col-span-12 md:col-span-4 md:flex md:items-center pl-8 md:pl-0">
-              <p className="text-muted-foreground text-sm font-body leading-relaxed">{product.desc}</p>
-            </div>
-
-            {/* Status + tags */}
-            <div className="col-span-12 md:col-span-3 flex flex-col md:items-end justify-center gap-2 pl-8 md:pl-0">
-              <span className={`text-[10px] tracking-[0.3em] font-body uppercase ${product.status === 'Active' ? 'text-accent' : 'text-muted-foreground/50'}`}>
-                {product.status}
-              </span>
-              <div className="flex flex-wrap gap-2 md:justify-end">
-                {product.tags.map((tag) => (
-                  <span key={tag} className="text-[9px] tracking-wider font-body text-muted-foreground/40 border border-border px-2 py-0.5">
-                    {tag}
+              {/* Image */}
+              <div className="relative h-48 md:h-56 overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                
+                {/* Number Badge */}
+                <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm border border-border px-3 py-1 rounded-full">
+                  <span className="text-[10px] tracking-[0.3em] font-body text-muted-foreground">
+                    {product.num}
                   </span>
-                ))}
+                </div>
+
+                {/* Status Badge */}
+                <div className="absolute top-4 right-4">
+                  <span className={`text-[9px] tracking-[0.2em] font-body uppercase px-3 py-1 rounded-full border ${
+                    product.status === 'Active' 
+                      ? 'bg-accent/10 border-accent/30 text-accent' 
+                      : 'bg-muted/50 border-border text-muted-foreground'
+                  }`}>
+                    {product.status}
+                  </span>
+                </div>
               </div>
-            </div>
-            </motion.div>
-          </a>
-        ))}
-        {/* Bottom border */}
-        <div className="border-t border-border" />
+
+              {/* Content */}
+              <div className="p-6">
+                {/* Label */}
+                <p className="text-[10px] tracking-[0.4em] font-body text-accent uppercase mb-3">
+                  — Alden Photo Studios
+                </p>
+
+                {/* Title */}
+                <h3 className="font-heading font-black text-xl md:text-2xl text-primary tracking-tight uppercase mb-3 group-hover:text-accent transition-colors duration-300">
+                  {product.name}
+                </h3>
+
+                {/* Separator */}
+                <div className="w-8 h-px bg-accent mb-4 group-hover:w-12 transition-all duration-300" />
+
+                {/* Description */}
+                <p className="text-muted-foreground text-sm font-body leading-relaxed mb-5">
+                  {product.desc}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {product.tags.map((tag) => (
+                    <span 
+                      key={tag} 
+                      className="text-[9px] tracking-wider font-body text-muted-foreground border border-border/60 px-2 py-1 rounded-sm group-hover:border-accent/30 group-hover:text-accent/80 transition-colors duration-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Explore Link */}
+                <div className="flex items-center gap-2 text-[11px] tracking-[0.2em] font-body uppercase text-accent group-hover:gap-3 transition-all duration-300">
+                  <span>Explore</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
       </div>
     </section>
   );
