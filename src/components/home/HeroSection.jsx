@@ -1,11 +1,10 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const HERO_LETTERS = ['A', 'L', 'D', 'E', 'N'];
 
 export default function HeroSection({ heroImage }) {
   const ref = useRef(null);
-  const [navHeight, setNavHeight] = useState(80); // fallback
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -13,20 +12,8 @@ export default function HeroSection({ heroImage }) {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const barOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
 
-  useEffect(() => {
-    // Measure the actual nav height so hero padding matches exactly
-    const nav = document.querySelector('nav');
-    if (nav) {
-      const measure = () => {
-        const rect = nav.getBoundingClientRect();
-        // nav height = its own height + its top offset (padding: 24px above content)
-        setNavHeight(rect.bottom);
-      };
-      measure();
-      window.addEventListener('resize', measure);
-      return () => window.removeEventListener('resize', measure);
-    }
-  }, []);
+  // Keep the title close to the navbar while preserving breathing room on mobile.
+  const SAFE_NAV_PADDING = 'clamp(76px, 11vw, 92px)';
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 640;
@@ -68,58 +55,63 @@ export default function HeroSection({ heroImage }) {
       {/* Content wrapper */}
       <motion.div
         className="hero-inner"
-        // Dynamic top padding based on measured nav height + breathing room
+        // Safe fixed padding to ensure no nav overlap
         style={{
           y: titleY,
           opacity: titleOpacity,
-          paddingTop: `calc(${navHeight}px + clamp(3rem, 6vh, 6rem))`,
+          paddingTop: SAFE_NAV_PADDING,
         }}
       >
-        {/* TOP: Letters + taglines */}
-        <div className="hero-top">
+        <div className="hero-content">
+          {/* TOP: Letters + taglines */}
+          <div className="hero-top">
 
-          <div className="hero-logo" aria-label="ALDEN">
-            {HERO_LETTERS.map((letter) => (
-              <span
-                key={letter}
-                className="alden-letter"
-                style={{
-                  opacity: 0.001,
-                  transition: 'opacity 0.8s cubic-bezier(0.55,0.45,0.16,1), transform 0.8s cubic-bezier(0.55,0.45,0.16,1)',
-                }}
-              >
-                {letter}
-              </span>
-            ))}
+            <div className="hero-logo" aria-label="ALDEN">
+              {HERO_LETTERS.map((letter) => (
+                <span
+                  key={letter}
+                  className="alden-letter"
+                  style={{
+                    opacity: 0.001,
+                    transition: 'opacity 0.8s cubic-bezier(0.55,0.45,0.16,1), transform 0.8s cubic-bezier(0.55,0.45,0.16,1)',
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+
+            <div className="hero-roles">
+              {[
+                { label: 'Technology', delay: 0.6 },
+                { label: 'Innovation', delay: 0.7 },
+                { label: 'Design',     delay: 0.8 },
+              ].map(({ label, delay }) => (
+                <h2
+                  key={label}
+                  data-animate-hero={label.toLowerCase()}
+                  data-delay={delay}
+                  className="hero-role-item"
+                  style={{
+                    opacity: 0,
+                    transform: 'translateX(50px)',
+                    transition: 'all 0.8s cubic-bezier(0.55,0.45,0.16,1)',
+                  }}
+                >
+                  {label}
+                </h2>
+              ))}
+            </div>
+
           </div>
 
-          <div className="hero-roles">
-            {[
-              { label: 'Technology', delay: 0.6 },
-              { label: 'Innovation', delay: 0.7 },
-              { label: 'Design',     delay: 0.8 },
-            ].map(({ label, delay }) => (
-              <h2
-                key={label}
-                data-animate-hero={label.toLowerCase()}
-                data-delay={delay}
-                className="hero-role-item"
-                style={{
-                  opacity: 0,
-                  transform: 'translateX(50px)',
-                  transition: 'all 0.8s cubic-bezier(0.55,0.45,0.16,1)',
-                }}
-              >
-                {label}
-              </h2>
-            ))}
+          <div className="hero-lower-right">
+            <p className="hero-desc">
+              I partner with companies and entrepreneurs{' '}
+              <span className="br-wrap">to transform visions into captivating experiences,{' '}</span>
+              all designed with users at the helm.
+            </p>
           </div>
-
-          <p className="hero-desc">
-            I partner with companies and entrepreneurs{' '}
-            <span className="br-wrap">to transform visions into captivating experiences,{' '}</span>
-            all designed with users at the helm.
-          </p>
         </div>
 
         {/* BOTTOM: scroll bar */}
@@ -178,21 +170,34 @@ export default function HeroSection({ heroImage }) {
           padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
         }
 
+        .hero-content {
+          display: flex;
+          flex: 1;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(2rem, 6vh, 4rem);
+          padding-bottom: clamp(1rem, 4vh, 3rem);
+        }
+
         /* Top block */
         .hero-top {
           display: flex;
           flex-direction: column;
-          gap: clamp(0.5rem, 1.5vh, 1rem);
+          align-items: center;
+          gap: clamp(1rem, 2.5vh, 1.75rem);
+          text-align: center;
         }
 
         /* ── Letters ── */
         .hero-logo {
           display: flex;
           align-items: flex-end;
+          justify-content: center;
         }
         .alden-letter {
           font-family: 'Koulen', cursive;
-          font-size: clamp(64px, 12vw, 320px);
+          font-size: clamp(84px, 15vw, 360px);
           color: #fff;
           line-height: 0.85;
           display: inline-block;
@@ -202,11 +207,13 @@ export default function HeroSection({ heroImage }) {
         /* ── Roles ── */
         .hero-roles {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
+          justify-content: center;
+          gap: clamp(1rem, 3vw, 3rem);
         }
         .hero-role-item {
           font-family: 'Koulen', cursive;
-          font-size: clamp(15px, 2.2vw, 34px);
+          font-size: clamp(18px, 2.5vw, 40px);
           color: #fff;
           margin: 0;
           line-height: 1.2;
@@ -220,6 +227,14 @@ export default function HeroSection({ heroImage }) {
           line-height: 1.6;
           margin: 0;
           max-width: 520px;
+          text-align: center;
+        }
+
+        /* ── Lower Right Container ── */
+        .hero-lower-right {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         /* ── Scroll bar ── */
@@ -237,22 +252,41 @@ export default function HeroSection({ heroImage }) {
         ════════════════════════════ */
         @media (max-width: 640px) {
           .hero-section {
-            --side: 1.1rem;
+            --side: clamp(1.5rem, 7vw, 2rem);
+          }
+
+          .hero-top {
+            gap: 0.9rem;
+          }
+
+          .hero-content {
+            gap: 2rem;
+            padding-bottom: 1rem;
+          }
+
+          .hero-roles {
+            gap: clamp(0.75rem, 4vw, 1rem);
           }
 
           .alden-letter {
-            font-size: clamp(48px, 14vw, 72px);
+            font-size: clamp(56px, 16vw, 76px);
             margin: 0 1px;
           }
 
           .hero-role-item {
-            font-size: clamp(14px, 4.2vw, 22px);
+            font-size: clamp(16px, 4.5vw, 22px);
+            line-height: 1.1;
           }
 
           .hero-desc {
             font-size: clamp(10px, 2.6vw, 13px);
             line-height: 1.5;
             max-width: 100%;
+            text-align: center;
+          }
+
+          .hero-lower-right {
+            align-items: center;
           }
 
           /* On mobile, .br-wrap displays inline so text flows naturally */
@@ -262,9 +296,10 @@ export default function HeroSection({ heroImage }) {
 
           .hero-scroll {
             flex-direction: column;
-            align-items: flex-start;
-            gap: 0.15rem;
+            align-items: center;
+            gap: 0.3rem;
             font-size: clamp(9px, 2.3vw, 11px);
+            text-align: center;
           }
         }
 

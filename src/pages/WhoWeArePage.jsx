@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
-import Footer from '@/components/home/Footer';
+import FooterSection from '@/components/home/FooterSection';
 
 export default function WhoWeArePage() {
   const letterRefs = useRef([]);
+  const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,6 +20,14 @@ export default function WhoWeArePage() {
       });
     }, 500);
   }, []);
+
+  useEffect(() => {
+    if (location.pathname !== '/about/careers' && location.hash !== '#careers') return;
+
+    requestAnimationFrame(() => {
+      document.getElementById('careers')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }, [location.pathname, location.hash]);
 
   const heroLetters = ['W', 'H', 'O'];
 
@@ -177,7 +187,7 @@ export default function WhoWeArePage() {
               <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '1.5rem', lineHeight: '1.6' }}>
                 We're always looking for talented individuals who share our passion for creating exceptional digital experiences.
               </p>
-              <a href="/core" className="inline-block py-3 px-6 bg-white/10 border border-white/20 text-white text-xs tracking-wider uppercase rounded-lg hover:bg-white/20 transition-all" style={{ fontFamily: 'Roboto Mono, monospace' }}>
+              <a href="/about/careers" className="inline-block py-3 px-6 bg-white/10 border border-white/20 text-white text-xs tracking-wider uppercase rounded-lg hover:bg-white/20 transition-all" style={{ fontFamily: 'Roboto Mono, monospace' }}>
                 Learn About Joining
               </a>
             </div>
@@ -241,7 +251,7 @@ export default function WhoWeArePage() {
       </section>
 
       {/* Careers Section */}
-      <section id="careers" className="py-20 md:py-32 px-6 md:px-10 bg-background">
+      <section id="careers" className="scroll-mt-20 py-20 md:py-32 px-6 md:px-10 bg-background">
         <div className="max-w-6xl mx-auto">
           <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2.25rem, 4vw, 3rem)', marginBottom: '2rem', color: 'hsl(var(--foreground))', textAlign: 'center' }}>Careers</h2>
           <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem', color: 'hsl(var(--muted-foreground))', marginBottom: '4rem', textAlign: 'center', maxWidth: '2xl', margin: '0 auto 4rem' }}>
@@ -309,7 +319,7 @@ export default function WhoWeArePage() {
         </div>
       </section>
 
-      <Footer />
+      <FooterSection />
     </div>
   );
 }

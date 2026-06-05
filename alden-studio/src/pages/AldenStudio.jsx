@@ -39,23 +39,35 @@ function HeroParallax() {
           Photography & Visual Arts — Kingston, JA
         </p>
         <div>
+          <p
+            style={{
+              fontFamily: 'monospace',
+              fontSize: 'clamp(0.75rem, 1.5vw, 1.25rem)',
+              letterSpacing: '0.4em',
+              color: 'rgba(255,255,255,0.5)',
+              textTransform: 'uppercase',
+              marginBottom: '0.5rem'
+            }}
+          >
+            Photo
+          </p>
           <h1
             className="font-black text-white uppercase leading-none"
-            style={{ fontSize: 'clamp(4rem, 18vw, 14rem)', letterSpacing: '-0.04em', fontFamily: '"Arial Black", sans-serif' }}
+            style={{ fontSize: 'clamp(2.5rem, 10vw, 8rem)', letterSpacing: '-0.02em', fontFamily: '"Arial Black", sans-serif' }}
           >
             ALDEN
           </h1>
           <p
+            className="font-black uppercase leading-none"
             style={{
-              fontFamily: 'monospace',
-              fontSize: 'clamp(1rem, 3vw, 2rem)',
-              letterSpacing: '0.3em',
-              color: 'rgba(255,255,255,0.6)',
-              textTransform: 'uppercase',
-              marginTop: '0.5rem'
+              fontSize: 'clamp(3.5rem, 14vw, 12rem)',
+              letterSpacing: '-0.04em',
+              fontFamily: '"Arial Black", sans-serif',
+              color: '#fff',
+              marginTop: '-0.5rem'
             }}
           >
-            Photo Studio
+            STUDIO
           </p>
         </div>
         <p style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace', fontSize: '13px', letterSpacing: '0.2em', marginTop: '1.5rem' }}>

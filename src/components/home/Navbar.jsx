@@ -76,7 +76,7 @@ export default function Navbar() {
     if (path === 'home') return currentPage === 'home';
     if (path === 'studios') return ['studios', 'web-studio', 'photo-studio'].includes(currentPage);
     if (path === 'ecosystem') return ['farm', 'build', 'springs'].includes(currentPage);
-    if (path === 'about') return ['about', 'who-we-are', 'core'].includes(currentPage);
+    if (path === 'about') return ['about', 'about/who-we-are', 'about/careers', 'core'].includes(currentPage);
     return currentPage === path;
   };
 
@@ -158,17 +158,14 @@ export default function Navbar() {
               <div className="dropdown-menu">
                 <Link to="/about/who-we-are" className="dropdown-item">Who Are We?</Link>
                 <Link to="/core" className="dropdown-item">Core</Link>
-                <Link to="/about#careers" className="dropdown-item">Careers</Link>
+                <Link to="/about/careers" className="dropdown-item">Careers</Link>
               </div>
             </div>
 
-            <Link to="/contact" className={`nav-link ${isActive('contact') ? 'active' : ''}`}>
-              <span className="nav-link-text">CONTACT</span>
-            </Link>
           </div>
 
           {/* Date Display */}
-          <div className="nav-year">
+          <div className={`nav-year ${isMobileMenuOpen ? 'menu-open' : ''}`}>
             <span className="year-current">{dateDisplay.year}</span>
             <span className="day-current">{dateDisplay.day}</span>
           </div>
@@ -190,7 +187,8 @@ export default function Navbar() {
           
           .hamburger-menu {
             position: absolute;
-            left: 0;
+            left: auto;
+            right: 0;
             order: 1;
           }
           
@@ -200,11 +198,18 @@ export default function Navbar() {
             transform: translateX(-50%);
             align-items: center;
             order: 2;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+          }
+
+          .nav-year.menu-open {
+            opacity: 0;
+            visibility: hidden;
           }
           
           .logo {
             position: absolute;
-            right: 0;
+            left: 0;
+            right: auto;
             order: 3;
           }
           
@@ -553,6 +558,17 @@ export default function Navbar() {
           display: block;
           line-height: 1.4;
           opacity: 0.8;
+        }
+
+        @media (max-width: 809.98px) {
+          .logo {
+            left: 0;
+            right: auto;
+          }
+
+          .nav-year {
+            right: auto;
+          }
         }
 
         @keyframes slideDown {

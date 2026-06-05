@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import Navbar from '@/components/home/Navbar';
-import Footer from '@/components/home/Footer';
+import FooterSection from '@/components/home/FooterSection';
 
 const CORE_LETTERS = ['C', 'O', 'R', 'E'];
 
@@ -128,15 +128,6 @@ export default function CorePage() {
               }}>
                 Software Developer & Electronics Engineer
               </p>
-              <a
-                href="https://andre-codes.netlify.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-8 py-3 border border-accent text-accent font-mono text-sm tracking-widest uppercase hover:bg-accent hover:text-background transition-all"
-                style={{ textShadow: '0 0 20px rgba(0,0,0,0.9)' }}
-              >
-                View Portfolio →
-              </a>
             </div>
 
             {/* Profile */}
@@ -574,11 +565,21 @@ export default function CorePage() {
                 </div>
               ))}
             </div>
+            <div className="text-center mt-14" data-animate>
+              <a
+                href="https://andre-codes.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-8 py-3 border border-accent text-accent font-mono text-sm tracking-widest uppercase hover:bg-accent hover:text-background transition-all"
+              >
+                View Portfolio →
+              </a>
+            </div>
           </div>
         </section>
       </main>
 
-      <Footer />
+      <FooterSection />
 
       <style>{`
         [data-animate] {

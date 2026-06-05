@@ -1,10 +1,11 @@
 import React from 'react';
+import SpotifyNowPlaying from './SpotifyNowPlaying';
 
 export default function Footer() {
   return (
     <footer id="contact" className="bg-black border-t border-white/10">
       {/* Top bar */}
-      <div className="px-6 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-white/10">
+      <div className="px-6 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10">
         {/* Left */}
         <div>
           <p className="text-white/30 text-xs tracking-widest uppercase mb-6">Location</p>
@@ -42,6 +43,8 @@ export default function Footer() {
             ))}
           </div>
         </div>
+
+        <SpotifyNowPlaying />
       </div>
 
       {/* Bottom bar */}

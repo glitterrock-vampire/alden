@@ -1,34 +1,58 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const products = [
   {
     num: '01',
     name: "ALDEN'S FARM",
+    label: "Alden Farm",
     desc: 'Fresh from farm to Kingston. Partnering with Agrotonomy for sustainable local produce.',
     tags: ['Whole Foods', 'Chicken', 'Eggs', 'Supplies'],
     status: 'Active',
-    domain: 'http://localhost:5176',
-    image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/a179600a5_generated_a31c9d6a.png',
+    domain: '/farm',
+    image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png',
   },
   {
     num: '02',
     name: "ALDEN'S CONSTRUCTION",
+    label: "Alden Build",
     desc: 'Affordable homes for Jamaica. Steel frames, container homes, and blueprint packages.',
     tags: ['Affordable Homes', 'Steel Frames', 'Blueprints'],
     status: 'Coming 2026',
-    domain: 'http://localhost:5175',
+    domain: '/build',
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png',
   },
   {
     num: '03',
     name: "ALDEN'S SPRINGS",
+    label: "Alden Springs",
     desc: 'Water tracking & irrigation systems for sustainable farming and residential use.',
     tags: ['Smart Irrigation', 'Water Harvesting', 'Agri-Tech'],
     status: 'Coming 2027',
-    domain: 'http://localhost:5177',
+    domain: '/springs',
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/9633f1d94_generated_82c4a200.png',
+  },
+  {
+    num: '04',
+    name: "ALDEN WEB STUDIO",
+    label: "Alden Web Studio",
+    desc: 'Custom web development, e-commerce solutions, and cloud infrastructure for modern businesses.',
+    tags: ['Development', 'E-Commerce', 'Cloud'],
+    status: 'Active',
+    domain: '/portfolio/web',
+    image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/eaa46c217_generated_ddb849ba.png',
+  },
+  {
+    num: '05',
+    name: "ALDEN PHOTO STUDIO",
+    label: "Alden Photo Studio",
+    desc: 'Professional photography services capturing moments and creating visual stories.',
+    tags: ['Portraits', 'Events', 'Landscapes'],
+    status: 'Active',
+    domain: '/studios/photo-studio/services',
+    image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/a179600a5_generated_a31c9d6a.png',
   },
 ];
 
@@ -75,17 +99,15 @@ export default function EcosystemSection() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {products.map((product, i) => (
-            <motion.a
+            <motion.div
               key={product.name}
-              href={product.domain}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: [0.25, 0.1, 0, 1] }}
               viewport={{ once: true, margin: '-40px' }}
               className="group relative bg-background border border-border rounded-lg overflow-hidden hover:border-accent/50 transition-all duration-500"
             >
+              <Link to={product.domain} className="block h-full">
               {/* Image */}
               <div className="relative h-48 md:h-56 overflow-hidden">
                 <img
@@ -118,7 +140,7 @@ export default function EcosystemSection() {
               <div className="p-6">
                 {/* Label */}
                 <p className="text-[10px] tracking-[0.4em] font-body text-accent uppercase mb-3">
-                  — Alden Photo Studios
+                  — {product.label}
                 </p>
 
                 {/* Title */}
@@ -152,7 +174,8 @@ export default function EcosystemSection() {
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </div>
-            </motion.a>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>

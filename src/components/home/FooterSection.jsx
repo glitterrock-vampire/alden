@@ -1,24 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import SpotifyNowPlaying from './SpotifyNowPlaying';
 
-const navItems = ['Home', 'Studios', 'Ecosystem', 'About'];
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Studios', href: '/studios' },
+  { label: 'Ecosystem', href: '/ecosystem' },
+  { label: 'About', href: '/about/who-we-are' },
+];
 
 export default function FooterSection() {
-  const scrollTo = (id) => {
-    const el = document.getElementById(id.toLowerCase());
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <footer id="contact" className="relative bg-card border-t border-border">
       {/* Big CTA */}
-      <div className="px-6 md:px-10 py-24 md:py-36 max-w-7xl mx-auto">
+      <div className="px-6 md:px-10 py-20 md:py-36 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-16 md:mb-20"
         >
           <span className="text-accent text-[10px] tracking-[0.4em] font-body uppercase block mb-6">
             — Say Hello
@@ -31,7 +33,7 @@ export default function FooterSection() {
             href="mailto:hello@alden.design"
             whileHover={{ x: 8 }}
             transition={{ duration: 0.2 }}
-            className="mt-12 inline-flex items-center gap-4 text-[11px] tracking-[0.3em] text-primary font-body uppercase border border-border px-8 py-4 hover:border-accent/60 hover:text-accent transition-colors duration-300"
+            className="mt-10 md:mt-12 inline-flex items-center gap-4 text-[11px] tracking-[0.3em] text-primary font-body uppercase border border-border px-6 md:px-8 py-4 hover:border-accent/60 hover:text-accent transition-colors duration-300"
           >
             hello@alden.design
             <span className="text-base">→</span>
@@ -39,7 +41,7 @@ export default function FooterSection() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pt-16 border-t border-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 pt-12 md:pt-16 border-t border-border">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -62,13 +64,13 @@ export default function FooterSection() {
             <span className="text-[10px] tracking-[0.4em] text-muted-foreground font-body uppercase block mb-4">Navigate</span>
             <div className="space-y-2">
               {navItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollTo(item)}
+                <Link
+                  key={item.href}
+                  to={item.href}
                   className="block text-muted-foreground text-sm font-body hover:text-accent transition-colors duration-200 uppercase tracking-wider"
                 >
-                  {item}
-                </button>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </motion.div>
@@ -94,21 +96,14 @@ export default function FooterSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex flex-col items-end gap-2"
           >
-            <span className="text-[10px] tracking-[0.4em] text-muted-foreground font-body uppercase">[CURRENTLY ON REPEAT]</span>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full animate-pulse"></div>
-              </div>
-              <span className="text-primary text-sm font-body">LC - Mean It In The Morning</span>
-            </div>
+            <SpotifyNowPlaying />
           </motion.div>
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-border px-6 md:px-10 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="border-t border-border px-6 md:px-10 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
         <span className="font-heading font-black text-sm tracking-[0.3em] text-primary">ALDEN</span>
         <span className="text-muted-foreground text-[10px] tracking-wider font-body">
           © {new Date().getFullYear()} Alden Design — All rights reserved

@@ -1,16 +1,59 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import path from 'path'
+import spotifyNowPlaying from './api/spotify-now-playing.js'
+
+function spotifyApiDevPlugin(env) {
+  return {
+    name: 'spotify-api-dev',
+    configureServer(server) {
+      server.middlewares.use('/api/spotify-now-playing', async (req, res) => {
+        if (req.method !== 'GET') {
+          res.statusCode = 405;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Method not allowed' }));
+          return;
+        }
+
+        for (const key of ['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET', 'SPOTIFY_REFRESH_TOKEN']) {
+          process.env[key] = env[key] || process.env[key];
+        }
+
+        const response = {
+          setHeader(key, value) {
+            res.setHeader(key, value);
+          },
+          status(code) {
+            res.statusCode = code;
+            return this;
+          },
+          json(body) {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(body));
+            return this;
+          },
+        };
+
+        await spotifyNowPlaying(req, response);
+      });
+    },
+  };
+}
 
 // https://vite.dev/config/
-export default defineConfig({
-  logLevel: 'error', // Suppress warnings, only show errors
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+
+  return {
+    logLevel: 'error', // Suppress warnings, only show errors
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
     },
-  },
-  plugins: [
-    react(),
-  ]
+    plugins: [
+      react(),
+      spotifyApiDevPlugin(env),
+    ],
+  };
 });

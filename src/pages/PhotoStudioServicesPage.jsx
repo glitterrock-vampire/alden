@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/home/Navbar';
-import Footer from '@/components/home/Footer';
+import FooterSection from '@/components/home/FooterSection';
 
 const PHOTO_STUDIO_SERVICES = [
   {
@@ -12,7 +12,17 @@ const PHOTO_STUDIO_SERVICES = [
       "Personal Branding",
       "Executive Portraits"
     ],
-    icon: "👤"
+    icon: "👤",
+    images: [
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
+    ]
   },
   {
     title: "Event",
@@ -23,7 +33,15 @@ const PHOTO_STUDIO_SERVICES = [
       "Birthday Parties",
       "Concerts & Performances"
     ],
-    icon: "✓"
+    icon: "✓",
+    images: [
+      "https://images.unsplash.com/photo-1519741497674-611481e3d46e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=400&fit=crop"
+    ]
   },
   {
     title: "Landscape",
@@ -34,7 +52,15 @@ const PHOTO_STUDIO_SERVICES = [
       "Urban & Architecture",
       "Sunset & Golden Hour"
     ],
-    icon: "🏔"
+    icon: "🏔",
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1433086966358-54859d0ed316?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=400&fit=crop"
+    ]
   },
   {
     title: "Product",
@@ -45,29 +71,53 @@ const PHOTO_STUDIO_SERVICES = [
       "Fashion & Apparel",
       "Lifestyle Products"
     ],
-    icon: "📦"
+    icon: "📦",
+    images: [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop"
+    ]
   },
   {
-    title: "Real Estate",
-    description: "Professional property photography that helps sell spaces by highlighting their best features.",
+    title: "Architecture",
+    description: "Architectural photography that highlights design details, spatial relationships, and building aesthetics.",
     features: [
-      "Interior Photography",
+      "Interior Design",
       "Exterior Shots",
-      "Aerial & Drone",
-      "Virtual Tours"
+      "Real Estate",
+      "Construction Progress"
     ],
-    icon: "🏠"
+    icon: "🏛",
+    images: [
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=400&fit=crop"
+    ]
   },
   {
-    title: "Food",
-    description: "Appetizing food photography that makes dishes look irresistible and professional.",
+    title: "Commercial",
+    description: "Commercial photography for advertising, marketing campaigns, and brand storytelling.",
     features: [
-      "Restaurant Menus",
-      "Recipe Photography",
-      "Food Styling",
-      "Packaging Shots"
+      "Brand Campaigns",
+      "Advertising",
+      "Social Media Content",
+      "Print Media"
     ],
-    icon: "🍽"
+    icon: "💼",
+    images: [
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=400&fit=crop"
+    ]
   },
   {
     title: "Creative Projects",
@@ -78,7 +128,15 @@ const PHOTO_STUDIO_SERVICES = [
       "Creative Retouching",
       "Experimental Projects"
     ],
-    icon: "🎨"
+    icon: "🎨",
+    images: [
+      "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1558478551-1a378f63328e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=400&fit=crop"
+    ]
   },
   {
     title: "Photo Editing",
@@ -89,7 +147,15 @@ const PHOTO_STUDIO_SERVICES = [
       "Background Removal",
       "Professional Printing"
     ],
-    icon: "🎭"
+    icon: "🎭",
+    images: [
+      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1614850523060-8da1d56ae167?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=400&h=400&fit=crop"
+    ]
   },
   {
     title: "Photo Sessions",
@@ -100,263 +166,162 @@ const PHOTO_STUDIO_SERVICES = [
       "Couples & Engagement",
       "Custom Themes"
     ],
-    icon: "📅"
+    icon: "📅",
+    images: [
+      "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=400&fit=crop"
+    ]
   }
 ];
 
 export default function PhotoStudioServicesPage() {
-  const letterRefs = useRef([]);
+  const serviceRefs = useRef([]);
+  const [selectedService, setSelectedService] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      letterRefs.current.forEach((letter, index) => {
-        if (letter) {
-          setTimeout(() => {
-            letter.style.opacity = '1';
-            letter.style.transform = 'translateX(0px) translateY(0px) scale(1)';
-          }, 800 + index * 100);
-        }
-      });
-    }, 500);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            if (element instanceof HTMLElement) {
+              element.style.opacity = '1';
+              element.style.transform = 'translateY(0)';
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    // Animate service cards on scroll
-    // @ts-ignore - TypeScript error in JSX file with Element type
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // @ts-ignore
-          const card = entry.target;
-          // @ts-ignore
-          const index = parseInt(card.dataset.serviceIndex || '0');
-          setTimeout(() => {
-            // @ts-ignore
-            card.style.opacity = '1';
-            // @ts-ignore
-            card.style.transform = 'translateY(0)';
-          }, index * 100);
-          observer.unobserve(card);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
-
-    document.querySelectorAll('.service-card').forEach(card => {
-      observer.observe(card);
+    serviceRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
     });
 
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-black/70 z-[1]" />
-        <div className="absolute bottom-0 left-10 z-[2] flex flex-col justify-start items-start gap-5 p-10 w-full max-w-full">
-          <div className="flex gap-3 justify-start flex-wrap">
-            <span ref={el => letterRefs.current[0] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(60px, 10vw, 120px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>P</span>
-            <span ref={el => letterRefs.current[1] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(60px, 10vw, 120px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>H</span>
-            <span ref={el => letterRefs.current[2] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(60px, 10vw, 120px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>O</span>
-            <span ref={el => letterRefs.current[3] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(60px, 10vw, 120px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>T</span>
-            <span ref={el => letterRefs.current[4] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(60px, 10vw, 120px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>O</span>
+      <section className="min-h-screen flex items-center justify-center px-4 md:px-12 pt-20 md:pt-0 bg-black text-white">
+        <div className="max-w-4xl text-center">
+          <div className="mb-8 md:mb-12">
+            <div className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-2" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
+              ALDEN
+            </div>
+            <div className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-400 mb-4" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
+              Technology
+            </div>
+            <div className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-400 mb-4" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
+              Innovation
+            </div>
+            <div className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-400" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
+              Design
+            </div>
           </div>
-          <div className="flex gap-3 justify-start flex-wrap">
-            <span ref={el => letterRefs.current[5] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>S</span>
-            <span ref={el => letterRefs.current[6] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>E</span>
-            <span ref={el => letterRefs.current[7] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>R</span>
-            <span ref={el => letterRefs.current[8] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>V</span>
-            <span ref={el => letterRefs.current[9] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>I</span>
-            <span ref={el => letterRefs.current[10] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>C</span>
-            <span ref={el => letterRefs.current[11] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>E</span>
-            <span ref={el => letterRefs.current[12] = el} style={{
-              fontFamily: 'Koulen, cursive',
-              fontSize: 'clamp(100px, 15vw, 200px)',
-              lineHeight: '0.7',
-              color: '#e7e5df',
-              display: 'inline-block',
-              opacity: 0,
-              transform: 'translateY(-230px)',
-              transition: 'all 0.9s cubic-bezier(0.77,0.02,0.38,1)',
-              maxWidth: '100%'
-            }}>S</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Header */}
-      <section className="py-32 px-10 text-center bg-background">
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-8">
-            <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(3rem, 6vw, 5rem)', lineHeight: '1', color: 'hsl(var(--foreground))' }}>ALDEN</h2>
-            <p style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', letterSpacing: '0.2em', color: '#ccbb87', marginTop: '0.5rem' }}>PHOTO STUDIO</p>
-          </div>
-          <h3 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(1.5rem, 3vw, 2rem)', lineHeight: '1.2', marginBottom: '30px', color: 'hsl(var(--foreground))' }}>
-            Photography Services
-          </h3>
-          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', color: '#ccbb87', marginBottom: '20px' }}>
-            Professional photography services tailored for your vision
+          <p 
+            className="text-base md:text-lg lg:text-xl text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-2xl mx-auto px-4"
+            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+          >
+            Professional photography services that capture moments, tell stories, and create lasting impressions through the art of visual storytelling.
           </p>
-          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(1rem, 2.5vw, 1.125rem)', lineHeight: '1.6', color: 'hsl(var(--muted-foreground))' }}>
-            From portraits to landscapes, events to creative projects, we capture moments that tell your story. Our photography combines technical excellence with artistic vision to create images that are both beautiful and meaningful.
-          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+            <a 
+              href="/portfolio"
+              className="px-6 md:px-8 py-3 md:py-4 bg-white text-black font-medium rounded-none hover:bg-gray-100 transition-colors text-sm md:text-base"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+            >
+              View Portfolio
+            </a>
+            <a 
+              href="#services"
+              className="px-6 md:px-8 py-3 md:py-4 border border-white text-white font-medium rounded-none hover:bg-white hover:text-black transition-colors text-sm md:text-base"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+            >
+              Our Services
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 px-10 bg-background">
+      <section id="services" className="py-24 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2rem, 4vw, 3rem)', textAlign: 'center', marginBottom: '60px', color: 'hsl(var(--foreground))' }}>
-            Photography Services
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-10 mb-20">
+          <div className="text-center mb-20">
+            <h2 
+              className="text-4xl md:text-5xl font-bold mb-6 text-black"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+            >
+              What We Do
+            </h2>
+            <p 
+              className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+            >
+              From intimate portraits to grand architectural projects, we bring your vision to life with professional photography services tailored to your needs.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             {PHOTO_STUDIO_SERVICES.map((service, index) => (
-              <div 
+              <div
                 key={service.title}
-                className="service-card bg-white/5 border border-white/10 rounded-2xl p-10 text-center transition-all duration-600 hover:bg-white/8 hover:-translate-y-1"
-                data-service-index={index}
-                style={{ opacity: 0, transform: 'translateY(30px)' }}
+                ref={(el) => (serviceRefs.current[index] = el)}
+                className="group"
+                style={{
+                  opacity: 0,
+                  transform: 'translateY(30px)',
+                  transition: 'all 0.8s ease-out',
+                  transitionDelay: `${index * 0.1}s`
+                }}
               >
-                <div className="w-16 h-16 bg-[#ccbb87] rounded-xl flex items-center justify-center mx-auto mb-6">
-                  <span className="text-4xl">{service.icon}</span>
-                </div>
-                <h3 style={{ fontFamily: 'Koulen, cursive', fontSize: '24px', marginBottom: '16px', color: 'hsl(var(--foreground))' }}>
-                  {service.title}
-                </h3>
-                <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '16px', lineHeight: '1.6', color: 'hsl(var(--muted-foreground))', marginBottom: '24px' }}>
-                  {service.description}
-                </p>
-                <div className="flex flex-col gap-3 mb-8">
-                  {service.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center gap-3">
-                      <span style={{ color: '#ccbb87', fontSize: '16px', fontWeight: 'bold' }}>✓</span>
-                      <span style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '14px', color: 'hsl(var(--muted-foreground))' }}>{feature}</span>
-                    </div>
-                  ))}
+                <div 
+                  className="border-b border-gray-200 pb-8 group-hover:border-black transition-colors cursor-pointer"
+                  onClick={() => {
+                    setSelectedService(service);
+                    setIsModalOpen(true);
+                  }}
+                >
+                  {/* Icon */}
+                  <div className="text-4xl mb-6">{service.icon}</div>
+                  
+                  {/* Title */}
+                  <h3 
+                    className="text-2xl font-bold mb-4 text-black"
+                    style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+                  >
+                    {service.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p 
+                    className="text-gray-600 mb-6 leading-relaxed"
+                    style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+                  >
+                    {service.description}
+                  </p>
+                  
+                  {/* Features */}
+                  <ul className="space-y-2">
+                    {service.features.map((feature, featureIndex) => (
+                      <li 
+                        key={featureIndex}
+                        className="text-sm text-gray-500 flex items-center"
+                        style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+                      >
+                        <span className="w-1 h-1 bg-black rounded-full mr-3"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
@@ -364,27 +329,183 @@ export default function PhotoStudioServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 px-10 text-center bg-background">
-        <div className="max-w-2xl mx-auto">
-          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '20px', color: 'hsl(var(--foreground))' }}>
-            Ready to Capture Your Moments?
+      {/* Process Section */}
+      <section className="py-24 px-6 md:px-12 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 
+            className="text-4xl md:text-5xl font-bold mb-12 text-black"
+            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+          >
+            Our Process
           </h2>
-          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '18px', marginBottom: '40px', color: 'hsl(var(--muted-foreground))' }}>
-            Let's create beautiful memories together
+          
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-black mb-4">01</div>
+              <h3 
+                className="text-xl font-semibold mb-3 text-black"
+                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+              >
+                Consultation
+              </h3>
+              <p 
+                className="text-gray-600"
+                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+              >
+                We discuss your vision, goals, and requirements to understand exactly what you need.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-3xl font-bold text-black mb-4">02</div>
+              <h3 
+                className="text-xl font-semibold mb-3 text-black"
+                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+              >
+                Creation
+              </h3>
+              <p 
+                className="text-gray-600"
+                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+              >
+                Our team captures stunning images that bring your vision to life with artistic excellence.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-3xl font-bold text-black mb-4">03</div>
+              <h3 
+                className="text-xl font-semibold mb-3 text-black"
+                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+              >
+                Delivery
+              </h3>
+              <p 
+                className="text-gray-600"
+                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+              >
+                Professional editing and delivery of high-quality images ready for your use.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 px-6 md:px-12 bg-black text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 
+            className="text-4xl md:text-5xl font-bold mb-8"
+            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+          >
+            Let's Create Something
+            <br />
+            Beautiful Together
+          </h2>
+          <p 
+            className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto"
+            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+          >
+            Ready to bring your vision to life? Get in touch to discuss your photography project and let us help you tell your story through stunning images.
           </p>
-          <div className="flex gap-5 justify-center flex-wrap">
-            <a href="/contact" className="py-4 px-8 bg-[#ccbb87] text-black font-body text-sm tracking-wider uppercase rounded-lg hover:bg-[#ccbb87]/90 transition-all min-w-[180px]" style={{ fontFamily: 'Roboto Mono, monospace' }}>
-              Book Photoshoot
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="mailto:photo@alden.com"
+              className="px-8 py-4 bg-white text-black font-medium rounded-none hover:bg-gray-100 transition-colors"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+            >
+              Get in Touch
             </a>
-            <a href="/studios/photo-studio/portfolio" className="py-4 px-8 bg-transparent border border-white/50 text-white font-body text-sm tracking-wider uppercase rounded-lg hover:bg-white/10 transition-all min-w-[180px]" style={{ fontFamily: 'Roboto Mono, monospace' }}>
-              View Portfolio
+            <a 
+              href="/portfolio"
+              className="px-8 py-4 border border-white text-white font-medium rounded-none hover:bg-white hover:text-black transition-colors"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+            >
+              View Work
             </a>
           </div>
         </div>
       </section>
 
-      <Footer />
+      {/* Mosaic Modal */}
+      {isModalOpen && selectedService && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 overflow-y-auto"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsModalOpen(false);
+          }}
+        >
+          <div 
+            className="min-h-screen px-4 py-12 md:py-20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="max-w-7xl mx-auto">
+              {/* Header */}
+              <div className="flex justify-between items-center mb-8">
+                <h2 
+                  className="text-3xl md:text-4xl font-bold text-white"
+                  style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+                >
+                  {selectedService.title}
+                </h2>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsModalOpen(false);
+                  }}
+                  className="text-white text-4xl hover:text-gray-300 transition-colors"
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Mosaic Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
+                {selectedService.images.map((image, index) => {
+                  const isLarge = index === 0;
+                  const isWide = index === 1;
+                  const isTall = index === 2;
+                  
+                  return (
+                    <div 
+                      key={index}
+                      className={`relative overflow-hidden bg-gray-800 ${
+                        isLarge ? 'col-span-2 row-span-2' : ''
+                      } ${
+                        isWide ? 'col-span-2' : ''
+                      } ${
+                        isTall ? 'row-span-2' : ''
+                      }`}
+                      style={{ aspectRatio: isLarge || isTall ? '1' : '1' }}
+                    >
+                      <img
+                        src={image}
+                        alt={`${selectedService.title} ${index + 1}`}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        onError={(e) => console.error('Image failed to load:', image, e)}
+                        onLoad={() => console.log('Image loaded successfully:', image)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Description */}
+              <div className="mt-12 text-center">
+                <p 
+                  className="text-gray-300 max-w-2xl mx-auto"
+                  style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+                >
+                  {selectedService.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <FooterSection />
     </div>
   );
 }

@@ -22,10 +22,4 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-<<<<<<< HEAD
 *.sw?
-=======
-*.sw?
-.vercel
-.env*.local
->>>>>>> 8b033c58a4bd0a32038445bb343c2a60997a4422

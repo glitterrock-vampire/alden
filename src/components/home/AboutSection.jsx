@@ -89,9 +89,9 @@ export default function AboutSection() {
           className="overflow-hidden border-t border-border pt-12"
         >
           <p
-            className="font-heading font-black text-[clamp(3rem,12vw,10rem)] text-muted-foreground/70 leading-none tracking-tight uppercase whitespace-nowrap"
+            className="font-heading font-black text-[clamp(2.5rem,8vw,7rem)] text-muted-foreground/70 leading-[0.9] tracking-tight uppercase"
           >
-            QUIETLY POWERFUL DIGITAL EXPERIENCES
+            QUIETLY POWERFUL<br />DIGITAL EXPERIENCES
           </p>
         </motion.div>
       </div>

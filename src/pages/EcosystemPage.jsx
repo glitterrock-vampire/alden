@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Navbar from '@/components/home/Navbar';
-import Footer from '@/components/home/Footer';
+import FooterSection from '@/components/home/FooterSection';
 import { Sprout, HardHat, Droplets, ArrowRight } from 'lucide-react';
 
 const ECOSYSTEM_VENTURES = [
@@ -213,7 +213,7 @@ export default function EcosystemPage() {
         </div>
       </section>
 
-      <Footer />
+      <FooterSection />
     </div>
   );
 }

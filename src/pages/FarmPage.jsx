@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/home/Navbar';
-import Footer from '@/components/home/Footer';
+import FooterSection from '@/components/home/FooterSection';
 import { ExternalLink, ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
 
 const FARM_PRODUCTS = [
@@ -599,7 +599,7 @@ export default function FarmPage() {
         </>
       )}
 
-      <Footer />
+      <FooterSection />
     </div>
   );
 }

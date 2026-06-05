@@ -1,4 +1,5 @@
 import React from 'react';
+import SpotifyNowPlaying from '@/components/SpotifyNowPlaying.jsx';
 
 export default function StudioFooter() {
   return (
@@ -61,6 +62,7 @@ export default function StudioFooter() {
             Kingston, Jamaica
           </p>
         </div>
+        <SpotifyNowPlaying />
       </div>
       <div style={{ maxWidth: '72rem', margin: '3rem auto 0', paddingTop: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <span style={{ fontFamily: 'monospace', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(240, 240, 240, 0.3)' }}>
