@@ -239,12 +239,25 @@ export default function HeroSection({ heroImage }) {
 
         /* ── Scroll bar ── */
         .hero-scroll {
+          position: relative;
           display: flex;
           justify-content: space-between;
           align-items: center;
           font-family: 'Roboto Mono', monospace;
           font-size: clamp(10px, 1vw, 14px);
           color: #fff;
+        }
+
+        .scroll-mid {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        .scroll-right {
+          margin-left: auto;
         }
 
         /* ════════════════════════════
@@ -300,6 +313,16 @@ export default function HeroSection({ heroImage }) {
             gap: 0.3rem;
             font-size: clamp(9px, 2.3vw, 11px);
             text-align: center;
+          }
+
+          .scroll-mid {
+            position: static;
+            transform: none;
+            white-space: normal;
+          }
+
+          .scroll-right {
+            margin-left: 0;
           }
         }
 

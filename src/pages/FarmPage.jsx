@@ -141,6 +141,38 @@ const DELIVERY_ZONES = [
   { area: "Other Areas", fee: "Contact for pricing", days: "Custom schedule" }
 ];
 
+function FarmHeroScene() {
+  return (
+    <div className="farm-hero-scene" aria-hidden="true">
+      <div className="farm-sun" />
+      <div className="farm-cloud is-one" />
+      <div className="farm-cloud is-two" />
+      <div className="farm-hill is-back" />
+      <div className="farm-hill is-front" />
+      <div className="farm-field">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <span key={index} style={{ '--row-index': index }} />
+        ))}
+      </div>
+      <div className="farm-sprouts">
+        {Array.from({ length: 18 }).map((_, index) => (
+          <i key={index} style={{ '--sprout-index': index }} />
+        ))}
+      </div>
+      <div className="farm-tractor">
+        <span className="farm-tractor-body" />
+        <span className="farm-tractor-cab" />
+        <span className="farm-tractor-wheel is-large" />
+        <span className="farm-tractor-wheel is-small" />
+      </div>
+      <div className="farm-loader-card">
+        <span>[FIELD LOADING]</span>
+        <strong>Fresh from farm to Kingston</strong>
+      </div>
+    </div>
+  );
+}
+
 export default function FarmPage() {
   const letterRefs = useRef([]);
   const cardRefs = useRef([]);
@@ -237,9 +269,11 @@ export default function FarmPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-green-600/70 z-[1]" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-[2] flex flex-col justify-center items-center gap-5 p-10 w-full">
+      <section className="farm-hero relative min-h-screen flex items-center justify-center overflow-hidden">
+        <FarmHeroScene />
+        <div className="farm-hero-overlay" />
+        <div className="farm-hero-title-wrap absolute bottom-0 left-1/2 -translate-x-1/2 z-[2] flex flex-col justify-center items-center gap-5 p-10 w-full">
+          <p className="farm-hero-kicker">ALDEN FARM - LOCAL PRODUCE MARKET</p>
           <div className="flex gap-3 justify-center">
             {heroLetters.map((letter, index) => (
               <span
@@ -249,10 +283,11 @@ export default function FarmPage() {
                   fontFamily: 'Koulen, cursive',
                   fontSize: 'clamp(120px, 20vw, 670px)',
                   lineHeight: '0.7',
-                  color: '#1b5e20',
+                  color: '#eaffd6',
                   display: 'inline-block',
                   opacity: 0,
                   transform: 'translateY(-230px)',
+                  textShadow: '0 1.5rem 4rem rgba(4, 28, 10, 0.42)',
                   transition: 'opacity 0.9s cubic-bezier(0.77,0.02,0.38,1), transform 0.9s cubic-bezier(0.77,0.02,0.38,1)'
                 }}
               >
@@ -600,6 +635,368 @@ export default function FarmPage() {
       )}
 
       <FooterSection />
+
+      <style>{`
+        .farm-hero {
+          background: #071006;
+          isolation: isolate;
+        }
+
+        .farm-hero-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background:
+            radial-gradient(circle at 50% 42%, transparent 0 18rem, rgba(5, 5, 5, 0.14) 34rem),
+            linear-gradient(90deg, rgba(5, 5, 5, 0.44), transparent 46%, rgba(5, 5, 5, 0.36)),
+            linear-gradient(180deg, rgba(5, 5, 5, 0.08), rgba(5, 5, 5, 0.02) 48%, rgba(5, 5, 5, 0.7));
+        }
+
+        .farm-hero-title-wrap {
+          text-align: center;
+        }
+
+        .farm-hero-kicker {
+          margin: 0 0 clamp(0.75rem, 2vw, 1.5rem);
+          font-family: 'Roboto Mono', monospace;
+          font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+          letter-spacing: 0.28em;
+          color: rgba(234, 255, 214, 0.82);
+          text-transform: uppercase;
+        }
+
+        .farm-hero-scene {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+          background:
+            radial-gradient(circle at 50% 20%, rgba(255, 248, 185, 0.5), transparent 20rem),
+            linear-gradient(180deg, #f5c96f 0%, #9cca68 34%, #275f23 62%, #071006 100%);
+        }
+
+        .farm-sun {
+          position: absolute;
+          left: 50%;
+          top: 15%;
+          width: clamp(8rem, 17vw, 16rem);
+          height: clamp(8rem, 17vw, 16rem);
+          border-radius: 50%;
+          background:
+            radial-gradient(circle, #fff7c7 0 28%, #f9be45 58%, rgba(249, 190, 69, 0) 72%);
+          transform: translateX(-50%);
+          animation: farmSunGlow 4.5s ease-in-out infinite;
+        }
+
+        .farm-cloud {
+          position: absolute;
+          top: 16%;
+          width: clamp(8rem, 18vw, 15rem);
+          height: clamp(2.5rem, 5vw, 4rem);
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.42);
+          filter: blur(0.3px);
+          animation: farmCloudDrift 18s linear infinite;
+        }
+
+        .farm-cloud::before,
+        .farm-cloud::after {
+          content: '';
+          position: absolute;
+          bottom: 0.55rem;
+          border-radius: 50%;
+          background: inherit;
+        }
+
+        .farm-cloud::before {
+          left: 1.2rem;
+          width: 42%;
+          height: 130%;
+        }
+
+        .farm-cloud::after {
+          right: 1.4rem;
+          width: 36%;
+          height: 105%;
+        }
+
+        .farm-cloud.is-one {
+          left: -12rem;
+        }
+
+        .farm-cloud.is-two {
+          top: 26%;
+          left: 58%;
+          transform: scale(0.78);
+          opacity: 0.6;
+          animation-duration: 24s;
+          animation-delay: -10s;
+        }
+
+        .farm-hill {
+          position: absolute;
+          left: -10%;
+          right: -10%;
+          bottom: 28%;
+          height: 28%;
+          border-radius: 50% 50% 0 0;
+          background: linear-gradient(180deg, #4d8d3c, #1e5a23);
+        }
+
+        .farm-hill.is-back {
+          bottom: 35%;
+          height: 25%;
+          opacity: 0.68;
+          background: linear-gradient(180deg, #70a95d, #2f7135);
+          transform: translateX(-8%);
+        }
+
+        .farm-hill.is-front {
+          transform: translateX(9%);
+        }
+
+        .farm-field {
+          position: absolute;
+          left: -8%;
+          right: -8%;
+          bottom: -10%;
+          height: 50%;
+          overflow: hidden;
+          background:
+            linear-gradient(180deg, rgba(46, 91, 26, 0.2), rgba(9, 34, 9, 0.92)),
+            linear-gradient(90deg, #17380f, #244d17 45%, #102d0d);
+          clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .farm-field span {
+          position: absolute;
+          left: calc((var(--row-index) - 1) * 14%);
+          bottom: -18%;
+          width: 6%;
+          height: 136%;
+          border-radius: 999px 999px 0 0;
+          background: linear-gradient(180deg, rgba(194, 149, 79, 0.15), rgba(194, 149, 79, 0.58));
+          transform: rotate(14deg);
+          transform-origin: bottom center;
+          opacity: 0.72;
+        }
+
+        .farm-sprouts {
+          position: absolute;
+          left: 7%;
+          right: 7%;
+          bottom: 7%;
+          height: 31%;
+          z-index: 1;
+        }
+
+        .farm-sprouts i {
+          position: absolute;
+          left: calc((var(--sprout-index) % 9) * 11.5%);
+          bottom: calc(8% + (var(--sprout-index) % 3) * 18%);
+          width: 0.22rem;
+          height: clamp(1.5rem, 4vw, 3.4rem);
+          border-radius: 999px;
+          background: #96e06a;
+          transform: rotate(calc(-12deg + (var(--sprout-index) % 5) * 6deg)) scaleY(0.35);
+          transform-origin: bottom;
+          animation: farmSproutGrow 2.8s ease-in-out infinite;
+          animation-delay: calc(var(--sprout-index) * -0.15s);
+        }
+
+        .farm-sprouts i::before,
+        .farm-sprouts i::after {
+          content: '';
+          position: absolute;
+          bottom: 42%;
+          width: 0.9rem;
+          height: 0.45rem;
+          border-radius: 100% 0;
+          background: #75c74f;
+        }
+
+        .farm-sprouts i::before {
+          right: 0;
+          transform: rotate(-28deg);
+          transform-origin: right center;
+        }
+
+        .farm-sprouts i::after {
+          left: 0;
+          transform: rotate(28deg) scaleX(-1);
+          transform-origin: left center;
+        }
+
+        .farm-tractor {
+          position: absolute;
+          left: -12rem;
+          bottom: 24%;
+          z-index: 2;
+          width: 9.5rem;
+          height: 4.5rem;
+          animation: farmTractorPass 12s linear infinite;
+        }
+
+        .farm-tractor-body,
+        .farm-tractor-cab,
+        .farm-tractor-wheel {
+          position: absolute;
+          display: block;
+        }
+
+        .farm-tractor-body {
+          left: 1.5rem;
+          bottom: 1.1rem;
+          width: 6.8rem;
+          height: 2.1rem;
+          border-radius: 0.35rem 1rem 0.4rem 0.4rem;
+          background: #d95f2d;
+          box-shadow: inset 0 -0.4rem 0 rgba(0, 0, 0, 0.18);
+        }
+
+        .farm-tractor-cab {
+          left: 2.45rem;
+          bottom: 3rem;
+          width: 2.45rem;
+          height: 1.7rem;
+          border-radius: 0.4rem 0.4rem 0 0;
+          background: rgba(220, 245, 255, 0.72);
+          border: 0.22rem solid #d95f2d;
+          border-bottom: 0;
+        }
+
+        .farm-tractor-wheel {
+          bottom: 0.15rem;
+          border-radius: 50%;
+          background: #111;
+          border: 0.35rem solid #2b2b2b;
+          animation: farmWheelSpin 0.8s linear infinite;
+        }
+
+        .farm-tractor-wheel::after {
+          content: '';
+          position: absolute;
+          inset: 32%;
+          border-radius: 50%;
+          background: #f5c542;
+        }
+
+        .farm-tractor-wheel.is-large {
+          left: 1.7rem;
+          width: 2.35rem;
+          height: 2.35rem;
+        }
+
+        .farm-tractor-wheel.is-small {
+          right: 1.2rem;
+          width: 1.65rem;
+          height: 1.65rem;
+        }
+
+        .farm-loader-card {
+          position: absolute;
+          right: clamp(1rem, 4vw, 3rem);
+          top: clamp(6rem, 12vh, 8rem);
+          z-index: 2;
+          display: grid;
+          gap: 0.35rem;
+          padding: 0.9rem 1rem;
+          border: 1px solid rgba(234, 255, 214, 0.24);
+          border-radius: 1rem;
+          background: rgba(7, 16, 6, 0.46);
+          backdrop-filter: blur(14px);
+          font-family: 'Roboto Mono', monospace;
+          text-transform: uppercase;
+          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.22);
+        }
+
+        .farm-loader-card span {
+          font-size: 0.68rem;
+          letter-spacing: 0.2em;
+          color: rgba(234, 255, 214, 0.72);
+        }
+
+        .farm-loader-card strong {
+          font-size: 0.78rem;
+          font-weight: 400;
+          letter-spacing: 0.08em;
+          color: #c8ff9b;
+        }
+
+        @keyframes farmSunGlow {
+          0%, 100% {
+            transform: translateX(-50%) scale(1);
+            filter: brightness(1);
+          }
+
+          50% {
+            transform: translateX(-50%) scale(1.04);
+            filter: brightness(1.12);
+          }
+        }
+
+        @keyframes farmCloudDrift {
+          0% {
+            transform: translateX(0);
+          }
+
+          100% {
+            transform: translateX(calc(100vw + 24rem));
+          }
+        }
+
+        @keyframes farmSproutGrow {
+          0%, 100% {
+            transform: rotate(calc(-12deg + (var(--sprout-index) % 5) * 6deg)) scaleY(0.5);
+          }
+
+          50% {
+            transform: rotate(calc(-12deg + (var(--sprout-index) % 5) * 6deg)) scaleY(1);
+          }
+        }
+
+        @keyframes farmTractorPass {
+          0% {
+            transform: translateX(0);
+          }
+
+          100% {
+            transform: translateX(calc(100vw + 22rem));
+          }
+        }
+
+        @keyframes farmWheelSpin {
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .farm-hero-title-wrap {
+            padding: 2rem 1rem 4rem;
+          }
+
+          .farm-hero-kicker {
+            max-width: 18rem;
+            line-height: 1.6;
+          }
+
+          .farm-loader-card {
+            left: 1rem;
+            right: 1rem;
+            top: 5.5rem;
+          }
+
+          .farm-tractor {
+            bottom: 28%;
+            transform: scale(0.8);
+          }
+        }
+      `}</style>
     </div>
   );
 }

@@ -53,6 +53,7 @@ export default function App() {
         {/* Venture pages - local in dev, redirect in production */}
         <Route path="/build" element={<BuildPage />} />
         <Route path="/farm" element={<FarmPage />} />
+        <Route path="/spring" element={<SpringsPage />} />
         <Route path="/springs" element={<SpringsPage />} />
         <Route path="/studios/photo-studio/services" element={<PhotoStudioServicesPage />} />
         {/* Hub pages */}
