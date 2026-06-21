@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
-import { ExternalLink, ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
+import { ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
+import FarmHero3D from '@/components/3d/FarmHero3D';
 
 const FARM_PRODUCTS = [
   // PRODUCE - Fresh from our farm
@@ -141,37 +142,7 @@ const DELIVERY_ZONES = [
   { area: "Other Areas", fee: "Contact for pricing", days: "Custom schedule" }
 ];
 
-function FarmHeroScene() {
-  return (
-    <div className="farm-hero-scene" aria-hidden="true">
-      <div className="farm-sun" />
-      <div className="farm-cloud is-one" />
-      <div className="farm-cloud is-two" />
-      <div className="farm-hill is-back" />
-      <div className="farm-hill is-front" />
-      <div className="farm-field">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <span key={index} style={{ '--row-index': index }} />
-        ))}
-      </div>
-      <div className="farm-sprouts">
-        {Array.from({ length: 18 }).map((_, index) => (
-          <i key={index} style={{ '--sprout-index': index }} />
-        ))}
-      </div>
-      <div className="farm-tractor">
-        <span className="farm-tractor-body" />
-        <span className="farm-tractor-cab" />
-        <span className="farm-tractor-wheel is-large" />
-        <span className="farm-tractor-wheel is-small" />
-      </div>
-      <div className="farm-loader-card">
-        <span>[FIELD LOADING]</span>
-        <strong>Fresh from farm to Kingston</strong>
-      </div>
-    </div>
-  );
-}
+
 
 export default function FarmPage() {
   const letterRefs = useRef([]);
@@ -270,7 +241,7 @@ export default function FarmPage() {
       
       {/* Hero Section */}
       <section className="farm-hero relative min-h-screen flex items-center justify-center overflow-hidden">
-        <FarmHeroScene />
+        <FarmHero3D />
         <div className="farm-hero-overlay" />
         <div className="farm-hero-title-wrap absolute bottom-0 left-1/2 -translate-x-1/2 z-[2] flex flex-col justify-center items-center gap-5 p-10 w-full">
           <p className="farm-hero-kicker">ALDEN FARM - LOCAL PRODUCE MARKET</p>
