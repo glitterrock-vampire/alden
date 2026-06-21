@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
+import BuildHeroScene from '@/components/3d/BuildHeroScene';
+import SimsBuilder from '@/components/3d/SimsBuilder';
 
 const CONSTRUCTION_SERVICES = [
   {
