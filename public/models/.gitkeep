@@ -1,0 +1,10 @@
+# Drop .glb files here — they'll be served at /models/<filename>.glb
+# 
+# Expected assets:
+#   tractor.glb       — Farm hero tractor
+#   barn.glb          — Farm barn
+#   farmer.glb        — Farmer avatar (replaces procedural)
+#   crane.glb         — Build hero crane
+#   building.glb      — Build hero WIP building
+#   builder.glb       — Builder avatar (replaces procedural)
+#   tree.glb          — Farm trees (optional)

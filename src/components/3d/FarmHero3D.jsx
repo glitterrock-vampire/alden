@@ -1,8 +1,9 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Stars } from '@react-three/drei';
+import { Float, Stars, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import AldenAvatar from './AldenAvatar.jsx';
+import { useAldenModel, MODEL_PATHS } from './useAldenModel.js';
 
 // ─── Sun ──────────────────────────────────────────────────────────────────────
 
@@ -165,7 +166,22 @@ function CropRow({ xOffset = 0, zRow = 0, count = 9 }) {
   );
 }
 
-// ─── Tractor ─────────────────────────────────────────────────────────────────
+// ─── GLB Tractor (used if tractor.glb is present) ────────────────────────────
+
+function TractorGLB({ posX }) {
+  const { scene } = useGLTF(MODEL_PATHS.tractor);
+  const clone = useMemo(() => scene.clone(true), [scene]);
+  return (
+    <primitive
+      object={clone}
+      position={[posX, 0, 1.8]}
+      scale={1}
+      castShadow
+    />
+  );
+}
+
+// ─── Procedural Tractor (fallback) ───────────────────────────────────────────
 
 function Tractor() {
   const groupRef = useRef();
@@ -236,7 +252,15 @@ function Tractor() {
   );
 }
 
-// ─── Barn ─────────────────────────────────────────────────────────────────────
+// ─── GLB Barn ─────────────────────────────────────────────────────────────────
+
+function BarnGLB() {
+  const { scene } = useGLTF(MODEL_PATHS.barn);
+  const clone = useMemo(() => scene.clone(true), [scene]);
+  return <primitive object={clone} position={[-5, 0, -3]} scale={1} castShadow />;
+}
+
+// ─── Procedural Barn ──────────────────────────────────────────────────────────
 
 function Barn() {
   return (
@@ -265,7 +289,15 @@ function Barn() {
   );
 }
 
-// ─── Tree ─────────────────────────────────────────────────────────────────────
+// ─── GLB Tree ─────────────────────────────────────────────────────────────────
+
+function TreeGLB({ position }) {
+  const { scene } = useGLTF(MODEL_PATHS.tree);
+  const clone = useMemo(() => scene.clone(true), [scene]);
+  return <primitive object={clone} position={position} scale={1} castShadow />;
+}
+
+// ─── Procedural Tree ──────────────────────────────────────────────────────────
 
 function Tree({ position }) {
   return (
@@ -328,13 +360,26 @@ function FarmScene() {
       <CropRow xOffset={0} zRow={1.4} count={10} />
       <CropRow xOffset={0.5} zRow={2.3} count={8} />
 
-      <Tractor />
-      <Barn />
+      {/* Tractor — GLB if available, procedural fallback */}
+      <Suspense fallback={<Tractor />}>
+        <TractorGLB posX={0} />
+      </Suspense>
 
-      {/* Trees */}
-      <Tree position={[6, -0.3, -1.5]} />
-      <Tree position={[7.8, -0.3, -2.5]} />
-      <Tree position={[-7.5, -0.3, -2]} />
+      {/* Barn — GLB if available, procedural fallback */}
+      <Suspense fallback={<Barn />}>
+        <BarnGLB />
+      </Suspense>
+
+      {/* Trees — GLB if available, procedural fallback */}
+      {[
+        [6, -0.3, -1.5],
+        [7.8, -0.3, -2.5],
+        [-7.5, -0.3, -2],
+      ].map((pos, i) => (
+        <Suspense key={i} fallback={<Tree position={pos} />}>
+          <TreeGLB position={pos} />
+        </Suspense>
+      ))}
 
       {/* Farmer avatar */}
       <AldenAvatar

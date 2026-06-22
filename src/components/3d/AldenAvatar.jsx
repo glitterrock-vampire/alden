@@ -1,7 +1,47 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo, Suspense } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
+import { Html, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import { MODEL_PATHS } from './useAldenModel.js';
+
+// ─── GLB Avatar (drops in when farmer.glb / builder.glb are present) ─────────
+
+function AvatarGLB({ outfit, position, scale, speech }) {
+  const path = outfit === 'farmer' ? MODEL_PATHS.farmer : MODEL_PATHS.builder;
+  const { scene, animations } = useGLTF(path);
+  const clone = useMemo(() => scene.clone(true), [scene]);
+  const meshRef = useRef();
+  const t = useRef(0);
+
+  useFrame((_, delta) => {
+    t.current += delta;
+    if (meshRef.current) {
+      meshRef.current.position.y = position[1] + Math.sin(t.current * 1.4) * 0.025;
+    }
+  });
+
+  return (
+    <group ref={meshRef} position={position} scale={scale}>
+      <primitive object={clone} castShadow />
+      {speech && (
+        <Html position={[0.6, 1.8, 0]} distanceFactor={4} style={{ pointerEvents: 'none' }}>
+          <div style={{
+            background: 'rgba(247,217,134,0.95)', color: '#1a0a00',
+            padding: '5px 9px', borderRadius: '10px',
+            fontSize: '10px', fontFamily: 'monospace',
+            whiteSpace: 'nowrap', boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+            position: 'relative',
+          }}>
+            {speech}
+            <div style={{ position: 'absolute', left: '-6px', bottom: '6px', width: 0, height: 0,
+              borderTop: '5px solid transparent', borderBottom: '5px solid transparent',
+              borderRight: '7px solid rgba(247,217,134,0.95)' }} />
+          </div>
+        </Html>
+      )}
+    </group>
+  );
+}
 
 const OUTFIT = {
   farmer: {
@@ -138,6 +178,8 @@ function AvatarBody({ outfit, hovered }) {
     </group>
   );
 }
+
+// ─── Procedural Avatar (default / fallback) ───────────────────────────────────
 
 export default function AldenAvatar({
   outfit = 'builder',

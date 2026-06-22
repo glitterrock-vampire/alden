@@ -1,10 +1,19 @@
-import { useRef } from 'react';
+import { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Stars } from '@react-three/drei';
+import { Float, Stars, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import AldenAvatar from './AldenAvatar.jsx';
+import { MODEL_PATHS } from './useAldenModel.js';
 
-// ─── Crane ────────────────────────────────────────────────────────────────────
+// ─── GLB Crane (used if crane.glb is present) ────────────────────────────────
+
+function CraneGLB() {
+  const { scene } = useGLTF(MODEL_PATHS.crane);
+  const clone = useMemo(() => scene.clone(true), [scene]);
+  return <primitive object={clone} position={[0.8, 0, 0.3]} scale={1} castShadow />;
+}
+
+// ─── Procedural Crane ─────────────────────────────────────────────────────────
 
 function Crane() {
   const armRef = useRef();
@@ -76,7 +85,15 @@ function Crane() {
   );
 }
 
-// ─── Building under construction ─────────────────────────────────────────────
+// ─── GLB Building (used if building.glb is present) ──────────────────────────
+
+function BuildingGLB() {
+  const { scene } = useGLTF(MODEL_PATHS.building);
+  const clone = useMemo(() => scene.clone(true), [scene]);
+  return <primitive object={clone} position={[-0.6, 0, -0.2]} scale={1} castShadow receiveShadow />;
+}
+
+// ─── Procedural Building ──────────────────────────────────────────────────────
 
 function BuildingWIP() {
   const buildingRef = useRef();
@@ -188,8 +205,17 @@ function HeroScene() {
       <Stars radius={16} depth={8} count={600} factor={2} fade />
 
       <ConstructionGround />
-      <BuildingWIP />
-      <Crane />
+
+      {/* Building — GLB if available, procedural fallback */}
+      <Suspense fallback={<BuildingWIP />}>
+        <BuildingGLB />
+      </Suspense>
+
+      {/* Crane — GLB if available, procedural fallback */}
+      <Suspense fallback={<Crane />}>
+        <CraneGLB />
+      </Suspense>
+
       <FloatingMaterials />
 
       {/* Builder avatar patrolling */}
