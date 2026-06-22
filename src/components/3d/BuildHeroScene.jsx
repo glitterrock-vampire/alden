@@ -213,7 +213,7 @@ export default function BuildHeroScene() {
         shadows
         camera={{ position: [5, 4, 6], fov: 52 }}
         gl={{ antialias: true, alpha: false }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
       >
         <HeroScene />
       </Canvas>

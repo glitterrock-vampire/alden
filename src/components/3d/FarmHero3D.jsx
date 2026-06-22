@@ -372,7 +372,7 @@ export default function FarmHero3D() {
         shadows
         camera={{ position: [0, 4, 10], fov: 58 }}
         gl={{ antialias: true, alpha: false }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
       >
         <FarmScene />
       </Canvas>
@@ -389,6 +389,8 @@ export default function FarmHero3D() {
           inset: 0;
           z-index: 0;
           overflow: hidden;
+          width: 100%;
+          height: 100%;
         }
         .farm-hero-3d-badge {
           position: absolute;

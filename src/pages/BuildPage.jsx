@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 import BuildHeroScene from '@/components/3d/BuildHeroScene';
@@ -555,42 +558,47 @@ export default function BuildPage() {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      letterRefs.current.forEach((letter, index) => {
-        if (letter) {
-          setTimeout(() => {
-            letter.style.opacity = '1';
-            letter.style.transform = 'translateY(0)';
-          }, 800 + index * 100);
+    const ctx = gsap.context(() => {
+      // Hero letters drop in
+      const letters = letterRefs.current.filter(Boolean);
+      gsap.fromTo(letters,
+        { y: -140, opacity: 0, rotateX: -50 },
+        {
+          y: 0, opacity: 1, rotateX: 0,
+          duration: 0.9,
+          ease: 'back.out(1.6)',
+          stagger: 0.08,
+          delay: 0.4,
         }
-      });
-    }, 500);
+      );
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const card = entry.target;
-          // @ts-ignore
-          const index = parseInt(card.dataset.index || '0');
-          setTimeout(() => {
-            // @ts-ignore
-            card.style.opacity = '1';
-            // @ts-ignore
-            card.style.transform = 'translateY(0)';
-          }, index * 100);
-          observer.unobserve(card);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      // Kicker line
+      gsap.fromTo('.build-hero-kicker',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: 0.25 }
+      );
+
+      // Service cards scroll-triggered
+      const cards = cardRefs.current.filter(Boolean);
+      if (cards.length) {
+        gsap.fromTo(cards,
+          { opacity: 0, y: 52 },
+          {
+            opacity: 1, y: 0,
+            duration: 0.65,
+            ease: 'power2.out',
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: cards[0].closest('section') || cards[0],
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
     });
 
-    cardRefs.current.forEach(card => {
-      if (card) observer.observe(card);
-    });
-
-    return () => observer.disconnect();
+    return () => ctx.revert();
   }, []);
 
   const handleSubmit = (e) => {

@@ -55,5 +55,17 @@ export default defineConfig(({ mode }) => {
       react(),
       spotifyApiDevPlugin(env),
     ],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'three-core': ['three'],
+            'r3f':        ['@react-three/fiber', '@react-three/drei'],
+            'gsap':       ['gsap', '@gsap/react'],
+            'vendor':     ['react', 'react-dom', 'react-router-dom'],
+          },
+        },
+      },
+    },
   };
 });

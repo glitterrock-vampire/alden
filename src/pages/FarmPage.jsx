@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 import { ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
 import FarmHero3D from '@/components/3d/FarmHero3D';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FARM_PRODUCTS = [
   // PRODUCE - Fresh from our farm
@@ -198,39 +202,47 @@ export default function FarmPage() {
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   useEffect(() => {
-    setTimeout(() => {
-      letterRefs.current.forEach((letter, index) => {
-        if (letter) {
-          setTimeout(() => {
-            letter.style.opacity = '1';
-            letter.style.transform = 'translateY(0)';
-          }, 800 + index * 100);
+    const ctx = gsap.context(() => {
+      // Hero letters drop in
+      const letters = letterRefs.current.filter(Boolean);
+      gsap.fromTo(letters,
+        { y: -120, opacity: 0, rotateX: -45 },
+        {
+          y: 0, opacity: 1, rotateX: 0,
+          duration: 0.85,
+          ease: 'back.out(1.4)',
+          stagger: 0.1,
+          delay: 0.5,
         }
-      });
-    }, 500);
+      );
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const card = /** @type {HTMLElement} */ (entry.target);
-          const index = parseInt(card.dataset.index || '0');
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, index * 100);
-          observer.unobserve(card);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      // Kicker line slides in
+      gsap.fromTo('.farm-hero-kicker',
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.3 }
+      );
+
+      // Product cards scroll-triggered stagger
+      const cards = cardRefs.current.filter(Boolean);
+      if (cards.length) {
+        gsap.fromTo(cards,
+          { opacity: 0, y: 48 },
+          {
+            opacity: 1, y: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            stagger: 0.08,
+            scrollTrigger: {
+              trigger: cards[0].closest('section') || cards[0],
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
     });
 
-    cardRefs.current.forEach(card => {
-      if (card) observer.observe(card);
-    });
-
-    return () => observer.disconnect();
+    return () => ctx.revert();
   }, []);
 
   const heroLetters = ['F', 'A', 'R', 'M'];
@@ -637,13 +649,7 @@ export default function FarmPage() {
         }
 
         .farm-hero-scene {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-          overflow: hidden;
-          background:
-            radial-gradient(circle at 50% 20%, rgba(255, 248, 185, 0.5), transparent 20rem),
-            linear-gradient(180deg, #f5c96f 0%, #9cca68 34%, #275f23 62%, #071006 100%);
+          display: none;
         }
 
         .farm-sun {
