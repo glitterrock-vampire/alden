@@ -58,11 +58,17 @@ export default defineConfig(({ mode }) => {
     build: {
       rollupOptions: {
         output: {
-          manualChunks: {
-            'three-core': ['three'],
-            'r3f':        ['@react-three/fiber', '@react-three/drei'],
-            'gsap':       ['gsap', '@gsap/react'],
-            'vendor':     ['react', 'react-dom', 'react-router-dom'],
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return undefined;
+
+            if (id.includes('/three/')) return 'three-core';
+            if (id.includes('/@react-three/fiber/') || id.includes('/@react-three/drei/')) return 'r3f';
+            if (id.includes('/gsap/') || id.includes('/@gsap/react/')) return 'gsap';
+            if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/react-router-dom/')) {
+              return 'vendor';
+            }
+
+            return undefined;
           },
         },
       },
