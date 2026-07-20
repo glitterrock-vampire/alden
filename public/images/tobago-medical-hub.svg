@@ -1,0 +1,16 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#06131f"/>
+  <circle cx="960" cy="120" r="280" fill="#0f766e" opacity="0.34"/>
+  <circle cx="185" cy="670" r="320" fill="#2563eb" opacity="0.22"/>
+  <path d="M0 540C164 488 296 474 456 514C625 556 747 612 919 574C1038 548 1120 491 1200 454V800H0V540Z" fill="#0b2238"/>
+  <rect x="210" y="178" width="780" height="444" rx="34" fill="#f8fafc"/>
+  <rect x="246" y="222" width="708" height="74" rx="20" fill="#e0f2fe"/>
+  <rect x="280" y="328" width="288" height="220" rx="22" fill="#dbeafe"/>
+  <rect x="610" y="328" width="310" height="52" rx="16" fill="#ccfbf1"/>
+  <rect x="610" y="408" width="310" height="52" rx="16" fill="#e2e8f0"/>
+  <rect x="610" y="488" width="220" height="52" rx="16" fill="#e2e8f0"/>
+  <path d="M414 380V496" stroke="#0f766e" stroke-width="48" stroke-linecap="round"/>
+  <path d="M356 438H472" stroke="#0f766e" stroke-width="48" stroke-linecap="round"/>
+  <text x="282" y="270" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Tobago East Medical Services</text>
+  <text x="282" y="680" fill="#e0f2fe" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="8">HEALTHCARE PLATFORM</text>
+</svg>

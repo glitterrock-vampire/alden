@@ -33,6 +33,16 @@ const projects = [
   },
   {
     id: 4,
+    title: "Tobago East Medical Services",
+    subtitle: "Healthcare Platform · Patient Services · Medical Access",
+    tag: "M",
+    image: "/images/tobago-medical-hub.svg",
+    fallbackGradient: "from-slate-950 via-cyan-950 to-black",
+    href: "https://tobago-medical-hub.vercel.app/",
+    year: "2026",
+  },
+  {
+    id: 5,
     title: "ALDEN'S FARM",
     subtitle: "Whole Foods · Chicken · Eggs · Supplies",
     tag: "F",
@@ -42,7 +52,7 @@ const projects = [
     year: "2026",
   },
   {
-    id: 5,
+    id: 6,
     title: "ALDEN'S CONSTRUCTION",
     subtitle: "Affordable Homes · Steel Frames · Coming 2026",
     tag: "B",
@@ -68,14 +78,19 @@ export default function ProjectsShowcase() {
 
       {/* Projects list — Contrast Design style */}
       <div className="divide-y divide-white/10">
-        {projects.map((project, index) => (
-          <a
-            key={project.id}
-            href={project.href}
-            className="relative block group cursor-pointer overflow-hidden"
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
+        {projects.map((project, index) => {
+          const isExternal = project.href.startsWith("http");
+
+          return (
+            <a
+              key={project.id}
+              href={project.href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noreferrer" : undefined}
+              className="relative block group cursor-pointer overflow-hidden"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
             {/* Background image on hover */}
             <div
               className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out"
@@ -140,8 +155,9 @@ export default function ProjectsShowcase() {
               className="absolute bottom-0 left-0 h-px bg-white/80 transition-all duration-500"
               style={{ width: hoveredIndex === index ? "100%" : "0%" }}
             />
-          </a>
-        ))}
+            </a>
+          );
+        })}
       </div>
     </section>
   );

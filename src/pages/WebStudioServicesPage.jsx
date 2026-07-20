@@ -103,6 +103,7 @@ const WEB_PORTFOLIO_PROJECTS = [
   { id: 4, title: 'GLOWING LANDING', category: 'LANDING PAGE', filter: 'frontend', href: 'https://glowing-landing-page.netlify.app', image: 'https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png' },
   { id: 5, title: 'BLACKBOX SYSTEM', category: 'IOT SYSTEM', filter: 'fullstack', href: 'https://blackbox-online.vercel.app', image: 'https://framerusercontent.com/images/fKFKHb1VZsz50W8Ctq7RIZW4SRw.png' },
   { id: 6, title: 'DAVID P BLAKE', category: 'PERSONAL PORTFOLIO', filter: 'frontend', href: 'https://davidpblake.org', image: 'https://framerusercontent.com/images/placeholder.png' },
+  { id: 10, title: 'TOBAGO EAST MEDICAL SERVICES', category: 'HEALTHCARE PLATFORM', filter: 'fullstack', href: 'https://tobago-medical-hub.vercel.app/', image: '/images/tobago-medical-hub.svg' },
   { id: 7, title: 'ALDEN FARM', category: 'ECOSYSTEM / AGRICULTURE', filter: 'ecosystem', href: '/farm', image: 'https://framerusercontent.com/images/jGIDW70qyfBuP6v8UKUwumU8HGo.png' },
   { id: 8, title: 'ALDEN BUILD', category: 'ECOSYSTEM / CONSTRUCTION', filter: 'ecosystem', href: '/build', image: 'https://framerusercontent.com/images/o6w4CVRNseGWbrL67Z02tHFMU.png' },
   { id: 9, title: 'ALDEN SPRINGS', category: 'ECOSYSTEM / WATER', filter: 'ecosystem', href: '/springs', image: 'https://framerusercontent.com/images/Dqg69EBbfiJJHyD2a4T7Ki7uPuc.png' },
