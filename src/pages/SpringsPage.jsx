@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 
@@ -26,36 +26,7 @@ const STORE_FEATURES = [
   { label: 'Service', value: 'Store + Delivery' },
 ];
 
-function WaterfallEnvironment({ progress = 0, compact = false }) {
-  return (
-    <div
-      className={`springs-waterfall-scene ${compact ? 'is-compact' : ''}`}
-      style={{ '--springs-progress': progress.toFixed(3) }}
-      aria-label="Virtual pure water waterfall environment"
-    >
-      <div className="springs-mountain-layer is-back" aria-hidden="true" />
-      <div className="springs-mountain-layer is-mid" aria-hidden="true" />
-      <div className="springs-waterfall-sheet is-left" aria-hidden="true" />
-      <div className="springs-waterfall-sheet is-main" aria-hidden="true" />
-      <div className="springs-waterfall-sheet is-right" aria-hidden="true" />
-      <div className="springs-pool" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="springs-mist is-one" aria-hidden="true" />
-      <div className="springs-mist is-two" aria-hidden="true" />
-      <div className="springs-bottle-silhouette" aria-hidden="true">
-        <span>ALDEN</span>
-      </div>
-    </div>
-  );
-}
-
 export default function SpringsPage() {
-  const letterRefs = useRef([]);
-  const environmentRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -63,49 +34,11 @@ export default function SpringsPage() {
     interest: ''
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      letterRefs.current.forEach((letter, index) => {
-        if (letter) {
-          setTimeout(() => {
-            letter.style.opacity = '1';
-            letter.style.transform = 'translateY(0)';
-          }, 800 + index * 100);
-        }
-      });
-    }, 500);
-
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const updateProgress = () => {
-      const section = environmentRef.current;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const travel = Math.max(1, rect.height - window.innerHeight);
-      const rawProgress = Math.min(1, Math.max(0, -rect.top / travel));
-      setScrollProgress(rawProgress);
-    };
-
-    updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
-
-    return () => {
-      window.removeEventListener('scroll', updateProgress);
-      window.removeEventListener('resize', updateProgress);
-    };
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('Thank you for joining our water store list. We will keep you updated on ALDEN Springs.');
     setFormData({ name: '', email: '', phone: '', interest: '' });
   };
-
-  const heroLetters = ['S', 'P', 'R', 'I', 'N', 'G', 'S'];
 
   return (
     <div className="springs-page min-h-screen bg-background">

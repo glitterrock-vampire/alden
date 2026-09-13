@@ -34,7 +34,14 @@ function spotifyApiDevPlugin(env) {
           },
         };
 
-        await spotifyNowPlaying(req, response);
+        try {
+          await spotifyNowPlaying(req, response);
+        } catch (error) {
+          console.error('Spotify middleware error:', error.message);
+          res.statusCode = 503;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Spotify service unavailable' }));
+        }
       });
     },
   };

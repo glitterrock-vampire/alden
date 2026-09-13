@@ -13,8 +13,12 @@ function Sun() {
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    if (meshRef.current) meshRef.current.scale.setScalar(1 + Math.sin(t * 0.8) * 0.018);
-    if (glowRef.current) glowRef.current.scale.setScalar(1 + Math.sin(t * 0.6) * 0.04);
+    // Smoother, more subtle pulse with easing
+    const pulse = Math.sin(t * 0.5) * 0.015 + 1;
+    const glow = Math.sin(t * 0.3) * 0.035 + 1;
+    
+    if (meshRef.current) meshRef.current.scale.setScalar(pulse);
+    if (glowRef.current) glowRef.current.scale.setScalar(glow);
   });
 
   return (
@@ -125,11 +129,23 @@ function Field() {
 function CropRow({ xOffset = 0, zRow = 0, count = 9 }) {
   const groupRef = useRef();
 
+  // Smooth easing function for natural crop wave (ease-in-out sine)
+  const easeInOutSine = (x) => -(Math.cos(Math.PI * x) - 1) / 2;
+
   useFrame((state) => {
     if (!groupRef.current) return;
     const t = state.clock.elapsedTime;
     groupRef.current.children.forEach((child, i) => {
-      child.scale.y = 0.7 + Math.sin(t * 1.2 + i * 0.4) * 0.3;
+      // Smoother wave with better spacing
+      const phase = (t * 0.8 + i * 0.35);
+      const normalizedPhase = (phase % (Math.PI * 2)) / (Math.PI * 2);
+      const eased = easeInOutSine(normalizedPhase);
+      
+      // More natural growth animation (0.6 to 1.0 scale)
+      child.scale.y = 0.6 + eased * 0.35;
+      
+      // Slight rotation for wind effect
+      child.rotation.z = Math.sin(t * 0.6 + i * 0.3) * 0.08;
     });
   });
 
@@ -167,18 +183,24 @@ function CropRow({ xOffset = 0, zRow = 0, count = 9 }) {
 }
 
 // ─── GLB Tractor (used if tractor.glb is present) ────────────────────────────
+// NOTE: GLB files not currently available, using procedural fallback
 
 function TractorGLB({ posX }) {
-  const { scene } = useGLTF(MODEL_PATHS.tractor);
-  const clone = useMemo(() => scene.clone(true), [scene]);
-  return (
-    <primitive
-      object={clone}
-      position={[posX, 0, 1.8]}
-      scale={1}
-      castShadow
-    />
-  );
+  try {
+    const { scene } = useGLTF(MODEL_PATHS.tractor);
+    const clone = useMemo(() => scene.clone(true), [scene]);
+    return (
+      <primitive
+        object={clone}
+        position={[posX, 0, 1.8]}
+        scale={1}
+        castShadow
+      />
+    );
+  } catch (error) {
+    // Model doesn't exist, throw to trigger Suspense fallback
+    throw error;
+  }
 }
 
 // ─── Procedural Tractor (fallback) ───────────────────────────────────────────
@@ -190,18 +212,97 @@ function Tractor() {
   const wheelRLRef = useRef();
   const wheelRRRef = useRef();
   const posX = useRef(-14);
+  const wheelRotationRef = useRef(0);
+  
+  // Physics constants
+  const FRONT_WHEEL_RADIUS = 0.26;
+  const REAR_WHEEL_RADIUS = 0.38;
+  const TRACTOR_SPEED = 2.4;
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
-    posX.current += delta * 2.4;
-    if (posX.current > 16) posX.current = -14;
+    
+    // Movement
+    posX.current += delta * TRACTOR_SPEED;
+    
+    // Loop position smoothly
+    if (posX.current > 16) {
+      posX.current = -14;
+      wheelRotationRef.current = 0; // Reset wheel rotation on loop
+    }
+    
     groupRef.current.position.x = posX.current;
 
-    const spin = posX.current * 1.8;
-    [wheelFLRef, wheelFRRef, wheelRLRef, wheelRRRef].forEach(r => {
-      if (r.current) r.current.rotation.z = -spin;
-    });
+    // Physics-based wheel rotation
+    // Distance traveled this frame = speed * deltaTime
+    const distanceTraveled = TRACTOR_SPEED * delta;
+    
+    // Rotation angle = distance / radius (in radians)
+    const frontWheelRotation = distanceTraveled / FRONT_WHEEL_RADIUS;
+    const rearWheelRotation = distanceTraveled / REAR_WHEEL_RADIUS;
+    
+    // Accumulate rotation
+    wheelRotationRef.current += rearWheelRotation;
+
+    // Apply rotation to wheels (rotation around Y axis since wheels are cylindrical)
+    // Positive rotation for forward motion
+    if (wheelFLRef.current) wheelFLRef.current.rotation.y += frontWheelRotation;
+    if (wheelFRRef.current) wheelFRRef.current.rotation.y += frontWheelRotation;
+    if (wheelRLRef.current) wheelRLRef.current.rotation.y += rearWheelRotation;
+    if (wheelRRRef.current) wheelRRRef.current.rotation.y += rearWheelRotation;
+    
+    // Slight vertical bobbing for suspension effect
+    groupRef.current.position.y = Math.sin(posX.current * 0.15) * 0.04;
   });
+
+  return (
+    <group ref={groupRef} position={[-14, 0, 1.8]}>
+      {/* Body */}
+      <mesh castShadow position={[0, 0.55, 0]}>
+        <boxGeometry args={[1.6, 0.65, 0.85]} />
+        <meshStandardMaterial color="#d95f2d" roughness={0.7} metalness={0.15} />
+      </mesh>
+      {/* Hood */}
+      <mesh castShadow position={[0.65, 0.68, 0]}>
+        <boxGeometry args={[0.5, 0.42, 0.7]} />
+        <meshStandardMaterial color="#c74e1e" roughness={0.7} metalness={0.15} />
+      </mesh>
+      {/* Cab */}
+      <mesh castShadow position={[-0.35, 0.98, 0]}>
+        <boxGeometry args={[0.7, 0.55, 0.72]} />
+        <meshStandardMaterial color="#d95f2d" roughness={0.7} />
+      </mesh>
+      {/* Cab glass */}
+      <mesh position={[-0.35, 1.0, 0.37]}>
+        <boxGeometry args={[0.64, 0.44, 0.04]} />
+        <meshStandardMaterial color="#c8efff" transparent opacity={0.6} roughness={0.1} />
+      </mesh>
+      {/* Exhaust pipe */}
+      <mesh castShadow position={[0.85, 1.0, 0.2]}>
+        <cylinderGeometry args={[0.05, 0.05, 0.5, 6]} />
+        <meshStandardMaterial color="#333" roughness={0.5} metalness={0.6} />
+      </mesh>
+      {/* Front wheels */}
+      <group ref={wheelFLRef} position={[0.65, 0.28, 0.48]}>
+        <mesh castShadow><cylinderGeometry args={[0.26, 0.26, 0.14, 10]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#1a1a1a" roughness={0.9} /></mesh>
+        <mesh><cylinderGeometry args={[0.1, 0.1, 0.16, 6]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#ccbb87" roughness={0.5} metalness={0.4} /></mesh>
+      </group>
+      <group ref={wheelFRRef} position={[0.65, 0.28, -0.48]}>
+        <mesh castShadow><cylinderGeometry args={[0.26, 0.26, 0.14, 10]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#1a1a1a" roughness={0.9} /></mesh>
+        <mesh><cylinderGeometry args={[0.1, 0.1, 0.16, 6]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#ccbb87" roughness={0.5} metalness={0.4} /></mesh>
+      </group>
+      {/* Rear wheels (bigger) */}
+      <group ref={wheelRLRef} position={[-0.6, 0.36, 0.54]}>
+        <mesh castShadow><cylinderGeometry args={[0.38, 0.38, 0.18, 12]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#1a1a1a" roughness={0.9} /></mesh>
+        <mesh><cylinderGeometry args={[0.15, 0.15, 0.2, 6]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#ccbb87" roughness={0.5} metalness={0.4} /></mesh>
+      </group>
+      <group ref={wheelRRRef} position={[-0.6, 0.36, -0.54]}>
+        <mesh castShadow><cylinderGeometry args={[0.38, 0.38, 0.18, 12]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#1a1a1a" roughness={0.9} /></mesh>
+        <mesh><cylinderGeometry args={[0.15, 0.15, 0.2, 6]} rotation={[Math.PI / 2, 0, 0]} /><meshStandardMaterial color="#ccbb87" roughness={0.5} metalness={0.4} /></mesh>
+      </group>
+    </group>
+  );
+}
 
   return (
     <group ref={groupRef} position={[-14, 0, 1.8]}>
@@ -360,25 +461,19 @@ function FarmScene() {
       <CropRow xOffset={0} zRow={1.4} count={10} />
       <CropRow xOffset={0.5} zRow={2.3} count={8} />
 
-      {/* Tractor — GLB if available, procedural fallback */}
-      <Suspense fallback={<Tractor />}>
-        <TractorGLB posX={0} />
-      </Suspense>
+      {/* Tractor — procedural only since GLB files not available */}
+      <Tractor />
 
-      {/* Barn — GLB if available, procedural fallback */}
-      <Suspense fallback={<Barn />}>
-        <BarnGLB />
-      </Suspense>
+      {/* Barn — procedural only since GLB files not available */}
+      <Barn />
 
-      {/* Trees — GLB if available, procedural fallback */}
+      {/* Trees — procedural only since GLB files not available */}
       {[
         [6, -0.3, -1.5],
         [7.8, -0.3, -2.5],
         [-7.5, -0.3, -2],
       ].map((pos, i) => (
-        <Suspense key={i} fallback={<Tree position={pos} />}>
-          <TreeGLB position={pos} />
-        </Suspense>
+        <Tree key={i} position={pos} />
       ))}
 
       {/* Farmer avatar */}

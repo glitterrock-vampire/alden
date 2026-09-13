@@ -1,12 +1,46 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 import { ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
-import FarmHero3D from '@/components/3d/FarmHero3D';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const heroImg = 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png';
+
+function HeroParallax() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  return (
+    <section ref={ref} className="relative h-screen overflow-hidden flex items-end pb-20">
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url('${heroImg}')`, y, scale: 1.1 }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent" />
+
+      <motion.div style={{ opacity }} className="relative z-10 w-full px-8 md:px-16">
+        <p className="text-green-600/70 text-[10px] tracking-[0.5em] font-mono uppercase mb-4">
+          Kingston, Jamaica — Est. 2024
+        </p>
+        <h1
+          className="font-black text-white uppercase leading-none"
+          style={{ fontSize: 'clamp(4rem, 18vw, 14rem)', letterSpacing: '-0.03em', fontFamily: 'Koulen, cursive' }}
+        >
+          FARM<br />MARKET
+        </h1>
+        <p className="text-white/70 text-sm font-mono tracking-wider mt-6 max-w-md">
+          Fresh from our farm to your table. Local produce. Sustainable farming. Kingston, Jamaica.
+        </p>
+      </motion.div>
+    </section>
+  );
+}
 
 const FARM_PRODUCTS = [
   // PRODUCE - Fresh from our farm
@@ -149,7 +183,6 @@ const DELIVERY_ZONES = [
 
 
 export default function FarmPage() {
-  const letterRefs = useRef([]);
   const cardRefs = useRef([]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [cart, setCart] = useState([]);
@@ -203,25 +236,6 @@ export default function FarmPage() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero letters drop in
-      const letters = letterRefs.current.filter(Boolean);
-      gsap.fromTo(letters,
-        { y: -120, opacity: 0, rotateX: -45 },
-        {
-          y: 0, opacity: 1, rotateX: 0,
-          duration: 0.85,
-          ease: 'back.out(1.4)',
-          stagger: 0.1,
-          delay: 0.5,
-        }
-      );
-
-      // Kicker line slides in
-      gsap.fromTo('.farm-hero-kicker',
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.3 }
-      );
-
       // Product cards scroll-triggered stagger
       const cards = cardRefs.current.filter(Boolean);
       if (cards.length) {
@@ -245,41 +259,12 @@ export default function FarmPage() {
     return () => ctx.revert();
   }, []);
 
-  const heroLetters = ['F', 'A', 'R', 'M'];
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="farm-hero relative min-h-screen flex items-center justify-center overflow-hidden">
-        <FarmHero3D />
-        <div className="farm-hero-overlay" />
-        <div className="farm-hero-title-wrap absolute bottom-0 left-1/2 -translate-x-1/2 z-[2] flex flex-col justify-center items-center gap-5 p-10 w-full">
-          <p className="farm-hero-kicker">ALDEN FARM - LOCAL PRODUCE MARKET</p>
-          <div className="flex gap-3 justify-center">
-            {heroLetters.map((letter, index) => (
-              <span
-                key={index}
-                ref={el => letterRefs.current[index] = el}
-                style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: 'clamp(120px, 20vw, 670px)',
-                  lineHeight: '0.7',
-                  color: '#eaffd6',
-                  display: 'inline-block',
-                  opacity: 0,
-                  transform: 'translateY(-230px)',
-                  textShadow: '0 1.5rem 4rem rgba(4, 28, 10, 0.42)',
-                  transition: 'opacity 0.9s cubic-bezier(0.77,0.02,0.38,1), transform 0.9s cubic-bezier(0.77,0.02,0.38,1)'
-                }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HeroParallax />
 
       {/* Farm Header */}
       <section className="py-20 md:py-32 px-6 md:px-10 text-center bg-background">
