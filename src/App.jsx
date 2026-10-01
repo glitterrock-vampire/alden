@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import HeroSection from '@/components/home/HeroSection';
 import MarqueeStrip from '@/components/home/MarqueeStrip';
@@ -11,7 +11,6 @@ import FooterSection from '@/components/home/FooterSection';
 import StudiosPage from '@/pages/StudiosPage';
 import EcosystemPage from '@/pages/EcosystemPage';
 import WhoWeArePage from '@/pages/WhoWeArePage';
-import PhotographyPortfolioPage from '@/pages/PhotographyPortfolioPage';
 import PhotoStudioServicesPage from '@/pages/PhotoStudioServicesPage';
 import WebStudioServicesPage from '@/pages/WebStudioServicesPage';
 import CorePage from '@/pages/CorePage';
@@ -74,7 +73,7 @@ export default function App() {
         <Route path="/about/who-we-are" element={<WhoWeArePage />} />
         <Route path="/about/careers"    element={<WhoWeArePage />} />
         <Route path="/about"            element={<WhoWeArePage />} />
-        <Route path="/portfolio/photography"          element={<PhotographyPortfolioPage />} />
+        <Route path="/portfolio/photography"          element={<Navigate replace to="/studios/photo-studio/services" />} />
         <Route path="/portfolio/web"                  element={<WebStudioServicesPage />} />
         <Route path="/studios/web-studio/services"    element={<WebStudioServicesPage />} />
         <Route path="/studios/web-studio/portfolio"   element={<WebStudioServicesPage />} />

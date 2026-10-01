@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 
@@ -35,7 +36,7 @@ const PHOTO_STUDIO_SERVICES = [
     ],
     icon: "✓",
     images: [
-      "https://images.unsplash.com/photo-1519741497674-611481e3d46e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&h=400&fit=crop",
@@ -57,7 +58,7 @@ const PHOTO_STUDIO_SERVICES = [
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1433086966358-54859d0ed316?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=400&fit=crop",
       "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=400&fit=crop"
     ]
@@ -178,334 +179,167 @@ const PHOTO_STUDIO_SERVICES = [
   }
 ];
 
+const FEATURED_WORK = {
+  title: 'Featured work',
+  description: 'A selection of portraits, celebrations, landscapes, and the everyday details in between.',
+  features: ['Landscapes', 'Portraits', 'Street stories', 'Celebrations'],
+  images: [
+    { src: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1000&h=900&fit=crop', title: 'Jamaica landscapes', category: 'Nature photography' },
+    { src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=600&fit=crop', title: 'Portrait sessions', category: 'Portrait photography' },
+    { src: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800&h=600&fit=crop', title: 'Urban exploration', category: 'Street photography' },
+    { src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop', title: 'Wedding stories', category: 'Event photography' },
+    { src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop', title: 'Product photography', category: 'Commercial' },
+    { src: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=1000&h=600&fit=crop', title: 'Architectural details', category: 'Architecture' }
+  ]
+};
+
 export default function PhotoStudioServicesPage() {
-  const serviceRefs = useRef([]);
-  const [selectedService, setSelectedService] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(FEATURED_WORK);
+  const [activePhoto, setActivePhoto] = useState(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const element = entry.target;
-            if (element instanceof HTMLElement) {
-              element.style.opacity = '1';
-              element.style.transform = 'translateY(0)';
-            }
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    serviceRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+    if (!activePhoto) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setActivePhoto(null);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [activePhoto]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <main className="studio-photo-page">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 md:px-12 pt-20 md:pt-0 bg-black text-white">
-        <div className="max-w-4xl text-center">
-          <div className="mb-8 md:mb-12">
-            <div className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-2" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-              ALDEN
-            </div>
-            <div className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-400 mb-4" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-              Technology
-            </div>
-            <div className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-400 mb-4" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-              Innovation
-            </div>
-            <div className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-400" style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-              Design
-            </div>
+      <style>{`
+        .studio-photo-page { min-height: 100vh; background: #111310; color: #f3f1e9; }
+        .studio-photo-shell { width: min(1440px, 100%); margin: 0 auto; padding: clamp(2.5rem, 6vw, 5rem) clamp(1rem, 5vw, 4.5rem) 3rem; }
+        .studio-photo-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 1.6rem; }
+        .studio-photo-kicker { margin: 0 0 .7rem; color: #c5a36d; font: 500 .66rem/1.5 var(--font-body); letter-spacing: .14em; text-transform: uppercase; }
+        .studio-photo-heading h1 { margin: 0; font: 400 clamp(2.7rem, 6vw, 5.4rem)/.9 var(--font-heading); }
+        .studio-photo-detail { max-width: 24rem; }
+        .studio-photo-detail h2 { margin: 0 0 .4rem; color: #e6c995; font: 400 1.1rem/1.3 var(--font-heading); }
+        .studio-photo-detail p { margin: 0; color: #aaa99f; font: 400 .7rem/1.7 var(--font-body); }
+        .studio-photo-filters { display: flex; gap: .45rem; overflow-x: auto; padding: .5rem 0 1rem; scrollbar-width: thin; }
+        .studio-photo-filter { flex: 0 0 auto; border: 1px solid #383a34; background: transparent; color: #aaa99f; padding: .62rem .78rem; font: 400 .6rem/1 var(--font-body); text-transform: uppercase; cursor: pointer; transition: color .2s, background .2s, border-color .2s; }
+        .studio-photo-filter:hover, .studio-photo-filter[aria-pressed="true"] { border-color: #d1ad71; background: #d1ad71; color: #191a16; }
+        .studio-photo-mosaic { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(4, clamp(3rem, 6vw, 5.2rem)); gap: .55rem; }
+        .studio-photo-tile { position: relative; min-width: 0; overflow: hidden; padding: 0; border: 0; background: #252720; text-align: left; cursor: zoom-in; }
+        .studio-photo-tile:nth-child(1) { grid-column: 1 / 7; grid-row: 1 / 5; }
+        .studio-photo-tile:nth-child(2) { grid-column: 7 / 10; grid-row: 1 / 3; }
+        .studio-photo-tile:nth-child(3) { grid-column: 10 / 13; grid-row: 1 / 3; }
+        .studio-photo-tile:nth-child(4) { grid-column: 7 / 10; grid-row: 3 / 5; }
+        .studio-photo-tile:nth-child(5) { grid-column: 10 / 13; grid-row: 3 / 5; }
+        .studio-photo-tile:nth-child(6) { grid-column: 1 / 7; grid-row: 5 / 7; }
+        .studio-photo-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .4s; }
+        .studio-photo-tile:hover img, .studio-photo-tile:focus-visible img { transform: scale(1.045); filter: saturate(1.12); }
+        .studio-photo-tile::after { position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.65)); content: ''; opacity: .7; transition: opacity .25s; }
+        .studio-photo-tile:hover::after { opacity: 1; }
+        .studio-photo-caption { position: absolute; z-index: 1; right: .75rem; bottom: .7rem; left: .75rem; color: white; font: 400 .8rem/1.2 var(--font-body); }
+        .studio-photo-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
+        .studio-photo-meta p { margin: 0; color: #aaa99f; font: 400 .64rem/1.6 var(--font-body); }
+        .studio-photo-features { display: flex; flex-wrap: wrap; gap: .35rem .8rem; color: #d9c29b; }
+        .studio-photo-features span { white-space: nowrap; }
+        .studio-photo-contact { flex: 0 0 auto; color: #e0c18e; font: 500 .64rem/1.5 var(--font-body); text-decoration: none; }
+        .studio-photo-contact:hover { color: white; }
+        .studio-photo-lightbox { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 1.5rem; background: rgba(10,11,9,.95); backdrop-filter: blur(12px); }
+        .studio-photo-lightbox img { max-width: min(1100px, 90vw); max-height: 78vh; object-fit: contain; }
+        .studio-photo-lightbox figcaption { margin-top: .8rem; color: white; font: 400 .75rem/1.5 var(--font-body); }
+        .studio-photo-close { position: absolute; top: 1.25rem; right: 1.25rem; border: 1px solid #777; background: transparent; color: white; padding: .7rem .9rem; font: 400 .62rem/1 var(--font-body); cursor: pointer; }
+        @media (max-width: 700px) {
+          .studio-photo-heading { align-items: start; flex-direction: column; gap: .8rem; }
+          .studio-photo-detail { max-width: 30rem; }
+          .studio-photo-mosaic { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(4, clamp(4rem, 19vw, 7rem)); gap: .4rem; }
+          .studio-photo-tile:nth-child(1) { grid-column: 1 / 5; grid-row: 1 / 3; }
+          .studio-photo-tile:nth-child(2) { grid-column: 1 / 3; grid-row: 3; }
+          .studio-photo-tile:nth-child(3) { grid-column: 3 / 5; grid-row: 3; }
+          .studio-photo-tile:nth-child(4) { grid-column: 1 / 3; grid-row: 4; }
+          .studio-photo-tile:nth-child(5) { grid-column: 3 / 5; grid-row: 4; }
+          .studio-photo-tile:nth-child(6) { display: none; }
+          .studio-photo-meta { align-items: start; flex-direction: column; gap: .8rem; }
+        }
+        @media (prefers-reduced-motion: reduce) { .studio-photo-tile img, .studio-photo-tile::after, .studio-photo-filter { transition: none; } }
+      `}</style>
+      <section className="studio-photo-shell" id="services">
+        <header className="studio-photo-heading">
+          <div>
+            <p className="studio-photo-kicker">Alden Photo Studio · Kingston, Jamaica</p>
+            <h1>Photography,<br />up close.</h1>
           </div>
-          <p 
-            className="text-base md:text-lg lg:text-xl text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-2xl mx-auto px-4"
-            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-          >
-            Professional photography services that capture moments, tell stories, and create lasting impressions through the art of visual storytelling.
+          <div className="studio-photo-detail" aria-live="polite">
+            <h2>{selectedService.title}</h2>
+            <p>{selectedService.description}</p>
+          </div>
+        </header>
+        <nav className="studio-photo-filters" aria-label="Photography services">
+          {[FEATURED_WORK, ...PHOTO_STUDIO_SERVICES].map((service) => (
+            <button
+              key={service.title}
+              className="studio-photo-filter"
+              type="button"
+              aria-pressed={selectedService.title === service.title}
+              onClick={() => setSelectedService(service)}
+            >
+              {service.title}
+            </button>
+          ))}
+        </nav>
+        <div className="studio-photo-mosaic" aria-live="polite">
+          <AnimatePresence mode="popLayout">
+            {selectedService.images.map((photo, index) => {
+              const image = typeof photo === 'string' ? photo : photo.src;
+              const title = typeof photo === 'string'
+                ? `${selectedService.title} · ${String(index + 1).padStart(2, '0')}`
+                : photo.title;
+
+              return (
+              <motion.button
+                key={`${selectedService.title}-${image}-${index}`}
+                className="studio-photo-tile"
+                type="button"
+                aria-label={`View ${title.toLowerCase()}`}
+                onClick={() => setActivePhoto({ image, title })}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: .97 }}
+                transition={{ duration: .35, delay: index * .04 }}
+                layout
+              >
+                <img src={image} alt={title} loading={index < 3 ? 'eager' : 'lazy'} />
+                <span className="studio-photo-caption">
+                  {title}{typeof photo === 'string' ? '' : ` · ${photo.category}`}
+                </span>
+              </motion.button>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+        <div className="studio-photo-meta">
+          <p className="studio-photo-features">
+            {selectedService.features.map((feature) => <span key={feature}>{feature}</span>)}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
-            <a 
-              href="/portfolio"
-              className="px-6 md:px-8 py-3 md:py-4 bg-white text-black font-medium rounded-none hover:bg-gray-100 transition-colors text-sm md:text-base"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              View Portfolio
-            </a>
-            <a 
-              href="#services"
-              className="px-6 md:px-8 py-3 md:py-4 border border-white text-white font-medium rounded-none hover:bg-white hover:text-black transition-colors text-sm md:text-base"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              Our Services
-            </a>
-          </div>
+          <a className="studio-photo-contact" href="mailto:photo@alden.com">BOOK A SESSION ↗</a>
         </div>
       </section>
-
-      {/* Services Grid */}
-      <section id="services" className="py-24 px-6 md:px-12 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 
-              className="text-4xl md:text-5xl font-bold mb-6 text-black"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              What We Do
-            </h2>
-            <p 
-              className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              From intimate portraits to grand architectural projects, we bring your vision to life with professional photography services tailored to your needs.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {PHOTO_STUDIO_SERVICES.map((service, index) => (
-              <div
-                key={service.title}
-                ref={(el) => (serviceRefs.current[index] = el)}
-                className="group"
-                style={{
-                  opacity: 0,
-                  transform: 'translateY(30px)',
-                  transition: 'all 0.8s ease-out',
-                  transitionDelay: `${index * 0.1}s`
-                }}
-              >
-                <div 
-                  className="border-b border-gray-200 pb-8 group-hover:border-black transition-colors cursor-pointer"
-                  onClick={() => {
-                    setSelectedService(service);
-                    setIsModalOpen(true);
-                  }}
-                >
-                  {/* Icon */}
-                  <div className="text-4xl mb-6">{service.icon}</div>
-                  
-                  {/* Title */}
-                  <h3 
-                    className="text-2xl font-bold mb-4 text-black"
-                    style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-                  >
-                    {service.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p 
-                    className="text-gray-600 mb-6 leading-relaxed"
-                    style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-                  >
-                    {service.description}
-                  </p>
-                  
-                  {/* Features */}
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li 
-                        key={featureIndex}
-                        className="text-sm text-gray-500 flex items-center"
-                        style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-                      >
-                        <span className="w-1 h-1 bg-black rounded-full mr-3"></span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-24 px-6 md:px-12 bg-gray-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 
-            className="text-4xl md:text-5xl font-bold mb-12 text-black"
-            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
+      <AnimatePresence>
+        {activePhoto && (
+          <motion.div
+            className="studio-photo-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={activePhoto.title}
+            onClick={() => setActivePhoto(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            Our Process
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-black mb-4">01</div>
-              <h3 
-                className="text-xl font-semibold mb-3 text-black"
-                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-              >
-                Consultation
-              </h3>
-              <p 
-                className="text-gray-600"
-                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-              >
-                We discuss your vision, goals, and requirements to understand exactly what you need.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-black mb-4">02</div>
-              <h3 
-                className="text-xl font-semibold mb-3 text-black"
-                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-              >
-                Creation
-              </h3>
-              <p 
-                className="text-gray-600"
-                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-              >
-                Our team captures stunning images that bring your vision to life with artistic excellence.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-black mb-4">03</div>
-              <h3 
-                className="text-xl font-semibold mb-3 text-black"
-                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-              >
-                Delivery
-              </h3>
-              <p 
-                className="text-gray-600"
-                style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-              >
-                Professional editing and delivery of high-quality images ready for your use.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 px-6 md:px-12 bg-black text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 
-            className="text-4xl md:text-5xl font-bold mb-8"
-            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-          >
-            Let's Create Something
-            <br />
-            Beautiful Together
-          </h2>
-          <p 
-            className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto"
-            style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-          >
-            Ready to bring your vision to life? Get in touch to discuss your photography project and let us help you tell your story through stunning images.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="mailto:photo@alden.com"
-              className="px-8 py-4 bg-white text-black font-medium rounded-none hover:bg-gray-100 transition-colors"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              Get in Touch
-            </a>
-            <a 
-              href="/portfolio"
-              className="px-8 py-4 border border-white text-white font-medium rounded-none hover:bg-white hover:text-black transition-colors"
-              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              View Work
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Mosaic Modal */}
-      {isModalOpen && selectedService && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 overflow-y-auto"
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsModalOpen(false);
-          }}
-        >
-          <div 
-            className="min-h-screen px-4 py-12 md:py-20"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="max-w-7xl mx-auto">
-              {/* Header */}
-              <div className="flex justify-between items-center mb-8">
-                <h2 
-                  className="text-3xl md:text-4xl font-bold text-white"
-                  style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-                >
-                  {selectedService.title}
-                </h2>
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsModalOpen(false);
-                  }}
-                  className="text-white text-4xl hover:text-gray-300 transition-colors"
-                >
-                  ×
-                </button>
-              </div>
-
-              {/* Mosaic Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
-                {selectedService.images.map((image, index) => {
-                  const isLarge = index === 0;
-                  const isWide = index === 1;
-                  const isTall = index === 2;
-                  
-                  return (
-                    <div 
-                      key={index}
-                      className={`relative overflow-hidden bg-gray-800 ${
-                        isLarge ? 'col-span-2 row-span-2' : ''
-                      } ${
-                        isWide ? 'col-span-2' : ''
-                      } ${
-                        isTall ? 'row-span-2' : ''
-                      }`}
-                      style={{ aspectRatio: isLarge || isTall ? '1' : '1' }}
-                    >
-                      <img
-                        src={image}
-                        alt={`${selectedService.title} ${index + 1}`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        onError={(e) => console.error('Image failed to load:', image, e)}
-                        onLoad={() => console.log('Image loaded successfully:', image)}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Description */}
-              <div className="mt-12 text-center">
-                <p 
-                  className="text-gray-300 max-w-2xl mx-auto"
-                  style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}
-                >
-                  {selectedService.description}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
+            <button className="studio-photo-close" type="button" onClick={() => setActivePhoto(null)}>CLOSE ×</button>
+            <figure onClick={(event) => event.stopPropagation()}>
+              <img src={activePhoto.image} alt={activePhoto.title} />
+              <figcaption>{activePhoto.title}</figcaption>
+            </figure>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <FooterSection />
-    </div>
+    </main>
   );
 }
