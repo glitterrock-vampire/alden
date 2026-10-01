@@ -45,28 +45,11 @@ export default function SpringsPage() {
       <Navbar />
 
       <section className="springs-hero">
-        <div className="springs-hero-water" aria-hidden="true">
-          <WaterfallEnvironment progress={scrollProgress * 0.35} compact />
-        </div>
         <div className="springs-hero-overlay" aria-hidden="true" />
 
         <div className="springs-hero-content">
           <p className="springs-kicker">ALDEN SPRINGS · PURE WATER STORE</p>
-          <h1 className="springs-hero-title" aria-label="Springs">
-            {heroLetters.map((letter, index) => (
-              <span
-                key={letter + index}
-                ref={el => letterRefs.current[index] = el}
-                style={{
-                  opacity: 0,
-                  transform: 'translateY(-230px)',
-                  transition: 'opacity 0.9s cubic-bezier(0.77,0.02,0.38,1), transform 0.9s cubic-bezier(0.77,0.02,0.38,1)'
-                }}
-              >
-                {letter}
-              </span>
-            ))}
-          </h1>
+          <h1 className="springs-hero-title">SPRINGS</h1>
           <div className="springs-hero-copy">
             <span>COMING 2027</span>
             <p>
@@ -102,26 +85,14 @@ export default function SpringsPage() {
         </div>
       </section>
 
-      <section
-        className="springs-scroll-environment"
-        ref={environmentRef}
-        style={{ '--springs-progress': scrollProgress.toFixed(3) }}
-      >
+      <section className="springs-scroll-environment">
         <div className="springs-sticky-frame">
-          <WaterfallEnvironment progress={scrollProgress} />
           <div className="springs-scroll-copy">
             <span className="springs-kicker">Virtual Source</span>
             <h2>Scroll Through The Waterfall</h2>
             <p>
               The environment pans as you move down the page, creating the feeling of traveling from the waterfall source into the pool where the water brand begins.
             </p>
-            <div className="springs-progress-card">
-              <span>Source Pan</span>
-              <div className="springs-progress-track">
-                <i style={{ width: `${Math.round(scrollProgress * 100)}%` }} />
-              </div>
-              <strong>{String(Math.round(scrollProgress * 100)).padStart(3, '0')}%</strong>
-            </div>
           </div>
         </div>
       </section>
@@ -228,11 +199,7 @@ export default function SpringsPage() {
           padding: clamp(7rem, 12vh, 10rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 7vh, 5rem);
         }
 
-        .springs-hero-water {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-        }
+
 
         .springs-hero-overlay {
           position: absolute;
@@ -260,20 +227,13 @@ export default function SpringsPage() {
         }
 
         .springs-hero-title {
-          display: flex;
-          flex-wrap: wrap;
-          gap: clamp(0.08em, 0.9vw, 0.14em);
-          max-width: 78rem;
-          margin: 1.35rem 0 0;
-        }
-
-        .springs-hero-title span {
-          display: inline-block;
           font-family: 'Koulen', cursive;
           font-size: clamp(4.75rem, 14vw, 14rem);
           line-height: 0.72;
           color: #f4fbff;
           text-shadow: 0 0 3rem rgba(141, 216, 232, 0.24);
+          max-width: 78rem;
+          margin: 1.35rem 0 0;
         }
 
         .springs-hero-copy {
@@ -453,15 +413,13 @@ export default function SpringsPage() {
 
         .springs-scroll-environment {
           position: relative;
-          min-height: 230vh;
+          min-height: 50vh;
           background: #050505;
         }
 
         .springs-sticky-frame {
-          position: sticky;
-          top: 0;
-          min-height: 100svh;
-          overflow: hidden;
+          position: relative;
+          min-height: 50vh;
           display: grid;
           align-items: center;
           padding: clamp(5rem, 9vh, 7rem) clamp(1.25rem, 5vw, 4rem);
@@ -478,200 +436,6 @@ export default function SpringsPage() {
           border-radius: 1.5rem;
           background: rgba(5, 12, 16, 0.56);
           backdrop-filter: blur(18px);
-        }
-
-        .springs-progress-card {
-          display: grid;
-          grid-template-columns: auto 1fr auto;
-          align-items: center;
-          gap: 0.8rem;
-          margin-top: 0.5rem;
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.68rem;
-          letter-spacing: 0.12em;
-          color: rgba(231, 229, 223, 0.68);
-          text-transform: uppercase;
-        }
-
-        .springs-progress-track {
-          height: 0.3rem;
-          overflow: hidden;
-          border-radius: 999px;
-          background: rgba(255, 255, 255, 0.12);
-        }
-
-        .springs-progress-track i {
-          display: block;
-          height: 100%;
-          border-radius: inherit;
-          background: linear-gradient(90deg, #8dd8e8, #f4fbff);
-        }
-
-        .springs-waterfall-scene {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-          background:
-            radial-gradient(circle at 50% 85%, rgba(141, 216, 232, 0.2), transparent 20rem),
-            linear-gradient(180deg, #061015 0%, #0c2730 44%, #041015 100%);
-          transform: scale(calc(1 + (var(--springs-progress) * 0.08)));
-          transform-origin: center;
-        }
-
-        .springs-waterfall-scene.is-compact {
-          transform: scale(1.03);
-        }
-
-        .springs-waterfall-scene::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background:
-            linear-gradient(90deg, rgba(5, 5, 5, 0.4), transparent 35%, rgba(5, 5, 5, 0.35)),
-            radial-gradient(circle at 52% 58%, transparent 0 10rem, rgba(5, 5, 5, 0.18) 24rem);
-          z-index: 2;
-        }
-
-        .springs-mountain-layer {
-          position: absolute;
-          inset: auto -10% 18% -10%;
-          height: 58%;
-          background: linear-gradient(135deg, #123842, #07181f);
-          clip-path: polygon(0 70%, 12% 46%, 22% 62%, 34% 24%, 48% 56%, 58% 34%, 72% 60%, 86% 28%, 100% 66%, 100% 100%, 0 100%);
-          transform: translateY(calc(var(--springs-progress) * -4rem));
-        }
-
-        .springs-mountain-layer.is-back {
-          bottom: 30%;
-          opacity: 0.55;
-          filter: blur(1px);
-          transform: translateY(calc(var(--springs-progress) * -6rem)) scale(1.08);
-        }
-
-        .springs-mountain-layer.is-mid {
-          opacity: 0.8;
-        }
-
-        .springs-waterfall-sheet {
-          position: absolute;
-          top: -14%;
-          bottom: 24%;
-          z-index: 1;
-          border-radius: 999px;
-          background:
-            linear-gradient(90deg, transparent, rgba(244, 251, 255, 0.85), rgba(141, 216, 232, 0.55), transparent),
-            repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0 0.65rem, rgba(141, 216, 232, 0.05) 0.65rem 1.25rem);
-          filter: blur(0.3px);
-          opacity: 0.86;
-          animation: springsWaterfallFlow 1.1s linear infinite;
-          transform: translateY(calc(var(--springs-progress) * 7rem));
-        }
-
-        .springs-waterfall-sheet.is-main {
-          left: 44%;
-          width: clamp(7rem, 16vw, 15rem);
-        }
-
-        .springs-waterfall-sheet.is-left {
-          left: 33%;
-          width: clamp(2.5rem, 7vw, 5rem);
-          opacity: 0.46;
-          animation-duration: 1.55s;
-        }
-
-        .springs-waterfall-sheet.is-right {
-          right: 29%;
-          width: clamp(2rem, 6vw, 4rem);
-          opacity: 0.4;
-          animation-duration: 1.35s;
-        }
-
-        .springs-pool {
-          position: absolute;
-          left: 50%;
-          bottom: -8%;
-          z-index: 1;
-          width: min(86vw, 58rem);
-          height: 26rem;
-          border-radius: 50%;
-          background:
-            radial-gradient(ellipse at center, rgba(244, 251, 255, 0.32), rgba(141, 216, 232, 0.2) 38%, rgba(4, 16, 21, 0.4) 68%);
-          transform: translateX(-50%) translateY(calc(var(--springs-progress) * -4rem));
-        }
-
-        .springs-pool span {
-          position: absolute;
-          inset: 16%;
-          border: 1px solid rgba(244, 251, 255, 0.22);
-          border-radius: 50%;
-          animation: springsRipple 3s ease-out infinite;
-        }
-
-        .springs-pool span:nth-child(2) {
-          animation-delay: 0.8s;
-        }
-
-        .springs-pool span:nth-child(3) {
-          animation-delay: 1.6s;
-        }
-
-        .springs-mist {
-          position: absolute;
-          z-index: 2;
-          width: 22rem;
-          height: 12rem;
-          border-radius: 50%;
-          background: rgba(244, 251, 255, 0.16);
-          filter: blur(32px);
-          animation: springsMistFloat 7s ease-in-out infinite;
-        }
-
-        .springs-mist.is-one {
-          left: 18%;
-          bottom: 24%;
-        }
-
-        .springs-mist.is-two {
-          right: 12%;
-          bottom: 18%;
-          animation-delay: 2s;
-        }
-
-        .springs-bottle-silhouette {
-          position: absolute;
-          right: clamp(1.5rem, 7vw, 7rem);
-          bottom: clamp(2rem, 8vh, 5rem);
-          z-index: 3;
-          width: clamp(4.5rem, 10vw, 8rem);
-          height: clamp(13rem, 28vw, 22rem);
-          border: 1px solid rgba(244, 251, 255, 0.42);
-          border-radius: 2.8rem 2.8rem 1.1rem 1.1rem;
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0.18), rgba(141, 216, 232, 0.08), rgba(255, 255, 255, 0.16));
-          box-shadow: inset 0 -5rem 6rem rgba(141, 216, 232, 0.16), 0 2rem 4rem rgba(0, 0, 0, 0.22);
-        }
-
-        .springs-bottle-silhouette::before {
-          content: '';
-          position: absolute;
-          left: 50%;
-          top: -2.4rem;
-          width: 36%;
-          height: 3rem;
-          border: 1px solid rgba(244, 251, 255, 0.42);
-          border-bottom: 0;
-          border-radius: 0.65rem 0.65rem 0 0;
-          transform: translateX(-50%);
-        }
-
-        .springs-bottle-silhouette span {
-          position: absolute;
-          left: 50%;
-          top: 48%;
-          transform: translate(-50%, -50%) rotate(-90deg);
-          font-family: 'Roboto Mono', monospace;
-          font-size: clamp(0.62rem, 1.2vw, 0.9rem);
-          letter-spacing: 0.35em;
-          color: rgba(244, 251, 255, 0.72);
         }
 
         .springs-store-stats {
@@ -808,47 +572,7 @@ export default function SpringsPage() {
           font-weight: 500;
         }
 
-        @keyframes springsWaterfallFlow {
-          0% {
-            background-position: 0 0, 0 0;
-          }
 
-          100% {
-            background-position: 0 0, 0 3rem;
-          }
-        }
-
-        @keyframes springsRipple {
-          0% {
-            opacity: 0.5;
-            transform: scale(0.5);
-          }
-
-          100% {
-            opacity: 0;
-            transform: scale(1.8);
-          }
-        }
-
-        @keyframes springsMistFloat {
-          0%, 100% {
-            transform: translate3d(0, 0, 0);
-          }
-
-          50% {
-            transform: translate3d(2rem, -1rem, 0);
-          }
-        }
-
-        @keyframes springsBottleWater {
-          0%, 100% {
-            transform: translateY(0);
-          }
-
-          50% {
-            transform: translateY(-0.35rem);
-          }
-        }
 
         @media (max-width: 900px) {
           .springs-section-heading,
@@ -870,13 +594,23 @@ export default function SpringsPage() {
           }
         }
 
+        @keyframes springsBottleWater {
+          0%, 100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-0.35rem);
+          }
+        }
+
         @media (max-width: 640px) {
           .springs-hero {
             align-items: center;
             padding: 6.5rem 1rem 2.5rem;
           }
 
-          .springs-hero-title span {
+          .springs-hero-title {
             font-size: clamp(3.5rem, 18vw, 5.25rem);
           }
 
@@ -902,27 +636,13 @@ export default function SpringsPage() {
             min-height: 24rem;
           }
 
-          .springs-scroll-environment {
-            min-height: 210vh;
-          }
-
           .springs-sticky-frame {
             padding: 5.5rem 1rem 1rem;
             align-items: end;
           }
 
-          .springs-bottle-silhouette {
-            opacity: 0.62;
-            right: 1rem;
-          }
-
-          .springs-progress-card,
           .springs-form-grid {
             grid-template-columns: 1fr;
-          }
-
-          .springs-progress-card {
-            align-items: start;
           }
         }
       `}</style>
