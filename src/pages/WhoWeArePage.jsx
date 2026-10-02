@@ -1,25 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
+import { WEB_PORTFOLIO_PROJECTS } from '@/pages/web-studio/webStudioData';
+import './WhoWeArePage.css';
 
 export default function WhoWeArePage() {
-  const letterRefs = useRef([]);
   const location = useLocation();
-
-  useEffect(() => {
-    setTimeout(() => {
-      letterRefs.current.forEach((letter, index) => {
-        if (letter) {
-          setTimeout(() => {
-            letter.style.opacity = '1';
-            letter.style.transform = 'translateY(0) scale(1)';
-          }, 800 + index * 100);
-        }
-      });
-    }, 500);
-  }, []);
 
   useEffect(() => {
     if (location.pathname !== '/about/careers' && location.hash !== '#careers') return;
@@ -29,122 +17,98 @@ export default function WhoWeArePage() {
     });
   }, [location.pathname, location.hash]);
 
-  const heroLetters = ['W', 'H', 'O'];
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="about-page min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-black/70 z-[1]" />
-        <div className="absolute bottom-0 left-0 right-0 z-[2] flex flex-col justify-center items-center gap-5 p-10 pb-20">
-          <div className="flex gap-3 justify-center">
-            {heroLetters.map((letter, index) => (
-              <span
-                key={index}
-                ref={el => letterRefs.current[index] = el}
-                style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: 'clamp(120px, 20vw, 670px)',
-                  lineHeight: '0.7',
-                  color: 'white',
-                  display: 'inline-block',
-                  opacity: 0,
-                  transform: 'translateY(-230px)',
-                  transition: 'opacity 0.9s cubic-bezier(0.77,0.02,0.38,1), transform 0.9s cubic-bezier(0.77,0.02,0.38,1)'
-                }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
-
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 0.8 }}
-            className="text-[11px] tracking-[0.4em] text-accent uppercase mt-8"
-            style={{ fontFamily: 'Roboto Mono, monospace' }}
-          >
-            Creative Studio · Digital Innovation · Visual Storytelling
-          </motion.p>
-
-          {/* Mission Statement */}
+      <section className="about-hero">
+        <div className="about-hero__inner">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.8 }}
-            className="max-w-3xl mx-auto text-center mt-6"
+            transition={{ duration: 0.75, ease: 'easeOut' }}
+            className="about-hero__copy"
           >
-            <p
-              className="text-lg md:text-xl leading-relaxed"
-              style={{ fontFamily: 'Roboto Mono, monospace', color: 'rgba(255,255,255,0.8)' }}
-            >
-              We are a multidisciplinary collective where technology meets creativity,
-              design meets functionality, and innovation meets purpose.
+            <p className="about-eyebrow">Independent studio · Kingston, Jamaica</p>
+            <h1>ALDEN</h1>
+            <p className="about-hero__statement">
+              Creative technology for a world that keeps moving.
             </p>
+            <p className="about-hero__description">
+              We bring strategy, design, and engineering together to build useful digital experiences and ventures with purpose.
+            </p>
+            <a className="about-hero__link" href="#site-work">Explore our work <span aria-hidden="true">↓</span></a>
           </motion.div>
 
-          {/* Stats Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.1, duration: 0.8 }}
-            className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12"
-          >
+          <div className="about-hero__stats" aria-label="ALDEN at a glance">
             {[
-              { num: '5+', label: 'Years Active' },
-              { num: '50+', label: 'Projects Delivered' },
-              { num: '4', label: 'Venture Studios' },
-              { num: 'Jamaica', label: 'Rooted in Kingston' },
+              { num: '5+', label: 'Years active' },
+              { num: '50+', label: 'Projects delivered' },
+              { num: '4', label: 'Venture studios' },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p
-                  className="text-3xl md:text-4xl font-bold"
-                  style={{ fontFamily: 'Koulen, cursive', color: 'white' }}
-                >
-                  {stat.num}
-                </p>
-                <p
-                  className="text-[10px] tracking-[0.2em] uppercase mt-1"
-                  style={{ fontFamily: 'Roboto Mono, monospace', color: 'rgba(160,130,80,0.8)' }}
-                >
-                  {stat.label}
-                </p>
+              <div className="about-hero__stat" key={stat.label}>
+                <span>{stat.num}</span>
+                <small>{stat.label}</small>
               </div>
             ))}
-          </motion.div>
+          </div>
+        </div>
+      </section>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.5, duration: 0.5 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          >
-            <div className="flex flex-col items-center gap-2">
-              <span
-                className="text-[10px] tracking-[0.3em] uppercase"
-                style={{ fontFamily: 'Roboto Mono, monospace', color: 'rgba(255,255,255,0.5)' }}
-              >
-                Scroll
-              </span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-px h-8 bg-gradient-to-b from-white/50 to-transparent"
-              />
+      <section id="site-work" className="about-work">
+        <div className="about-work__heading">
+          <div>
+            <p className="about-eyebrow">Selected work</p>
+            <h2>Built to be explored.</h2>
+          </div>
+          <p>Digital platforms and experiences made by ALDEN and our studio teams.</p>
+        </div>
+
+        <div className="about-mosaic">
+          <article className="about-mosaic__studio">
+            <div className="about-mosaic__studio-label">
+              <span>Featured studio</span>
+              <span>01 / Web</span>
             </div>
-          </motion.div>
+            <iframe
+              src="/studios/web-studio/services"
+              title="Live preview of the ALDEN Web Studio website"
+              loading="lazy"
+              tabIndex={-1}
+            />
+            <a href="/studios/web-studio/services" aria-label="Open the ALDEN Web Studio website">
+              <span>ALDEN Web Studio</span>
+              <span>Explore the studio <span aria-hidden="true">↗</span></span>
+            </a>
+          </article>
+
+          {WEB_PORTFOLIO_PROJECTS.slice(0, 5).map((project, index) => {
+            const external = project.href.startsWith('http');
+
+            return (
+              <a
+                className={`about-mosaic__project about-mosaic__project--${index + 1}`}
+                href={project.href}
+                key={project.id}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+              >
+                <img src={project.image} alt={`${project.title} website preview`} loading="lazy" />
+                <span className="about-mosaic__project-copy">
+                  <small>{project.category}</small>
+                  <strong>{project.title}</strong>
+                  <span aria-hidden="true">↗</span>
+                </span>
+              </a>
+            );
+          })}
         </div>
       </section>
 
       {/* Studio Overview Section */}
       <section className="py-20 md:py-32 px-6 md:px-10 bg-background">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2.25rem, 4vw, 3rem)', marginBottom: '2.5rem', color: 'hsl(var(--foreground))' }}>Who Are We?</h2>
+          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2.25rem, 4vw, 3rem)', marginBottom: '2.5rem', color: 'hsl(var(--foreground))' }}>The Studio Behind the Work</h2>
           <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(1.125rem, 1.5vw, 1.25rem)', color: 'hsl(var(--muted-foreground))', marginBottom: '2rem', lineHeight: '1.6' }}>
             ALDEN is a multidisciplinary studio where technology meets creativity, design meets functionality, and innovation meets purpose.
           </p>

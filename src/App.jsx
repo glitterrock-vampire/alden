@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Suspense, lazy, useLayoutEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import HeroSection from '@/components/home/HeroSection';
 import MarqueeStrip from '@/components/home/MarqueeStrip';
@@ -12,7 +12,7 @@ import StudiosPage from '@/pages/StudiosPage';
 import EcosystemPage from '@/pages/EcosystemPage';
 import WhoWeArePage from '@/pages/WhoWeArePage';
 import PhotoStudioServicesPage from '@/pages/PhotoStudioServicesPage';
-import WebStudioServicesPage from '@/pages/WebStudioServicesPage';
+import WebStudioServicesPage from '@/pages/web-studio/WebStudioServicesPage';
 import CorePage from '@/pages/CorePage';
 import SpringsPage from '@/pages/SpringsPage';
 
@@ -55,9 +55,20 @@ function Home() {
   );
 }
 
+function ScrollToTop() {
+  const { pathname, search } = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname, search]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/studios" element={<StudiosPage />} />
