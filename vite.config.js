@@ -4,6 +4,8 @@ import path from 'path'
 import spotifyNowPlaying from './api/spotify-now-playing.js'
 
 function spotifyApiDevPlugin(env) {
+  let lastSpotifyErrorLogAt = 0;
+
   return {
     name: 'spotify-api-dev',
     configureServer(server) {
@@ -37,7 +39,11 @@ function spotifyApiDevPlugin(env) {
         try {
           await spotifyNowPlaying(req, response);
         } catch (error) {
-          console.error('Spotify middleware error:', error.message);
+          const now = Date.now();
+          if (now - lastSpotifyErrorLogAt >= 60_000) {
+            console.error('Spotify middleware error:', error.message);
+            lastSpotifyErrorLogAt = now;
+          }
           res.statusCode = 503;
           res.setHeader('Content-Type', 'application/json');
           res.end(JSON.stringify({ error: 'Spotify service unavailable' }));

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const products = [
   {
-    num: '01',
+    num: '03',
     name: "ALDEN'S FARM",
     label: "Alden Farm",
     desc: 'Fresh from farm to Kingston. Partnering with Agrotonomy for sustainable local produce.',
@@ -15,7 +15,7 @@ const products = [
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png',
   },
   {
-    num: '02',
+    num: '04',
     name: "ALDEN'S CONSTRUCTION",
     label: "Alden Build",
     desc: 'Affordable homes for Jamaica. Steel frames, container homes, and blueprint packages.',
@@ -25,7 +25,7 @@ const products = [
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png',
   },
   {
-    num: '03',
+    num: '05',
     name: "ALDEN'S SPRINGS",
     label: "Alden Springs",
     desc: 'Water tracking & irrigation systems for sustainable farming and residential use.',
@@ -35,7 +35,7 @@ const products = [
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/9633f1d94_generated_82c4a200.png',
   },
   {
-    num: '04',
+    num: '01',
     name: "ALDEN WEB STUDIO",
     label: "Alden Web Studio",
     desc: 'Custom web development, e-commerce solutions, and cloud infrastructure for modern businesses.',
@@ -45,7 +45,7 @@ const products = [
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/eaa46c217_generated_ddb849ba.png',
   },
   {
-    num: '05',
+    num: '02',
     name: "ALDEN PHOTO STUDIO",
     label: "Alden Photo Studio",
     desc: 'Professional photography services capturing moments and creating visual stories.',
@@ -98,7 +98,7 @@ export default function EcosystemSection() {
       {/* Product Cards Grid */}
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {products.map((product, i) => (
+          {[...products].sort((a, b) => a.num.localeCompare(b.num)).map((product, i) => (
             <motion.div
               key={product.name}
               initial={{ opacity: 0, y: 40 }}

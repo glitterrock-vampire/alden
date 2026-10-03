@@ -72,21 +72,35 @@ function PortfolioPreview({ project }) {
     event.currentTarget.parentElement?.classList.add('has-failed-preview');
   };
 
+  const sameOriginPreview = (() => {
+    if (!project.href.startsWith('http')) return true;
+
+    try {
+      return new URL(project.href).origin === window.location.origin;
+    } catch {
+      return false;
+    }
+  })();
+
   return (
-    <span className="portfolio-card__media">
+    <span className={`portfolio-card__media ${sameOriginPreview ? '' : 'has-failed-preview'}`}>
       <span className="portfolio-card__fallback" aria-hidden="true">
         <strong>{project.title}</strong>
         <small>{project.category}</small>
       </span>
       <img src={project.image} alt={`${project.title} project preview`} loading="lazy" onError={handleError} />
-      <iframe
-        src={project.href}
-        title={`${project.title} live website preview`}
-        loading="lazy"
-        tabIndex={-1}
-        aria-hidden="true"
-      />
-      <span className="portfolio-card__preview-badge">LIVE PREVIEW / {padNumber(project.id)}</span>
+      {sameOriginPreview && (
+        <iframe
+          src={project.href}
+          title={`${project.title} live website preview`}
+          loading="lazy"
+          tabIndex={-1}
+          aria-hidden="true"
+        />
+      )}
+      <span className="portfolio-card__preview-badge">
+        {sameOriginPreview ? `LIVE PREVIEW / ${padNumber(project.id)}` : 'OPEN SITE'}
+      </span>
     </span>
   );
 }
@@ -106,7 +120,7 @@ function PortfolioCard({ project, revealIndex }) {
           rel={external ? 'noopener noreferrer' : undefined}
           className="portfolio-card__link"
         >
-          {external ? 'View Live Site' : 'View Project'} <span aria-hidden="true">→</span>
+          {external ? 'Open Site' : 'View Project'} <span aria-hidden="true">→</span>
         </a>
       </span>
     </article>
@@ -202,7 +216,7 @@ export default function WebStudioServicesPage() {
 
       <section id="alden-builds" className="web-services-section web-services-builds-section">
         <div className="web-services-wide-shell">
-          <SectionHeading eyebrow="ALDEN Ventures" title="ALDEN Builds" copy="Our own ventures, designed and developed from the ground up." />
+          <SectionHeading eyebrow="ALDEN Ventures" title="ALDEN Builds" copy="Our own ventures are designed and developed from the ground up." />
           <div className="portfolio-card-grid" aria-label="ALDEN venture projects">
             {ALDEN_BUILD_PROJECTS.map((project, index) => (
               <PortfolioCard key={project.id} project={project} revealIndex={index + 1} />

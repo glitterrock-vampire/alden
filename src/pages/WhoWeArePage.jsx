@@ -1,10 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 import { WEB_PORTFOLIO_PROJECTS } from '@/pages/web-studio/webStudioData';
 import './WhoWeArePage.css';
+
+function DigitalClock() {
+  const [time, setTime] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setTime(new Date()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const formattedTime = [time.getHours(), time.getMinutes(), time.getSeconds()]
+    .map((value) => String(value).padStart(2, '0'))
+    .join(':');
+
+  return (
+    <div className="about-digital-clock" aria-live="polite" aria-label="Current local time">
+      <span className="about-digital-clock__label">Local time</span>
+      <span className="about-digital-clock__value">{formattedTime}</span>
+    </div>
+  );
+}
 
 export default function WhoWeArePage() {
   const location = useLocation();
@@ -37,6 +57,7 @@ export default function WhoWeArePage() {
             <p className="about-hero__description">
               We bring strategy, design, and engineering together to build useful digital experiences and ventures with purpose.
             </p>
+            <DigitalClock />
             <a className="about-hero__link" href="#site-work">Explore our work <span aria-hidden="true">↓</span></a>
           </motion.div>
 
