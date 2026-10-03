@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
+import { CONTACT_EMAIL } from '@/lib/contact';
 
 const PHOTO_STUDIO_SERVICES = [
   {
@@ -316,7 +317,7 @@ export default function PhotoStudioServicesPage() {
           <p className="studio-photo-features">
             {selectedService.features.map((feature) => <span key={feature}>{feature}</span>)}
           </p>
-          <a className="studio-photo-contact" href="mailto:photo@alden.com">BOOK A SESSION ↗</a>
+          <a className="studio-photo-contact" href={`mailto:${CONTACT_EMAIL}?subject=Photo%20Studio%20Booking`}>BOOK A SESSION ↗</a>
         </div>
       </section>
       <AnimatePresence>

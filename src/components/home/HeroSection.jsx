@@ -3,11 +3,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const HERO_LETTERS = ['A', 'L', 'D', 'E', 'N'];
 
-export default function HeroSection({ heroImage }) {
+export default function HeroSection() {
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const titleY = useTransform(scrollYProgress, [0, 0.6], [0, -100]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const barOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
@@ -41,16 +40,6 @@ export default function HeroSection({ heroImage }) {
 
   return (
     <section id="home" ref={ref} className="hero-section">
-
-      {/* Background — sits BELOW nav's mixBlendMode layer */}
-      <motion.div className="hero-bg" style={{ y: bgY }}>
-        <img
-          src={heroImage}
-          alt="Hero background"
-          className="hero-bg-img"
-        />
-        <div className="hero-bg-overlay" />
-      </motion.div>
 
       {/* Content wrapper */}
       <motion.div
@@ -130,30 +119,7 @@ export default function HeroSection({ heroImage }) {
           height: 100svh;
           overflow: hidden;
           --side: clamp(1.5rem, 4.5vw, 2.5rem);
-        }
-
-        /* Background: starts below nav to prevent overlap */
-        .hero-bg {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          height: 100%;
-          z-index: 0;
-          /* Sits below nav's mixBlendMode: difference — no z-index fight */
-        }
-        .hero-bg-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center center;
-          display: block;
-        }
-        .hero-bg-overlay {
-          position: absolute;
-          inset: 0;
-          /* Slightly stronger overlay so text is legible even with blend mode above */
-          background: rgba(0, 0, 0, 0.45);
+          background: #000;
         }
 
         /* Content wrapper */

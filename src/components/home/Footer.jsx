@@ -1,5 +1,6 @@
 import React from 'react';
 import SpotifyNowPlaying from './SpotifyNowPlaying';
+import { CONTACT_EMAIL } from '@/lib/contact';
 
 export default function Footer() {
   return (
@@ -19,7 +20,7 @@ export default function Footer() {
         {/* Center: big say hello */}
         <div className="flex items-center justify-center">
           <a
-            href="mailto:hello@alden.design"
+            href={`mailto:${CONTACT_EMAIL}`}
             className="text-white text-3xl md:text-5xl font-black uppercase hover:text-white/50 transition-colors duration-300"
             style={{ fontFamily: "'Arial Black', sans-serif" }}
           >

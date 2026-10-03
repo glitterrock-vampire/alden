@@ -9,7 +9,6 @@ import FooterSection from '@/components/home/FooterSection';
 
 // Static pages — bundled normally
 import StudiosPage from '@/pages/StudiosPage';
-import EcosystemPage from '@/pages/EcosystemPage';
 import WhoWeArePage from '@/pages/WhoWeArePage';
 import PhotoStudioServicesPage from '@/pages/PhotoStudioServicesPage';
 import WebStudioServicesPage from '@/pages/web-studio/WebStudioServicesPage';
@@ -19,8 +18,6 @@ import SpringsPage from '@/pages/SpringsPage';
 // 3D pages — lazy loaded so Three.js/R3F never blocks initial render
 const FarmPage  = lazy(() => import('@/pages/FarmPage'));
 const BuildPage = lazy(() => import('@/pages/BuildPage'));
-
-const heroImage = 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/dca4e077b_generated_26799b91.png';
 
 // Simple fallback while 3D chunks load
 function Page3DFallback() {
@@ -46,7 +43,7 @@ function Home() {
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
-      <HeroSection heroImage={heroImage} />
+      <HeroSection />
       <MarqueeStrip text="TECHNOLOGY · INNOVATION · DESIGN · FARM · BUILD · FLOW · KINGSTON, JA ·" />
       <EcosystemSection />
       <AboutSection />
@@ -56,11 +53,15 @@ function Home() {
 }
 
 function ScrollToTop() {
-  const { pathname, search } = useLocation();
+  const { pathname, search, hash } = useLocation();
 
   useLayoutEffect(() => {
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView();
+      return;
+    }
     window.scrollTo(0, 0);
-  }, [pathname, search]);
+  }, [pathname, search, hash]);
 
   return null;
 }
@@ -72,7 +73,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/studios" element={<StudiosPage />} />
-        <Route path="/ecosystem" element={<EcosystemPage />} />
+        <Route path="/ecosystem" element={<Navigate replace to="/#ecosystem" />} />
 
         {/* 3D pages — lazy + suspense */}
         <Route path="/farm"  element={<Suspense fallback={<Page3DFallback />}><FarmPage /></Suspense>} />

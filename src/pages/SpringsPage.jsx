@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
+import { CONTACT_EMAIL, createContactMailto } from '@/lib/contact';
 
 const SPRINGS_PRODUCTS = [
   {
@@ -36,8 +37,7 @@ export default function SpringsPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for joining our water store list. We will keep you updated on ALDEN Springs.');
-    setFormData({ name: '', email: '', phone: '', interest: '' });
+    window.location.href = createContactMailto('ALDEN Springs Early Access', formData);
   };
 
   return (
@@ -172,7 +172,7 @@ export default function SpringsPage() {
           <h2>Get Water Store Updates</h2>
           <p>Questions about supply, delivery, retail, or partnerships?</p>
           <div className="springs-contact-grid">
-            <span>Email: <strong>water@alden.one</strong></span>
+            <span>Email: <strong><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></strong></span>
             <span>Location: <strong>Kingston, Jamaica</strong></span>
           </div>
           <a href="/contact">Contact Us</a>

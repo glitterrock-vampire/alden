@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
+import { createContactMailto } from '@/lib/contact';
 
 const CONSTRUCTION_SERVICES = [
   {
@@ -55,8 +56,7 @@ export default function BuildPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for joining our waitlist! We\'ll be in touch soon.');
-    setFormData({ name: '', email: '', phone: '', homeType: '', timeline: '', message: '' });
+    window.location.href = createContactMailto('ALDEN Construction Waitlist', formData);
   };
 
   return (

@@ -20,7 +20,7 @@ const products = [
     label: "Alden Build",
     desc: 'Affordable homes for Jamaica. Steel frames, container homes, and blueprint packages.',
     tags: ['Affordable Homes', 'Steel Frames', 'Blueprints'],
-    status: 'Coming 2026',
+    status: 'Inactive',
     domain: '/build',
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png',
   },
@@ -30,7 +30,7 @@ const products = [
     label: "Alden Springs",
     desc: 'Water tracking & irrigation systems for sustainable farming and residential use.',
     tags: ['Smart Irrigation', 'Water Harvesting', 'Agri-Tech'],
-    status: 'Coming 2027',
+    status: 'Inactive',
     domain: '/springs',
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/9633f1d94_generated_82c4a200.png',
   },
@@ -53,6 +53,25 @@ const products = [
     status: 'Active',
     domain: '/studios/photo-studio/services',
     image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/a179600a5_generated_a31c9d6a.png',
+  },
+];
+
+const ecosystemValues = [
+  {
+    title: 'Sustainability',
+    description: 'Build for long-term environmental balance, not short-term gain.',
+  },
+  {
+    title: 'Quality',
+    description: 'Hold every venture to a thoughtful, consistent standard.',
+  },
+  {
+    title: 'Community',
+    description: 'Create useful opportunities that strengthen the places we serve.',
+  },
+  {
+    title: 'Innovation',
+    description: 'Use new ideas and tools while staying grounded in real needs.',
   },
 ];
 
@@ -115,7 +134,7 @@ export default function EcosystemSection() {
                   alt={product.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute inset-0 bg-black/55" />
                 
                 {/* Number Badge */}
                 <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm border border-border px-3 py-1 rounded-full">
@@ -177,6 +196,36 @@ export default function EcosystemSection() {
               </Link>
             </motion.div>
           ))}
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10 mt-20 md:mt-28">
+        <div className="border-t border-border pt-8 md:pt-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <p className="text-accent text-[10px] tracking-[0.4em] font-body uppercase mb-4">
+                What connects the work
+              </p>
+              <h3 className="font-heading font-black text-3xl md:text-5xl text-primary uppercase leading-none">
+                Built around what lasts
+              </h3>
+            </div>
+            <p className="text-muted-foreground text-sm font-body leading-relaxed max-w-sm">
+              Across every sector, ALDEN is committed to responsible growth, dependable work, and lasting community impact.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-border/70">
+            {ecosystemValues.map((value, index) => (
+              <div
+                key={value.title}
+                className={`py-6 md:py-7 ${index > 0 ? 'sm:border-l sm:border-border/70 sm:pl-6 lg:pl-7' : ''} ${index % 2 === 0 ? 'sm:pr-6 lg:pr-7' : ''} border-b border-border/70 lg:border-b-0`}
+              >
+                <h4 className="font-heading text-lg text-primary uppercase mb-2">{value.title}</h4>
+                <p className="text-muted-foreground text-xs font-body leading-relaxed max-w-xs">{value.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

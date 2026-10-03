@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SpotifyNowPlaying from './SpotifyNowPlaying';
+import { CONTACT_EMAIL } from '@/lib/contact';
 
 const navItems = [
   { label: 'Home', href: '/' },
@@ -30,12 +31,12 @@ export default function FooterSection() {
           </h2>
 
           <motion.a
-            href="mailto:hello@alden.design"
+            href={`mailto:${CONTACT_EMAIL}`}
             whileHover={{ x: 8 }}
             transition={{ duration: 0.2 }}
             className="mt-10 md:mt-12 inline-flex items-center gap-4 text-[11px] tracking-[0.3em] text-primary font-body uppercase border border-border px-6 md:px-8 py-4 hover:border-accent/60 hover:text-accent transition-colors duration-300"
           >
-            hello@alden.design
+            {CONTACT_EMAIL}
             <span className="text-base">→</span>
           </motion.a>
         </motion.div>

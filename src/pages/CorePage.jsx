@@ -565,16 +565,6 @@ export default function CorePage() {
                 </div>
               ))}
             </div>
-            <div className="text-center mt-14" data-animate>
-              <a
-                href="https://andre-codes.netlify.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-8 py-3 border border-accent text-accent font-mono text-sm tracking-widest uppercase hover:bg-accent hover:text-background transition-all"
-              >
-                View Portfolio →
-              </a>
-            </div>
           </div>
         </section>
       </main>

@@ -52,7 +52,6 @@ export default function SpotifyNowPlaying() {
         className={`spotify-vinyl ${vinylStateClass}`}
         aria-hidden="true"
       >
-        <span className="spotify-vinyl__shine" />
         <span
           className="spotify-vinyl__label"
           style={track?.imageUrl ? { backgroundImage: `url(${track.imageUrl})` } : undefined}
@@ -96,9 +95,7 @@ export default function SpotifyNowPlaying() {
           flex: 0 0 3.4rem;
           border-radius: 999px;
           overflow: hidden;
-          background:
-            radial-gradient(circle at 50% 50%, transparent 0 18%, rgba(255, 255, 255, 0.08) 18.5% 19%, transparent 19.5% 31%, rgba(255, 255, 255, 0.06) 31.5% 32%, transparent 32.5% 45%, rgba(255, 255, 255, 0.05) 45.5% 46%, transparent 46.5%),
-            conic-gradient(from 120deg, #050505, #242424, #050505, #151515, #050505);
+          background: #111;
           border: 1px solid rgba(255, 255, 255, 0.14);
           box-shadow:
             inset 0 0 0 1px rgba(255, 255, 255, 0.05),
@@ -117,14 +114,6 @@ export default function SpotifyNowPlaying() {
           animation: spotifyVinylPulse 1.6s ease-in-out infinite;
         }
 
-        .spotify-vinyl__shine {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(115deg, rgba(255, 255, 255, 0.24), transparent 34%);
-          opacity: 0.45;
-          pointer-events: none;
-        }
-
         .spotify-vinyl__label {
           position: absolute;
           inset: 28%;
@@ -132,8 +121,7 @@ export default function SpotifyNowPlaying() {
           align-items: center;
           justify-content: center;
           border-radius: 999px;
-          background:
-            linear-gradient(135deg, rgba(30, 215, 96, 0.9), rgba(16, 111, 50, 0.95));
+          background: #1ed760;
           background-size: cover;
           background-position: center;
           box-shadow:

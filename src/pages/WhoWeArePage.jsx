@@ -1,33 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 import { WEB_PORTFOLIO_PROJECTS } from '@/pages/web-studio/webStudioData';
+import { CONTACT_EMAIL } from '@/lib/contact';
 import './WhoWeArePage.css';
-
-function DigitalClock() {
-  const [time, setTime] = useState(() => new Date());
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setTime(new Date()), 1000);
-    return () => window.clearInterval(timer);
-  }, []);
-
-  const formattedTime = [time.getHours(), time.getMinutes(), time.getSeconds()]
-    .map((value) => String(value).padStart(2, '0'))
-    .join(':');
-
-  return (
-    <div className="about-digital-clock" aria-live="polite" aria-label="Current local time">
-      <span className="about-digital-clock__label">Local time</span>
-      <span className="about-digital-clock__value">{formattedTime}</span>
-    </div>
-  );
-}
 
 export default function WhoWeArePage() {
   const location = useLocation();
+  const isCareersPage = location.pathname === '/about/careers';
 
   useEffect(() => {
     if (location.pathname !== '/about/careers' && location.hash !== '#careers') return;
@@ -57,8 +39,9 @@ export default function WhoWeArePage() {
             <p className="about-hero__description">
               We bring strategy, design, and engineering together to build useful digital experiences and ventures with purpose.
             </p>
-            <DigitalClock />
-            <a className="about-hero__link" href="#site-work">Explore our work <span aria-hidden="true">↓</span></a>
+            <a className="about-hero__link" href={isCareersPage ? '#careers' : '#site-work'}>
+              {isCareersPage ? 'View open roles' : 'Explore our work'} <span aria-hidden="true">↓</span>
+            </a>
           </motion.div>
 
           <div className="about-hero__stats" aria-label="ALDEN at a glance">
@@ -76,7 +59,7 @@ export default function WhoWeArePage() {
         </div>
       </section>
 
-      <section id="site-work" className="about-work">
+      {!isCareersPage && <section id="site-work" className="about-work">
         <div className="about-work__heading">
           <div>
             <p className="about-eyebrow">Selected work</p>
@@ -124,7 +107,7 @@ export default function WhoWeArePage() {
             );
           })}
         </div>
-      </section>
+      </section>}
 
       {/* Studio Overview Section */}
       <section className="py-20 md:py-32 px-6 md:px-10 bg-background">
@@ -263,7 +246,7 @@ export default function WhoWeArePage() {
                 </div>
                 <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '4', lineHeight: '1.6' }}>{position.desc}</p>
                 <a
-                  href="mailto:careers@alden.design"
+                  href={`mailto:${CONTACT_EMAIL}?subject=Career%20Application`}
                   className="inline-block mt-4 px-6 py-3 border border-accent text-accent font-mono text-xs tracking-widest uppercase hover:bg-accent hover:text-background transition-all"
                 >
                   Apply Now

@@ -7,7 +7,6 @@ const projects = [
     subtitle: "Custom Development · E-Commerce · Automation · Cloud Hosting",
     tag: "W",
     image: "/__generating__/img_a826b4a179b8.png",
-    fallbackGradient: "from-slate-900 via-blue-950 to-black",
     href: "#studios",
     year: "2026",
   },
@@ -17,7 +16,6 @@ const projects = [
     subtitle: "Portraits · Events · Landscapes · Creative Projects",
     tag: "P",
     image: "/__generating__/img_42fdb88f3863.png",
-    fallbackGradient: "from-stone-900 via-amber-950 to-black",
     href: "#studios",
     year: "2026",
   },
@@ -27,7 +25,6 @@ const projects = [
     subtitle: "Research · Planning · Implementation · Optimization",
     tag: "D",
     image: "/__generating__/img_257003ee01f6.png",
-    fallbackGradient: "from-zinc-900 via-emerald-950 to-black",
     href: "#studios",
     year: "2026",
   },
@@ -37,7 +34,6 @@ const projects = [
     subtitle: "Healthcare Platform · Patient Services · Medical Access",
     tag: "M",
     image: "/images/tobago-medical-hub.svg",
-    fallbackGradient: "from-slate-950 via-cyan-950 to-black",
     href: "https://tobago-medical-hub.vercel.app/",
     year: "2026",
   },
@@ -47,7 +43,6 @@ const projects = [
     subtitle: "Whole Foods · Chicken · Eggs · Supplies",
     tag: "F",
     image: "/__generating__/img_cb74e15f79bf.png",
-    fallbackGradient: "from-green-950 via-stone-900 to-black",
     href: "#ecosystem",
     year: "2026",
   },
@@ -57,7 +52,6 @@ const projects = [
     subtitle: "Affordable Homes · Steel Frames · Coming 2026",
     tag: "B",
     image: "/__generating__/img_e88f6fbccde6.png",
-    fallbackGradient: "from-neutral-900 via-orange-950 to-black",
     href: "#ecosystem",
     year: "2026",
   },
@@ -101,12 +95,6 @@ export default function ProjectsShowcase() {
                 transform: hoveredIndex === index ? "scale(1.03)" : "scale(1.08)",
               }}
             />
-            {/* Fallback gradient */}
-            <div
-              className={`absolute inset-0 bg-gradient-to-r ${project.fallbackGradient} transition-opacity duration-700`}
-              style={{ opacity: hoveredIndex === index ? 0 : 0 }}
-            />
-
             {/* Content */}
             <div
               className="relative z-10 flex items-center justify-between px-6 md:px-10 py-8 md:py-10 transition-all duration-300"

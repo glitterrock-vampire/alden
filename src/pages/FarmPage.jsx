@@ -32,7 +32,7 @@ function HeroParallax() {
           className="font-black text-white uppercase leading-none"
           style={{ fontSize: 'clamp(4rem, 18vw, 14rem)', letterSpacing: '-0.03em', fontFamily: 'Koulen, cursive' }}
         >
-          FARM<br />MARKET
+          ALDEN'S<br />FARM SUPPLY
         </h1>
         <p className="text-white/70 text-sm font-mono tracking-wider mt-6 max-w-md">
           Fresh from our farm to your table. Local produce. Sustainable farming. Kingston, Jamaica.

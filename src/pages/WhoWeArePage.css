@@ -63,33 +63,6 @@
   font: 400 clamp(0.8rem, 1.2vw, 0.95rem)/1.8 'Roboto Mono', monospace;
 }
 
-.about-digital-clock {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  width: min(12.5rem, 100%);
-  margin-top: 1.5rem;
-  padding: 0.9rem 1rem;
-  border: 1px solid rgba(216, 174, 91, 0.4);
-  background: rgba(8, 9, 8, 0.56);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px);
-}
-
-.about-digital-clock__label {
-  color: var(--about-gold);
-  font: 600 0.62rem/1.4 'Roboto Mono', monospace;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.about-digital-clock__value {
-  color: var(--about-paper);
-  font: 400 clamp(1.35rem, 2vw, 2rem)/1 'Roboto Mono', monospace;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.22em;
-}
-
 .about-hero__link {
   display: inline-flex;
   align-items: center;

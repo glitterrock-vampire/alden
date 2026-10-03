@@ -6,7 +6,9 @@ export default function Navbar() {
   const [isNavHidden, setIsNavHidden] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [dateDisplay, setDateDisplay] = useState({ year: '', day: '' });
+  const [timeDisplay, setTimeDisplay] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isEcosystemMenuOpen, setIsEcosystemMenuOpen] = useState(false);
   const location = useLocation();
 
   const currentPage = location.pathname.replace('/', '') || 'home';
@@ -52,6 +54,10 @@ export default function Navbar() {
   }, [isReady]);
 
   useEffect(() => {
+    setIsEcosystemMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
     const updateDate = () => {
       const date = new Date();
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -69,6 +75,19 @@ export default function Navbar() {
 
     updateDate();
     const interval = setInterval(updateDate, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTimeDisplay([now.getHours(), now.getMinutes(), now.getSeconds()]
+        .map((value) => String(value).padStart(2, '0'))
+        .join(':'));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -95,8 +114,8 @@ export default function Navbar() {
           animation: 'slideDown 1.5s 2.5s cubic-bezier(0.55, 0.45, 0.16, 1) forwards',
           opacity: isNavHidden ? 0 : (isReady ? 1 : 0.001),
           transform: isNavHidden ? 'translateY(-120%)' : (isReady ? 'translateY(0)' : 'translateY(-150px)'),
-          mixBlendMode: 'difference',
-          background: 'transparent',
+          mixBlendMode: 'normal',
+          background: '#000',
           transition: isReady ? 'transform 0.35s cubic-bezier(0.55, 0.45, 0.16, 1), opacity 0.35s ease' : 'none',
         }}
       >
@@ -114,11 +133,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" className="logo">
-            {['A', 'L', 'D', 'E', 'N'].map((letter, index) => (
-              <span key={letter} className="nav-letter" style={{ transitionDelay: `${index * 0.1}s` }}>
-                {letter}
-              </span>
-            ))}
+            <img src="/images/alden-circle-logo-transparent.png" alt="ALDEN" className="nav-logo-image" />
           </Link>
 
           {/* Navigation Links */}
@@ -127,11 +142,17 @@ export default function Navbar() {
               <span className="nav-link-text">HOME</span>
             </Link>
 
-            <div className="nav-dropdown">
-              <Link to="/ecosystem" className={`nav-link ${isActive('ecosystem') ? 'active' : ''}`}>
+            <div className={`nav-dropdown ${isEcosystemMenuOpen ? 'is-open' : ''}`}>
+              <button
+                type="button"
+                className={`nav-link nav-trigger ${isActive('ecosystem') ? 'active' : ''}`}
+                onClick={() => setIsEcosystemMenuOpen((open) => !open)}
+                aria-expanded={isEcosystemMenuOpen}
+                aria-label="Toggle ecosystem menu"
+              >
                 <span className="nav-link-text">ECOSYSTEM</span>
                 <span className="dropdown-arrow">+</span>
-              </Link>
+              </button>
               <div className="dropdown-menu">
                 <div className="dropdown-section">
                   <div className="dropdown-section-title">Studios</div>
@@ -141,10 +162,10 @@ export default function Navbar() {
                 <div className="dropdown-section">
                   <div className="dropdown-section-title">Current Ventures</div>
                   <Link to="/farm" className="dropdown-item">ALDEN'S FARM</Link>
-                  <Link to="/build" className="dropdown-item">ALDEN'S CONSTRUCTION</Link>
                 </div>
                 <div className="dropdown-section">
                   <div className="dropdown-section-title">Coming Soon</div>
+                  <Link to="/build" className="dropdown-item">ALDEN'S CONSTRUCTION</Link>
                   <Link to="/springs" className="dropdown-item">ALDEN'S SPRINGS</Link>
                 </div>
               </div>
@@ -168,6 +189,9 @@ export default function Navbar() {
           <div className={`nav-year ${isMobileMenuOpen ? 'menu-open' : ''}`}>
             <span className="year-current">{dateDisplay.year}</span>
             <span className="day-current">{dateDisplay.day}</span>
+            <time className="nav-clock" dateTime={new Date().toISOString()} aria-label={`Local time ${timeDisplay}`}>
+              {timeDisplay}
+            </time>
           </div>
         </div>
       </nav>
@@ -353,20 +377,12 @@ export default function Navbar() {
           opacity: 0.8;
         }
 
-        .logo:hover .nav-letter {
-          opacity: 0.5;
-          transform: translateY(-10px);
-        }
-
-        .nav-letter {
-          font-family: 'Koulen', cursive;
-          font-size: 28px;
-          letter-spacing: 0.02em;
-          color: #ffffff;
-          transition: all 0.8s cubic-bezier(0.55, 0.45, 0.16, 1);
-          display: inline-block;
-          opacity: 1;
-          transform: translateX(0);
+        .nav-logo-image {
+          display: block;
+          width: 48px;
+          height: 48px;
+          object-fit: contain;
+          transition: opacity 0.3s ease;
         }
 
         .nav-links {
@@ -394,11 +410,20 @@ export default function Navbar() {
 
         .nav-link {
           text-decoration: none;
+          background: transparent;
+          border: none;
+          padding: 0;
+          cursor: pointer;
           position: relative;
           overflow: hidden;
           height: 20px;
           display: flex;
           align-items: center;
+        }
+
+        .nav-trigger {
+          appearance: none;
+          color: inherit;
         }
 
         .nav-link-text {
@@ -467,7 +492,8 @@ export default function Navbar() {
           pointer-events: none;
         }
 
-        .nav-dropdown:hover .dropdown-menu {
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown.is-open .dropdown-menu {
           opacity: 1;
           visibility: visible;
           transform: translateY(0);
@@ -558,6 +584,16 @@ export default function Navbar() {
           display: block;
           line-height: 1.4;
           opacity: 0.8;
+        }
+
+        .nav-clock {
+          margin-top: 2px;
+          color: rgba(255, 255, 255, 0.72);
+          font-family: 'Roboto Mono', monospace;
+          font-size: 11px;
+          font-variant-numeric: tabular-nums;
+          line-height: 1.4;
+          white-space: nowrap;
         }
 
         @media (max-width: 809.98px) {

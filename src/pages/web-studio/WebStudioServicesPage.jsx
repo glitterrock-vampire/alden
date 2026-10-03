@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import FooterSection from '@/components/home/FooterSection';
 import {
@@ -12,33 +11,42 @@ import {
 } from './webStudioData';
 import './WebStudioServicesPage.css';
 
-const HERO_IMAGE = WEB_PORTFOLIO_PROJECTS[0].image;
 const REVEAL_STAGGER_MS = 85;
 const padNumber = (number) => String(number).padStart(2, '0');
 const isExternalLink = (href) => href.startsWith('http');
 const CLIENT_PROJECTS = WEB_PORTFOLIO_PROJECTS.filter((project) => project.filter !== 'ecosystem');
 const ALDEN_BUILD_PROJECTS = WEB_PORTFOLIO_PROJECTS.filter((project) => project.filter === 'ecosystem');
 
+/**
+ * @typedef {{ titleRef: React.RefObject<HTMLDivElement | null>; kickerRef: React.RefObject<HTMLParagraphElement | null>; copyRef: React.RefObject<HTMLDivElement | null>; }} HeroIntroRefs
+ */
+
+/**
+ * @param {{ titleRef: React.RefObject<HTMLDivElement | null>; kickerRef: React.RefObject<HTMLParagraphElement | null>; copyRef: React.RefObject<HTMLDivElement | null>; }} props
+ */
 function useHeroIntro({ titleRef, kickerRef, copyRef }) {
   useEffect(() => {
-    const timers = [];
-    const later = (callback, delay) => timers.push(setTimeout(callback, delay));
     const letters = titleRef.current?.querySelectorAll('.web-services-letter') ?? [];
-
-    letters.forEach((letter, index) => later(() => letter.classList.add('is-visible'), 430 + index * 70));
-    later(() => kickerRef.current?.classList.add('is-visible'), 1010);
-    later(() => copyRef.current?.classList.add('is-visible'), 1190);
-
-    return () => timers.forEach(clearTimeout);
+    letters.forEach((letter) => letter.classList.add('is-visible'));
+    kickerRef.current?.classList.add('is-visible');
+    copyRef.current?.classList.add('is-visible');
   }, [titleRef, kickerRef, copyRef]);
 }
 
+/**
+ * @param {React.RefObject<HTMLElement | null>} rootRef
+ * @param {string | number | undefined} dependency
+ */
 function useScrollReveal(rootRef, dependency) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return undefined;
 
+    /** @type {ReturnType<typeof setTimeout>[]} */
     const timers = [];
+    /**
+     * @param {Element} element
+     */
     const reveal = (element) => {
       if (element.classList.contains('is-queued')) return;
       element.classList.add('is-queued');
@@ -66,67 +74,69 @@ function useScrollReveal(rootRef, dependency) {
   }, [rootRef, dependency]);
 }
 
+/**
+ * @param {{ project: { id: number; title: string; category: string; href: string; image: string; filter?: string }; }} props
+ */
 function PortfolioPreview({ project }) {
+  /**
+   * @param {Event & { currentTarget: HTMLImageElement }} event
+   */
   const handleError = (event) => {
     event.currentTarget.hidden = true;
     event.currentTarget.parentElement?.classList.add('has-failed-preview');
   };
 
-  const sameOriginPreview = (() => {
-    if (!project.href.startsWith('http')) return true;
-
-    try {
-      return new URL(project.href).origin === window.location.origin;
-    } catch {
-      return false;
-    }
-  })();
-
   return (
-    <span className={`portfolio-card__media ${sameOriginPreview ? '' : 'has-failed-preview'}`}>
+    <span className="portfolio-card__media">
       <span className="portfolio-card__fallback" aria-hidden="true">
         <strong>{project.title}</strong>
         <small>{project.category}</small>
       </span>
       <img src={project.image} alt={`${project.title} project preview`} loading="lazy" onError={handleError} />
-      {sameOriginPreview && (
-        <iframe
-          src={project.href}
-          title={`${project.title} live website preview`}
-          loading="lazy"
-          tabIndex={-1}
-          aria-hidden="true"
-        />
-      )}
-      <span className="portfolio-card__preview-badge">
-        {sameOriginPreview ? `LIVE PREVIEW / ${padNumber(project.id)}` : 'OPEN SITE'}
-      </span>
+      <iframe
+        src={project.href}
+        title={`${project.title} live website preview`}
+        loading="lazy"
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+      <span className="portfolio-card__preview-badge">LIVE PREVIEW / {padNumber(project.id)}</span>
     </span>
   );
 }
 
+/**
+ * @param {{ project: { id: number; title: string; category: string; href: string; image: string; filter?: string }; revealIndex: number; }} props
+ */
 function PortfolioCard({ project, revealIndex }) {
   const external = isExternalLink(project.href);
+  const CardLink = external ? 'a' : Link;
+  const destinationProps = external
+    ? { href: project.href, target: '_blank', rel: 'noopener noreferrer' }
+    : { to: project.href };
 
   return (
-    <article className="portfolio-card portfolio-card--live web-reveal" data-reveal-index={revealIndex}>
+    <CardLink
+      {...destinationProps}
+      className="portfolio-card portfolio-card--live web-reveal"
+      data-reveal-index={revealIndex}
+      aria-label={`${external ? 'Open' : 'View'} ${project.title}${external ? ' in a new tab' : ''}`}
+    >
       <PortfolioPreview project={project} />
       <span className="portfolio-card__body">
         <span className="portfolio-card__meta">{project.category}</span>
         <span className="portfolio-card__title">{project.title}</span>
-        <a
-          href={project.href}
-          target={external ? '_blank' : undefined}
-          rel={external ? 'noopener noreferrer' : undefined}
-          className="portfolio-card__link"
-        >
+        <span className="portfolio-card__link">
           {external ? 'Open Site' : 'View Project'} <span aria-hidden="true">→</span>
-        </a>
+        </span>
       </span>
-    </article>
+    </CardLink>
   );
 }
 
+/**
+ * @param {{ eyebrow: string; title: string; copy?: string }} props
+ */
 function SectionHeading({ eyebrow, title, copy }) {
   return (
     <div className="web-services-editorial-heading web-reveal" data-reveal-index="0">
@@ -141,12 +151,9 @@ export default function WebStudioServicesPage() {
   const { hash } = useLocation();
   const [activeFilter, setActiveFilter] = useState('all');
   const pageRef = useRef(null);
-  const heroRef = useRef(null);
   const titleRef = useRef(null);
   const kickerRef = useRef(null);
   const copyRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
   const filteredProjects = CLIENT_PROJECTS.filter(
     (project) => activeFilter === 'all' || project.filter === activeFilter
   );
@@ -161,13 +168,7 @@ export default function WebStudioServicesPage() {
   return (
     <div ref={pageRef} className="web-studio-page min-h-screen">
       <Navbar />
-      <section ref={heroRef} className="web-services-hero relative overflow-hidden">
-        <motion.div
-          className="web-services-hero-image"
-          style={{ backgroundImage: `url('${HERO_IMAGE}')`, y: heroY, scale: 1.08 }}
-          aria-hidden="true"
-        />
-        <div className="web-services-hero-shade" aria-hidden="true" />
+      <section className="web-services-hero relative overflow-hidden">
         <div className="web-services-hero-inner">
           <p className="web-services-kicker" ref={kickerRef}>
             Digital products &amp; platforms · Kingston, JA
