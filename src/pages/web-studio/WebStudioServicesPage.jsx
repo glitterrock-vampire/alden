@@ -93,13 +93,15 @@ function PortfolioPreview({ project }) {
         <small>{project.category}</small>
       </span>
       <img src={project.image} alt={`${project.title} project preview`} loading="lazy" onError={handleError} />
-      <iframe
-        src={project.href}
-        title={`${project.title} live website preview`}
-        loading="lazy"
-        tabIndex={-1}
-        aria-hidden="true"
-      />
+      {!isExternalLink(project.href) && (
+        <iframe
+          src={project.href}
+          title={`${project.title} live website preview`}
+          loading="lazy"
+          tabIndex={-1}
+          aria-hidden="true"
+        />
+      )}
       <span className="portfolio-card__preview-badge">LIVE PREVIEW / {padNumber(project.id)}</span>
     </span>
   );
@@ -171,7 +173,7 @@ export default function WebStudioServicesPage() {
       <section className="web-services-hero relative overflow-hidden">
         <div className="web-services-hero-inner">
           <p className="web-services-kicker" ref={kickerRef}>
-            Digital products &amp; platforms · Kingston, JA
+            Digital products &amp; platforms
           </p>
           <h1 className="web-services-title" aria-label="Alden's Web Studio" ref={titleRef}>
             {HERO_TITLE_WORDS.map(({ text, className }) => (

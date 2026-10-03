@@ -22,8 +22,8 @@
 .web-studio-page .web-reveal { transform: translate3d(0, 1.25rem, 0); transition: opacity 0.55s ease, filter 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
 .web-studio-page .web-reveal.is-visible { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0); }
 
-.web-services-hero { min-height: 100svh; background: #000; }
-.web-services-hero-inner { position: relative; z-index: 2; display: flex; min-height: 100svh; flex-direction: column; align-items: flex-start; justify-content: center; padding: 7rem clamp(1.25rem, 8vw, 8rem) clamp(4rem, 10vh, 8rem); text-align: left; }
+.web-services-hero { min-height: 88svh; background: #000; }
+.web-services-hero-inner { position: relative; z-index: 2; display: flex; min-height: 88svh; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: clamp(8rem, 16vh, 12rem) clamp(1.25rem, 8vw, 8rem) clamp(2rem, 4vh, 3rem); text-align: left; }
 .web-services-kicker, .web-services-hero-copy { transform: translateY(0); transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease; }
 .web-services-kicker.is-visible, .web-services-hero-copy.is-visible { opacity: 1; filter: blur(0); transform: translateY(0); }
 .web-services-kicker { margin: 0 0 clamp(1.25rem, 3vw, 2rem); color: rgba(231, 229, 223, 0.78); font: 0.8rem/1.7 var(--ws-mono); letter-spacing: 0.25em; text-transform: uppercase; }
@@ -58,18 +58,19 @@
 }
 
 .web-services-hero-copy a:hover, .web-services-pill-link:hover { transform: translateY(-2px); background: var(--ws-gold); color: var(--ws-bg); }
-.web-services-section { position: relative; overflow: hidden; padding: clamp(5.5rem, 12vw, 9rem) clamp(1.25rem, 5vw, 4rem); background: var(--ws-bg); }
-.web-services-grid-section { padding-block: clamp(5rem, 10vw, 8rem); }
-.web-services-portfolio-section { padding-block: clamp(5rem, 9vw, 7rem); scroll-margin-top: 5rem; }
-.web-services-process-section { padding-top: 0; }
+.web-services-section { position: relative; overflow: hidden; padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem); background: var(--ws-bg); }
+.web-services-grid-section { padding-block: clamp(3.25rem, 6vw, 5rem); }
+.web-services-portfolio-section { padding-block: clamp(3rem, 5vw, 4.5rem); scroll-margin-top: 5rem; }
+.web-services-process-section { padding-top: 0; padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+.web-services-cta-section { padding-top: 0; padding-bottom: clamp(2.5rem, 5vw, 4rem); }
 .web-services-wide-shell { position: relative; z-index: 1; width: min(100%, 82rem); margin: 0 auto; }
-.web-services-editorial-heading { max-width: 54rem; margin: 0 0 clamp(2rem, 5vw, 4rem); text-align: left; }
+.web-services-editorial-heading { max-width: 54rem; margin: 0 0 clamp(1.5rem, 3vw, 2.5rem); text-align: left; }
 .web-services-eyebrow { display: inline-block; margin-bottom: 1rem; color: var(--ws-gold); font: 0.72rem/1.4 var(--ws-mono); letter-spacing: 0.3em; text-transform: uppercase; }
 .web-services-section-title { margin: 0; color: var(--ws-text); font: clamp(2.75rem, 7vw, 6.5rem)/0.92 var(--ws-display); text-transform: uppercase; text-wrap: balance; }
 .web-services-section-copy { max-width: 46rem; margin: 1.25rem 0 0; color: rgba(231, 229, 223, 0.66); font: clamp(0.92rem, 1.45vw, 1.05rem)/1.8 var(--ws-mono); }
 
 .web-service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; }
-.web-service-card { display: flex; min-height: 22rem; flex-direction: column; align-items: flex-start; padding: clamp(1.25rem, 2vw, 1.8rem); border: 1px solid var(--ws-line); background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)); transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease; }
+.web-service-card { display: flex; min-height: 19rem; flex-direction: column; align-items: flex-start; padding: clamp(1.25rem, 2vw, 1.8rem); border: 1px solid var(--ws-line); background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)); transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease; }
 .web-service-card:hover { transform: translateY(-0.2rem); border-color: rgba(204, 187, 135, 0.4); background: rgba(204, 187, 135, 0.045); }
 .web-service-card__number { color: var(--ws-gold); font: 0.68rem/1.4 var(--ws-mono); letter-spacing: 0.2em; }
 .web-service-card__title { margin: 1.5rem 0 0.75rem; color: var(--ws-text); font: clamp(1.55rem, 2.4vw, 2.2rem)/0.98 var(--ws-display); text-transform: uppercase; }
@@ -80,7 +81,7 @@
 .web-service-card__link { display: inline-flex; gap: 0.65rem; align-items: center; margin-top: auto; padding-top: 1.25rem; color: var(--ws-gold); font: 0.62rem/1.5 var(--ws-mono); letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; }
 .web-service-card__link:hover { color: #f7d986; }
 
-.web-services-portfolio-section .web-services-editorial-heading { margin-bottom: 2rem; }
+.web-services-portfolio-section .web-services-editorial-heading { margin-bottom: 1.5rem; }
 .web-services-portfolio-section .web-services-eyebrow { margin-bottom: 0.45rem; }
 .web-services-portfolio-section .web-services-section-title { font-size: clamp(2.75rem, 6vw, 5rem); line-height: 0.98; }
 .web-services-portfolio-section .web-services-section-copy { margin-top: 0.6rem; }
@@ -130,7 +131,7 @@
 .process-card__number { display: block; margin-bottom: 1rem; color: var(--ws-gold); font: 0.72rem/1.4 var(--ws-mono); }
 .process-card h3 { margin: 0 0 0.8rem; color: var(--ws-text); font: 1.6rem/1 var(--ws-display); text-transform: uppercase; }
 .process-card p { margin: 0; color: rgba(231, 229, 223, 0.62); font: 0.86rem/1.7 var(--ws-mono); }
-.web-services-cta { position: relative; z-index: 1; width: min(100%, 68rem); margin: 0 auto; padding: clamp(3rem, 8vw, 6rem) 0; border-top: 1px solid var(--ws-line); text-align: center; }
+.web-services-cta { position: relative; z-index: 1; width: min(100%, 68rem); margin: 0 auto; padding: clamp(2rem, 4vw, 3.5rem) 0; border-top: 1px solid var(--ws-line); text-align: center; }
 .web-services-cta .web-services-section-copy { margin-inline: auto; }
 .web-services-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
 .web-services-solid-link { border-color: var(--ws-gold); background: var(--ws-gold); color: var(--ws-bg); }
@@ -138,14 +139,15 @@
 
 @media (max-width: 767px) {
   .web-services-section { padding-inline: 1rem; }
-  .web-services-cta-section { padding-block: 4.25rem; }
+  .web-services-hero, .web-services-hero-inner { min-height: 100svh; }
+  .web-services-cta-section { padding-block: 3rem; }
   .web-services-hero-inner { padding: 6rem 1.25rem 3.5rem; }
   .web-services-word.is-web .web-services-letter { font-size: clamp(4.8rem, 23vw, 7.4rem); }
   .web-services-word.is-services .web-services-letter { font-size: clamp(2.5rem, 12vw, 4rem); }
   .web-services-kicker { max-width: 24rem; line-height: 1.7; }
   .web-services-section-title { font-size: clamp(2.65rem, 15vw, 4.25rem); }
   .web-service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .web-service-card { min-height: 20rem; padding: 1.15rem; }
+  .web-service-card { min-height: 18rem; padding: 1.15rem; }
   .portfolio-filter-row { flex-wrap: nowrap; overflow-x: auto; padding: 0.2rem 0 0.4rem; scrollbar-width: none; }
   .portfolio-filter-row::-webkit-scrollbar { display: none; }
   .portfolio-filter-button { flex: 0 0 auto; min-height: 2.35rem; padding: 0.55rem 0.75rem; font-size: 0.65rem; }
