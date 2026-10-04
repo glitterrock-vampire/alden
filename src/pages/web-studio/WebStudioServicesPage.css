@@ -1,8 +1,13 @@
+/* ============================================================
+   ALDEN — WEB STUDIO
+   Editorial / Minimal / Creative Technology
+   ============================================================ */
+
 .web-studio-page {
   --ws-bg: #050505;
-  --ws-surface: #111310;
+  --ws-surface: #0d0f0d;
   --ws-text: #e7e5df;
-  --ws-muted: rgba(231, 229, 223, 0.62);
+  --ws-muted: rgba(231, 229, 223, 0.58);
   --ws-gold: #ccbb87;
   --ws-gold-bright: #f0dfaa;
   --ws-line: rgba(231, 229, 223, 0.12);
@@ -16,27 +21,19 @@
   text-align: left;
 }
 
+.web-studio-page .web-services-wide-shell {
+  width: min(1500px, calc(100% - 96px));
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
 .web-studio-page .bg-card {
   background-color: var(--ws-bg);
 }
 
-.web-studio-page .spotify-vinyl {
-  background: var(--ws-surface);
-}
-
-.web-studio-page .spotify-vinyl__shine {
-  display: none;
-  background-image: none;
-}
-
-.web-studio-page
-  .spotify-vinyl__label:not([style*='background-image']) {
-  background: var(--ws-gold);
-}
-
 /* ============================================================
    REVEALS
-============================================================ */
+   ============================================================ */
 
 .web-studio-page .web-reveal,
 .web-studio-page .web-services-kicker,
@@ -61,11 +58,11 @@
 
 /* ============================================================
    HERO
-============================================================ */
+   ============================================================ */
 
 .web-services-hero {
   position: relative;
-  min-height: calc(100svh - 5rem);
+  min-height: 100svh;
   overflow: hidden;
   background: #000;
   border-bottom: 1px solid var(--ws-line);
@@ -88,48 +85,35 @@
 .web-services-hero-inner {
   position: relative;
   z-index: 2;
-
   display: grid;
-
   grid-template-columns:
     minmax(0, 1fr)
     minmax(18rem, 31rem);
-
   grid-template-rows:
     auto
     1fr
     auto;
-
   width: min(1600px, 100%);
   min-height: calc(100svh - 5rem);
-
   margin-inline: auto;
-
   padding:
     clamp(5rem, 9vw, 9rem)
     clamp(1rem, 5vw, 5rem)
     2rem;
-
   align-items: end;
 }
 
 .web-services-kicker {
   grid-column: 1 / -1;
   grid-row: 1;
-
   align-self: start;
-
   margin: 0;
-
   color: rgba(231, 229, 223, 0.72);
-
   font:
     0.72rem / 1.6
     var(--ws-mono);
-
   letter-spacing: 0.28em;
   text-transform: uppercase;
-
   transition:
     opacity 0.7s ease,
     filter 0.7s ease;
@@ -144,17 +128,12 @@
 .web-services-title {
   grid-column: 1;
   grid-row: 2;
-
   display: flex;
   width: 100%;
-
   flex-direction: column;
   align-items: flex-start;
-
   gap: clamp(0.25rem, 0.8vw, 0.75rem);
-
   margin: 0;
-
   align-self: end;
 }
 
@@ -165,43 +144,34 @@
 
 .web-services-letter {
   display: inline-block;
-
   color: var(--ws-text);
-
   font-family: var(--ws-display);
   line-height: 0.78;
-
   opacity: 1;
   filter: blur(0);
-
   transform:
     translate3d(0, 0, 0)
     scale(1);
-
   text-shadow:
     0 0 2.4rem rgba(204, 187, 135, 0.18),
     0 0 5rem rgba(255, 255, 255, 0.06);
-
   transition: none;
 }
 
 .web-services-letter.is-visible {
   opacity: 1;
   filter: blur(0);
-
   transform:
     translate3d(0, 0, 0)
     scale(1);
 }
 
-.web-services-word.is-web
-  .web-services-letter {
+.web-services-word.is-web .web-services-letter {
   font-size:
     clamp(5rem, 12vw, 14rem);
 }
 
-.web-services-word.is-services
-  .web-services-letter {
+.web-services-word.is-services .web-services-letter {
   font-size:
     clamp(3.25rem, 8vw, 10rem);
 }
@@ -209,21 +179,14 @@
 .web-services-hero-copy {
   grid-column: 2;
   grid-row: 2;
-
   width: min(100%, 29rem);
-
   justify-self: end;
   align-self: end;
-
   display: flex;
-
   flex-direction: column;
   align-items: flex-start;
-
   gap: 1.5rem;
-
   margin: 0;
-
   transition:
     opacity 0.7s ease 0.1s,
     filter 0.7s ease 0.1s;
@@ -231,9 +194,7 @@
 
 .web-services-hero-copy p {
   margin: 0;
-
   color: rgba(231, 229, 223, 0.78);
-
   font:
     clamp(0.9rem, 1.35vw, 1.05rem) / 1.65
     var(--ws-mono);
@@ -241,33 +202,22 @@
 
 .web-services-hero-copy a {
   display: inline-flex;
-
   min-height: 3rem;
-
   align-items: center;
   justify-content: center;
-
   gap: 0.7rem;
-
   padding:
     0.8rem
     1.15rem;
-
-  border: 1px solid
-    rgba(204, 187, 135, 0.72);
-
+  border: 1px solid rgba(204, 187, 135, 0.72);
   border-radius: 0;
-
   color: var(--ws-gold);
-
   font:
     0.7rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.12em;
   text-decoration: none;
   text-transform: uppercase;
-
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
@@ -277,7 +227,6 @@
 
 .web-services-hero-copy a:hover {
   transform: translateY(-2px);
-
   background: var(--ws-gold);
   color: var(--ws-bg);
 }
@@ -285,105 +234,79 @@
 .web-services-hero-meta {
   grid-column: 1 / -1;
   grid-row: 3;
-
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   gap: 1rem;
-
   padding-top: 1.5rem;
-
   border-top: 1px solid var(--ws-line);
-
   color: rgba(231, 229, 223, 0.46);
-
   font:
     0.62rem / 1.5
     var(--ws-mono);
-
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 /* ============================================================
    GENERAL SECTIONS
-============================================================ */
+   ============================================================ */
 
 .web-services-section {
   position: relative;
-
   overflow: hidden;
-
   padding:
     clamp(5rem, 9vw, 9rem)
     0;
-
   background: var(--ws-bg);
 }
 
 .web-services-wide-shell {
   position: relative;
   z-index: 1;
-
   width: min(1600px, 100%);
-
   margin-inline: auto;
-
   padding-inline:
     clamp(1rem, 5vw, 5rem);
 }
 
 .web-services-editorial-heading {
   max-width: 62rem;
-
   margin:
     0
     0
     clamp(3rem, 5vw, 5rem);
-
   text-align: left;
 }
 
 .web-services-eyebrow {
   display: inline-block;
-
   margin-bottom: 1rem;
-
   color: var(--ws-gold);
-
   font:
     0.68rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.3em;
   text-transform: uppercase;
 }
 
 .web-services-section-title {
   margin: 0;
-
   color: var(--ws-text);
-
   font:
     clamp(3rem, 7vw, 7rem) / 0.84
     var(--ws-display);
-
   text-transform: uppercase;
   text-wrap: balance;
 }
 
 .web-services-section-copy {
   max-width: 43rem;
-
   margin:
     1.5rem
     0
     0;
-
   color: var(--ws-muted);
-
   font:
     clamp(0.86rem, 1.3vw, 1rem) / 1.8
     var(--ws-mono);
@@ -391,12 +314,11 @@
 
 /* ============================================================
    PORTFOLIO
-============================================================ */
+   ============================================================ */
 
 .web-services-portfolio-section {
   padding-top: clamp(6rem, 10vw, 10rem);
   padding-bottom: clamp(6rem, 10vw, 10rem);
-
   scroll-margin-top: 5rem;
 }
 
@@ -407,47 +329,31 @@
 
 .portfolio-filter-row {
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 0.5rem;
-
   margin-bottom: 2rem;
 }
 
 .portfolio-filter-button {
   display: inline-flex;
-
   min-height: 2.55rem;
-
   align-items: center;
   justify-content: center;
-
   padding:
     0.55rem
     0.9rem;
-
-  border: 1px solid
-    rgba(231, 229, 223, 0.16);
-
+  border: 1px solid rgba(231, 229, 223, 0.16);
   border-radius: 0;
-
   background:
     rgba(255, 255, 255, 0.025);
-
   color:
     rgba(231, 229, 223, 0.58);
-
   cursor: pointer;
-
   font:
     0.64rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.1em;
-
   text-transform: uppercase;
-
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
@@ -456,36 +362,28 @@
 
 .portfolio-filter-button:hover {
   border-color: var(--ws-gold);
-
   background:
     rgba(204, 187, 135, 0.08);
-
   color: var(--ws-gold);
 }
 
 .portfolio-filter-button.is-active {
   border-color: var(--ws-gold);
-
   background: var(--ws-gold);
-
   color: var(--ws-bg);
-
   box-shadow: none;
 }
 
 .portfolio-card-grid {
   display: grid;
-
   grid-template-columns:
     repeat(3, minmax(0, 1fr));
-
   gap: 1rem;
 }
 
 .portfolio-card-grid--mosaic {
   grid-template-columns:
     repeat(12, minmax(0, 1fr));
-
   grid-template-rows:
     minmax(18rem, 28rem)
     minmax(18rem, 28rem)
@@ -523,28 +421,18 @@
 
 .portfolio-card {
   position: relative;
-
   display: flex;
-
   min-width: 0;
   min-height: 19rem;
-
   flex-direction: column;
-
   overflow: hidden;
-
   border:
     1px solid
     var(--ws-line);
-
   border-radius: 0;
-
   background: var(--ws-surface);
-
   color: inherit;
-
   text-decoration: none;
-
   transition:
     border-color 0.3s ease,
     transform 0.3s ease;
@@ -552,7 +440,6 @@
 
 .portfolio-card:hover {
   transform: translateY(-0.25rem);
-
   border-color:
     rgba(204, 187, 135, 0.5);
 }
@@ -561,72 +448,51 @@
   outline:
     2px solid
     var(--ws-gold);
-
   outline-offset: 4px;
 }
 
 .portfolio-card__media {
   position: relative;
-
   display: block;
-
   overflow: hidden;
-
   background: #050505;
 }
 
 .portfolio-card__media iframe {
   position: absolute;
-
   inset: 0;
-
   z-index: 1;
-
   width: 100%;
   height: 100%;
-
   border: 0;
-
   background: transparent;
 }
 
 .portfolio-card--live {
   min-height: 0;
-
   aspect-ratio: auto;
 }
 
 .portfolio-card--live
   .portfolio-card__media {
   position: relative;
-
   inset: auto;
-
   height:
     clamp(14rem, 25vw, 25rem);
-
   flex: none;
 }
 
 .portfolio-card--live
   .portfolio-card__media iframe {
   position: absolute;
-
   inset: 0;
-
   z-index: 1;
-
   width: 100%;
   height: 100%;
-
   border: 0;
-
   background: transparent;
-
   transform: scale(1);
-
   transform-origin: center;
-
   pointer-events: none;
 }
 
@@ -634,61 +500,42 @@
   .portfolio-card--mosaic
   .portfolio-card__media {
   position: absolute;
-
   inset: 0;
-
   height: auto;
 }
 
 .portfolio-card__preview-badge {
   position: absolute;
-
   z-index: 3;
-
   top: 0.85rem;
   left: 0.85rem;
-
   padding:
     0.42rem
     0.6rem;
-
   border:
     1px solid
     rgba(204, 187, 135, 0.38);
-
   border-radius: 0;
-
   background:
     rgba(5, 5, 5, 0.72);
-
   color: var(--ws-gold);
-
   font:
     0.58rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.14em;
-
   text-transform: uppercase;
-
   backdrop-filter: blur(12px);
 }
 
 .portfolio-card__body {
   position: relative;
-
   z-index: 2;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 0.3rem;
-
   padding:
     1.15rem
     1.2rem;
-
   background: var(--ws-bg);
 }
 
@@ -696,11 +543,9 @@
   .portfolio-card--mosaic
   .portfolio-card__body {
   position: absolute;
-
   right: 0;
   bottom: 0;
   left: 0;
-
   background:
     linear-gradient(
       to top,
@@ -708,53 +553,38 @@
       rgba(5, 5, 5, 0.86) 68%,
       transparent 100%
     );
-
   padding-top: 5rem;
 }
 
 .portfolio-card__meta {
   color: var(--ws-gold);
-
   font:
     0.62rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.18em;
-
   text-transform: uppercase;
 }
 
 .portfolio-card__title {
   color: var(--ws-text);
-
   font:
     clamp(1.7rem, 3vw, 3rem) / 0.9
     var(--ws-display);
-
   text-transform: uppercase;
 }
 
 .portfolio-card__link {
   display: inline-flex;
-
   align-items: center;
-
   align-self: flex-start;
-
   gap: 0.55rem;
-
   margin-top: 0.4rem;
-
   color: var(--ws-gold);
-
   font:
     0.68rem / 1.5
     var(--ws-mono);
-
   letter-spacing: 0.1em;
-
   text-decoration: none;
-
   text-transform: uppercase;
 }
 
@@ -764,21 +594,17 @@
 
 /* ============================================================
    STUDIO STATEMENT
-============================================================ */
+   ============================================================ */
 
 .studio-statement {
   position: relative;
-
   padding:
     clamp(7rem, 15vw, 15rem)
     0;
-
   background: #000;
-
   border-top:
     1px solid
     var(--ws-line);
-
   border-bottom:
     1px solid
     var(--ws-line);
@@ -786,78 +612,55 @@
 
 .studio-statement::before {
   content: 'ALDEN';
-
   position: absolute;
-
   right: -0.05em;
   bottom: -0.2em;
-
   color:
     rgba(231, 229, 223, 0.025);
-
   font:
     clamp(10rem, 25vw, 32rem) / 0.7
     var(--ws-display);
-
   pointer-events: none;
-
   user-select: none;
 }
 
 .studio-statement__eyebrow {
   display: block;
-
   margin-bottom: 2rem;
-
   color: var(--ws-gold);
-
   font:
     0.68rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.28em;
-
   text-transform: uppercase;
 }
 
 .studio-statement__title {
   position: relative;
   z-index: 1;
-
   max-width: 1100px;
-
   margin: 0;
-
   color: var(--ws-text);
-
   font:
     clamp(4rem, 9.5vw, 10.5rem) / 0.8
     var(--ws-display);
-
   text-transform: uppercase;
 }
 
 .studio-statement__title span {
   display: block;
-
   color: var(--ws-gold);
 }
 
 .studio-statement__footer {
   position: relative;
   z-index: 1;
-
   display: flex;
-
   align-items: flex-end;
   justify-content: space-between;
-
   gap: 2rem;
-
   margin-top: 4rem;
-
   padding-top: 1.5rem;
-
   border-top:
     1px solid
     var(--ws-line);
@@ -865,11 +668,8 @@
 
 .studio-statement__footer p {
   max-width: 32rem;
-
   margin: 0;
-
   color: var(--ws-muted);
-
   font:
     0.85rem / 1.75
     var(--ws-mono);
@@ -877,20 +677,17 @@
 
 .studio-statement__mark {
   flex: 0 0 auto;
-
   color:
     rgba(231, 229, 223, 0.42);
-
   font:
     0.62rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.15em;
 }
 
 /* ============================================================
    SERVICES
-============================================================ */
+   ============================================================ */
 
 .web-services-grid-section {
   padding-block:
@@ -899,9 +696,7 @@
 
 .web-service-grid {
   display: grid;
-
   grid-template-columns: 1fr;
-
   border-top:
     1px solid
     var(--ws-line);
@@ -909,31 +704,22 @@
 
 .web-service-card {
   display: grid;
-
   grid-template-columns:
     5rem
     minmax(12rem, 0.75fr)
     minmax(18rem, 1.4fr)
     auto;
-
   align-items: center;
-
   gap: 2rem;
-
   min-height: 9rem;
-
   padding:
     1.5rem
     0;
-
   border: 0;
-
   border-bottom:
     1px solid
     var(--ws-line);
-
   background: transparent;
-
   transition:
     padding 0.3s ease,
     background 0.3s ease;
@@ -941,42 +727,32 @@
 
 .web-service-card:hover {
   transform: none;
-
   padding-inline: 1rem;
-
   background:
     rgba(204, 187, 135, 0.035);
 }
 
 .web-service-card__number {
   color: var(--ws-gold);
-
   font:
     0.66rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.18em;
 }
 
 .web-service-card__title {
   margin: 0;
-
   color: var(--ws-text);
-
   font:
     clamp(1.7rem, 2.8vw, 2.8rem) / 0.9
     var(--ws-display);
-
   text-transform: uppercase;
 }
 
 .web-service-card__description {
   max-width: 34rem;
-
   margin: 0;
-
   color: var(--ws-muted);
-
   font:
     0.78rem / 1.75
     var(--ws-mono);
@@ -988,27 +764,17 @@
 
 .web-service-card__link {
   display: inline-flex;
-
   align-items: center;
-
   gap: 0.6rem;
-
   margin: 0;
-
   padding: 0;
-
   color: var(--ws-gold);
-
   font:
     0.62rem / 1.5
     var(--ws-mono);
-
   letter-spacing: 0.1em;
-
   text-decoration: none;
-
   text-transform: uppercase;
-
   white-space: nowrap;
 }
 
@@ -1018,15 +784,13 @@
 
 /* ============================================================
    ALDEN BUILDS
-============================================================ */
+   ============================================================ */
 
 .web-services-builds-section {
   background: #080908;
-
   border-top:
     1px solid
     var(--ws-line);
-
   border-bottom:
     1px solid
     var(--ws-line);
@@ -1034,38 +798,26 @@
 
 .alden-builds-layout {
   display: grid;
-
   grid-template-columns:
     minmax(10rem, 0.35fr)
     minmax(0, 1.65fr);
-
   gap: 3rem;
-
   align-items: start;
 }
 
 .alden-builds-index {
   position: sticky;
-
   top: 6rem;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 0.65rem;
-
   padding-top: 0.4rem;
-
   color:
     rgba(231, 229, 223, 0.45);
-
   font:
     0.62rem / 1.5
     var(--ws-mono);
-
   letter-spacing: 0.14em;
-
   text-transform: uppercase;
 }
 
@@ -1074,41 +826,36 @@
 }
 
 .alden-builds-grid {
+  display: grid;
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 }
 
 /* ============================================================
    PROCESS
-============================================================ */
+   ============================================================ */
 
 .web-services-process-section {
   padding-top:
     clamp(6rem, 10vw, 10rem);
-
   padding-bottom:
     clamp(5rem, 8vw, 8rem);
 }
 
 .process-track {
   display: grid;
-
   grid-template-columns: 1fr;
 }
 
 .process-card {
   display: grid;
-
   grid-template-columns:
     5rem
     minmax(0, 1fr);
-
   gap: 2rem;
-
   padding:
     2rem
     0;
-
   border-top:
     1px solid
     var(--ws-line);
@@ -1122,45 +869,34 @@
 
 .process-card__number {
   display: block;
-
   color: var(--ws-gold);
-
   font:
     0.68rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.18em;
 }
 
 .process-card__content {
   display: grid;
-
   grid-template-columns:
     minmax(14rem, 0.7fr)
     minmax(18rem, 1fr);
-
   gap: 2rem;
 }
 
 .process-card h3 {
   margin: 0;
-
   color: var(--ws-text);
-
   font:
     clamp(2rem, 4vw, 4rem) / 0.85
     var(--ws-display);
-
   text-transform: uppercase;
 }
 
 .process-card p {
   max-width: 34rem;
-
   margin: 0;
-
   color: var(--ws-muted);
-
   font:
     0.82rem / 1.75
     var(--ws-mono);
@@ -1168,22 +904,19 @@
 
 /* ============================================================
    CTA
-============================================================ */
+   ============================================================ */
 
 .web-services-cta-section {
   padding-top: 0;
-
   padding-bottom:
     clamp(6rem, 10vw, 10rem);
 }
 
 .web-services-cta {
   position: relative;
-
   padding:
     clamp(4rem, 8vw, 8rem)
     0;
-
   border-top:
     1px solid
     var(--ws-line);
@@ -1191,72 +924,52 @@
 
 .web-services-cta .web-services-section-title {
   max-width: 1000px;
-
   font-size:
     clamp(4rem, 9vw, 9rem);
 }
 
 .web-services-cta-footer {
   display: flex;
-
   align-items: flex-end;
   justify-content: space-between;
-
   gap: 3rem;
-
   margin-top: 3rem;
 }
 
 .web-services-cta
   .web-services-section-copy {
   max-width: 34rem;
-
   margin: 0;
 }
 
 .web-services-actions {
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 0.75rem;
-
   flex: 0 0 auto;
 }
 
 .web-services-solid-link,
 .web-services-pill-link {
   display: inline-flex;
-
   min-height: 3rem;
-
   align-items: center;
   justify-content: center;
-
   gap: 0.65rem;
-
   padding:
     0.85rem
     1.25rem;
-
   border:
     1px solid
     var(--ws-gold);
-
   border-radius: 0;
-
   color: var(--ws-gold);
-
   font:
     0.68rem / 1.4
     var(--ws-mono);
-
   letter-spacing: 0.1em;
-
   text-decoration: none;
-
   text-transform: uppercase;
-
   transition:
     background 0.25s ease,
     color 0.25s ease,
@@ -1265,42 +978,36 @@
 
 .web-services-solid-link {
   background: var(--ws-gold);
-
   color: var(--ws-bg);
 }
 
 .web-services-solid-link:hover {
   transform: translateY(-2px);
-
   background: transparent;
-
   color: var(--ws-gold);
 }
 
 .web-services-pill-link {
   border-color:
     rgba(231, 229, 223, 0.2);
-
   color:
     rgba(231, 229, 223, 0.68);
 }
 
 .web-services-pill-link:hover {
   transform: translateY(-2px);
-
   border-color: var(--ws-gold);
-
   color: var(--ws-gold);
 }
 
 /* ============================================================
    LARGE DESKTOP
-============================================================ */
+   ============================================================ */
 
 @media (min-width: 1800px) {
   .portfolio-card-grid:not(
-      .portfolio-card-grid--mosaic
-    ) {
+    .portfolio-card-grid--mosaic
+  ) {
     grid-template-columns:
       repeat(4, minmax(0, 1fr));
   }
@@ -1308,7 +1015,7 @@
 
 /* ============================================================
    TABLET
-============================================================ */
+   ============================================================ */
 
 @media (max-width: 1050px) {
   .web-services-hero-inner {
@@ -1320,9 +1027,7 @@
   .portfolio-card-grid--mosaic {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
-
     grid-template-rows: none;
-
     grid-auto-rows:
       minmax(17rem, auto);
   }
@@ -1330,18 +1035,14 @@
   .portfolio-card-grid--mosaic
     .portfolio-card--mosaic:nth-child(1) {
     grid-column: 1 / -1;
-
     grid-row: auto;
-
     min-height: 24rem;
   }
 
   .portfolio-card-grid--mosaic
     .portfolio-card--mosaic:nth-child(n + 2) {
     grid-column: auto;
-
     grid-row: auto;
-
     min-height: 18rem;
   }
 
@@ -1351,25 +1052,19 @@
       minmax(11rem, 0.75fr)
       minmax(14rem, 1.25fr)
       auto;
-
     gap: 1.25rem;
   }
 
   .alden-builds-layout {
     grid-template-columns: 1fr;
-
     gap: 2rem;
   }
 
   .alden-builds-index {
     position: static;
-
     flex-direction: row;
-
     justify-content: space-between;
-
     padding-bottom: 1rem;
-
     border-bottom:
       1px solid
       var(--ws-line);
@@ -1384,7 +1079,7 @@
 
 /* ============================================================
    MOBILE
-============================================================ */
+   ============================================================ */
 
 @media (max-width: 767px) {
   .web-services-section {
@@ -1397,14 +1092,10 @@
 
   .web-services-hero-inner {
     display: flex;
-
     min-height: 100svh;
-
     flex-direction: column;
-
     align-items: stretch;
     justify-content: flex-end;
-
     padding:
       6rem
       1rem
@@ -1413,13 +1104,11 @@
 
   .web-services-kicker {
     margin-bottom: auto;
-
     padding-top: 1rem;
   }
 
   .web-services-title {
     width: 100%;
-
     margin-bottom: 2rem;
   }
 
@@ -1437,9 +1126,7 @@
 
   .web-services-hero-copy {
     width: 100%;
-
     margin: 0;
-
     align-self: stretch;
   }
 
@@ -1449,9 +1136,7 @@
 
   .web-services-hero-meta {
     margin-top: 2.5rem;
-
     flex-direction: column;
-
     align-items: flex-start;
   }
 
@@ -1466,16 +1151,12 @@
 
   .portfolio-filter-row {
     flex-wrap: nowrap;
-
     overflow-x: auto;
-
     padding:
       0.2rem
       0
       0.6rem;
-
     margin-bottom: 1.5rem;
-
     scrollbar-width: none;
   }
 
@@ -1485,13 +1166,10 @@
 
   .portfolio-filter-button {
     flex: 0 0 auto;
-
     min-height: 2.3rem;
-
     padding:
       0.5rem
       0.72rem;
-
     font-size: 0.6rem;
   }
 
@@ -1508,7 +1186,6 @@
   .portfolio-card-grid--mosaic
     .portfolio-card--mosaic:nth-child(1) {
     grid-column: 1 / -1;
-
     min-height: 22rem;
   }
 
@@ -1544,7 +1221,6 @@
 
   .studio-statement__footer {
     flex-direction: column;
-
     align-items: flex-start;
   }
 
@@ -1556,11 +1232,8 @@
     grid-template-columns:
       3rem
       minmax(0, 1fr);
-
     gap: 0.5rem 1rem;
-
     min-height: 0;
-
     padding:
       1.5rem
       0;
@@ -1576,13 +1249,11 @@
 
   .web-service-card__description {
     grid-column: 2;
-
     max-width: none;
   }
 
   .web-service-card__link {
     grid-column: 2;
-
     margin-top: 0.5rem;
   }
 
@@ -1599,9 +1270,7 @@
     grid-template-columns:
       3rem
       minmax(0, 1fr);
-
     gap: 1rem;
-
     padding:
       1.75rem
       0;
@@ -1613,7 +1282,6 @@
 
   .process-card h3 {
     margin-bottom: 1rem;
-
     font-size:
       clamp(2rem, 10vw, 3rem);
   }
@@ -1636,13 +1304,11 @@
 
   .web-services-cta-footer {
     flex-direction: column;
-
     align-items: flex-start;
   }
 
   .web-services-actions {
     width: 100%;
-
     flex-direction: column;
   }
 
@@ -1654,7 +1320,7 @@
 
 /* ============================================================
    SMALL MOBILE
-============================================================ */
+   ============================================================ */
 
 @media (max-width: 520px) {
   .web-services-wide-shell {
@@ -1689,7 +1355,6 @@
   .portfolio-card-grid--mosaic
     .portfolio-card--mosaic:nth-child(n + 2) {
     grid-column: auto;
-
     min-height: 19rem;
   }
 
@@ -1702,9 +1367,7 @@
     .portfolio-card--mosaic
     .portfolio-card__media {
     position: relative;
-
     inset: auto;
-
     height: 19rem;
   }
 
@@ -1712,11 +1375,8 @@
     .portfolio-card--mosaic
     .portfolio-card__body {
     position: relative;
-
     inset: auto;
-
     padding-top: 1.15rem;
-
     background: var(--ws-bg);
   }
 
@@ -1735,21 +1395,19 @@
 
   .alden-builds-index {
     flex-direction: column;
-
     align-items: flex-start;
   }
 }
 
 /* ============================================================
    REDUCED MOTION
-============================================================ */
+   ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
   .web-studio-page *,
   .web-studio-page *::before,
   .web-studio-page *::after {
     scroll-behavior: auto !important;
-
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
