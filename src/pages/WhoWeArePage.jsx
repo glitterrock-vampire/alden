@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
-// import Footer from '@/components/home/Footer';
+
 import { CONTACT_EMAIL } from '@/lib/contact';
 
 import './WhoWeArePage.css';
