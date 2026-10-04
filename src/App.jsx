@@ -5,7 +5,7 @@ import HeroSection from '@/components/home/HeroSection';
 import MarqueeStrip from '@/components/home/MarqueeStrip';
 import EcosystemSection from '@/components/home/EcosystemSection';
 import AboutSection from '@/components/home/AboutSection';
-import FooterSection from '@/components/home/FooterSection';
+import Footer from '@/components/home/Footer';
 
 // Static pages — bundled normally
 import StudiosPage from '@/pages/StudiosPage';
@@ -47,7 +47,7 @@ function Home() {
       <MarqueeStrip text="TECHNOLOGY · INNOVATION · DESIGN · FARM · BUILD · FLOW · KINGSTON, JA ·" />
       <EcosystemSection />
       <AboutSection />
-      <FooterSection />
+      <Footer />
     </div>
   );
 }

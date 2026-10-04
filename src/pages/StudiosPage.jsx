@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Navbar from '@/components/home/Navbar';
-import FooterSection from '@/components/home/FooterSection';
+import Footer from '@/components/home/Footer';
 import { Code2, Camera } from 'lucide-react';
 
 const STUDIOS = [
@@ -180,7 +180,7 @@ export default function StudiosPage() {
         </div>
       </section>
 
-      <FooterSection />
+      <Footer />
     </div>
   );
 }

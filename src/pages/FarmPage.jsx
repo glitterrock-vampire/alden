@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from '@/components/home/Navbar';
-import FooterSection from '@/components/home/FooterSection';
+import Footer from '@/components/home/Footer';
 import { ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -602,7 +602,7 @@ export default function FarmPage() {
         </>
       )}
 
-      <FooterSection />
+      <Footer />
 
       <style>{`
         .farm-hero {

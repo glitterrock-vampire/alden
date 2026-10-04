@@ -1,0 +1,282 @@
+/* ==========================================================================
+   ALDEN FOOTER
+   ========================================================================== */
+
+.site-footer {
+  background: #000;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   CONTAINER
+   ========================================================================== */
+
+.footer-container {
+  width: min(1400px, calc(100% - 80px));
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   MAIN FOOTER
+   ========================================================================== */
+
+.footer-navigation {
+  padding: 60px 0 65px;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.25fr)
+    minmax(420px, 1fr);
+  gap: 70px;
+  align-items: start;
+  padding-bottom: 55px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
+   BRAND
+   ========================================================================== */
+
+.footer-brand {
+  min-width: 0;
+}
+
+.footer-logo {
+  margin: 0 0 30px;
+  font-family: 'Koulen', sans-serif;
+  font-size: clamp(75px, 10vw, 150px);
+  font-weight: 400;
+  line-height: 0.72;
+  letter-spacing: -0.025em;
+}
+
+.footer-description {
+  max-width: 400px;
+  margin: 0 0 22px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.footer-location {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.28);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   NAVIGATION GRID
+   ========================================================================== */
+
+.footer-navigation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 55px;
+  padding-top: 8px;
+}
+
+.footer-column {
+  min-width: 0;
+}
+
+/* ==========================================================================
+   LABEL
+   ========================================================================== */
+
+.footer-label {
+  margin: 0 0 17px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.footer-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    padding 200ms ease;
+}
+
+.footer-link-arrow {
+  color: rgba(255, 255, 255, 0.25);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  transform: translate(0, 0);
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.footer-link:hover {
+  padding-left: 6px;
+  color: #fff;
+  border-color: rgba(200, 168, 78, 0.5);
+}
+
+.footer-link:hover .footer-link-arrow {
+  color: #c8a84e;
+  transform: translate(4px, -4px);
+}
+
+/* ==========================================================================
+   BOTTOM BAR
+   ========================================================================== */
+
+.footer-bottom {
+  padding: 16px 0;
+}
+
+.footer-bottom-grid {
+  display: grid;
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+  align-items: center;
+  gap: 15px;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-bottom-brand {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Koulen', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0;
+}
+
+.footer-bottom-grid > span:nth-child(2) {
+  text-align: center;
+}
+
+.footer-bottom-grid > span:nth-child(3) {
+  text-align: right;
+}
+
+/* ==========================================================================
+   TABLET
+   ========================================================================== */
+
+@media (max-width: 1050px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .footer-navigation-grid {
+    padding-top: 0;
+  }
+}
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .footer-container {
+    width: calc(100% - 36px);
+  }
+
+  .footer-navigation {
+    padding: 50px 0 55px;
+  }
+
+  .footer-main {
+    gap: 45px;
+    padding-bottom: 50px;
+  }
+
+  .footer-logo {
+    margin-bottom: 25px;
+    font-size: clamp(75px, 23vw, 120px);
+  }
+
+  .footer-description {
+    max-width: 340px;
+    font-size: 11px;
+  }
+
+  .footer-navigation-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .footer-link {
+    max-width: 100%;
+  }
+
+  .footer-bottom {
+    padding: 16px 0;
+  }
+
+  .footer-bottom-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .footer-bottom-grid > span:nth-child(2),
+  .footer-bottom-grid > span:nth-child(3) {
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   SMALL MOBILE
+   ========================================================================== */
+
+@media (max-width: 400px) {
+  .footer-container {
+    width: calc(100% - 28px);
+  }
+
+  .footer-logo {
+    font-size: 72px;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-link,
+  .footer-link-arrow {
+    transition: none;
+  }
+}

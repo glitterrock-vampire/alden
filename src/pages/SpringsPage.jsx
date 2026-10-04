@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Navbar from '@/components/home/Navbar';
-import FooterSection from '@/components/home/FooterSection';
+import Footer from '@/components/home/Footer';
 import { CONTACT_EMAIL, createContactMailto } from '@/lib/contact';
 
 const SPRINGS_PRODUCTS = [
@@ -179,7 +179,7 @@ export default function SpringsPage() {
         </div>
       </section>
 
-      <FooterSection />
+      <Footer />
 
       <style>{`
         .springs-page {

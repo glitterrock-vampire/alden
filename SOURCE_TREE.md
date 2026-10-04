@@ -31,7 +31,7 @@ alden-one/                          # Main hub repository (alden-one.com)
 │   │   ├── home/                 # Home-specific components
 │   │   │   ├── Navbar.jsx       # Navigation bar
 │   │   │   ├── Footer.jsx       # Simple footer
-│   │   │   ├── FooterSection.jsx # Footer with music player
+│   │   │   ├── Footer.jsx # Footer with music player
 │   │   │   ├── HeroSection.jsx   # Hero with parallax
 │   │   │   ├── StickyScrollShowcase.jsx  # Studios showcase
 │   │   │   ├── MarqueeStrip.jsx  # Scrolling marquee
@@ -163,7 +163,7 @@ App.jsx
     ├── MarqueeStrip
     ├── EcosystemSection
     ├── AboutSection
-    └── FooterSection (with music player)
+    └── Footer (with music player)
 ```
 
 ### Venture Pages

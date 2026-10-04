@@ -5,7 +5,7 @@ import StickyScrollShowcase from '../components/home/StickyScrollShowcase.jsx';
 import MarqueeStrip from '../components/home/MarqueeStrip.jsx';
 import EcosystemSection from '../components/home/EcosystemSection.jsx';
 import AboutSection from '../components/home/AboutSection.jsx';
-import FooterSection from '../components/home/FooterSection.jsx';
+import Footer from '../components/home/Footer.jsx';
 
 const heroImage = 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/dca4e077b_generated_26799b91.png';
 
@@ -55,7 +55,7 @@ export default function Home() {
       <MarqueeStrip />
       <EcosystemSection />
       <AboutSection />
-      <FooterSection />
+      <Footer />
     </div>
   );
 }

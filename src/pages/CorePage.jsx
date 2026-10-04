@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import Navbar from '@/components/home/Navbar';
-import FooterSection from '@/components/home/FooterSection';
+import Footer from '@/components/home/Footer';
 
 const CORE_LETTERS = ['C', 'O', 'R', 'E'];
 
@@ -569,7 +569,7 @@ export default function CorePage() {
         </section>
       </main>
 
-      <FooterSection />
+      <Footer />
 
       <style>{`
         [data-animate] {
