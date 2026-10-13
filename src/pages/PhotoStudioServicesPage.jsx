@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import Navbar from '@/components/home/Navbar';
@@ -491,15 +492,24 @@ export default function PhotoStudioServicesPage() {
               </p>
             </div>
 
-            <a
-              className="photo-studio-contact"
-              href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-                'Photo Studio Booking',
-              )}`}
-            >
-              <span>Book a session</span>
-              <strong>↗</strong>
-            </a>
+            <div className="photo-studio-bottom-actions">
+              <Link
+                className="photo-studio-contact photo-studio-contact--primary"
+                to="/studios/photo-studio/packages"
+              >
+                <span>View packages & pricing</span>
+                <strong>↗</strong>
+              </Link>
+              <a
+                className="photo-studio-contact"
+                href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+                  'Photo Studio Booking',
+                )}`}
+              >
+                <span>Book a session</span>
+                <strong>↗</strong>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -524,11 +534,43 @@ export default function PhotoStudioServicesPage() {
               and technical precision.
             </p>
 
+            <div className="photo-studio-pricing-preview">
+              <span>Pricing starts at</span>
+              <strong>JMD 25,000</strong>
+              <Link
+                to="/studios/photo-studio/packages"
+                className="photo-studio-pricing-link"
+              >
+                View all packages
+                <strong>↗</strong>
+              </Link>
+            </div>
+
             <span>
               Kingston, Jamaica
               <br />
               Available beyond.
             </span>
+          </div>
+        </div>
+      </section>
+
+      <section className="photo-studio-pricing-standout">
+        <div className="photo-studio-container">
+          <div className="photo-studio-pricing-standout-inner">
+            <span>Book a session today</span>
+            <h2>
+              Starting at
+              <br />
+              <strong>JMD 25,000</strong>
+            </h2>
+            <Link
+              to="/studios/photo-studio/packages"
+              className="photo-studio-pricing-cta"
+            >
+              View packages
+              <strong>↗</strong>
+            </Link>
           </div>
         </div>
       </section>

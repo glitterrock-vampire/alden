@@ -14,6 +14,10 @@ const navigation = [
     href: '/about',
   },
   {
+    label: 'Contact',
+    href: '/contact',
+  },
+  {
     label: 'Careers',
     href: '/about/careers',
   },

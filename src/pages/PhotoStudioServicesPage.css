@@ -767,6 +767,13 @@
   line-height: 1.6;
 }
 
+.photo-studio-bottom-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .photo-studio-contact {
   display: inline-flex;
   align-items: center;
@@ -808,6 +815,182 @@
 .photo-studio-contact:focus-visible {
   outline: 2px solid var(--ps-gold-light);
   outline-offset: 4px;
+}
+
+.photo-studio-contact--primary {
+  padding: 1rem 2rem;
+
+  background: var(--ps-gold);
+  color: var(--ps-black);
+
+  border-radius: 4px;
+
+  font-weight: 500;
+  letter-spacing: 0.1em;
+
+  transition:
+    background-color 200ms ease,
+    transform 150ms ease;
+}
+
+.photo-studio-contact--primary strong {
+  color: var(--ps-black);
+}
+
+.photo-studio-contact--primary:hover {
+  background: var(--ps-gold-light);
+  color: var(--ps-black);
+}
+
+.photo-studio-contact--primary:hover strong {
+  transform: translate(3px, -3px);
+}
+
+.photo-studio-contact--primary:active {
+  transform: translateY(-1px);
+}
+
+.photo-studio-pricing-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  padding: 2rem 2.5rem;
+
+  background: var(--ps-gold);
+  border: 2px solid var(--ps-gold);
+  border-radius: 6px;
+
+  margin: 2.5rem 0;
+
+  box-shadow: 0 4px 20px rgba(200, 168, 78, 0.4);
+}
+
+.photo-studio-pricing-preview span {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ps-black);
+  font-weight: 500;
+}
+
+.photo-studio-pricing-preview strong {
+  font-family: "Koulen", cursive;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--ps-black);
+}
+
+.photo-studio-pricing-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  margin-top: 0.5rem;
+
+  color: var(--ps-black);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition: color 200ms ease;
+}
+
+.photo-studio-pricing-link strong {
+  font-size: 1rem;
+  color: var(--ps-black);
+  transition: transform 200ms ease;
+}
+
+.photo-studio-pricing-link:hover {
+  color: var(--ps-black-soft);
+}
+
+.photo-studio-pricing-link:hover strong {
+  transform: translate(3px, -3px);
+}
+
+.photo-studio-pricing-standout {
+  padding: 8rem 0;
+
+  background: var(--ps-gold);
+  color: var(--ps-black);
+}
+
+.photo-studio-pricing-standout-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  max-width: 800px;
+}
+
+.photo-studio-pricing-standout span {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ps-black);
+  font-weight: 500;
+}
+
+.photo-studio-pricing-standout h2 {
+  font-family: "Koulen", cursive;
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 0.9;
+  color: var(--ps-black);
+  margin: 0;
+}
+
+.photo-studio-pricing-standout h2 strong {
+  color: var(--ps-black);
+}
+
+.photo-studio-pricing-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1.25rem 2.5rem;
+
+  background: var(--ps-black);
+  color: var(--ps-gold);
+  border: 2px solid var(--ps-black);
+  border-radius: 4px;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+
+  transition:
+    background-color 200ms ease,
+    transform 150ms ease;
+  width: fit-content;
+}
+
+.photo-studio-pricing-cta strong {
+  font-size: 1.25rem;
+  color: var(--ps-gold);
+  transition: transform 200ms ease;
+}
+
+.photo-studio-pricing-cta:hover {
+  background: var(--ps-black-soft);
+  transform: translateY(-2px);
+}
+
+.photo-studio-pricing-cta:hover strong {
+  transform: translate(4px, -4px);
+}
+
+.photo-studio-pricing-cta:active {
+  transform: translateY(-1px);
 }
 
 
@@ -1020,6 +1203,14 @@
 @media (max-width: 1000px) {
   .photo-studio-container {
     width: min(calc(100% - 48px), 900px);
+  }
+
+  .photo-studio-pricing-standout {
+    padding: 6rem 0;
+  }
+
+  .photo-studio-pricing-standout h2 {
+    font-size: clamp(3.5rem, 10vw, 5.5rem);
   }
 
   .photo-studio-hero-grid {
@@ -1283,8 +1474,29 @@
     margin-top: 3.5rem;
   }
 
+  .photo-studio-pricing-preview {
+    padding: 1.5rem 2rem;
+  }
+
+  .photo-studio-pricing-preview strong {
+    font-size: 2.5rem;
+  }
+
   .photo-studio-statement-bottom span {
     text-align: left;
+  }
+
+  .photo-studio-pricing-standout {
+    padding: 5rem 0;
+  }
+
+  .photo-studio-pricing-standout h2 {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  .photo-studio-pricing-cta {
+    width: 100%;
+    justify-content: center;
   }
 
 

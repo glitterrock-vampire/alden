@@ -42,7 +42,7 @@ export default function InfoSection() {
               moments of joy that catch us by surprise and stay with us for years to come.
             </p>
             <a
-              href="#contact"
+              href="/contact"
               className="inline-block border border-white/30 text-white/70 text-xs tracking-widest uppercase px-6 py-3 hover:border-white hover:text-white transition-all duration-300"
             >
               Say Hello →

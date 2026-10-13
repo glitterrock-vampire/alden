@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
 import { Code2, Camera } from 'lucide-react';
@@ -9,6 +10,7 @@ const STUDIOS = [
     description: "Custom web development, e-commerce solutions, and digital transformation services to elevate your online presence.",
     icon: Code2,
     href: "/studios/web-studio/services",
+    packagesHref: "/studios/web-studio/packages",
     features: ["Website Development", "E-Commerce Solutions", "Mobile Apps", "Cloud Hosting"]
   },
   {
@@ -16,6 +18,7 @@ const STUDIOS = [
     description: "Professional photography services covering portraits, events, commercial, and artistic visual storytelling.",
     icon: Camera,
     href: "/studios/photo-studio/services",
+    packagesHref: "/studios/photo-studio/packages",
     features: ["Portrait Photography", "Event Coverage", "Commercial Photography", "Photo Editing"]
   }
 ];
@@ -138,16 +141,25 @@ export default function StudiosPage() {
                     </div>
                   ))}
                 </div>
-                <a 
-                  href={studio.href} 
-                  className="inline-flex items-center gap-3 text-accent hover:text-white transition-all duration-300 hover:gap-4"
-                  style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem' }}
-                >
-                  Explore {studio.title}
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                  </svg>
-                </a>
+                <div className="flex flex-wrap gap-6">
+                  <Link
+                    to={studio.href}
+                    className="inline-flex min-h-11 items-center gap-3 text-accent hover:text-white transition-all duration-300 hover:gap-4"
+                    style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem' }}
+                  >
+                    Explore {studio.title}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                    </svg>
+                  </Link>
+                  <Link
+                    to={studio.packagesHref}
+                    className="inline-flex min-h-11 items-center gap-3 text-white/60 hover:text-accent transition-colors"
+                    style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem' }}
+                  >
+                    View packages
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

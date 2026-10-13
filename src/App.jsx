@@ -10,8 +10,11 @@ import Footer from '@/components/home/Footer';
 // Static pages — bundled normally
 import StudiosPage from '@/pages/StudiosPage';
 import WhoWeArePage from '@/pages/WhoWeArePage';
+import ContactPage from '@/pages/ContactPage';
 import PhotoStudioServicesPage from '@/pages/PhotoStudioServicesPage';
+import PhotoStudioPackagesPage from '@/pages/PhotoStudioPackagesPage';
 import WebStudioServicesPage from '@/pages/web-studio/WebStudioServicesPage';
+import WebStudioPackagesPage from '@/pages/web-studio/WebStudioPackagesPage';
 import CorePage from '@/pages/CorePage';
 import SpringsPage from '@/pages/SpringsPage';
 
@@ -73,6 +76,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/studios" element={<StudiosPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/ecosystem" element={<Navigate replace to="/#ecosystem" />} />
 
         {/* 3D pages — lazy + suspense */}
@@ -82,12 +86,14 @@ export default function App() {
         <Route path="/spring"  element={<SpringsPage />} />
         <Route path="/springs" element={<SpringsPage />} />
         <Route path="/studios/photo-studio/services"  element={<PhotoStudioServicesPage />} />
+        <Route path="/studios/photo-studio/packages"  element={<PhotoStudioPackagesPage />} />
         <Route path="/about/who-we-are" element={<WhoWeArePage />} />
         <Route path="/about/careers"    element={<WhoWeArePage />} />
         <Route path="/about"            element={<WhoWeArePage />} />
         <Route path="/portfolio/photography"          element={<Navigate replace to="/studios/photo-studio/services" />} />
         <Route path="/portfolio/web"                  element={<WebStudioServicesPage />} />
         <Route path="/studios/web-studio/services"    element={<WebStudioServicesPage />} />
+        <Route path="/studios/web-studio/packages"    element={<WebStudioPackagesPage />} />
         <Route path="/studios/web-studio/portfolio"   element={<WebStudioServicesPage />} />
         <Route path="/core" element={<CorePage />} />
       </Routes>

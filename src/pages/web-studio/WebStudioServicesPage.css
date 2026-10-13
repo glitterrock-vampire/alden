@@ -200,6 +200,12 @@
     var(--ws-mono);
 }
 
+.web-services-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .web-services-hero-copy a {
   display: inline-flex;
   min-height: 3rem;
@@ -685,6 +691,149 @@
   letter-spacing: 0.15em;
 }
 
+.studio-pricing-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  padding: 2rem 2.5rem;
+
+  background: var(--ws-gold);
+  border: 2px solid var(--ws-gold);
+  border-radius: 6px;
+
+  margin: 2.5rem 0;
+
+  box-shadow: 0 4px 20px rgba(204, 187, 135, 0.4);
+}
+
+.studio-pricing-preview span {
+  font-family: var(--ws-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ws-bg);
+  font-weight: 500;
+}
+
+.studio-pricing-preview strong {
+  font-family: var(--ws-display);
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--ws-bg);
+}
+
+.studio-pricing-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  margin-top: 0.5rem;
+
+  color: var(--ws-bg);
+  font-family: var(--ws-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition: color 200ms ease;
+}
+
+.studio-pricing-link span {
+  font-size: 1rem;
+  color: var(--ws-bg);
+  transition: transform 200ms ease;
+}
+
+.studio-pricing-link:hover {
+  color: var(--ws-bg);
+}
+
+.studio-pricing-link:hover span {
+  transform: translate(3px, -3px);
+}
+
+.studio-pricing-standout {
+  padding: 8rem 0;
+
+  background: var(--ws-gold);
+  color: var(--ws-bg);
+}
+
+.studio-pricing-standout-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  max-width: 800px;
+}
+
+.studio-pricing-standout span {
+  font-family: var(--ws-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ws-bg);
+  font-weight: 500;
+}
+
+.studio-pricing-standout h2 {
+  font-family: var(--ws-display);
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 0.9;
+  color: var(--ws-bg);
+  margin: 0;
+}
+
+.studio-pricing-standout h2 strong {
+  color: var(--ws-bg);
+}
+
+.studio-pricing-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1.25rem 2.5rem;
+
+  background: var(--ws-bg);
+  color: var(--ws-gold);
+  border: 2px solid var(--ws-bg);
+  border-radius: 4px;
+
+  font-family: var(--ws-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+
+  transition:
+    background-color 200ms ease,
+    transform 150ms ease;
+  width: fit-content;
+}
+
+.studio-pricing-cta span {
+  font-size: 1.25rem;
+  color: var(--ws-gold);
+  transition: transform 200ms ease;
+}
+
+.studio-pricing-cta:hover {
+  background: var(--ws-surface);
+  transform: translateY(-2px);
+}
+
+.studio-pricing-cta:hover span {
+  transform: translate(4px, -4px);
+}
+
+.studio-pricing-cta:active {
+  transform: translateY(-1px);
+}
+
 /* ============================================================
    SERVICES
    ============================================================ */
@@ -987,6 +1136,21 @@
   color: var(--ws-gold);
 }
 
+.web-services-solid-link--primary {
+  padding: 1rem 2rem;
+
+  font-weight: 500;
+  letter-spacing: 0.12em;
+
+  box-shadow: 0 4px 20px rgba(204, 187, 135, 0.3);
+}
+
+.web-services-solid-link--primary:hover {
+  background: var(--ws-gold-bright);
+  color: var(--ws-bg);
+  box-shadow: 0 6px 24px rgba(204, 187, 135, 0.4);
+}
+
 .web-services-pill-link {
   border-color:
     rgba(231, 229, 223, 0.2);
@@ -1018,6 +1182,14 @@
    ============================================================ */
 
 @media (max-width: 1050px) {
+  .studio-pricing-standout {
+    padding: 6rem 0;
+  }
+
+  .studio-pricing-standout h2 {
+    font-size: clamp(3.5rem, 10vw, 5.5rem);
+  }
+
   .web-services-hero-inner {
     grid-template-columns:
       minmax(0, 1fr)
@@ -1226,6 +1398,45 @@
 
   .studio-statement__mark {
     align-self: flex-end;
+  }
+
+  .studio-pricing-preview {
+    padding: 1.5rem 2rem;
+  }
+
+  .studio-pricing-preview strong {
+    font-size: 2.5rem;
+  }
+
+  .studio-pricing-standout {
+    padding: 5rem 0;
+  }
+
+  .studio-pricing-standout h2 {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  .studio-pricing-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1050px) {
+  .studio-pricing-preview {
+    padding: 1.5rem 2rem;
+  }
+
+  .studio-pricing-preview strong {
+    font-size: 2.5rem;
+  }
+
+  .studio-pricing-standout {
+    padding: 6rem 0;
+  }
+
+  .studio-pricing-standout h2 {
+    font-size: clamp(3.5rem, 10vw, 5.5rem);
   }
 
   .web-service-card {

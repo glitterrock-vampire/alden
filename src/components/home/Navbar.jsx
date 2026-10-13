@@ -147,11 +147,11 @@ export default function Navbar() {
     }
 
     if (path === 'studios') {
-      return [
-        'studios',
-        'web-studio',
-        'photo-studio',
-      ].includes(currentPage);
+      return (
+        currentPage === 'studios' ||
+        currentPage.includes('web-studio') ||
+        currentPage.includes('photo-studio')
+      );
     }
 
     if (path === 'ecosystem') {
@@ -241,10 +241,24 @@ export default function Navbar() {
                 </Link>
 
                 <Link
+                  to="/studios/web-studio/packages"
+                  className="dropdown-item"
+                >
+                  Web Packages
+                </Link>
+
+                <Link
                   to="/studios/photo-studio/services"
                   className="dropdown-item"
                 >
                   Photo Studio
+                </Link>
+
+                <Link
+                  to="/studios/photo-studio/packages"
+                  className="dropdown-item"
+                >
+                  Photo Packages
                 </Link>
               </div>
 

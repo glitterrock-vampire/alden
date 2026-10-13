@@ -337,12 +337,23 @@ export default function WebStudioServicesPage() {
               ambitious businesses forward.
             </p>
 
-            <a href="#portfolio">
-              Explore selected work
-              <span aria-hidden="true">
-                ↓
-              </span>
-            </a>
+            <div className="web-services-hero-actions">
+              <a href="#portfolio">
+                Explore selected work
+                <span aria-hidden="true">
+                  ↓
+                </span>
+              </a>
+              <Link
+                to="/studios/web-studio/packages"
+                className="web-services-solid-link web-services-solid-link--primary"
+              >
+                View packages & pricing
+                <span aria-hidden="true">
+                  ↗
+                </span>
+              </Link>
+            </div>
           </div>
 
           <div className="web-services-hero-meta">
@@ -439,11 +450,43 @@ export default function WebStudioServicesPage() {
               digital experiences.
             </p>
 
+            <div className="studio-pricing-preview">
+              <span>Website builds start at</span>
+              <strong>JMD 150,000</strong>
+              <Link
+                to="/studios/web-studio/packages"
+                className="studio-pricing-link"
+              >
+                View all packages
+                <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+
             <span className="studio-statement__mark">
               ALDEN / 01
             </span>
           </div>
 
+        </div>
+      </section>
+
+      <section className="studio-pricing-standout">
+        <div className="web-services-wide-shell">
+          <div className="studio-pricing-standout-inner">
+            <span>Start your project today</span>
+            <h2>
+              Website builds from
+              <br />
+              <strong>JMD 150,000</strong>
+            </h2>
+            <Link
+              to="/studios/web-studio/packages"
+              className="studio-pricing-cta"
+            >
+              View packages
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -626,15 +669,15 @@ export default function WebStudioServicesPage() {
               </p>
 
               <div className="web-services-actions">
-                <a
-                  href="/contact"
+                <Link
+                  to="/studios/web-studio/packages"
                   className="web-services-solid-link"
                 >
-                  Start Your Project
+                  View packages
                   <span aria-hidden="true">
                     ↗
                   </span>
-                </a>
+                </Link>
 
                 <a
                   href="#portfolio"
