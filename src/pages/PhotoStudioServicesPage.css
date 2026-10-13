@@ -118,7 +118,6 @@
   color: transparent;
 
   -webkit-text-stroke: 1px rgba(243, 241, 233, 0.55);
-  text-stroke: 1px rgba(243, 241, 233, 0.55);
 }
 
 .photo-studio-hero-side {
@@ -1030,7 +1029,6 @@
   color: transparent;
 
   -webkit-text-stroke: 1px rgba(243, 241, 233, 0.45);
-  text-stroke: 1px rgba(243, 241, 233, 0.45);
 }
 
 .photo-studio-statement-bottom {
