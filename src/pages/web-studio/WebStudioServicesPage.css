@@ -1142,12 +1142,14 @@
   font-weight: 500;
   letter-spacing: 0.12em;
 
+  background: var(--ws-gold) !important;
+  color: var(--ws-bg) !important;
   box-shadow: 0 4px 20px rgba(204, 187, 135, 0.3);
 }
 
 .web-services-solid-link--primary:hover {
-  background: var(--ws-gold-bright);
-  color: var(--ws-bg);
+  background: var(--ws-gold-bright) !important;
+  color: var(--ws-bg) !important;
   box-shadow: 0 6px 24px rgba(204, 187, 135, 0.4);
 }
 
