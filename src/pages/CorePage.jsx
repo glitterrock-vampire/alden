@@ -1,4 +1,3 @@
-import { useRef, useEffect } from 'react';
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
 
@@ -32,46 +31,10 @@ const offerings = [
 ];
 
 export default function CorePage() {
-  const letterRefs = useRef([]);
-
-  useEffect(() => {
-    // Hero letter animation
-    setTimeout(() => {
-      letterRefs.current.forEach((letter, index) => {
-        setTimeout(() => {
-          if (letter) {
-            // @ts-ignore
-            letter.style.opacity = '1';
-            // @ts-ignore
-            letter.style.transform = 'translateY(0px)';
-          }
-        }, index * 150);
-      });
-    }, 400);
-
-    // Scroll reveal animation
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // @ts-ignore
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div className="min-h-screen bg-background" style={{
-      backgroundImage: 'url(/images/5BC0F55F-2624-4CB5-8C13-D1B70DD77DB3.PNG)',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed',
-      backgroundPosition: 'center top'
+      backgroundColor: '#050505'
     }}>
       <div className="fixed inset-0 bg-black/50 pointer-events-none z-0" />
       
@@ -81,10 +44,9 @@ export default function CorePage() {
         {/* Hero Section */}
         <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
           <div className="hero-letter-wrap absolute bottom-20 left-1/2 -translate-x-1/2 flex justify-center gap-2 z-3">
-            {CORE_LETTERS.map((letter, index) => (
+            {CORE_LETTERS.map((letter) => (
               <span
                 key={letter}
-                ref={el => letterRefs.current[index] = el}
                 className="hero-letter"
                 style={{
                   fontFamily: 'Koulen, cursive',
@@ -92,10 +54,7 @@ export default function CorePage() {
                   lineHeight: '0.82',
                   color: '#e7e5df',
                   whiteSpace: 'nowrap',
-                  display: 'inline-block',
-                  opacity: 0,
-                  transform: 'translateY(-200px)',
-                  transition: 'opacity 0.6s ease-in-out, transform 0.6s ease-in-out'
+                  display: 'inline-block'
                 }}
               >
                 {letter}
@@ -131,7 +90,7 @@ export default function CorePage() {
             </div>
 
             {/* Profile */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10" data-animate>
+            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
               <div className="bio-label">
                 <h2 style={{
                   fontFamily: 'Koulen, cursive',
@@ -205,7 +164,7 @@ export default function CorePage() {
             </div>
 
             {/* Experience */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10" data-animate>
+            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
               <div className="bio-label">
                 <h2 style={{
                   fontFamily: 'Koulen, cursive',
@@ -314,7 +273,7 @@ export default function CorePage() {
             </div>
 
             {/* Education */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10" data-animate>
+            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
               <div className="bio-label">
                 <h2 style={{
                   fontFamily: 'Koulen, cursive',
@@ -362,7 +321,7 @@ export default function CorePage() {
             </div>
 
             {/* Achievements */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10" data-animate>
+            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
               <div className="bio-label">
                 <h2 style={{
                   fontFamily: 'Koulen, cursive',
@@ -427,7 +386,7 @@ export default function CorePage() {
             </div>
 
             {/* Interests */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10 border-b" data-animate>
+            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10 border-b">
               <div className="bio-label">
                 <h2 style={{
                   fontFamily: 'Koulen, cursive',
