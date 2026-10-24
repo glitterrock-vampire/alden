@@ -3,11 +3,88 @@
    ========================================================================== */
 
 .build-page {
-  --build-black: #080808;
-  --build-cream: #f1eee7;
-  --build-muted: rgba(241, 238, 231, 0.62);
-  --build-line: rgba(241, 238, 231, 0.18);
-  --build-soft-line: rgba(241, 238, 231, 0.1);
+  --build-black: #050505;
+  --build-cream: #e7e5df;
+  --build-muted: rgba(231, 229, 223, 0.62);
+  --build-line: rgba(231, 229, 223, 0.18);
+  --build-soft-line: rgba(231, 229, 223, 0.1);
+  --build-accent: #ccbb87;
+}
+
+.build-page .section-index,
+.build-page .build-hero-kicker,
+.build-page .home-type-number,
+.build-page .home-type-specs span,
+.build-page .form-field label {
+  color: var(--build-accent);
+}
+
+.build-page .build-hero-title h1 {
+  font-size: clamp(5rem, 14vw, 13rem);
+  line-height: .78;
+  letter-spacing: -.03em;
+}
+
+.build-page .build-hero-title h1 span,
+.build-page .build-idea-layout h2 span,
+.build-page .home-types-heading h2 span,
+.build-page .waitlist-intro h2 span,
+.build-page .build-cta h2 span,
+.build-page .build-process-heading h2 span {
+  -webkit-text-stroke-color: rgba(231, 229, 223, .58);
+}
+
+.build-page .home-type-status.is-available,
+.build-page .process-arrow,
+.build-page .waitlist-intro ul li span {
+  color: var(--build-accent);
+}
+
+.build-page .home-type-card,
+.build-page .process-item,
+.build-page .form-field input,
+.build-page .form-field select,
+.build-page .form-field textarea {
+  transition: border-color .2s ease, background-color .2s ease;
+}
+
+.build-page .home-type-card:hover {
+  background: rgba(204, 187, 135, .035);
+}
+
+.build-page .form-field input:focus,
+.build-page .form-field select:focus,
+.build-page .form-field textarea:focus {
+  border-color: rgba(204, 187, 135, .8);
+  outline: 2px solid rgba(204, 187, 135, .35);
+  outline-offset: 2px;
+}
+
+.build-page .waitlist-submit,
+.build-page .build-cta-button {
+  border-radius: 0;
+  background: var(--build-accent);
+  color: var(--build-black);
+}
+
+.build-page .waitlist-submit:hover,
+.build-page .build-cta-button:hover {
+  background: #f0dfaa;
+}
+
+.build-page a:focus-visible,
+.build-page button:focus-visible {
+  outline: 2px solid var(--build-accent);
+  outline-offset: 4px;
+}
+
+.build-page {
+  --build-black: #050505;
+  --build-cream: #e7e5df;
+  --build-muted: rgba(231, 229, 223, 0.62);
+  --build-line: rgba(231, 229, 223, 0.18);
+  --build-soft-line: rgba(231, 229, 223, 0.1);
+  --build-accent: #ccbb87;
 
   background: var(--build-black);
   color: var(--build-cream);

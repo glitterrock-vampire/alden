@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
 import { ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
+import './FarmPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -260,7 +261,7 @@ export default function FarmPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="farm-page min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}

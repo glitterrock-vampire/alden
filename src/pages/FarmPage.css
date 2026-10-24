@@ -1,0 +1,130 @@
+.farm-page {
+  --farm-bg: #080907;
+  --farm-panel: #10130e;
+  --farm-cream: #e7e5df;
+  --farm-muted: rgba(231, 229, 223, .62);
+  --farm-line: rgba(231, 229, 223, .15);
+  --farm-accent: #b5c886;
+  background: var(--farm-bg) !important;
+  color: var(--farm-cream);
+}
+
+.farm-page > section {
+  background-color: var(--farm-bg) !important;
+}
+
+.farm-page .farm-hero {
+  min-height: 100svh;
+  background: #080907;
+}
+
+.farm-page .farm-hero > div:first-of-type {
+  background-position: center 48%;
+}
+
+.farm-page .farm-hero h1 {
+  max-width: 12ch;
+  font-size: clamp(4.25rem, 13.5vw, 12rem) !important;
+  line-height: .78 !important;
+  letter-spacing: -.025em !important;
+  text-wrap: balance;
+}
+
+.farm-page .farm-hero p {
+  color: rgba(231, 229, 223, .78) !important;
+}
+
+.farm-page .farm-hero p[class*="text-green-600"] {
+  color: #d5dfad !important;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, .7);
+}
+
+.farm-page > section:not(:first-of-type) {
+  padding-top: clamp(4.5rem, 9vw, 9rem) !important;
+  padding-bottom: clamp(4.5rem, 9vw, 9rem) !important;
+}
+
+.farm-page > section:not(:first-of-type) h2 {
+  font-size: clamp(2.75rem, 6vw, 6rem) !important;
+  line-height: .9 !important;
+  letter-spacing: -.025em;
+}
+
+.farm-page > section:not(:first-of-type) p {
+  color: var(--farm-muted) !important;
+  line-height: 1.8 !important;
+}
+
+.farm-page .grid.md\:grid-cols-3 > .group,
+.farm-page .grid.md\:grid-cols-4 > div,
+.farm-page .grid.md\:grid-cols-2 > div:last-child > div {
+  border-radius: 0 !important;
+  border-color: var(--farm-line) !important;
+  background: var(--farm-panel) !important;
+  box-shadow: none !important;
+}
+
+.farm-page .group:hover,
+.farm-page .grid.md\:grid-cols-4 > div:hover {
+  border-color: rgba(181, 200, 134, .52) !important;
+  transform: translateY(-4px);
+}
+
+.farm-page .group > div:first-child {
+  height: clamp(12rem, 21vw, 18rem) !important;
+}
+
+.farm-page .group button,
+.farm-page a[href="#products"],
+.farm-page a[href="/contact"] {
+  min-height: 3rem;
+  border-radius: 0 !important;
+  background-color: var(--farm-accent) !important;
+  color: #10130e !important;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.farm-page .group button:hover,
+.farm-page a[href="#products"]:hover,
+.farm-page a[href="/contact"]:hover {
+  background-color: #d0dda9 !important;
+  transform: translateY(-2px);
+}
+
+.farm-page button:focus-visible,
+.farm-page a:focus-visible {
+  outline: 2px solid var(--farm-accent);
+  outline-offset: 4px;
+}
+
+.farm-page .fixed.top-24.right-6 {
+  min-width: 3rem;
+  min-height: 3rem;
+  border-radius: 0 !important;
+  background: var(--farm-accent) !important;
+}
+
+.farm-page .fixed.right-0.top-0 {
+  border-radius: 0 !important;
+  background: #0b0d09 !important;
+}
+
+@media (max-width: 640px) {
+  .farm-page .farm-hero h1 {
+    font-size: clamp(3.75rem, 17vw, 6.5rem) !important;
+  }
+
+  .farm-page .grid.md\:grid-cols-3 {
+    gap: 1rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .farm-page *,
+  .farm-page *::before,
+  .farm-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}

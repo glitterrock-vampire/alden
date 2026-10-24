@@ -1,0 +1,150 @@
+.springs-page {
+  --springs-bg: #050707;
+  --springs-panel: #0c1111;
+  --springs-text: #e7e5df;
+  --springs-muted: rgba(231, 229, 223, .62);
+  --springs-line: rgba(231, 229, 223, .14);
+  --springs-accent: #8dd8e8;
+  text-align: left;
+}
+
+.springs-page .springs-hero {
+  min-height: 100svh;
+  align-items: flex-end;
+  padding-inline: clamp(1.5rem, 6.5vw, 7rem);
+}
+
+.springs-page .springs-hero-content {
+  width: min(100%, 1500px);
+  padding-bottom: clamp(2rem, 4vw, 4.5rem);
+}
+
+.springs-page .springs-hero-title {
+  max-width: 11ch;
+  font-size: clamp(5.5rem, 17vw, 15rem);
+  line-height: .74;
+  letter-spacing: -.03em;
+}
+
+.springs-page .springs-hero-copy {
+  max-width: 42rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.25rem;
+}
+
+.springs-page .springs-hero-copy p,
+.springs-page .springs-section-heading p,
+.springs-page .springs-about-card p,
+.springs-page .springs-access-card p,
+.springs-page .springs-contact-section p {
+  color: var(--springs-muted);
+  line-height: 1.75;
+}
+
+.springs-page .springs-hero-copy a,
+.springs-page .springs-contact-section a,
+.springs-page .springs-form button {
+  min-height: 3rem;
+  border-radius: 0;
+  border: 1px solid rgba(141, 216, 232, .7);
+  background: var(--springs-accent);
+  color: #071012;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.springs-page .springs-hero-copy a:hover,
+.springs-page .springs-contact-section a:hover,
+.springs-page .springs-form button:hover {
+  background: #b3e9f2;
+  transform: translateY(-2px);
+}
+
+.springs-page .springs-section-shell {
+  width: min(1500px, calc(100% - 96px));
+}
+
+.springs-page .springs-store-section,
+.springs-page .springs-proof-section,
+.springs-page .springs-access-section,
+.springs-page .springs-contact-section {
+  padding: clamp(5rem, 10vw, 10rem) 0;
+}
+
+.springs-page .springs-section-heading h2,
+.springs-page .springs-about-card h2,
+.springs-page .springs-access-card h2,
+.springs-page .springs-contact-section h2,
+.springs-page .springs-scroll-copy h2 {
+  font-size: clamp(2.75rem, 6vw, 6rem);
+  line-height: .9;
+  letter-spacing: -.025em;
+}
+
+.springs-page .springs-product-card,
+.springs-page .springs-store-stats div,
+.springs-page .springs-about-card,
+.springs-page .springs-access-card {
+  border-radius: 0;
+  border-color: var(--springs-line);
+  background: var(--springs-panel);
+}
+
+.springs-page .springs-product-card {
+  min-height: 28rem;
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.springs-page .springs-product-card:hover {
+  border-color: rgba(141, 216, 232, .5);
+  transform: translateY(-4px);
+}
+
+.springs-page .springs-store-stats div {
+  border-width: 1px 0 0;
+  background: transparent;
+}
+
+.springs-page .springs-contact-grid span {
+  border-radius: 0;
+  border-color: var(--springs-line);
+  background: var(--springs-panel);
+}
+
+.springs-page .springs-form input,
+.springs-page .springs-form select {
+  min-height: 3rem;
+  border-radius: 0;
+  border-color: var(--springs-line);
+  background: #080b0b;
+  color: var(--springs-text);
+}
+
+.springs-page button:focus-visible,
+.springs-page a:focus-visible,
+.springs-page input:focus-visible,
+.springs-page select:focus-visible {
+  outline: 2px solid var(--springs-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .springs-page .springs-section-shell {
+    width: min(100% - 40px, 1500px);
+  }
+
+  .springs-page .springs-hero-copy {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .springs-page *,
+  .springs-page *::before,
+  .springs-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}

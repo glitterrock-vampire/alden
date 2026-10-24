@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
 import { CONTACT_EMAIL, createContactMailto } from '@/lib/contact';
+import './SpringsPage.css';
 
 const SPRINGS_PRODUCTS = [
   {
