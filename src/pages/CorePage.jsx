@@ -1,561 +1,268 @@
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
 
-const CORE_LETTERS = ['C', 'O', 'R', 'E'];
+import './CorePage.css';
 
-const offerings = [
+const CORE_SERVICES = [
   {
-    id: 'strategy',
     title: 'STRATEGY',
-    description: 'Crafting comprehensive design strategies that align with business objectives and user needs. From research to implementation, I ensure every design decision serves a purpose.',
-    related: ['UX Research', 'Product Planning']
+    description: 'Crafting comprehensive design strategies that align with business objectives and user needs. From research to implementation, ensuring every design decision serves a purpose.',
+    features: ['UX Research', 'Product Planning', 'User Testing', 'Roadmapping']
   },
   {
-    id: 'design',
     title: 'DESIGN',
     description: 'Creating intuitive, beautiful interfaces that balance aesthetics with functionality. Every pixel, every interaction is thoughtfully designed to enhance the user experience.',
-    related: ['UI/UX Design', 'Interaction Design']
+    features: ['UI/UX Design', 'Interaction Design', 'Design Systems', 'Prototyping']
   },
   {
-    id: 'development',
     title: 'DEVELOPMENT',
-    description: 'Bringing designs to life with clean, efficient code. I specialize in modern web technologies and frameworks to create performant, scalable solutions.',
-    related: ['Frontend Development', 'React/Vue/Astro', 'Performance Optimization']
+    description: 'Bringing designs to life with clean, efficient code. Specializing in modern web technologies and frameworks to create performant, scalable solutions.',
+    features: ['Frontend Development', 'React/Vue/Astro', 'Performance Optimization', 'Full-Stack']
   },
   {
-    id: 'leadership',
     title: 'LEADERSHIP',
-    description: 'Guiding teams and projects to success. From mentoring junior designers to leading cross-functional initiatives, I help organizations achieve their design goals.',
-    related: ['Team Leadership', 'Design Systems', 'Mentorship']
+    description: 'Guiding teams and projects to success. From mentoring junior designers to leading cross-functional initiatives, helping organizations achieve their design goals.',
+    features: ['Team Leadership', 'Design Systems', 'Mentorship', 'Technical Consulting']
   }
 ];
 
-export default function CorePage() {
+const padNumber = (number) => String(number).padStart(2, '0');
 
+export default function CorePage() {
   return (
-    <div className="min-h-screen bg-background" style={{
-      backgroundColor: '#050505'
-    }}>
-      <div className="fixed inset-0 bg-black/50 pointer-events-none z-0" />
-      
+    <div className="core-page">
       <Navbar />
       
-      <main className="relative z-1">
+      <main>
         {/* Hero Section */}
-        <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-          <div className="hero-letter-wrap absolute bottom-20 left-1/2 -translate-x-1/2 flex justify-center gap-2 z-3">
-            {CORE_LETTERS.map((letter) => (
-              <span
-                key={letter}
-                className="hero-letter"
-                style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: 'clamp(96px, 15vw, 560px)',
-                  lineHeight: '0.82',
-                  color: '#e7e5df',
-                  whiteSpace: 'nowrap',
-                  display: 'inline-block'
-                }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
-        </section>
+        <section className="core-hero">
+          <div className="core-container">
+            <p className="core-kicker">
+              Digital products &amp; platforms
+            </p>
 
-        {/* About Section */}
-        <section className="about-section px-6 md:px-8 py-24" style={{ color: '#e7e5df' }}>
-          <div className="about-content max-w-6xl mx-auto">
-            {/* Name / Title */}
-            <div className="about-description text-center pb-16">
-              <p className="about-lead" style={{
-                fontFamily: 'Koulen, cursive',
-                fontSize: 'clamp(64px, 10vw, 130px)',
-                lineHeight: '0.9',
-                color: '#e7e5df',
-                marginBottom: '16px',
-                textShadow: '0 2px 30px rgba(0,0,0,1)'
-              }}>
-                Andre Walters
-              </p>
-              <p className="about-subline" style={{
-                fontFamily: 'Roboto Mono, monospace',
-                fontSize: 'clamp(14px, 1.8vw, 22px)',
-                color: '#ccbb87',
-                textShadow: '0 0 20px rgba(0,0,0,0.9)',
-                marginBottom: '24px'
-              }}>
+            <h1 className="core-title">
+              ANDRE
+              <br />
+              <span>WALTERS</span>
+            </h1>
+
+            <div className="core-hero-copy">
+              <p>
                 Software Developer & Electronics Engineer
               </p>
-            </div>
 
-            {/* Profile */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
-              <div className="bio-label">
-                <h2 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '20px',
-                  color: '#ccbb87',
-                  letterSpacing: '0.06em',
-                  lineHeight: '1.3'
-                }}>Profile</h2>
-              </div>
-              <div className="bio-text">
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Andre Walters is a software developer and electronics engineer based in Jamaica.
-                </p>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  His work spans full-stack development, digital product design, and hardware-software integrations, with experience building scalable systems using React, Angular, Node.js, and modern cloud architectures.
-                </p>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Andre previously contributed to enterprise platforms at Jamaica Public Service Company, helping evolve systems including the MyJPS Mobile App and internal customer experience platforms.
-                </p>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  He holds a Bachelor of Science in Electronics Engineering from The University of the West Indies, Mona, and is currently pursuing a Master's in Computer-Based Management Information Systems.
-                </p>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  His approach blends engineering discipline with a creative perspective to design systems that are intuitive, resilient, and purposeful.
-                </p>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  When he's not coding, he's probably off-grid exploring waterfalls or soaking in the natural rhythm of Jamaica's rivers and beaches.
-                </p>
+              <div className="core-hero-actions">
+                <a href="#services">
+                  Explore expertise
+                  <span aria-hidden="true">
+                    ↓
+                  </span>
+                </a>
+                <a
+                  href="#contact"
+                  className="core-solid-link core-solid-link--primary"
+                >
+                  Get in touch
+                  <span aria-hidden="true">
+                    ↗
+                  </span>
+                </a>
               </div>
             </div>
 
-            {/* Experience */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
-              <div className="bio-label">
-                <h2 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '20px',
-                  color: '#ccbb87',
-                  letterSpacing: '0.06em',
-                  lineHeight: '1.3'
-                }}>Experience</h2>
-              </div>
-              <div className="bio-text">
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Software Developer</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  <strong style={{ color: '#ccbb87', fontWeight: 400 }}>Jamaica Public Service Company</strong> — Previous Role
-                </p>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Contributed to enterprise platforms at JPS, helping evolve systems including the MyJPS Mobile App and internal customer experience platforms between 2021–2024.
-                </p>
-                <ul style={{ margin: '8px 0 12px', paddingLeft: '18px' }}>
-                  <li style={{
-                    fontFamily: 'Roboto Mono, monospace',
-                    fontSize: '14px',
-                    lineHeight: '1.7',
-                    color: '#e7e5df',
-                    marginBottom: '4px',
-                    textShadow: '0 1px 10px rgba(0,0,0,0.7)'
-                  }}>Full-stack development using React, Angular, and Node.js</li>
-                  <li style={{
-                    fontFamily: 'Roboto Mono, monospace',
-                    fontSize: '14px',
-                    lineHeight: '1.7',
-                    color: '#e7e5df',
-                    marginBottom: '4px',
-                    textShadow: '0 1px 10px rgba(0,0,0,0.7)'
-                  }}>Modern cloud architectures and scalable system design</li>
-                  <li style={{
-                    fontFamily: 'Roboto Mono, monospace',
-                    fontSize: '14px',
-                    lineHeight: '1.7',
-                    color: '#e7e5df',
-                    marginBottom: '4px',
-                    textShadow: '0 1px 10px rgba(0,0,0,0.7)'
-                  }}>Digital product design and user experience optimization</li>
-                  <li style={{
-                    fontFamily: 'Roboto Mono, monospace',
-                    fontSize: '14px',
-                    lineHeight: '1.7',
-                    color: '#e7e5df',
-                    marginBottom: '4px',
-                    textShadow: '0 1px 10px rgba(0,0,0,0.7)'
-                  }}>Hardware-software integrations and IoT solutions</li>
-                </ul>
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Senior Frontend Developer</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Led development of complex web applications with a focus on performance, accessibility, and user experience.
-                </p>
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Technical Consultant</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Provided strategic guidance on technology implementation and digital transformation initiatives.
-                </p>
-              </div>
+            <div className="core-hero-meta">
+              <span>ALDEN / CORE</span>
+              <span>JAMAICA</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section
+          id="services"
+          className="core-section core-services-section"
+        >
+          <div className="core-container">
+            <div className="core-section-header">
+              <span className="core-eyebrow">
+                Expertise
+              </span>
+              <h2 className="core-section-title">
+                What I do
+              </h2>
+              <p className="core-section-copy">
+                From strategy to development, bringing
+                digital systems to life.
+              </p>
             </div>
 
-            {/* Education */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
-              <div className="bio-label">
-                <h2 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '20px',
-                  color: '#ccbb87',
-                  letterSpacing: '0.06em',
-                  lineHeight: '1.3'
-                }}>Education</h2>
-              </div>
-              <div className="bio-text">
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Master's in Computer-Based Management Information Systems</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  <strong style={{ color: '#ccbb87', fontWeight: 400 }}>Currently Pursuing</strong>
-                </p>
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Bachelor of Science in Electronics Engineering</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  <strong style={{ color: '#ccbb87', fontWeight: 400 }}>The University of the West Indies, Mona</strong>
-                </p>
-              </div>
+            <div className="core-service-grid">
+              {CORE_SERVICES.map(
+                (service, index) => (
+                  <article
+                    key={service.title}
+                    className="core-service-card"
+                  >
+                    <span className="core-service-card__number">
+                      {padNumber(index + 1)}
+                    </span>
+
+                    <h3 className="core-service-card__title">
+                      {service.title}
+                    </h3>
+
+                    <p className="core-service-card__description">
+                      {service.description}
+                    </p>
+
+                    <div className="core-service-card__features">
+                      {service.features.map(
+                        (feature) => (
+                          <span key={feature}>
+                            <span aria-hidden="true">
+                              +
+                            </span>
+                            {feature}
+                          </span>
+                        )
+                      )}
+                    </div>
+
+                    <a
+                      className="core-service-card__link"
+                      href="#contact"
+                    >
+                      Discuss this service
+                      <span aria-hidden="true">
+                        ↗
+                      </span>
+                    </a>
+                  </article>
+                )
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Statement Section */}
+        <section className="core-statement">
+          <div className="core-container">
+            <span className="core-statement__eyebrow">
+              The Approach
+            </span>
+
+            <h2 className="core-statement__title">
+              Engineering meets
+              <span>creative perspective.</span>
+            </h2>
+
+            <div className="core-statement__footer">
+              <p>
+                I blend technical discipline with a creative
+                approach to design systems that are intuitive,
+                resilient, and purposeful.
+              </p>
+
+              <span className="core-statement__mark">
+                ALDEN / CORE
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <section className="core-section core-experience-section">
+          <div className="core-container">
+            <div className="core-section-header">
+              <span className="core-eyebrow">
+                Background
+              </span>
+              <h2 className="core-section-title">
+                Experience
+              </h2>
+              <p className="core-section-copy">
+                Professional journey in technology and engineering.
+              </p>
             </div>
 
-            {/* Achievements */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10">
-              <div className="bio-label">
-                <h2 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '20px',
-                  color: '#ccbb87',
-                  letterSpacing: '0.06em',
-                  lineHeight: '1.3'
-                }}>Achievements</h2>
-              </div>
-              <div className="bio-text">
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Technical Excellence</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Helped evolve and modernize critical features in the MyJPS Mobile App and Harmony Customer Experience Platform, recognized for blending a sharp creative eye with technical resilience.
+            <div className="core-experience-grid">
+              <div className="core-experience-item">
+                <span className="core-experience-item__year">
+                  2021–2024
+                </span>
+                <h3 className="core-experience-item__role">
+                  Software Developer
+                </h3>
+                <p className="core-experience-item__company">
+                  Jamaica Public Service Company
                 </p>
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Design Innovation</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Bridges engineering discipline with a creative perspective to deliver intuitive, user-centered digital experiences.
-                </p>
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Community Impact</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Contributions to open-source projects and tech community initiatives across the Caribbean region.
+                <p className="core-experience-item__description">
+                  Contributed to enterprise platforms including the MyJPS Mobile App and internal customer experience platforms.
                 </p>
               </div>
-            </div>
 
-            {/* Interests */}
-            <div className="bio-row grid md:grid-cols-[180px_1fr] gap-12 pt-12 border-t border-white/10 border-b">
-              <div className="bio-label">
-                <h2 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '20px',
-                  color: '#ccbb87',
-                  letterSpacing: '0.06em',
-                  lineHeight: '1.3'
-                }}>Interests</h2>
-              </div>
-              <div className="bio-text">
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Emerging Technologies</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Passionate about hardware-software integrations and IoT solutions that bridge the physical and digital worlds.
+              <div className="core-experience-item">
+                <span className="core-experience-item__year">
+                  Present
+                </span>
+                <h3 className="core-experience-item__role">
+                  Pursuing Master's
+                </h3>
+                <p className="core-experience-item__company">
+                  Computer-Based Management Information Systems
                 </p>
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Digital Art & Design</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  marginBottom: '12px',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Creative expression through digital mediums and interactive installations, applying engineering discipline to creative challenges.
-                </p>
-                <h3 style={{
-                  fontFamily: 'Koulen, cursive',
-                  fontSize: '22px',
-                  color: '#e7e5df',
-                  margin: '22px 0 6px',
-                  textShadow: '0 1px 15px rgba(0,0,0,0.8)'
-                }}>Community Building</h3>
-                <p style={{
-                  fontFamily: 'Roboto Mono, monospace',
-                  fontSize: '15px',
-                  lineHeight: '1.8',
-                  color: '#e7e5df',
-                  textShadow: '0 1px 12px rgba(0,0,0,0.75)'
-                }}>
-                  Fostering tech communities and knowledge sharing in the Caribbean region.
+                <p className="core-experience-item__description">
+                  The University of the West Indies, Mona
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Expertise Section */}
-        <section className="expertise px-6 md:px-8 py-20" style={{ color: '#e7e5df' }}>
-          <div className="expertise-container max-w-6xl mx-auto">
-            <div className="expertise-header text-center mb-14">
-              <h2 className="expertise-title" style={{
-                fontFamily: 'Koulen, cursive',
-                fontSize: 'clamp(44px, 6vw, 76px)',
-                lineHeight: '0.9',
-                textShadow: '0 0 20px rgba(0,0,0,0.8)'
-              }}>
-                EXPERTISE
+        {/* CTA Section */}
+        <section className="core-section core-cta-section">
+          <div className="core-container">
+            <div className="core-cta">
+              <span className="core-eyebrow">
+                Let's Connect
+              </span>
+
+              <h2 className="core-section-title">
+                Start a conversation
               </h2>
-            </div>
-            <div className="expertise-grid grid md:grid-cols-2 lg:grid-cols-4 gap-7">
-              {offerings.map((offering, index) => (
-                <div 
-                  key={offering.id} 
-                  className="card p-8 bg-black/50 border border-white/13 rounded-md backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-[#ccbb87]" 
-                  data-animate
-                  style={{ transitionDelay: `${index * 0.08}s` }}
-                >
-                  <div className="card-number" style={{
-                    fontFamily: 'Roboto Mono, monospace',
-                    fontSize: '11px',
-                    color: '#ccbb87',
-                    letterSpacing: '0.1em',
-                    marginBottom: '10px',
-                    opacity: 0.75
-                  }}>
-                    0{index + 1}
-                  </div>
-                  <h3 className="card-title" style={{
-                    fontFamily: 'Koulen, cursive',
-                    fontSize: '28px',
-                    color: '#e7e5df',
-                    margin: 0,
-                    lineHeight: 1
-                  }}>
-                    {offering.title}
-                  </h3>
-                  <div className="card-divider w-full h-px bg-white/10 my-3" />
-                  <p className="card-subtitle" style={{
-                    fontFamily: 'Roboto Mono, monospace',
-                    fontSize: '13px',
-                    color: '#e7e5df',
-                    opacity: 0.68,
-                    lineHeight: '1.6',
-                    margin: 0
-                  }}>
-                    {offering.description}
-                  </p>
-                  <div className="card-related mt-4 pt-3 border-t border-white/7">
-                    <h4 className="related-title" style={{
-                      fontFamily: 'Koulen, cursive',
-                      fontSize: '11px',
-                      color: '#ccbb87',
-                      letterSpacing: '0.1em',
-                      margin: '0 0 7px'
-                    }}>
-                      Related
-                    </h4>
-                    <div className="related-tags flex flex-wrap gap-1">
-                      {offering.related.map(tag => (
-                        <span key={tag} className="tag bg-[rgba(204,187,135,0.1)] text-[#e7e5df] px-2 py-0.5 rounded text-xs opacity-82">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+
+              <div className="core-cta-footer">
+                <p className="core-section-copy">
+                  Tell me what you're trying to build.
+                  I'll help you find the right path forward.
+                </p>
+
+                <div className="core-actions">
+                  <a
+                    href="mailto:aldenwebstudios@gmail.com"
+                    className="core-solid-link"
+                  >
+                    Get in touch
+                    <span aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+
+                  <a
+                    href="#services"
+                    className="core-pill-link"
+                  >
+                    View Services
+                  </a>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
       </main>
 
-      <Footer />
-
-      <style>{`
-        [data-animate] {
-          opacity: 0;
-          transform: translateY(32px);
-          transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        [data-animate].visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        
-        @media (max-width: 809px) {
-          .bio-row {
-            grid-template-columns: 1fr;
-            gap: 14px;
-            padding: 36px 0;
-          }
-          .expertise-grid {
-            grid-template-columns: 1fr;
-            gap: 18px;
-          }
-          .card {
-            padding: 24px;
-          }
-        }
-      `}</style>
+      <Footer showContactCta={false} />
     </div>
   );
 }
