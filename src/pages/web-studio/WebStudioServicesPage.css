@@ -1633,3 +1633,27 @@
     transform: none;
   }
 }
+
+/* Standard body scale for Web Studio descriptions and controls. */
+.web-studio-page .web-services-hero-copy p,
+.web-studio-page .web-services-section-copy,
+.web-studio-page .studio-statement__footer p,
+.web-studio-page .web-service-card__description,
+.web-studio-page .process-card p {
+  font-size: 1rem;
+}
+
+.web-studio-page .web-services-hero-copy a,
+.web-studio-page .web-services-solid-link,
+.web-studio-page .studio-pricing-cta,
+.web-studio-page .web-service-card__link {
+  font-size: 0.9rem;
+}
+
+.web-studio-page .web-services-kicker,
+.web-studio-page .web-services-eyebrow,
+.web-studio-page .web-services-hero-meta,
+.web-studio-page .alden-builds-index,
+.web-studio-page .process-card__number {
+  font-size: 0.8rem;
+}

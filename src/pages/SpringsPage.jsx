@@ -250,7 +250,7 @@ export default function SpringsPage() {
           border-radius: 999px;
           padding: 0.7rem 1rem;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.72rem;
+          font-size: 0.8rem;
           letter-spacing: 0.18em;
           color: #8dd8e8;
         }
@@ -262,7 +262,7 @@ export default function SpringsPage() {
         .springs-contact-section p {
           margin: 0;
           font-family: 'Roboto Mono', monospace;
-          font-size: clamp(0.92rem, 1.25vw, 1.05rem);
+          font-size: 1rem;
           line-height: 1.75;
           color: rgba(231, 229, 223, 0.7);
         }
@@ -275,7 +275,7 @@ export default function SpringsPage() {
           padding: 0.9rem 1.25rem;
           color: #e7fbff;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.75rem;
+          font-size: 1rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
           transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
@@ -345,7 +345,7 @@ export default function SpringsPage() {
 
         .springs-product-size {
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.7rem;
+          font-size: 0.8rem;
           letter-spacing: 0.2em;
           color: #8dd8e8;
         }
@@ -407,7 +407,7 @@ export default function SpringsPage() {
           bottom: 1.25rem;
           margin: 0;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.78rem;
+          font-size: 1rem;
           line-height: 1.55;
           color: rgba(231, 229, 223, 0.62);
         }
@@ -463,7 +463,7 @@ export default function SpringsPage() {
         .springs-store-stats span {
           display: block;
           margin-bottom: 0.5rem;
-          font-size: 0.72rem;
+          font-size: 0.8rem;
           letter-spacing: 0.16em;
           color: rgba(231, 229, 223, 0.52);
           text-transform: uppercase;
@@ -513,7 +513,7 @@ export default function SpringsPage() {
           color: #e7e5df;
           padding: 0 1rem;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.84rem;
+          font-size: 1rem;
           outline: 0;
         }
 
@@ -528,7 +528,7 @@ export default function SpringsPage() {
           background: #f4fbff;
           color: #051015;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.76rem;
+          font-size: 0.9rem;
           letter-spacing: 0.16em;
           text-transform: uppercase;
           cursor: pointer;
@@ -557,7 +557,7 @@ export default function SpringsPage() {
           justify-content: center;
           gap: 0.8rem;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.8rem;
+          font-size: 0.9rem;
           color: rgba(231, 229, 223, 0.62);
         }
 

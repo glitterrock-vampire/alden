@@ -106,8 +106,8 @@ export default function StudiosPage() {
             <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: '1', color: 'hsl(var(--foreground))' }}>ALDEN</h2>
             <p style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2.5rem, 5vw, 4rem)', lineHeight: '1', letterSpacing: '0.05em', color: 'hsl(var(--foreground))', marginTop: '-0.25rem' }}>STUDIO</p>
           </div>
-          <p className="text-[11px] tracking-[0.3em] text-accent uppercase mb-5">Creative Excellence Across Multiple Disciplines</p>
-          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(0.875rem, 1vw, 1rem)', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>
+          <p className="text-xs tracking-[0.2em] text-accent uppercase mb-5">Creative Excellence Across Multiple Disciplines</p>
+          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>
             Our Studios bring together expertise in web development, photography, and digital services to deliver comprehensive solutions for your creative and technical needs.
           </p>
         </div>
@@ -137,7 +137,7 @@ export default function StudiosPage() {
                   {studio.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-center gap-4">
                       <span className="text-accent text-lg font-bold">✓</span>
-                      <span style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))' }}>{feature}</span>
+                      <span style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem', color: 'hsl(var(--muted-foreground))' }}>{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -185,7 +185,7 @@ export default function StudiosPage() {
                   {step.num}
                 </div>
                 <h3 style={{ fontFamily: 'Koulen, cursive', fontSize: '1.25rem', marginBottom: '1.25rem', color: 'hsl(var(--foreground))' }}>{step.title}</h3>
-                <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>{step.desc}</p>
+                <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>{step.desc}</p>
               </div>
             ))}
           </div>

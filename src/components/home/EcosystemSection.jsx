@@ -88,7 +88,7 @@ export default function EcosystemSection() {
           className="flex items-center gap-4 mb-8"
         >
           <div className="w-6 h-px bg-accent" />
-          <span className="text-accent text-[10px] tracking-[0.4em] font-body uppercase">The Ecosystem</span>
+          <span className="text-xs tracking-[0.3em] text-accent font-body uppercase">The Ecosystem</span>
         </motion.div>
 
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
@@ -107,7 +107,7 @@ export default function EcosystemSection() {
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.7 }}
             viewport={{ once: true }}
-            className="text-muted-foreground text-sm font-body leading-relaxed max-w-xs"
+            className="text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-xs"
           >
             A constellation of ventures — each solving real problems across technology, agriculture, construction, and sustainability.
           </motion.p>
@@ -138,14 +138,14 @@ export default function EcosystemSection() {
                 
                 {/* Number Badge */}
                 <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm border border-border px-3 py-1 rounded-full">
-                  <span className="text-[10px] tracking-[0.3em] font-body text-muted-foreground">
+                  <span className="text-xs tracking-[0.2em] font-body text-muted-foreground">
                     {product.num}
                   </span>
                 </div>
 
                 {/* Status Badge */}
                 <div className="absolute top-4 right-4">
-                  <span className={`text-[9px] tracking-[0.2em] font-body uppercase px-3 py-1 rounded-full border ${
+                  <span className={`text-xs tracking-[0.12em] font-body uppercase px-3 py-1 rounded-full border ${
                     product.status === 'Active' 
                       ? 'bg-accent/10 border-accent/30 text-accent' 
                       : 'bg-muted/50 border-border text-muted-foreground'
@@ -158,7 +158,7 @@ export default function EcosystemSection() {
               {/* Content */}
               <div className="p-6">
                 {/* Label */}
-                <p className="text-[10px] tracking-[0.4em] font-body text-accent uppercase mb-3">
+                <p className="text-xs tracking-[0.2em] font-body text-accent uppercase mb-3">
                   — {product.label}
                 </p>
 
@@ -171,7 +171,7 @@ export default function EcosystemSection() {
                 <div className="w-8 h-px bg-accent mb-4 group-hover:w-12 transition-all duration-300" />
 
                 {/* Description */}
-                <p className="text-muted-foreground text-sm font-body leading-relaxed mb-5">
+                <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-5">
                   {product.desc}
                 </p>
 
@@ -180,7 +180,7 @@ export default function EcosystemSection() {
                   {product.tags.map((tag) => (
                     <span 
                       key={tag} 
-                      className="text-[9px] tracking-wider font-body text-muted-foreground border border-border/60 px-2 py-1 rounded-sm group-hover:border-accent/30 group-hover:text-accent/80 transition-colors duration-300"
+                      className="text-xs tracking-wider font-body text-muted-foreground border border-border/60 px-2 py-1 rounded-sm group-hover:border-accent/30 group-hover:text-accent/80 transition-colors duration-300"
                     >
                       {tag}
                     </span>
@@ -188,7 +188,7 @@ export default function EcosystemSection() {
                 </div>
 
                 {/* Explore Link */}
-                <div className="flex items-center gap-2 text-[11px] tracking-[0.2em] font-body uppercase text-accent group-hover:gap-3 transition-all duration-300">
+                <div className="flex items-center gap-2 text-sm tracking-[0.15em] font-body uppercase text-accent group-hover:gap-3 transition-all duration-300">
                   <span>Explore</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -203,14 +203,14 @@ export default function EcosystemSection() {
         <div className="border-t border-border pt-8 md:pt-10">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
-              <p className="text-accent text-[10px] tracking-[0.4em] font-body uppercase mb-4">
+            <p className="text-xs tracking-[0.3em] text-accent font-body uppercase mb-4">
                 What connects the work
               </p>
               <h3 className="font-heading font-black text-3xl md:text-5xl text-primary uppercase leading-none">
                 Built around what lasts
               </h3>
             </div>
-            <p className="text-muted-foreground text-sm font-body leading-relaxed max-w-sm">
+            <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-sm">
               Across every sector, ALDEN is committed to responsible growth, dependable work, and lasting community impact.
             </p>
           </div>
@@ -222,7 +222,7 @@ export default function EcosystemSection() {
                 className={`py-6 md:py-7 ${index > 0 ? 'sm:border-l sm:border-border/70 sm:pl-6 lg:pl-7' : ''} ${index % 2 === 0 ? 'sm:pr-6 lg:pr-7' : ''} border-b border-border/70 lg:border-b-0`}
               >
                 <h4 className="font-heading text-lg text-primary uppercase mb-2">{value.title}</h4>
-                <p className="text-muted-foreground text-xs font-body leading-relaxed max-w-xs">{value.description}</p>
+                <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed max-w-xs">{value.description}</p>
               </div>
             ))}
           </div>

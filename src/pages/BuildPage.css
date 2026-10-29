@@ -1097,6 +1097,35 @@
   }
 }
 
+/* Standard body scale across the construction page. */
+.build-page .build-hero-bottom p,
+.build-page .build-idea-copy p,
+.build-page .home-types-heading p,
+.build-page .home-type-description,
+.build-page .process-copy p,
+.build-page .waitlist-intro p,
+.build-page .build-principles-heading p,
+.build-page .build-faq-layout > div:first-child > p,
+.build-page .build-faq-item p {
+  font-size: 1rem;
+}
+
+.build-page .home-type-features li,
+.build-page .waitlist-intro li {
+  font-size: 1rem;
+}
+
+.build-page .home-type-specs span,
+.build-page .home-type-specs strong,
+.build-page .form-field label,
+.build-page .form-field input,
+.build-page .form-field select,
+.build-page .form-field textarea,
+.build-page .waitlist-submit,
+.build-page .build-cta-button {
+  font-size: 1rem;
+}
+
 
 /* ==========================================================================
    REDUCED MOTION
@@ -1110,5 +1139,193 @@
   .waitlist-submit,
   .build-cta-button {
     transition: none;
+  }
+}
+
+/* Reference-inspired intro, principles, and FAQ structure */
+.build-hero-cta {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 3rem;
+  align-items: center;
+  gap: 2rem;
+  padding: .85rem 1.1rem;
+  border: 1px solid rgba(204, 187, 135, .72);
+  color: var(--build-accent);
+  font: .7rem/1.3 'Roboto Mono', monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.build-hero-cta:hover {
+  background: var(--build-accent);
+  color: var(--build-black);
+  transform: translateY(-2px);
+}
+
+.build-principles {
+  padding: 130px 0 170px;
+  border-top: 1px solid var(--build-soft-line);
+}
+
+.build-principles-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, .55fr);
+  align-items: end;
+  gap: 3rem;
+  margin: 5rem 0 4rem;
+}
+
+.build-principles-heading h2,
+.build-faq-layout h2 {
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  line-height: .82;
+  letter-spacing: -.04em;
+}
+
+.build-principles-heading h2 span,
+.build-faq-layout h2 span {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(231, 229, 223, .58);
+}
+
+.build-principles-heading p,
+.build-faq-layout > div:first-child > p {
+  max-width: 28rem;
+  color: var(--build-muted);
+  font: 1rem/1.7 'Roboto Mono', monospace;
+}
+
+.build-principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--build-line);
+  border-left: 1px solid var(--build-line);
+}
+
+.build-principle {
+  min-height: 15rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-right: 1px solid var(--build-line);
+  border-bottom: 1px solid var(--build-line);
+  transition: background-color .2s ease;
+}
+
+.build-principle:hover {
+  background: rgba(204, 187, 135, .035);
+}
+
+.build-principle > span {
+  color: var(--build-accent);
+  font: .7rem/1.4 'Roboto Mono', monospace;
+}
+
+.build-principle h3 {
+  margin: 3.5rem 0 .8rem;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: .95;
+}
+
+.build-principle p {
+  max-width: 26rem;
+  color: var(--build-muted);
+  font: 1rem/1.7 'Roboto Mono', monospace;
+}
+
+.build-faq {
+  padding: 130px 0 160px;
+  border-top: 1px solid var(--build-soft-line);
+}
+
+.build-faq-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(3rem, 8vw, 9rem);
+  margin-top: 5rem;
+}
+
+.build-faq-layout h2 {
+  font-size: clamp(3.25rem, 6.5vw, 6.5rem);
+}
+
+.build-faq-layout > div:first-child > p {
+  margin-top: 1.5rem;
+}
+
+.build-faq-item {
+  border-top: 1px solid var(--build-line);
+}
+
+.build-faq-item:last-child {
+  border-bottom: 1px solid var(--build-line);
+}
+
+.build-faq-item summary {
+  display: flex;
+  min-height: 4.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--build-cream);
+  font: .78rem/1.5 'Roboto Mono', monospace;
+}
+
+.build-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.build-faq-item summary span {
+  color: var(--build-accent);
+  font-size: 1.2rem;
+  transition: transform .2s ease;
+}
+
+.build-faq-item[open] summary span {
+  transform: rotate(45deg);
+}
+
+.build-faq-item p {
+  max-width: 42rem;
+  padding: 0 2.5rem 1.5rem 0;
+  color: var(--build-muted);
+  font: 1rem/1.7 'Roboto Mono', monospace;
+}
+
+.build-hero-cta:focus-visible,
+.build-faq-item summary:focus-visible {
+  outline: 2px solid var(--build-accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .build-hero-cta {
+    gap: 1rem;
+  }
+
+  .build-principles,
+  .build-faq {
+    padding: 90px 0 110px;
+  }
+
+  .build-principles-heading,
+  .build-faq-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .build-principles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .build-principle {
+    min-height: 12rem;
+  }
+
+  .build-principle h3 {
+    margin-top: 2.25rem;
   }
 }

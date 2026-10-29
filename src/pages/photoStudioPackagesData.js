@@ -3,8 +3,8 @@ export const PHOTO_STUDIO_PACKAGES = [
     id: 'session',
     name: 'Session',
     tag: 'Portraits',
-    price: '$45,000',
-    cadence: 'JMD',
+    price: '$250',
+    cadence: 'USD',
     summary:
       'A directed portrait sitting for personal, professional, or brand-of-one work.',
     includes: [
@@ -21,8 +21,8 @@ export const PHOTO_STUDIO_PACKAGES = [
     name: 'Event day',
     tag: 'Most popular',
     featured: true,
-    price: '$120,000+',
-    cadence: 'JMD',
+    price: '$750+',
+    cadence: 'USD',
     summary:
       'Coverage for weddings, launches, and gatherings — people, atmosphere, and the moments in between.',
     includes: [
@@ -39,8 +39,8 @@ export const PHOTO_STUDIO_PACKAGES = [
     id: 'brand',
     name: 'Brand story',
     tag: 'Commercial',
-    price: '$220,000+',
-    cadence: 'JMD',
+    price: '$1,400+',
+    cadence: 'USD',
     summary:
       'Campaign and product work with art direction, so the pictures can live across web, print, and ads.',
     includes: [
@@ -56,7 +56,7 @@ export const PHOTO_STUDIO_PACKAGES = [
 ];
 
 export const PHOTO_STUDIO_PACKAGE_NOTES = [
-  'All prices are quoted in Jamaican dollars (JMD).',
+  'All prices are quoted in US dollars (USD).',
   'Items marked * are scoped during the briefing and may be billed separately.',
   'Travel outside Kingston, extra hours, and rushed delivery are quoted on top.',
 ];

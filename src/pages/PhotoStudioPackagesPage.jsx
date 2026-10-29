@@ -49,13 +49,13 @@ export default function PhotoStudioPackagesPage() {
 
             <div className="photo-studio-hero-side">
               <span className="photo-studio-index">
-                JMD
+                USD
               </span>
 
               <p>
                 Three ways to book the studio — portraits,
                 events, and commercial work. Prices are
-                quoted in Jamaican dollars.
+                quoted in US dollars.
               </p>
 
               <nav
@@ -81,7 +81,7 @@ export default function PhotoStudioPackagesPage() {
 
       <section className="photo-packages-grid-section">
         <div className="photo-studio-container">
-          <div className="photo-studio-section-header">
+          <div className="photo-studio-section-header photo-packages-section-header">
             <div>
               <span className="photo-studio-section-number">
                 01

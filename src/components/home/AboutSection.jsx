@@ -23,7 +23,7 @@ export default function AboutSection() {
           className="flex items-center gap-4 mb-16"
         >
           <div className="w-6 h-px bg-accent" />
-          <span className="text-accent text-[10px] tracking-[0.4em] font-body uppercase">About</span>
+          <span className="text-xs tracking-[0.3em] text-accent font-body uppercase">About</span>
         </motion.div>
 
         {/* Two-column grid */}
@@ -38,10 +38,10 @@ export default function AboutSection() {
             <h2 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl text-primary leading-[0.92] tracking-tight uppercase mb-8">
               A [MULTI-<br />DISCIPLINARY]<br />PERSPECTIVE
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base font-body leading-relaxed mb-4">
+            <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-4">
               Informed by technology, design, and innovation. A strategic approach led by clarity, precision, and intent.
             </p>
-            <p className="text-muted-foreground text-sm font-body leading-relaxed">
+            <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed">
               I partner with companies and entrepreneurs to transform visions into captivating experiences — all designed with users at the helm.
             </p>
           </motion.div>
@@ -53,7 +53,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-[10px] tracking-[0.4em] text-muted-foreground font-body uppercase mb-8"
+              className="text-xs tracking-[0.3em] text-muted-foreground font-body uppercase mb-8"
             >
               Expertise & Services
             </motion.p>

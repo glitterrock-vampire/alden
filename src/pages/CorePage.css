@@ -500,6 +500,24 @@
   line-height: 1.8;
 }
 
+/* Shared supporting copy scale; editorial headings keep their own sizing. */
+.core-page .core-section-copy,
+.core-page .core-service-card__description,
+.core-page .core-statement__footer p,
+.core-page .core-experience-item__description {
+  font-size: 1rem;
+}
+
+.core-page .core-kicker,
+.core-page .core-hero-meta span,
+.core-page .core-eyebrow,
+.core-page .core-statement__eyebrow,
+.core-page .core-statement__mark,
+.core-page .core-experience-item__year,
+.core-page .core-experience-item__company {
+  font-size: 0.8rem;
+}
+
 
 /* =========================================================
    CTA

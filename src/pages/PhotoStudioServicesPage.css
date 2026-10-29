@@ -35,7 +35,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.photo-studio-page button {
+.photo-studio-page button:not(.nav-link) {
   font: inherit;
 }
 
@@ -560,9 +560,48 @@
 
   text-align: left;
 
-  cursor: zoom-in;
+  cursor: default;
 
   isolation: isolate;
+}
+
+.photo-studio-tile::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: '';
+  background:
+    linear-gradient(rgba(200, 168, 78, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 168, 78, 0.055) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 44%, rgba(200, 168, 78, 0.1), transparent 62%),
+    #11110f;
+  background-size: 32px 32px, 32px 32px, auto, auto;
+}
+
+.photo-studio-image-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: rgba(243, 241, 233, 0.44);
+  font: 0.55rem/1.4 "Roboto Mono", monospace;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.photo-studio-placeholder-mark {
+  display: grid;
+  width: clamp(2.5rem, 5vw, 4rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(200, 168, 78, 0.36);
+  color: rgba(200, 168, 78, 0.72);
+  font: 2rem/1 "Koulen", cursive;
 }
 
 .photo-studio-tile img {
@@ -597,9 +636,9 @@
 
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.42);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), transparent 42%, rgba(0, 0, 0, 0.42));
 
-  opacity: 0.7;
+  opacity: 1;
 
   transition:
     opacity 350ms ease,
@@ -1569,4 +1608,81 @@
 
     animation-iteration-count: 1 !important;
   }
+}
+
+/* Shared body scale: compact supporting copy, with display headings untouched. */
+.photo-studio-page .photo-studio-hero-side p {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-section-header p {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-eyebrow,
+.photo-studio-page .photo-studio-index,
+.photo-studio-page .photo-studio-section-number,
+.photo-studio-page .photo-studio-section-label,
+.photo-studio-page .photo-studio-mini-label,
+.photo-studio-page .photo-studio-selector-intro span {
+  font-size: 0.8rem;
+}
+
+.photo-studio-page .photo-studio-filter {
+  font-size: 0.9rem;
+}
+
+.photo-studio-page .photo-studio-selected-copy p {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-feature-list span {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-feature-list small,
+.photo-studio-page .photo-studio-tile-number,
+.photo-studio-page .photo-studio-bottom-note > span {
+  font-size: 0.8rem;
+}
+
+.photo-studio-page .photo-studio-image-placeholder {
+  font-size: 0.75rem;
+}
+
+.photo-studio-page .photo-studio-caption strong {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-caption small {
+  font-size: 0.8rem;
+}
+
+.photo-studio-page .photo-studio-bottom-note p {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-contact {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-pricing-preview > span,
+.photo-studio-page .photo-studio-pricing-standout-inner > span {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-pricing-link {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-pricing-cta {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-statement-bottom > p {
+  font-size: 1rem;
+}
+
+.photo-studio-page .photo-studio-statement-bottom > span {
+  font-size: 0.8rem;
 }

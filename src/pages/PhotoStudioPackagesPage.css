@@ -40,6 +40,23 @@
   padding: 0 0 clamp(5rem, 9vw, 8rem);
 }
 
+.photo-packages-section-header {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.photo-packages-section-header > div {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.photo-packages-section-header p {
+  max-width: 34rem;
+  text-align: left;
+}
+
 .photo-packages-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -199,6 +216,24 @@
   font-family: "Roboto Mono", monospace;
   font-size: 0.68rem;
   line-height: 1.7;
+}
+
+/* Keep package copy aligned with the site's standard body scale. */
+.photo-packages-page .photo-package-card__summary {
+  font-size: 1rem;
+}
+
+.photo-packages-page .photo-package-card li {
+  font-size: 1rem;
+}
+
+.photo-packages-page .photo-packages-footnotes {
+  font-size: 0.9rem;
+}
+
+.photo-packages-page .photo-package-cta,
+.photo-packages-page .photo-packages-switch a {
+  font-size: 0.9rem;
 }
 
 @media (max-width: 1100px) {

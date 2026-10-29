@@ -121,7 +121,7 @@ export default function ProjectsShowcase() {
                   >
                     {project.title}
                   </h3>
-                  <p className="text-white/30 text-xs md:text-sm tracking-widest mt-1 transition-all duration-300 group-hover:text-white/60">
+                  <p className="text-white/30 text-sm tracking-widest mt-1 transition-all duration-300 group-hover:text-white/60">
                     {project.subtitle}
                   </p>
                 </div>

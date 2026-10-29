@@ -270,6 +270,19 @@
     var(--ws-mono);
 }
 
+.web-packages-page .web-package-card__summary,
+.web-packages-page .web-package-card__list li,
+.web-packages-page .web-packages-footnotes {
+  font-size: 1rem;
+}
+
+.web-packages-page .web-package-card__tag,
+.web-packages-page .web-package-card__badge,
+.web-packages-page .web-package-card__price span,
+.web-packages-page .web-package-card__metrics dt {
+  font-size: 0.8rem;
+}
+
 .web-packages-note .web-services-actions {
   justify-content: flex-start;
 }

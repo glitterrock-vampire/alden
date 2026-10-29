@@ -271,8 +271,8 @@ export default function FarmPage() {
       <section className="py-20 md:py-32 px-6 md:px-10 text-center bg-background">
         <div className="max-w-3xl mx-auto">
           <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2rem, 4vw, 3.75rem)', marginBottom: '2rem', color: 'hsl(var(--foreground))' }}>ALDEN FARM</h2>
-          <p className="text-[11px] tracking-[0.3em] text-green-500 uppercase mb-5">Whole Foods · Chicken · Eggs · Supplies</p>
-          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(0.875rem, 1vw, 1rem)', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>
+          <p className="text-xs tracking-[0.2em] text-green-500 uppercase mb-5">Whole Foods · Chicken · Eggs · Supplies</p>
+          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>
             Fresh from farm to Kingston. Partnering with Agrotonomy for sustainable local produce and farm supplies. Supporting local agriculture and bringing quality products to your table.
           </p>
         </div>
@@ -282,7 +282,7 @@ export default function FarmPage() {
       <section id="products" className="py-20 px-6 md:px-10 bg-background">
         <div className="max-w-6xl mx-auto">
           <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2.25rem, 4vw, 3rem)', marginBottom: '1rem', color: 'hsl(var(--foreground))', textAlign: 'center' }}>Farm Shop</h2>
-          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: 'clamp(0.875rem, 1vw, 1rem)', color: 'hsl(var(--muted-foreground))', textAlign: 'center', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem', color: 'hsl(var(--muted-foreground))', textAlign: 'center', marginBottom: '2rem' }}>
             Fresh produce from our farm · Supplies to start your own
           </p>
 
@@ -355,7 +355,7 @@ export default function FarmPage() {
                 {/* Product Info */}
                 <div className="p-6">
                   <h3 style={{ fontFamily: 'Koulen, cursive', fontSize: '1.25rem', marginBottom: '0.5rem', color: 'hsl(var(--foreground))' }}>{product.name}</h3>
-                  <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '0.75rem', color: 'hsl(var(--muted-foreground))', marginBottom: '1rem', lineHeight: '1.5' }}>{product.description}</p>
+                  <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))', marginBottom: '1rem', lineHeight: '1.5' }}>{product.description}</p>
                   
                   {/* Price & Quantity Row */}
                   <div className="flex items-center justify-between mb-4">

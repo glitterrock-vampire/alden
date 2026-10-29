@@ -1,10 +1,13 @@
-import { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { lazy, Suspense, useRef, useEffect } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+
+const HomeParallaxScene = lazy(() => import('@/components/3d/HomeParallaxScene'));
 
 const HERO_LETTERS = ['A', 'L', 'D', 'E', 'N'];
 
 export default function HeroSection() {
   const ref = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const titleY = useTransform(scrollYProgress, [0, 0.6], [0, -100]);
@@ -40,6 +43,11 @@ export default function HeroSection() {
 
   return (
     <section id="home" ref={ref} className="hero-section">
+      {!prefersReducedMotion && (
+        <Suspense fallback={null}>
+          <HomeParallaxScene />
+        </Suspense>
+      )}
 
       {/* Content wrapper */}
       <motion.div
@@ -51,6 +59,14 @@ export default function HeroSection() {
           paddingTop: SAFE_NAV_PADDING,
         }}
       >
+        <div className="hero-edition hero-edition--left" aria-hidden="true">
+          <span className="hero-edition-mark" />
+          <span>Independent creative company</span>
+        </div>
+        <div className="hero-edition hero-edition--right" aria-hidden="true">
+          <span>Kingston, Jamaica</span>
+          <span>17° 58′ N / 76° 48′ W</span>
+        </div>
         <div className="hero-content">
           {/* TOP: Letters + taglines */}
           <div className="hero-top">
@@ -122,6 +138,43 @@ export default function HeroSection() {
           background: #000;
         }
 
+        .hero-depth-scene {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          overflow: hidden;
+          opacity: 0.82;
+          pointer-events: none;
+          mask-image: radial-gradient(ellipse 66% 65% at 50% 48%, #000 35%, transparent 100%);
+        }
+
+        .hero-section::before,
+        .hero-section::after {
+          position: absolute;
+          z-index: 2;
+          content: '';
+          pointer-events: none;
+        }
+
+        .hero-section::before {
+          inset: 12% var(--side);
+          border-top: 1px solid rgba(204, 187, 135, 0.13);
+          border-bottom: 1px solid rgba(204, 187, 135, 0.13);
+          background: linear-gradient(90deg, transparent 49.95%, rgba(255,255,255,0.035) 50%, transparent 50.05%);
+          mask-image: linear-gradient(to bottom, #000, transparent 24%, transparent 76%, #000);
+        }
+
+        .hero-section::after {
+          inset: 0;
+          background: radial-gradient(ellipse 52% 48% at 50% 48%, transparent 30%, rgba(0,0,0,0.54) 100%);
+        }
+
+        .hero-depth-scene canvas {
+          display: block;
+          width: 100% !important;
+          height: 100% !important;
+        }
+
         /* Content wrapper */
         .hero-inner {
           position: relative;
@@ -134,6 +187,30 @@ export default function HeroSection() {
           padding-left: var(--side);
           padding-right: var(--side);
           padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
+        }
+
+        .hero-edition {
+          position: absolute;
+          top: clamp(6.5rem, 14vh, 9rem);
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          gap: 0.45rem;
+          color: rgba(243, 241, 233, 0.46);
+          font: 0.75rem/1.5 'Roboto Mono', monospace;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .hero-edition--left { left: var(--side); }
+        .hero-edition--right { right: var(--side); text-align: right; }
+
+        .hero-edition-mark {
+          width: 22px;
+          height: 1px;
+          margin-bottom: 0.2rem;
+          background: #ccbb87;
+          box-shadow: 0 0 12px rgba(204, 187, 135, 0.7);
         }
 
         .hero-content {
@@ -234,6 +311,18 @@ export default function HeroSection() {
             --side: clamp(1.5rem, 7vw, 2rem);
           }
 
+          .hero-depth-scene {
+            opacity: 0.45;
+          }
+
+          .hero-edition {
+            top: 6.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+          }
+
+          .hero-edition--right span:first-child { display: none; }
+
           .hero-top {
             gap: 0.9rem;
           }
@@ -289,6 +378,12 @@ export default function HeroSection() {
 
           .scroll-right {
             margin-left: 0;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-depth-scene {
+            display: none;
           }
         }
 

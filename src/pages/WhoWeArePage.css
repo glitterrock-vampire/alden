@@ -44,9 +44,25 @@
 
 .about-lead {
   margin: 0;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 1.125rem;
   line-height: 1.35;
   letter-spacing: -0.025em;
+}
+
+.about-page .about-hero__meta p,
+.about-page .about-eyebrow,
+.about-page .about-section-heading,
+.about-page .about-arrow-link,
+.about-page .about-discipline__number,
+.about-page .about-tags span,
+.about-page .about-founder__eyebrow,
+.about-page .about-text-link,
+.about-page .about-principle > span,
+.about-page .about-position__type,
+.about-page .about-position__side > span,
+.about-page .about-position__side a,
+.about-page .about-cta__link {
+  font-size: 0.8rem;
 }
 
 .about-section-heading {
@@ -199,7 +215,7 @@
 
 .about-studio__copy p.about-lead {
   margin-bottom: 34px;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 1.125rem;
   line-height: 1.35;
   color: var(--about-text);
 }
@@ -345,7 +361,7 @@
 
 .about-founder__copy p.about-lead {
   margin-bottom: 34px;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 1.125rem;
   line-height: 1.35;
   color: var(--about-bg);
 }
@@ -453,7 +469,7 @@
 
 .about-careers__intro p.about-lead {
   margin-bottom: 30px;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 1.125rem;
   line-height: 1.35;
   color: var(--about-text);
 }

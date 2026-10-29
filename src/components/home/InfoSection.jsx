@@ -32,11 +32,11 @@ export default function InfoSection() {
         {/* Right: description + services */}
         <div className="flex flex-col justify-between gap-12">
           <div>
-            <p className="text-white/50 text-base leading-relaxed mb-6">
+            <p className="text-white/50 text-sm md:text-base leading-relaxed mb-6">
               A strategic approach led by clarity, precision, and intent.
               Every digital experience is engineered to be intuitive, scalable, and enduring.
             </p>
-            <p className="text-white/40 text-sm leading-relaxed mb-10">
+            <p className="text-white/40 text-sm md:text-base leading-relaxed mb-10">
               Design to me is a bridge between emotion and function. My goal has always been to
               elevate everyday interactions into something more meaningful — quietly threading in
               moments of joy that catch us by surprise and stay with us for years to come.

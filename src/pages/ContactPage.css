@@ -44,9 +44,17 @@
 
 .contact-lead {
   margin: 0;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 1.125rem;
   line-height: 1.35;
   letter-spacing: -0.025em;
+}
+
+.contact-page .contact-hero__meta p,
+.contact-page .contact-eyebrow,
+.contact-page .contact-method__label,
+.contact-page .contact-form__field label,
+.contact-page .contact-form__submit {
+  font-size: 0.85rem;
 }
 
 /* =========================================================
@@ -151,7 +159,7 @@
 
 .contact-intro__copy p.contact-lead {
   margin-bottom: 34px;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 1.125rem;
   line-height: 1.35;
   color: var(--contact-text);
 }
@@ -260,7 +268,7 @@
 
 .contact-form__intro p.contact-lead {
   margin-bottom: 34px;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 1.125rem;
   line-height: 1.35;
   color: var(--contact-text);
 }
@@ -456,7 +464,7 @@
 
   .contact-intro__copy p.contact-lead {
     margin-bottom: 28px;
-    font-size: 21px;
+    font-size: 1.125rem;
   }
 
   .contact-method {
@@ -487,7 +495,7 @@
   }
 
   .contact-form__intro p.contact-lead {
-    font-size: 21px;
+    font-size: 1.125rem;
   }
 
   .contact-form__field {

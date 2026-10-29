@@ -95,6 +95,43 @@ const PROJECT_TIMELINE = [
   },
 ];
 
+const BUILD_PRINCIPLES = [
+  {
+    number: '01',
+    title: 'Designed for real life',
+    description: 'Thoughtful layouts make room for the routines, people, and plans that turn a house into a home.',
+  },
+  {
+    number: '02',
+    title: 'Practical by design',
+    description: 'Engineering, materials, and construction planning work together from the first conversation.',
+  },
+  {
+    number: '03',
+    title: 'Clear from day one',
+    description: 'Each project starts with a clear scope, a considered timeline, and decisions made with you.',
+  },
+];
+
+const BUILD_FAQ = [
+  {
+    question: 'What can I enquire about now?',
+    answer: 'You can register interest in steel frame homes, container homes, or the blueprint packages that are currently available.',
+  },
+  {
+    question: 'When will the homes be available?',
+    answer: 'Steel frame and container homes are marked as coming soon. Join the early access list for launch timing, designs, and pricing updates.',
+  },
+  {
+    question: 'Can a home be tailored to my needs?',
+    answer: 'Yes. The first conversation covers your site, budget, preferred layout, and timeline so the right starting point can be scoped.',
+  },
+  {
+    question: 'What happens after I enquire?',
+    answer: 'The process begins with a consultation, then moves through design, planning, and a build plan with clear next steps.',
+  },
+];
+
 function createContactMailto(subject, data) {
   const body = [
     `Name: ${data.name || ''}`,
@@ -250,6 +287,10 @@ export default function BuildPage() {
               <i />
             </div>
           </div>
+
+          <a className="build-hero-cta" href="#services">
+            Explore home options <span aria-hidden="true">↘</span>
+          </a>
         </div>
       </section>
 
@@ -259,32 +300,44 @@ export default function BuildPage() {
 
       <section className="build-section build-idea">
         <div className="build-section-inner">
-          <div className="section-index">
-            01 / THE IDEA
-          </div>
+          <div className="section-index">01 / A DIFFERENT APPROACH</div>
 
           <div className="build-idea-layout">
             <h2>
-              A BETTER WAY
+              HOMES WITH
               <br />
-              <span>TO BUILD.</span>
+              <span>PURPOSE.</span>
             </h2>
 
             <div className="build-idea-copy">
               <p className="large-copy">
-                ALDEN Construction brings
-                together practical engineering,
-                thoughtful design, and modern
-                building methods.
+                Building should feel considered from the first sketch to the final handover.
               </p>
 
               <p>
-                We are developing a simpler
-                approach to creating homes that
-                are functional, adaptable, and
-                built with intention.
+                ALDEN Construction brings practical engineering, thoughtful design, and modern building methods together to create functional, adaptable homes.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRINCIPLES */}
+      <section className="build-section build-principles">
+        <div className="build-section-inner">
+          <div className="section-index">02 / WHAT GUIDES THE WORK</div>
+          <div className="build-principles-heading">
+            <h2>BUILT AROUND<br /><span>WHAT MATTERS.</span></h2>
+            <p>Good homes balance how they look with how they work, age, and support everyday life.</p>
+          </div>
+          <div className="build-principles-grid">
+            {BUILD_PRINCIPLES.map((principle) => (
+              <article className="build-principle" key={principle.number}>
+                <span>{principle.number}</span>
+                <h3>{principle.title}</h3>
+                <p>{principle.description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -295,9 +348,7 @@ export default function BuildPage() {
 
       <section className="build-section build-home-types">
         <div className="build-section-inner">
-          <div className="section-index">
-            02 / HOME TYPES
-          </div>
+          <div className="section-index">03 / HOME OPTIONS</div>
 
           <div className="home-types-heading">
             <h2>
@@ -314,7 +365,7 @@ export default function BuildPage() {
             </p>
           </div>
 
-          <div className="home-types-grid">
+          <div id="services" className="home-types-grid">
             {CONSTRUCTION_SERVICES.map(
               (service) => (
                 <HomeTypeCard
@@ -333,9 +384,7 @@ export default function BuildPage() {
 
       <section className="build-section build-process">
         <div className="build-section-inner">
-          <div className="section-index">
-            03 / THE PROCESS
-          </div>
+          <div className="section-index">04 / THE PROCESS</div>
 
           <div className="build-process-layout">
             <div className="build-process-heading">
@@ -392,6 +441,27 @@ export default function BuildPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq" className="build-section build-faq">
+        <div className="build-section-inner">
+          <div className="section-index">05 / GOOD TO KNOW</div>
+          <div className="build-faq-layout">
+            <div>
+              <h2>QUESTIONS<br /><span>BEFORE YOU BUILD.</span></h2>
+              <p>Quick answers about ALDEN Construction and getting started.</p>
+            </div>
+            <div className="build-faq-list">
+              {BUILD_FAQ.map((item, index) => (
+                <details className="build-faq-item" key={item.question} open={index === 0}>
+                  <summary>{item.question}<span aria-hidden="true">+</span></summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ================================================================ */}
       {/* WAITLIST                                                         */}
       {/* ================================================================ */}
@@ -401,9 +471,7 @@ export default function BuildPage() {
         className="build-section build-waitlist"
       >
         <div className="build-section-inner">
-          <div className="section-index">
-            04 / EARLY ACCESS
-          </div>
+          <div className="section-index">06 / EARLY ACCESS</div>
 
           <div className="waitlist-layout">
             <div className="waitlist-intro">

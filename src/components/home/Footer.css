@@ -181,6 +181,24 @@
   letter-spacing: 0;
 }
 
+/* Make footer details readable on every venture and studio page. */
+.footer-description {
+  font-size: 1rem;
+}
+
+.footer-location,
+.footer-label {
+  font-size: 0.85rem;
+}
+
+.footer-link {
+  font-size: 0.9rem;
+}
+
+.footer-bottom-grid {
+  font-size: 0.875rem;
+}
+
 .footer-bottom-grid > span:nth-child(2) {
   text-align: center;
 }
@@ -278,5 +296,11 @@
   .footer-link,
   .footer-link-arrow {
     transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-description {
+    font-size: 1rem;
   }
 }
