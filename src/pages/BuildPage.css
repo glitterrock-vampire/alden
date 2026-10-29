@@ -101,7 +101,7 @@
   text-decoration: none;
 }
 
-.build-page button,
+.build-page button:not(.nav-link),
 .build-page input,
 .build-page select,
 .build-page textarea {
@@ -296,8 +296,8 @@
 }
 
 .build-hero-title h1 span {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(241, 238, 231, 0.92);
+  color: var(--build-accent);
+  -webkit-text-stroke: 0;
 }
 
 .build-hero-bottom {
@@ -451,8 +451,18 @@
   border-left: 1px solid var(--build-line);
 }
 
+.build-page .home-types-pricing-note {
+  max-width: 54rem;
+  margin-top: 1.5rem;
+  color: var(--build-muted);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
 .home-type-card {
   min-height: 580px;
+  display: flex;
+  flex-direction: column;
 
   padding: 30px;
 
@@ -494,21 +504,19 @@
 .home-type-card-content {
   display: flex;
   flex-direction: column;
-
-  height: calc(100% - 30px);
-
-  padding-top: 100px;
+  flex: 1;
+  padding-top: 76px;
 }
 
 .home-type-card h3 {
   font-size: clamp(42px, 4vw, 66px);
   line-height: 0.86;
+  min-height: 1.72em;
 }
 
 .home-type-description {
-  max-width: 390px;
-
-  margin-top: 26px;
+  min-height: 5.1em;
+  margin-top: 18px;
 
   font-size: 12px;
   line-height: 1.7;
@@ -518,13 +526,11 @@
 
 .home-type-specs {
   display: grid;
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 20px;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 14px;
 
   margin-top: auto;
-  padding: 30px 0;
+  padding: 24px 0;
 
   border-top: 1px solid var(--build-soft-line);
   border-bottom: 1px solid var(--build-soft-line);
@@ -546,7 +552,8 @@
 
 .home-type-specs strong {
   font-family: 'Roboto Mono', monospace;
-  font-size: 11px;
+  font-size: 0.875rem;
+  line-height: 1.5;
   font-weight: 400;
 }
 
@@ -555,9 +562,9 @@
   grid-template-columns:
     repeat(2, 1fr);
 
-  gap: 12px 20px;
+  gap: 14px 16px;
 
-  margin: 26px 0 0;
+  margin: 22px 0 0;
   padding: 0;
 
   list-style: none;
@@ -568,7 +575,7 @@
   gap: 8px;
 
   font-family: 'Roboto Mono', monospace;
-  font-size: 10px;
+  font-size: 0.875rem;
   line-height: 1.4;
 
   color: var(--build-muted);
@@ -1115,6 +1122,10 @@
   font-size: 1rem;
 }
 
+.build-page .home-type-features li {
+  font-size: 0.875rem;
+}
+
 .build-page .home-type-specs span,
 .build-page .home-type-specs strong,
 .build-page .form-field label,
@@ -1124,6 +1135,10 @@
 .build-page .waitlist-submit,
 .build-page .build-cta-button {
   font-size: 1rem;
+}
+
+.build-page .home-type-specs strong {
+  font-size: 0.875rem;
 }
 
 

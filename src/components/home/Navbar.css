@@ -470,6 +470,62 @@
   cursor: default;
 }
 
+.nav-meta.has-farm-actions {
+  display: none;
+}
+
+.nav-actions {
+  position: absolute;
+  right: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-action {
+  position: relative;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.nav-action svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.nav-action:hover,
+.nav-action:focus-visible {
+  border-color: #b5c886;
+  background: rgba(181, 200, 134, 0.12);
+  color: #d0dda9;
+}
+
+.nav-action:focus-visible {
+  outline: 2px solid #b5c886;
+  outline-offset: 3px;
+}
+
+.nav-action-count {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  min-width: 1.25rem;
+  padding: 0.12rem 0.3rem;
+  border-radius: 999px;
+  background: #b5c886;
+  color: #10130e;
+  font: 700 0.65rem / 1.2 'Roboto Mono', monospace;
+  text-align: center;
+}
+
 .nav-date {
   color: #fff;
 
@@ -620,6 +676,20 @@
     transition:
       opacity 200ms ease,
       visibility 200ms ease;
+  }
+
+  .nav-meta.has-farm-actions {
+    display: none;
+  }
+
+  .nav-actions {
+    right: 46px;
+    gap: 0.35rem;
+  }
+
+  .nav-action {
+    width: 2.4rem;
+    height: 2.4rem;
   }
 
   .nav-meta.menu-open {

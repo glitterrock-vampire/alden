@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import './EcosystemSection.css';
 
 const products = [
   {
@@ -124,9 +125,9 @@ export default function EcosystemSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: [0.25, 0.1, 0, 1] }}
               viewport={{ once: true, margin: '-40px' }}
-              className="group relative bg-background border border-border rounded-lg overflow-hidden hover:border-accent/50 transition-all duration-500"
+              className="ecosystem-card group relative bg-background border border-border rounded-lg overflow-hidden hover:border-accent/50 transition-all duration-500"
             >
-              <Link to={product.domain} className="block h-full">
+              <Link to={product.domain} className="ecosystem-card__link block h-full">
               {/* Image */}
               <div className="relative h-48 md:h-56 overflow-hidden">
                 <img
@@ -156,7 +157,7 @@ export default function EcosystemSection() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="ecosystem-card__content p-6">
                 {/* Label */}
                 <p className="text-xs tracking-[0.2em] font-body text-accent uppercase mb-3">
                   — {product.label}
@@ -171,12 +172,12 @@ export default function EcosystemSection() {
                 <div className="w-8 h-px bg-accent mb-4 group-hover:w-12 transition-all duration-300" />
 
                 {/* Description */}
-                <p className="text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-5">
+                <p className="ecosystem-card__description text-sm md:text-base text-muted-foreground font-body leading-relaxed mb-5">
                   {product.desc}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-5">
+                <div className="ecosystem-card__tags flex flex-wrap gap-2 mb-5">
                   {product.tags.map((tag) => (
                     <span 
                       key={tag} 
@@ -188,7 +189,7 @@ export default function EcosystemSection() {
                 </div>
 
                 {/* Explore Link */}
-                <div className="flex items-center gap-2 text-sm tracking-[0.15em] font-body uppercase text-accent group-hover:gap-3 transition-all duration-300">
+                <div className="ecosystem-card__explore flex items-center gap-2 text-sm tracking-[0.15em] font-body uppercase text-accent group-hover:gap-3 transition-all duration-300">
                   <span>Explore</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>

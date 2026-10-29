@@ -9,6 +9,15 @@ import './FarmPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const readFarmStorage = (key, fallback) => {
+  try {
+    const saved = window.localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 const heroImg = 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png';
 
 function HeroParallax() {
@@ -33,7 +42,7 @@ function HeroParallax() {
           className="font-black text-white uppercase leading-none"
           style={{ fontSize: 'clamp(4rem, 18vw, 14rem)', letterSpacing: '-0.03em', fontFamily: 'Koulen, cursive' }}
         >
-          ALDEN'S<br />FARM SUPPLY
+          ALDEN'S<br />FARM
         </h1>
         <p className="text-white/70 text-sm font-mono tracking-wider mt-6 max-w-md">
           Fresh from our farm to your table. Local produce. Sustainable farming. Kingston, Jamaica.
@@ -48,7 +57,7 @@ const FARM_PRODUCTS = [
   {
     name: "Free-Range Eggs",
     description: "Fresh eggs from pasture-raised chickens",
-    price: "$8/dozen",
+    price: "USD $8/dozen",
     category: "produce",
     inStock: true,
     image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=300&fit=crop",
@@ -57,7 +66,7 @@ const FARM_PRODUCTS = [
   {
     name: "Pasture-Raised Chicken",
     description: "Premium quality chicken meat",
-    price: "$15/lb",
+    price: "USD $15/lb",
     category: "produce",
     inStock: true,
     image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=300&fit=crop",
@@ -66,7 +75,7 @@ const FARM_PRODUCTS = [
   {
     name: "Weekly Produce Box",
     description: "Seasonal vegetables and fruits",
-    price: "$25/box",
+    price: "USD $25/box",
     category: "produce",
     inStock: true,
     image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
@@ -75,7 +84,7 @@ const FARM_PRODUCTS = [
   {
     name: "Fresh Herbs Bundle",
     description: "Basil, thyme, cilantro, scallions",
-    price: "$12/bundle",
+    price: "USD $12/bundle",
     category: "produce",
     inStock: true,
     image: "https://images.unsplash.com/photo-1509722747041-616f39c5c5e4?w=400&h=300&fit=crop",
@@ -84,7 +93,7 @@ const FARM_PRODUCTS = [
   {
     name: "Organic Honey",
     description: "Raw local honey from our hives",
-    price: "$18/jar",
+    price: "USD $18/jar",
     category: "produce",
     inStock: true,
     image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=300&fit=crop",
@@ -94,7 +103,7 @@ const FARM_PRODUCTS = [
   {
     name: "Tower Garden Kit",
     description: "Complete vertical farming system",
-    price: "$129",
+    price: "USD $129",
     category: "equipment",
     inStock: true,
     image: "https://images.unsplash.com/photo-1530836369250-ef8f732797e0?w=400&h=300&fit=crop",
@@ -103,7 +112,7 @@ const FARM_PRODUCTS = [
   {
     name: "Seed Starter Kit",
     description: "20 heirloom vegetable seed varieties",
-    price: "$35",
+    price: "USD $35",
     category: "seeds",
     inStock: true,
     image: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=400&h=300&fit=crop",
@@ -112,7 +121,7 @@ const FARM_PRODUCTS = [
   {
     name: "Chicken Coop Starter",
     description: "DIY coop kit for 6-8 hens",
-    price: "$199",
+    price: "USD $199",
     category: "equipment",
     inStock: true,
     image: "https://images.unsplash.com/photo-1548550023-2bdb3c5c3c3a?w=400&h=300&fit=crop",
@@ -121,7 +130,7 @@ const FARM_PRODUCTS = [
   {
     name: "Organic Compost",
     description: "Nutrient-rich compost for gardens",
-    price: "$12/bag",
+    price: "USD $12/bag",
     category: "supplies",
     inStock: true,
     image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
@@ -130,7 +139,7 @@ const FARM_PRODUCTS = [
   {
     name: "Garden Tool Set",
     description: "Essential hand tools and gloves",
-    price: "$55",
+    price: "USD $55",
     category: "tools",
     inStock: true,
     image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
@@ -139,7 +148,7 @@ const FARM_PRODUCTS = [
   {
     name: "Irrigation System",
     description: "Drip irrigation for 100 sq ft",
-    price: "$89",
+    price: "USD $89",
     category: "equipment",
     inStock: true,
     image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
@@ -148,7 +157,7 @@ const FARM_PRODUCTS = [
   {
     name: "Soil Test Kit",
     description: "Professional pH & nutrient testing",
-    price: "$25",
+    price: "USD $25",
     category: "supplies",
     inStock: true,
     image: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=400&h=300&fit=crop",
@@ -157,7 +166,7 @@ const FARM_PRODUCTS = [
   {
     name: "Compost Bin",
     description: "80-gallon tumbling composter",
-    price: "$75",
+    price: "USD $75",
     category: "equipment",
     inStock: true,
     image: "https://images.unsplash.com/photo-1548550023-2bdb3c5c3c3a?w=400&h=300&fit=crop",
@@ -176,8 +185,8 @@ const CATEGORY_FILTERS = [
 
 const DELIVERY_ZONES = [
   { area: "Kingston & St. Andrew", fee: "Free", days: "Tuesday & Friday" },
-  { area: "St. Catherine", fee: "$5", days: "Wednesday & Saturday" },
-  { area: "Portmore", fee: "$3", days: "Tuesday & Friday" },
+  { area: "St. Catherine", fee: "USD $5", days: "Wednesday & Saturday" },
+  { area: "Portmore", fee: "USD $3", days: "Tuesday & Friday" },
   { area: "Other Areas", fee: "Contact for pricing", days: "Custom schedule" }
 ];
 
@@ -186,9 +195,24 @@ const DELIVERY_ZONES = [
 export default function FarmPage() {
   const cardRefs = useRef([]);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => readFarmStorage('alden-farm-cart', []));
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [profile, setProfile] = useState(() => readFarmStorage('alden-farm-profile', {
+    name: '',
+    email: '',
+    phone: '',
+    deliveryAddress: '',
+  }));
   const [quantities, setQuantities] = useState({});
+
+  useEffect(() => {
+    window.localStorage.setItem('alden-farm-cart', JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    window.localStorage.setItem('alden-farm-profile', JSON.stringify(profile));
+  }, [profile]);
 
   const addToCart = (product) => {
     const quantity = quantities[product.name] || 1;
@@ -262,7 +286,19 @@ export default function FarmPage() {
 
   return (
     <div className="farm-page min-h-screen bg-background">
-      <Navbar />
+      <Navbar
+        farmActions={{
+          cartItemCount,
+          onCartClick: () => {
+            setIsProfileOpen(false);
+            setIsCartOpen(true);
+          },
+          onProfileClick: () => {
+            setIsCartOpen(false);
+            setIsProfileOpen(true);
+          },
+        }}
+      />
       
       {/* Hero Section */}
       <HeroParallax />
@@ -270,7 +306,7 @@ export default function FarmPage() {
       {/* Farm Header */}
       <section className="py-20 md:py-32 px-6 md:px-10 text-center bg-background">
         <div className="max-w-3xl mx-auto">
-          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2rem, 4vw, 3.75rem)', marginBottom: '2rem', color: 'hsl(var(--foreground))' }}>ALDEN FARM</h2>
+          <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2rem, 4vw, 3.75rem)', marginBottom: '2rem', color: 'hsl(var(--foreground))' }}>ALDEN'S FARM</h2>
           <p className="text-xs tracking-[0.2em] text-green-500 uppercase mb-5">Whole Foods · Chicken · Eggs · Supplies</p>
           <p style={{ fontFamily: 'Roboto Mono, monospace', fontSize: '1rem', color: 'hsl(var(--muted-foreground))', lineHeight: '1.6' }}>
             Fresh from farm to Kingston. Partnering with Agrotonomy for sustainable local produce and farm supplies. Supporting local agriculture and bringing quality products to your table.
@@ -437,7 +473,7 @@ export default function FarmPage() {
           <h2 style={{ fontFamily: 'Koulen, cursive', fontSize: 'clamp(2.25rem, 4vw, 3rem)', marginBottom: '4rem', color: 'hsl(var(--foreground))', textAlign: 'center' }}>Our Partnership with Agrotonomy</h2>
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div className="text-base text-muted-foreground leading-relaxed space-y-5" style={{ fontFamily: 'Roboto Mono, monospace' }}>
-              <p>ALDEN FARM partners with Agrotonomy to bring you the freshest local produce and farm supplies. Together, we support sustainable agriculture and provide Kingston residents with access to quality, farm-fresh products.</p>
+              <p>ALDEN'S FARM partners with Agrotonomy to bring you fresh local produce and practical growing supplies. Together, we support sustainable agriculture and connect Kingston residents with quality, farm-fresh products.</p>
               <p>Through this partnership, we ensure that every product meets the highest standards of quality and freshness, while supporting local farmers and promoting food security in Jamaica.</p>
             </div>
             <div className="flex flex-col gap-6">
@@ -475,19 +511,53 @@ export default function FarmPage() {
         </div>
       </section>
 
-      {/* Cart Button - Fixed Position */}
-      <button
-        onClick={() => setIsCartOpen(true)}
-        className="fixed top-24 right-6 z-50 bg-white text-black p-3 rounded-full shadow-lg hover:bg-green-400 transition-all flex items-center gap-2"
-        style={{ fontFamily: 'Roboto Mono, monospace' }}
-      >
-        <ShoppingCart className="w-5 h-5" />
-        {cartItemCount > 0 && (
-          <span className="bg-green-600 text-white text-xs px-2 py-0.5 rounded-full">
-            {cartItemCount}
-          </span>
-        )}
-      </button>
+      {isProfileOpen && (
+        <>
+          <button
+            type="button"
+            className="farm-panel-backdrop"
+            onClick={() => setIsProfileOpen(false)}
+            aria-label="Close profile"
+          />
+          <aside className="farm-profile-panel" aria-label="Your farm profile">
+            <div className="farm-panel-heading">
+              <div>
+                <span className="farm-panel-eyebrow">ALDEN'S FARM</span>
+                <h2>Your profile</h2>
+              </div>
+              <button type="button" onClick={() => setIsProfileOpen(false)} aria-label="Close profile">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <form
+              className="farm-profile-form"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setIsProfileOpen(false);
+              }}
+            >
+              <label>
+                Name
+                <input value={profile.name} onChange={(event) => setProfile({ ...profile, name: event.target.value })} autoComplete="name" />
+              </label>
+              <label>
+                Email
+                <input type="email" value={profile.email} onChange={(event) => setProfile({ ...profile, email: event.target.value })} autoComplete="email" />
+              </label>
+              <label>
+                Phone
+                <input type="tel" value={profile.phone} onChange={(event) => setProfile({ ...profile, phone: event.target.value })} autoComplete="tel" />
+              </label>
+              <label>
+                Delivery address
+                <textarea value={profile.deliveryAddress} onChange={(event) => setProfile({ ...profile, deliveryAddress: event.target.value })} autoComplete="street-address" rows={3} />
+              </label>
+              <button type="submit" className="farm-profile-save">Save profile</button>
+              <p>Saved on this device for faster checkout.</p>
+            </form>
+          </aside>
+        </>
+      )}
 
       {/* Cart Sidebar */}
       {isCartOpen && (
@@ -584,7 +654,7 @@ export default function FarmPage() {
                 <div className="flex items-center justify-between text-lg">
                   <span style={{ fontFamily: 'Roboto Mono, monospace' }}>Total</span>
                   <span className="font-bold text-green-400" style={{ fontFamily: 'Koulen, cursive' }}>
-                    ${cartTotal.toFixed(2)}
+                    USD ${cartTotal.toFixed(2)}
                   </span>
                 </div>
                 <button 

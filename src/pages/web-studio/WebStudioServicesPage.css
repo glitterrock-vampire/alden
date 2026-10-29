@@ -851,6 +851,15 @@
     var(--ws-line);
 }
 
+.portfolio-empty-state {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--ws-line);
+  color: var(--ws-muted);
+  font: 0.8rem / 1.7 var(--ws-mono);
+}
+
 .web-service-card {
   display: grid;
   grid-template-columns:
@@ -1276,9 +1285,16 @@
       1.5rem;
   }
 
-  .web-services-kicker {
-    margin-bottom: auto;
-    padding-top: 1rem;
+  .web-studio-page .web-services-kicker {
+    position: absolute;
+    top: calc(5.5rem + env(safe-area-inset-top));
+    left: 1rem;
+    right: 1rem;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    filter: none;
+    transition: none;
   }
 
   .web-services-title {

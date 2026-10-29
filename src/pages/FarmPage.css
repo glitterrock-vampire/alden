@@ -97,11 +97,106 @@
   outline-offset: 4px;
 }
 
-.farm-page .fixed.top-24.right-6 {
-  min-width: 3rem;
+.farm-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  border: 0;
+  background: rgba(0, 0, 0, .62);
+  backdrop-filter: blur(4px);
+}
+
+.farm-profile-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  width: min(100%, 28rem);
+  height: 100dvh;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-left: 1px solid var(--farm-line);
+  background: #0b0d09;
+  color: var(--farm-cream);
+}
+
+.farm-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--farm-line);
+}
+
+.farm-panel-heading h2 {
+  margin: .35rem 0 0;
+  font: 400 2rem/.95 'Koulen', sans-serif;
+}
+
+.farm-panel-eyebrow {
+  color: var(--farm-accent);
+  font: .65rem/1.4 'Roboto Mono', monospace;
+  letter-spacing: .12em;
+}
+
+.farm-panel-heading > button {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid var(--farm-line);
+  background: transparent;
+  color: var(--farm-cream);
+}
+
+.farm-profile-form {
+  display: grid;
+  gap: 1.1rem;
+  padding-top: 1.5rem;
+}
+
+.farm-profile-form label {
+  display: grid;
+  gap: .45rem;
+  color: var(--farm-muted);
+  font: .7rem/1.4 'Roboto Mono', monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.farm-profile-form input,
+.farm-profile-form textarea {
+  width: 100%;
+  padding: .8rem;
+  border: 1px solid var(--farm-line);
+  border-radius: 0;
+  background: rgba(255, 255, 255, .035);
+  color: var(--farm-cream);
+  font: .85rem/1.5 'Roboto Mono', monospace;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.farm-profile-form input:focus,
+.farm-profile-form textarea:focus {
+  border-color: var(--farm-accent);
+  outline: 1px solid var(--farm-accent);
+}
+
+.farm-profile-save {
   min-height: 3rem;
-  border-radius: 0 !important;
-  background: var(--farm-accent) !important;
+  border: 0;
+  background: var(--farm-accent);
+  color: #10130e;
+  font: .7rem/1.4 'Roboto Mono', monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.farm-profile-form > p {
+  color: var(--farm-muted);
+  font: .7rem/1.5 'Roboto Mono', monospace;
 }
 
 .farm-page .fixed.right-0.top-0 {

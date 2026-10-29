@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { ShoppingCart, UserRound } from 'lucide-react';
 
 import './Navbar.css';
 
-export default function Navbar() {
+export default function Navbar({ farmActions }) {
   const navRef = useRef(null);
 
   const [isNavHidden, setIsNavHidden] = useState(false);
@@ -178,6 +179,8 @@ export default function Navbar() {
     <nav
       ref={navRef}
       className={`nav ${
+        farmActions ? 'nav--farm-actions' : ''
+      } ${
         isNavHidden ? 'nav--hidden' : ''
       } ${isReady ? 'nav--ready' : ''}`}
     >
@@ -337,6 +340,8 @@ export default function Navbar() {
         {/* Date / Time */}
         <div
           className={`nav-meta ${
+            farmActions ? 'has-farm-actions' : ''
+          } ${
             isMobileMenuOpen ? 'menu-open' : ''
           }`}
         >
@@ -356,6 +361,34 @@ export default function Navbar() {
             {timeDisplay}
           </time>
         </div>
+
+        {farmActions && (
+          <div className="nav-actions" aria-label="ALDEN'S FARM shopping">
+            <button
+              type="button"
+              className="nav-action"
+              onClick={farmActions.onProfileClick}
+              aria-label="Open your farm profile"
+              title="Profile"
+            >
+              <UserRound aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              className="nav-action"
+              onClick={farmActions.onCartClick}
+              aria-label={`Open shopping cart, ${farmActions.cartItemCount} items`}
+              title="Shopping cart"
+            >
+              <ShoppingCart aria-hidden="true" />
+              {farmActions.cartItemCount > 0 && (
+                <span className="nav-action-count">
+                  {farmActions.cartItemCount}
+                </span>
+              )}
+            </button>
+          </div>
+        )}
 
         {/* Mobile Menu */}
         <button

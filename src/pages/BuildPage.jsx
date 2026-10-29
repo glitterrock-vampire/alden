@@ -14,9 +14,9 @@ const CONSTRUCTION_SERVICES = [
     number: '01',
     title: 'Steel Frame Homes',
     description:
-      'Durable and affordable steel frame construction designed around modern living.',
-    price: 'From $XXk',
-    size: '1–3 BR',
+      'One-bedroom steel-frame homes, with layouts available up to three bedrooms.',
+    price: 'From $46,980 USD',
+    size: '1–3 BR · 440 sq ft base',
     timeline: '3–4 months',
     features: [
       'Earthquake resistant',
@@ -30,9 +30,9 @@ const CONSTRUCTION_SERVICES = [
     number: '02',
     title: 'Container Homes',
     description:
-      'Modern container home conversions with practical layouts and contemporary finishes.',
-    price: 'From $XXk',
-    size: 'Studio–2 BR',
+      'A compact 20-foot home with one bedroom, kitchen, and bath. Larger layouts are available.',
+    price: 'From $16,500 USD',
+    size: 'Studio–2 BR · 160 sq ft base',
     timeline: '2–3 months',
     features: [
       'Sustainable materials',
@@ -46,9 +46,9 @@ const CONSTRUCTION_SERVICES = [
     number: '03',
     title: 'Blueprint Packages',
     description:
-      'DIY home building plans and material guidance for people who want to build independently.',
-    price: 'From $XXX',
-    size: 'Various',
+      'Build-ready plans with materials lists and a step-by-step construction guide.',
+    price: 'From $950 USD',
+    size: 'Plans up to 1,000 sq ft',
     timeline: 'DIY',
     features: [
       'Detailed plans',
@@ -375,6 +375,12 @@ export default function BuildPage() {
               )
             )}
           </div>
+
+          <p className="home-types-pricing-note">
+            Home prices are starting estimates; final costs vary by layout,
+            site, delivery, utilities, permits, and finishes. Blueprint pricing
+            excludes site-specific engineering and approval fees.
+          </p>
         </div>
       </section>
 

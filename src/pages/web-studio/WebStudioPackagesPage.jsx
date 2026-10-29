@@ -103,7 +103,7 @@ export default function WebStudioPackagesPage() {
 
           <div className="web-packages-hero-row">
             <p className="web-services-section-copy">
-              Website builds and monthly marketing retainers, priced in JMD.
+              Website builds and monthly marketing retainers, priced in USD.
               Select a package, then we confirm scope before work starts.
             </p>
 

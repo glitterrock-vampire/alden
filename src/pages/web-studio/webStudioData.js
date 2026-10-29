@@ -27,8 +27,8 @@ export const WEB_STUDIO_PACKAGE_GROUPS = [
         id: 'basic',
         name: 'Basic',
         tag: 'Launch',
-        price: '$200,000',
-        cadence: 'JMD',
+        price: '$1,250',
+        cadence: 'USD',
         summary:
           'A polished single-page site that gets a brand online with a clear story and a working contact path.',
         includes: [
@@ -52,8 +52,8 @@ export const WEB_STUDIO_PACKAGE_GROUPS = [
         name: 'Growth',
         tag: 'Most popular',
         featured: true,
-        price: '$300,000+',
-        cadence: 'JMD',
+        price: '$1,900+',
+        cadence: 'USD',
         summary:
           'A multi-page site with richer content, integrations, and room for the business to keep expanding.',
         includes: [
@@ -78,8 +78,8 @@ export const WEB_STUDIO_PACKAGE_GROUPS = [
         id: 'enterprise',
         name: 'Enterprise',
         tag: 'Commerce',
-        price: '$450,000+',
-        cadence: 'JMD',
+        price: '$2,850+',
+        cadence: 'USD',
         summary:
           'A full-scale platform with commerce, payments, and the systems needed to take orders online.',
         includes: [
@@ -114,8 +114,8 @@ export const WEB_STUDIO_PACKAGE_GROUPS = [
         name: 'Startup',
         tag: 'Most popular',
         featured: true,
-        price: '$100,000',
-        cadence: 'JMD / month',
+        price: '$650',
+        cadence: 'USD / month',
         summary:
           'A tight monthly cadence of posts, stories, and reporting to get social channels working.',
         metrics: [
@@ -138,8 +138,8 @@ export const WEB_STUDIO_PACKAGE_GROUPS = [
         id: 'scaling',
         name: 'Scaling',
         tag: 'Expand',
-        price: '$180,000',
-        cadence: 'JMD / month',
+        price: '$1,150',
+        cadence: 'USD / month',
         summary:
           'More content, more community time, and deeper reporting as the brand starts to compound.',
         metrics: [
@@ -164,8 +164,8 @@ export const WEB_STUDIO_PACKAGE_GROUPS = [
         id: 'marketing-enterprise',
         name: 'Enterprise',
         tag: 'Full send',
-        price: '$240,000',
-        cadence: 'JMD / month',
+        price: '$1,500',
+        cadence: 'USD / month',
         summary:
           'Multi-platform coverage, heavier production, and reporting built for teams that need the full picture.',
         metrics: [
@@ -191,7 +191,7 @@ export const WEB_STUDIO_PACKAGE_GROUPS = [
 ];
 
 export const WEB_STUDIO_PACKAGE_NOTES = [
-  'All prices are quoted in Jamaican dollars (JMD).',
+  'All prices are quoted in US dollars (USD).',
   'Items marked * are scoped during discovery and may be billed separately.',
   'Website timelines start after brand assets, copy, and access are confirmed.',
   'Marketing retainers are billed monthly and can be paused with 14 days’ notice.',
@@ -211,13 +211,13 @@ const PLACEHOLDER_IMAGES = {
 };
 
 export const WEB_PORTFOLIO_PROJECTS = [
-  { id: 1, title: 'CDT JAMAICA', category: 'DIGITAL PLATFORM', filter: 'enterprise', href: 'https://cdtjamaica.org', image: PLACEHOLDER_IMAGES.cdt },
-  { id: 2, title: 'TOTALLY BAKED', category: 'E-COMMERCE', filter: 'fullstack', href: 'https://totally-baked-ja.vercel.app', image: 'https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png' },
-  { id: 3, title: 'ZENITH TEAS', category: 'TEA MANAGEMENT', filter: 'fullstack', href: 'https://zenith-taupe.vercel.app', image: PLACEHOLDER_IMAGES.zenith },
-  { id: 4, title: 'GLOWING LANDING', category: 'LANDING PAGE', filter: 'frontend', href: 'https://glowing-landing-page.netlify.app', image: PLACEHOLDER_IMAGES.glowing },
-  { id: 5, title: 'BLACKBOX SYSTEM', category: 'IOT SYSTEM', filter: 'fullstack', href: 'https://blackbox-online.vercel.app', image: 'https://framerusercontent.com/images/fKFKHb1VZsz50W8Ctq7RIZW4SRw.png' },
-  { id: 6, title: 'DAVID P BLAKE', category: 'PERSONAL PORTFOLIO', filter: 'frontend', href: 'https://davidpblake.org', image: 'https://framerusercontent.com/images/placeholder.png' },
-  { id: 10, title: 'TOBAGO EAST MEDICAL SERVICES', category: 'HEALTHCARE PLATFORM', filter: 'fullstack', href: 'https://tobago-medical-hub.vercel.app/', image: '/images/tobago-medical-hub.svg' },
+  { id: 1, title: 'CDT JAMAICA', category: 'DIGITAL PLATFORM', filter: 'enterprise', services: ['Digital Transformation', 'Website Development', 'Automation & Integration', 'Cloud Hosting', 'Quality Assurance', 'Load Testing'], href: 'https://cdtjamaica.org', image: PLACEHOLDER_IMAGES.cdt },
+  { id: 2, title: 'TOTALLY BAKED', category: 'E-COMMERCE', filter: 'fullstack', services: ['e-Commerce', 'Website Development', 'Cloud Hosting', 'Quality Assurance'], href: 'https://totally-baked-ja.vercel.app', image: 'https://framerusercontent.com/images/XbAyT67MOmZ9iWY72g8FEkEZZFM.png' },
+  { id: 3, title: 'ZENITH TEAS', category: 'TEA MANAGEMENT', filter: 'fullstack', services: ['e-Commerce', 'Website Development', 'Automation & Integration', 'Cloud Hosting', 'Quality Assurance'], href: 'https://zenith-taupe.vercel.app', image: PLACEHOLDER_IMAGES.zenith },
+  { id: 4, title: 'GLOWING LANDING', category: 'LANDING PAGE', filter: 'frontend', services: ['Website Development', 'Content Marketing', 'Quality Assurance'], href: 'https://glowing-landing-page.netlify.app', image: PLACEHOLDER_IMAGES.glowing },
+  { id: 5, title: 'BLACKBOX SYSTEM', category: 'IOT SYSTEM', filter: 'fullstack', services: ['Digital Transformation', 'Website Development', 'Automation & Integration', 'Cloud Hosting', 'Quality Assurance', 'Load Testing', 'S&G Cloud Hosting'], href: 'https://blackbox-online.vercel.app', image: 'https://framerusercontent.com/images/fKFKHb1VZsz50W8Ctq7RIZW4SRw.png' },
+  { id: 6, title: 'DAVID P BLAKE', category: 'PERSONAL PORTFOLIO', filter: 'frontend', services: ['Website Development', 'Content Marketing'], href: 'https://davidpblake.org', image: 'https://framerusercontent.com/images/placeholder.png' },
+  { id: 10, title: 'TOBAGO EAST MEDICAL SERVICES', category: 'HEALTHCARE PLATFORM', filter: 'fullstack', services: ['Digital Transformation', 'Website Development', 'Automation & Integration', 'Help Desk Solution', 'Cloud Hosting', 'Quality Assurance', 'Load Testing'], href: 'https://tobago-medical-hub.vercel.app/', image: '/images/tobago-medical-hub.svg' },
   { id: 7, title: 'ALDEN FARM', category: 'ECOSYSTEM / AGRICULTURE', filter: 'ecosystem', href: '/farm', image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png' },
   { id: 8, title: 'ALDEN BUILD', category: 'ECOSYSTEM / CONSTRUCTION', filter: 'ecosystem', href: '/build', image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png' },
   { id: 9, title: 'ALDEN SPRINGS', category: 'ECOSYSTEM / WATER', filter: 'ecosystem', href: '/springs', image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/9633f1d94_generated_82c4a200.png' },

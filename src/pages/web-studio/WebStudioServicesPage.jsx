@@ -7,7 +7,6 @@ import {
   WEB_STUDIO_SERVICES,
   PROCESS_STEPS,
   WEB_PORTFOLIO_PROJECTS,
-  PORTFOLIO_FILTERS,
 } from './webStudioData';
 import './WebStudioServicesPage.css';
 
@@ -248,7 +247,7 @@ function SectionHeading({
 export default function WebStudioServicesPage() {
   const { hash } = useLocation();
 
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeService, setActiveService] = useState('all');
 
   const pageRef = useRef(null);
   const titleRef = useRef(null);
@@ -257,8 +256,8 @@ export default function WebStudioServicesPage() {
 
   const filteredProjects = CLIENT_PROJECTS.filter(
     (project) =>
-      activeFilter === 'all' ||
-      project.filter === activeFilter
+      activeService === 'all' ||
+      project.services?.includes(activeService)
   );
 
   useHeroIntro({
@@ -267,7 +266,7 @@ export default function WebStudioServicesPage() {
     copyRef,
   });
 
-  useScrollReveal(pageRef, activeFilter);
+  useScrollReveal(pageRef, activeService);
 
   useEffect(() => {
     if (hash) {
@@ -383,28 +382,32 @@ export default function WebStudioServicesPage() {
           <div
             className="portfolio-filter-row web-reveal"
             data-reveal-index="1"
-            aria-label="Filter web portfolio projects"
+            aria-label="Filter selected work by service"
           >
-            {PORTFOLIO_FILTERS.map(
-              ({ id, label }) => (
+            {[
+              { title: 'All services' },
+              ...WEB_STUDIO_SERVICES,
+            ].map(
+              (service) => {
+                const filter = service.title === 'All services' ? 'all' : service.title;
+                return (
                 <button
-                  key={id}
+                  key={filter}
                   type="button"
-                  onClick={() =>
-                    setActiveFilter(id)
-                  }
+                  onClick={() => setActiveService(filter)}
                   className={`portfolio-filter-button ${
-                    activeFilter === id
+                    activeService === filter
                       ? 'is-active'
                       : ''
                   }`}
                   aria-pressed={
-                    activeFilter === id
+                    activeService === filter
                   }
                 >
-                  {label}
+                  {service.title}
                 </button>
-              )
+                );
+              }
             )}
           </div>
 
@@ -421,6 +424,11 @@ export default function WebStudioServicesPage() {
                   mosaic
                 />
               )
+            )}
+            {filteredProjects.length === 0 && (
+              <p className="portfolio-empty-state">
+                No selected work is tagged for this service yet.
+              </p>
             )}
           </div>
 
@@ -452,7 +460,7 @@ export default function WebStudioServicesPage() {
 
             <div className="studio-pricing-preview">
               <span>Website builds start at</span>
-              <strong>JMD 150,000</strong>
+              <strong>$950 USD</strong>
               <Link
                 to="/studios/web-studio/packages"
                 className="studio-pricing-link"
@@ -477,7 +485,7 @@ export default function WebStudioServicesPage() {
             <h2>
               Website builds from
               <br />
-              <strong>JMD 150,000</strong>
+              <strong>$950 USD</strong>
             </h2>
             <Link
               to="/studios/web-studio/packages"
