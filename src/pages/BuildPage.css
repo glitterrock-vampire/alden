@@ -34,6 +34,24 @@
   -webkit-text-stroke-color: rgba(231, 229, 223, .58);
 }
 
+.build-page .build-cta h2 span {
+  color: var(--build-black);
+  -webkit-text-stroke: 0;
+}
+
+.build-page .site-footer .footer-description {
+  color: rgba(255, 255, 255, .76);
+}
+
+.build-page .site-footer .footer-location,
+.build-page .site-footer .footer-label {
+  color: rgba(255, 255, 255, .68);
+}
+
+.build-page .site-footer .footer-bottom-grid {
+  color: rgba(255, 255, 255, .55);
+}
+
 .build-page .home-type-status.is-available,
 .build-page .process-arrow,
 .build-page .waitlist-intro ul li span {

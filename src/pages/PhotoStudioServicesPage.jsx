@@ -194,11 +194,9 @@ export default function PhotoStudioServicesPage() {
 
           <div className="photo-studio-selector">
             <div className="photo-studio-selector-intro">
-              <span>Services</span>
+              <span>Portfolio filters</span>
 
-              <strong>
-                {selectedService.title}
-              </strong>
+              <strong>Browse disciplines</strong>
             </div>
 
             <nav

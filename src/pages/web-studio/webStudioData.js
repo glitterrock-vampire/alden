@@ -221,6 +221,7 @@ export const WEB_PORTFOLIO_PROJECTS = [
   { id: 7, title: 'ALDEN FARM', category: 'ECOSYSTEM / AGRICULTURE', filter: 'ecosystem', href: '/farm', image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/bc9876621_generated_c9f73a67.png' },
   { id: 8, title: 'ALDEN BUILD', category: 'ECOSYSTEM / CONSTRUCTION', filter: 'ecosystem', href: '/build', image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/50c3d2b40_generated_95198927.png' },
   { id: 9, title: 'ALDEN SPRINGS', category: 'ECOSYSTEM / WATER', filter: 'ecosystem', href: '/springs', image: 'https://media.base44.com/images/public/69ee1b9c56c5f45aaae16bea/9633f1d94_generated_82c4a200.png' },
+  { id: 11, title: 'ALDEN DRIVE', category: 'CAR RENTAL CONCEPT', filter: 'fullstack', services: ['Website Development'], href: '/drive', image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85' },
 ];
 
 export const PORTFOLIO_FILTERS = [
