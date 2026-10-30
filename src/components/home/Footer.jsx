@@ -6,10 +6,6 @@ const navigation = [
     href: '/',
   },
   {
-    label: 'Studios',
-    href: '/studios',
-  },
-  {
     label: 'About',
     href: '/about',
   },

@@ -8,7 +8,6 @@ import AboutSection from '@/components/home/AboutSection';
 import Footer from '@/components/home/Footer';
 
 // Static pages — bundled normally
-import StudiosPage from '@/pages/StudiosPage';
 import WhoWeArePage from '@/pages/WhoWeArePage';
 import ContactPage from '@/pages/ContactPage';
 import PhotoStudioServicesPage from '@/pages/PhotoStudioServicesPage';
@@ -75,7 +74,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/studios" element={<StudiosPage />} />
+        <Route path="/studios" element={<Navigate replace to="/#studios" />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/ecosystem" element={<Navigate replace to="/#ecosystem" />} />
 

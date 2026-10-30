@@ -16,7 +16,7 @@ function StudioSlide({ image, title, subtitle, tags, index, total }) {
     'Photo Studio': 'http://localhost:5178',
     'Web Studio': '/portfolio/web',
   };
-  const exploreLink = domainMap[title] || '/studios';
+  const exploreLink = domainMap[title] || '/#studios';
 
   // Image parallax
   const imageY = useTransform(scrollYProgress, [0, 1], ['8%', '-8%']);

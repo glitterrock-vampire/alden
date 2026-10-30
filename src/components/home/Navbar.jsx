@@ -147,14 +147,6 @@ export default function Navbar({ farmActions }) {
       return currentPage === 'home';
     }
 
-    if (path === 'studios') {
-      return (
-        currentPage === 'studios' ||
-        currentPage.includes('web-studio') ||
-        currentPage.includes('photo-studio')
-      );
-    }
-
     if (path === 'ecosystem') {
       return [
         'farm',
