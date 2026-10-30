@@ -17,7 +17,6 @@ import WebStudioServicesPage from '@/pages/web-studio/WebStudioServicesPage';
 import WebStudioPackagesPage from '@/pages/web-studio/WebStudioPackagesPage';
 import CorePage from '@/pages/CorePage';
 import SpringsPage from '@/pages/SpringsPage';
-import DrivePage from '@/pages/DrivePage';
 
 // 3D pages — lazy loaded so Three.js/R3F never blocks initial render
 const FarmPage  = lazy(() => import('@/pages/FarmPage'));
@@ -83,7 +82,6 @@ export default function App() {
         {/* 3D pages — lazy + suspense */}
         <Route path="/farm"  element={<Suspense fallback={<Page3DFallback />}><FarmPage /></Suspense>} />
         <Route path="/build" element={<Suspense fallback={<Page3DFallback />}><BuildPage /></Suspense>} />
-        <Route path="/drive" element={<DrivePage />} />
 
         <Route path="/spring"  element={<SpringsPage />} />
         <Route path="/springs" element={<SpringsPage />} />
