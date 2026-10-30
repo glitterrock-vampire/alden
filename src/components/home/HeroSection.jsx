@@ -18,28 +18,37 @@ export default function HeroSection() {
   const SAFE_NAV_PADDING = 'clamp(76px, 11vw, 92px)';
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 640;
+    const letters = ref.current?.querySelectorAll('.alden-letter') ?? [];
+    const timers = [];
 
-    const letters = document.querySelectorAll('.alden-letter');
     letters.forEach((letter, index) => {
-      if (!isMobile) {
-        letter.style.transform = index % 2 === 0 ? 'translateX(-100px)' : 'translateX(100px)';
-      }
-      setTimeout(() => {
+      if (prefersReducedMotion) {
         letter.style.opacity = '1';
-        letter.style.transform = 'translateX(0)';
-      }, 800 + index * 100);
+        return;
+      }
+
+      timers.push(window.setTimeout(() => {
+        letter.style.opacity = '1';
+      }, 800 + index * 100));
     });
 
-    const heroRoles = document.querySelectorAll('[data-animate-hero]');
+    const heroRoles = ref.current?.querySelectorAll('[data-animate-hero]') ?? [];
     heroRoles.forEach((el) => {
+      if (prefersReducedMotion) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        return;
+      }
+
       const delay = parseFloat(el.dataset.delay || '0') * 1000;
-      setTimeout(() => {
+      timers.push(window.setTimeout(() => {
         el.style.opacity = '1';
         el.style.transform = 'translateX(0)';
-      }, delay);
+      }, delay));
     });
-  }, []);
+
+    return () => timers.forEach(window.clearTimeout);
+  }, [prefersReducedMotion]);
 
   return (
     <section id="home" ref={ref} className="hero-section">
@@ -78,7 +87,7 @@ export default function HeroSection() {
                   className="alden-letter"
                   style={{
                     opacity: 0.001,
-                    transition: 'opacity 0.8s cubic-bezier(0.55,0.45,0.16,1), transform 0.8s cubic-bezier(0.55,0.45,0.16,1)',
+                    transition: 'opacity 0.8s cubic-bezier(0.55,0.45,0.16,1)',
                   }}
                 >
                   {letter}
@@ -245,6 +254,7 @@ export default function HeroSection() {
           line-height: 0.85;
           display: inline-block;
           margin: 0 clamp(1px, 0.2vw, 6px);
+          transition: opacity 0.8s cubic-bezier(0.55,0.45,0.16,1);
         }
 
         /* ── Roles ── */
@@ -384,6 +394,11 @@ export default function HeroSection() {
         @media (prefers-reduced-motion: reduce) {
           .hero-depth-scene {
             display: none;
+          }
+
+          .alden-letter,
+          .hero-role-item {
+            transition: none !important;
           }
         }
 

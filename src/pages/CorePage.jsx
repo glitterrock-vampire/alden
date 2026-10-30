@@ -37,43 +37,38 @@ export default function CorePage() {
         {/* Hero Section */}
         <section className="core-hero">
           <div className="core-container">
-            <p className="core-kicker">
-              Digital products &amp; platforms
-            </p>
-
-            <h1 className="core-title">
-              ANDRE
-              <br />
-              <span>WALTERS</span>
-            </h1>
-
-            <div className="core-hero-copy">
-              <p>
-                Software Developer & Electronics Engineer
+            <div className="core-hero-layout">
+              <p className="core-kicker">
+                Digital products &amp; platforms
               </p>
 
-              <div className="core-hero-actions">
-                <a href="#services">
-                  Explore expertise
-                  <span aria-hidden="true">
-                    ↓
-                  </span>
-                </a>
-                <a
-                  href="#contact"
-                  className="core-solid-link core-solid-link--primary"
-                >
-                  Get in touch
-                  <span aria-hidden="true">
-                    ↗
-                  </span>
-                </a>
-              </div>
-            </div>
+              <h1 className="core-title">
+                ANDRE
+                <br />
+                <span>WALTERS</span>
+              </h1>
 
-            <div className="core-hero-meta">
-              <span>ALDEN / CORE</span>
-              <span>JAMAICA</span>
+              <div className="core-hero-copy">
+                <p>
+                  Software Developer &amp; Electronics Engineer
+                </p>
+
+                <div className="core-hero-actions">
+                  <a href="#services">
+                    Explore expertise
+                    <span aria-hidden="true">↓</span>
+                  </a>
+                  <a href="#contact" className="core-solid-link core-solid-link--primary">
+                    Get in touch
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="core-hero-meta">
+                <span>ALDEN / CORE</span>
+                <span>JAMAICA</span>
+              </div>
             </div>
           </div>
         </section>
@@ -85,15 +80,12 @@ export default function CorePage() {
         >
           <div className="core-container">
             <div className="core-section-header">
-              <span className="core-eyebrow">
-                Expertise
-              </span>
-              <h2 className="core-section-title">
-                What I do
-              </h2>
+              <div className="core-section-heading">
+                <span className="core-eyebrow">Expertise</span>
+                <h2 className="core-section-title">What I do</h2>
+              </div>
               <p className="core-section-copy">
-                From strategy to development, bringing
-                digital systems to life.
+                From strategy to development, bringing digital systems to life.
               </p>
             </div>
 
@@ -153,7 +145,7 @@ export default function CorePage() {
             </span>
 
             <h2 className="core-statement__title">
-              Engineering meets
+              Engineering meets{' '}
               <span>creative perspective.</span>
             </h2>
 
@@ -175,12 +167,10 @@ export default function CorePage() {
         <section className="core-section core-experience-section">
           <div className="core-container">
             <div className="core-section-header">
-              <span className="core-eyebrow">
-                Background
-              </span>
-              <h2 className="core-section-title">
-                Experience
-              </h2>
+              <div className="core-section-heading">
+                <span className="core-eyebrow">Background</span>
+                <h2 className="core-section-title">Experience</h2>
+              </div>
               <p className="core-section-copy">
                 Professional journey in technology and engineering.
               </p>
@@ -221,7 +211,7 @@ export default function CorePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="core-section core-cta-section">
+        <section id="contact" className="core-section core-cta-section">
           <div className="core-container">
             <div className="core-cta">
               <span className="core-eyebrow">
