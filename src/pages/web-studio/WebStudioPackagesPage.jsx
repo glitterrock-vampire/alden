@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
@@ -8,6 +9,33 @@ import {
 } from './webStudioData';
 import './WebStudioServicesPage.css';
 import './WebStudioPackagesPage.css';
+
+function usePackageReveals(rootRef) {
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+
+    const items = [...root.querySelectorAll('.web-package-reveal')];
+    if (!('IntersectionObserver' in window)) {
+      items.forEach((item) => item.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+    );
+
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, [rootRef]);
+}
 
 function CheckIcon() {
   return (
@@ -27,7 +55,7 @@ function CheckIcon() {
   );
 }
 
-function PackageCard({ pkg, groupTitle }) {
+function PackageCard({ pkg, groupTitle, index }) {
   const mailto = createContactMailto(
     `Web Studio — ${groupTitle} / ${pkg.name}`,
     {
@@ -39,7 +67,8 @@ function PackageCard({ pkg, groupTitle }) {
 
   return (
     <article
-      className={`web-package-card${pkg.featured ? ' is-featured' : ''}`}
+      className={`web-package-card web-package-reveal${pkg.featured ? ' is-featured' : ''}`}
+      style={{ '--package-reveal-delay': `${index * 90}ms` }}
     >
       <header className="web-package-card__head">
         <div className="web-package-card__meta">
@@ -88,20 +117,23 @@ function PackageCard({ pkg, groupTitle }) {
 }
 
 export default function WebStudioPackagesPage() {
+  const pageRef = useRef(null);
+  usePackageReveals(pageRef);
+
   return (
-    <div className="web-studio-page web-packages-page min-h-screen">
+    <div ref={pageRef} className="web-studio-page web-packages-page min-h-screen">
       <Navbar />
 
       <section className="web-packages-hero">
         <div className="web-services-wide-shell">
-          <p className="web-services-eyebrow">Pricing packages</p>
+          <p className="web-services-eyebrow web-package-reveal">Pricing packages</p>
 
-          <h1 className="web-packages-title">
+          <h1 className="web-packages-title web-package-reveal" style={{ '--package-reveal-delay': '90ms' }}>
             Choose
             <span> a deal.</span>
           </h1>
 
-          <div className="web-packages-hero-row">
+          <div className="web-packages-hero-row web-package-reveal" style={{ '--package-reveal-delay': '180ms' }}>
             <p className="web-services-section-copy">
               Website builds and monthly marketing retainers, priced in USD.
               Select a package, then we confirm scope before work starts.
@@ -124,7 +156,7 @@ export default function WebStudioPackagesPage() {
           className="web-packages-grid-section"
         >
           <div className="web-services-wide-shell">
-            <div className="web-services-editorial-heading">
+            <div className="web-services-editorial-heading web-package-reveal">
               <span className="web-services-eyebrow">
                 {String(groupIndex + 1).padStart(2, '0')} / Packages
               </span>
@@ -133,11 +165,12 @@ export default function WebStudioPackagesPage() {
             </div>
 
             <div className="web-packages-grid">
-              {group.packages.map((pkg) => (
+              {group.packages.map((pkg, packageIndex) => (
                 <PackageCard
                   key={pkg.id}
                   pkg={pkg}
                   groupTitle={group.title}
+                  index={packageIndex}
                 />
               ))}
             </div>
@@ -147,7 +180,7 @@ export default function WebStudioPackagesPage() {
 
       <section className="web-packages-note-section">
         <div className="web-services-wide-shell">
-          <div className="web-packages-note">
+          <div className="web-packages-note web-package-reveal">
             <span className="web-services-eyebrow">Before you book</span>
             <h2 className="web-services-section-title">
               Quoted from the package.

@@ -91,14 +91,12 @@
 }
 .springs-hero-title {
   margin: 1rem 0 0;
-  font: 400 clamp(5.5rem, 15vw, 16rem) / .72 'Koulen', cursive;
+  font: 400 clamp(5.5rem, 15vw, 16rem) / .9 'Koulen', cursive;
   letter-spacing: -.035em;
   background: linear-gradient(100deg, var(--spring-text) 0%, var(--spring-aqua) 40%, var(--spring-lime) 55%, var(--spring-text) 75%);
   background-size: 250% 100%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: springs-title-in 1.4s var(--ease) both, springs-sheen 9s ease-in-out 1.4s infinite;
-  transform-origin: 0 100%;
-  translate: 0 calc(var(--scroll) * -40px);
 }
 .springs-hero-rule {
   display: flex; gap: 2rem; margin-top: 2.6rem; padding-top: 1rem; max-width: 34rem;
@@ -109,6 +107,9 @@
 .springs-hero-shell > div:first-child > * { animation: springs-fade-up 1s var(--ease) both; }
 .springs-hero-shell > div:first-child > .springs-kicker { animation-delay: .1s; }
 .springs-hero-rule { animation-delay: .6s !important; }
+.springs-hero-main > .springs-hero-title {
+  animation: springs-fade-in 1.2s var(--ease) .2s both, springs-sheen 9s ease-in-out 1.4s infinite;
+}
 
 /* 3D stage */
 .springs-hero-aside { position: relative; display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
