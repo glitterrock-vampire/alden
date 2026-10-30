@@ -82,6 +82,13 @@ const positions = [
     description:
       'Design digital products and interfaces that balance usability, clarity, and visual character.',
   },
+  {
+    title: 'Marketer',
+    type: 'Full-Time',
+    location: 'Remote',
+    description:
+      'Drive brand awareness and growth through strategic marketing campaigns and content creation.',
+  },
 ];
 
 export default function WhoWeArePage() {
